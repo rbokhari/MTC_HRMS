@@ -1,0 +1,89 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Department <small> Edit </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    HRMS <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/HRMSPortal/department">Departments</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#">Edit</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Departmnet - Edit</h4>
+                    <span class="tools">
+                        <a class="icon-plus-sign" href="/HRMSPortal/department/add"></a>
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="departmentForm" novalidate>
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label">Department Code</label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
+                                    <input type="hidden" id="hdId" ng-model="department.id" />
+                                    <div class="help-inline" ng-show="departmentForm.txtCode.$error.required && departmentForm.txtCode.$dirty">Please enter code !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Department Name</label>
+                                <div class="controls">
+                                    <input type="text" name="txtName" id="txtName" ng-model="department.departmentName" required="required" />
+                                    <div class="help-inline" ng-show="departmentForm.txtName.$error.required && departmentForm.txtName.$dirty">Please enter name !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Is Active</label>
+                                <div class="controls">
+                                    <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <a id="cmdSave" class="btn btn-primary" ng-click="edit(department)" ng-disabled="departmentForm.$isvalid">
+                                    <i class="icon-edit"></i>
+                                    Update
+                                </a>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/department">
+                                    <i class="icon-undo"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS, #liDepartment').addClass('active open');
+        });
+    </script>
+</div>

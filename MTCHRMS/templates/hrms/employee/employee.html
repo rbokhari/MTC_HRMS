@@ -1,0 +1,120 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Staff <small> Listing </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">HRMS</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Staff List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <span class="pull-right"><a ng-href="/HRMSPortal/employee/add" class="btn btn-success"><i class="icon-plus"></i> Add Employee</a></span>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+    
+    <div ng-hide="isBusy">
+        <div class="progress progress-striped active">
+            <div style="width: 100%;" class="bar"></div>
+        </div>
+    </div>
+    
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="row">
+                <span class="pull-right">
+                    search : <input type="text" ng-model="empSearch" class="search-query" placeholder="search" />
+                </span>
+            </div>
+            <!--<a class="profile-btn span2" ng-href="/HRMSPortal/employee/detail/{{ employee.id}}" ng-repeat="employee in employees">
+                <div><img src="/Content/img/avatar.png" ng-show="!employee.empPicture" /><img ng-show="employee.empPicture" src="data:image/jpeg;base64,{{employee.empPicture}}" style="height: 48px; width: 48px;" width="48px" height="48px" /></div>
+                <div>{{ employee.employeeCode}} - {{ employee.employeeName}}</div>
+                <div>{{ employee.rank}}</div>
+                <div>{{ employee.departmentId.departmentName}}</div>
+                <div>{{ employee.validationDetailId.nameEn}}</div>
+            </a>-->
+
+
+                <div data-desktop="span2" data-tablet="span2" class="span3" style="max-width: 275px; -moz-min-width: 200px; -ms-min-width: 200px; -o-min-width: 200px; -webkit-min-width: 200px; min-width: 200px;" ng-repeat="employee in filtered = (employees | filter:empSearch)">
+                    <div class="metro-overview green-color clearfix">
+                        <div class="display">
+                            <img alt="" data-img-loading-value="{{employee.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+
+                            <!--<img src="/Content/img/avatar.png" ng-show="!employee.empPicture" /><img ng-show="employee.empPicture" src="data:image/jpeg;base64,{{employee.empPicture}}" style="height: 48px; width: 48px;" width="48px" height="48px" />-->
+                            <div class="percent">{{ employee.employeeCode}}</div>
+                        </div>
+                        <div class="details">
+                            <div class="number"><a ng-href="/HRMSPortal/employee/detail/{{ employee.id}}">{{ employee.employeeName}}</a></div>
+                            <div class="title">{{ employee.departmentId.departmentName}}</div>
+                            <div class="title">{{ employee.rank}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            <!--<div class="row">
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>Listing</h4>
+                        <span class="tools">
+                            <a class="icon-plus-sign" href="/HRMSPortal/department/add"></a>
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                            <a href="javascript:;" class="icon-remove"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="form-horizontal">
+                            <div class="row">
+                                <div class="control-group pull-left">
+                                    <label class="control-label">
+                                        Record Per Page:
+                                    </label>
+                                    <div class="controls">
+                                        <select ng-model="recordPage" ng-init="recordPage=5" class="input-small m-wrap">
+                                            <option value="5" selected="selected">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <span class="pull-right">
+                                    search : <input type="text" ng-model="departmentSearch" />
+                                </span>
+                            </div>
+                            <br />
+                            <div class="span3" ng-repeat="employee in filtered = (employees | filter:empSearch)">
+                                <div class="metro-overview green-color clearfix">
+                                    <div class="display">
+                                        <img src="/Content/img/avatar.png" ng-show="!employee.empPicture" /><img ng-show="employee.empPicture" src="data:image/jpeg;base64,{{employee.empPicture}}" style="height: 48px; width: 48px;" width="48px" height="48px" />
+                                        <div class="percent">{{ employee.employeeCode}}</div>
+                                    </div>
+                                    <div class="details">
+                                        <div class="number"><a ng-href="/HRMSPortal/employee/detail/{{ employee.id}}">{{ employee.employeeName}}</a></div>
+                                        <div class="title">{{ employee.departmentId.departmentName}}</div>
+                                        <div class="title">{{ employee.rank}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS, #liStaffRegistration').addClass('active open');
+        });
+    </script>
+</div>

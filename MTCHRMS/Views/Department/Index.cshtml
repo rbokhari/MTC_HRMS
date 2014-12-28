@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MTCHRMS.EntityFramework.Department>
+
+@{
+    ViewBag.Title = "Department";
+}
+
+@section PageTitle
+{
+    Department
+}
+
+@section BreadCrumbs{
+    <li>
+        <i class="fa fa-dashboard"></i>  <a href="#">HRMS</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-bar-chart-o"></i> Department
+    </li>
+}
+
+<div data-ng-controller="DepartmentController">
+    <!-- Render Body goes here -->
+    
+</div>
+
+@section scripts{
+    
+    <script src="~/Scripts/controller/department/department-repository.js"></script>
+    <script src="~/Scripts/controller/department/department-controller.js"></script>
+
+    
+    <script language="javascript">
+        $(function () {
+            $('#mnuHRMS,#mnuDepartment').addClass('active');
+            
+
+        });
+    </script>
+}

@@ -1,0 +1,215 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Staff <small> Update </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    HRMS <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/HRMSPortal/employee">Staff List</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a ng-href="/HRMSPortal/employee/detail/{{employee[0].id}}">Staff Detail</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+    <div ng-hide="isBusy">
+        <div class="progress progress-striped active">
+            <div style="width: 100%;" class="bar"></div>
+        </div>
+    </div>
+
+    <div class="row-fluid " ng-show="isBusy">
+        <form name="staffForm" novalidate>
+            <div class="span12">
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-user"></i>  Personal Information</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row-fluid">
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <label for="tCode" class="control-label">Employee No :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tCode" name="tCode" ng-model="employee[0].employeeCode" required />
+                                            <div class="help-inline" ng-show="staffForm.tCode.$error.required && staffForm.tCode.$dirty">*</div>
+                                            <input type="hidden" id="hdId" ng-model="employee[0].id" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Rank / Grade :</label>
+                                        <div class="controls">
+                                            <input type="text" id="rRank" name="tRank" ng-model="employee[0].rank" required />
+                                            <div class="help-inline" ng-show="staffForm.tRank.$error.required && staffForm.tRank.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Full Name :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tFullName" name="tFullName" ng-model="employee[0].employeeName" required />
+                                            <div class="help-inline" ng-show="staffForm.tFullName.$error.required && staffForm.tFullName.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Designation :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tDesignation" name="tDesignation" ng-model="employee[0].designation" required />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Mobile :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tMobile" name="tMobile" ng-model="employee[0].mobile" required />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Email :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tEmail" name="tEmail" ng-model="employee[0].email" required />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Nationality :</label>
+                                        <div class="controls">
+                                            <select id="cNationality" name="cNationality" ng-model="employee[0].nationalityId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities" required></select>
+                                            <div class="help-inline" ng-show="staffForm.cNationality.$error.required && staffForm.cNationality.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Religion :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tReligion" name="tReligion" ng-model="employee[0].religion" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Birth Place :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tBirthPlace" name="tBirthPlace" ng-model="employee[0].placeOfBirth" required />
+                                            <div class="help-inline" ng-show="staffForm.tBirthPlace.$error.required && staffForm.tBirthPlace.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address :</label>
+                                        <div class="controls">
+                                            <textarea ng-model="employee[0].address" class="input-xlarge"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <label class="control-label">Appointment Date :</label>
+                                        <div class="controls">
+                                            <input type="text" ng-model="employee[0].appointment" datepicker required />
+                                            <!--<input type="text" id="tAppintmentDate" name="tAppintmentDate" ng-model="employee[0].appointment" datepicker data-date-format="dd/mm/yyyy" required />-->
+                                            <div class="help-inline" ng-show="staffForm.tAppintmentDate.$error.required && staffForm.tAppintmentDate.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Posted To :</label>
+                                        <div class="controls">
+                                            <select id="cPostedTo" name="cPostedTo" ng-model="employee[0].postedTo" ng-options="department.id as department.departmentName for department in departments" required></select>
+                                            <div class="help-inline" ng-show="staffForm.cPostedTo.$error.required && staffForm.cPostedTo.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Regiment :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tRegiment" name="tRegiment" ng-model="employee[0].parentRegiment" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Phone :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tPhone" name="tRegiment" ng-model="employee[0].phone" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Supervisor :</label>
+                                        <div class="controls">
+                                            <select id="tSupervisor" name="tSupervisor" ng-model="employee[0].managerId" ></select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">User Name :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tUserName" name="tUserName" ng-model="employee[0].userName" required />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Blood Group :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tBlookGroup" name="tBlookGroup" ng-model="employee[0].bloodGroup" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Date of Birth :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tDOB" name="tDOB" class="date-picker" ng-model="employee[0].dateOfBirth" datepicker required />
+                                            <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Expirty Date :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tDOE" name="tDOE" class="date-picker" ng-model="employee[0].serviceEndDate" datepicker required />
+                                            <div class="help-inline" ng-show="staffForm.tDOE.$error.required && staffForm.tDOE.$dirty">*</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Address (Permanent) :</label>
+                                        <div class="controls">
+                                            <textarea ng-model="employee[0].permanentAddress" class="input-xlarge"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <a id="cmdSave" class="btn btn-primary" ng-click="edit(employee[0])" ng-disabled="staffForm.$isvalid">
+                                <i class="icon-save"></i>
+                                Update
+                            </a>
+                            <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/employee/detail/{{employee[0].id}}">
+                                <i class="icon-undo"></i>
+                                Cancel
+                            </a>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS, #liStaffRegistration').addClass('active open');
+            $('#tDOB, #tDOE').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose:'true'
+            });
+
+        });
+    </script>

@@ -1,0 +1,118 @@
+﻿.view-animate.ng-enter,
+.view-animate.ng-leave,
+.view-animate.ng-move {
+  -webkit-transition: 0.5s linear all;
+  -moz-transition: 0.5s linear all;
+  -o-transition: 0.5s linear all;
+  transition: 0.5s linear all;
+  background-color: aqua;
+}
+.view-animate.ng-enter,
+.view-animate.ng-move {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.view-animate.ng-move.ng-move-active,
+.view-animate.ng-enter.ng-enter-active {
+  opacity: 1;
+  height: 120px;
+}
+.view-animate.ng-leave {
+  opacity: 1;
+  overflow: hidden;
+}
+.view-animate.ng-leave.ng-leave-active {
+  opacity: 0;
+  height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.view {
+  width: 100%;
+  padding-left: 1em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.slideLeft.ng-enter,
+.slideLeft.ng-leave,
+.slideRight.ng-enter,
+.slideRight.ng-leave {
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  -o-transition: all 1s;
+  transition: all 1s;
+}
+.slideLeft.ng-enter {
+  left: 100%;
+}
+.slideLeft.ng-enter.ng-enter-active {
+  left: 0;
+}
+.slideLeft.ng-leave.ng-leave-active {
+  left: -100%;
+}
+.slideRight.ng-enter {
+  left: -100%;
+}
+.slideRight.ng-enter.ng-enter-active {
+  left: 0;
+}
+.slideRight.ng-leave.ng-leave-active {
+  left: 100%;
+}
+.fade-in {
+  -webkit-transition: 2s linear all;
+  -moz-transition: 2s linear all;
+  -o-transition: 2s linear all;
+  transition: 2s linear all;
+}
+.fade-in.ng-enter {
+  opacity: 0;
+}
+.fade-in.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+.fade-in.ng-leave {
+  opacity: 1;
+}
+.fade-in.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+@-moz-keyframes firstAnimation {
+  0% {
+    color: yellow;
+  }
+  100% {
+    color: black;
+  }
+}
+@-ms-keyframes firstAnimation {
+  0% {
+    color: yellow;
+  }
+  100% {
+    color: black;
+  }
+}
+@keyframes firstAnimation {
+  0% {
+    color: yellow;
+  }
+  100% {
+    color: black;
+  }
+}
+/* For Chrome and Safari */
+@-webkit-keyframes firstAnimation {
+  /* from is equivalent to 0% */
+  from {
+    color: yellow;
+  }
+  /* from is equivalent to 100% */
+  to {
+    color: black;
+  }
+}
+/*# sourceMappingURL=animate.css.map */

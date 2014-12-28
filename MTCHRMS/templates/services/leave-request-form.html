@@ -1,0 +1,314 @@
+﻿<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Annual Leave <small> Request </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Services</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Leave Request</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>  Personal Information</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span id="MainContent_lblCode" class="control-label">Employee No:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$txtCode" type="text" id="MainContent_txtCode" class="textbox" />
+                                        <input type="hidden" name="ctl00$MainContent$hdID" id="MainContent_hdID" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_lblAssetTag" class="control-label">Occupation:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$txtAssetTag" type="text" id="MainContent_txtAssetTag" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label1" class="control-label">Grade:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox1" type="text" id="MainContent_TextBox1" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span id="MainContent_lblName" class="control-label">Employee Name:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$txtName" type="text" id="MainContent_txtName" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_lblSerialNo" class="control-label">Department/Section:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$txtSerialNo" type="text" id="MainContent_txtSerialNo" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label2" class="control-label">Unit:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox2" type="text" id="MainContent_TextBox2" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>  Leave Information</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span id="MainContent_Label3" class="control-label">Leave Type:</span>
+                                    <div class="controls">
+                                        <select name="ctl00$MainContent$TextBox3" id="MainContent_TextBox3">
+                                            <option value="Annual Leave">Annual Leave</option>
+                                            <option value="Sick Leave">Sick Leave</option>
+                                            <option value="Emergency Leave">Emergency Leave</option>
+                                            <option value="Married Leave">Married Leave</option>
+                                            <option value="Haj Leave">Haj Leave</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label5" class="control-label">With Pay/Without Pay:</span>
+                                    <div class="controls">
+                                        <input id="MainContent_TextBox5" type="checkbox" name="ctl00$MainContent$TextBox5" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label6" class="control-label">From Date:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox6" type="text" id="MainContent_TextBox6" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label9" class="control-label">Address/Phone No:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox9" type="text" id="MainContent_TextBox9" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label10" class="control-label">Replace Person:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox10" type="text" id="MainContent_TextBox10" class="span24" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label8" class="control-label">Ticket Cost:</span>
+                                    <div class="controls">
+                                        <label class="checkbox">
+                                            <input type="checkbox" value="" /> Self
+                                            <input type="checkbox" value="" /> MOD
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label11" class="control-label">Signature:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox11" type="text" id="MainContent_TextBox11" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span id="MainContent_Label4" class="control-label">Total Days:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox4" type="text" id="MainContent_TextBox4" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                    <div class="controls">&nbsp;</div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label7" class="control-label">To Date:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox7" type="text" id="MainContent_TextBox7" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                    <div class="controls">&nbsp;</div>
+                                </div>
+                                <div class="control-group">
+                                    &nbsp;
+                                    <div class="controls">&nbsp;</div>
+                                </div>
+                                <div class="control-group">
+                                    <span id="MainContent_Label12" class="control-label">Date:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$TextBox8" type="text" id="MainContent_TextBox8" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>  Line Manager</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span class="control-label">Line Manager Name:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox90" type="text" id="MainContent_textbox90" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span class="control-label">Signature:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox12" type="text" id="MainContent_textbox12" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>  Department Manager</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span class="control-label">Manager Name:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox13" type="text" id="MainContent_textbox13" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span6">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span class="control-label">Signature:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox14" type="text" id="MainContent_textbox14" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>  HR Department</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span class="control-label">Total Leave Days:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox15" type="text" id="MainContent_textbox15" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Contract Dates:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox16" type="text" id="MainContent_textbox16" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Leave Transferred from Previous Contract:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox17" type="text" id="MainContent_textbox17" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Used Days:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox18" type="text" id="MainContent_textbox18" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Remaining Days:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox19" type="text" id="MainContent_textbox19" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Signature:</span>
+                                    <div class="controls">
+                                        <input name="ctl00$MainContent$textbox20" type="text" id="MainContent_textbox20" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('.sidebar-menu > .active').removeClass('active open');
+        $('#liStaffServices,#liLeaveRequest').addClass("active");
+    });
+</script>

@@ -1,0 +1,153 @@
+﻿<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Organization <small> Chart </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">HRMS</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Organization Chart</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <div id="page">
+        <div class="row-fluid ">
+            <div class="span12">
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-reorder"></i>  MTC Departments</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row-fluid">
+                            <div class="form-horizontal">
+                                <div class="control-group">
+                                    <span id="MainContent_lblCode" class="control-label">Department Name:</span>
+                                    <div class="controls">
+                                        <select name="cboDepartments" id="cboDepartments">
+                                            <option value="IT &amp; Systems">IT &amp; Systems</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4>Organization Chart</h4>
+                        <span class="tools">
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row-fluid">
+                            <div style="text-align:center;overflow:scroll">
+                                <div id="chart" class="orgChart" style="display: inline-block;margin:auto;">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul id="org" style="display:none">
+        <li>
+            IAN KENNET <br /> <h4>Director</h4>
+            <ul>
+                <li>
+                    RUPESH NAIR <br /> <b>P.A</b>
+                </li>
+                <li>
+                    ANDRE FOREMAN <br /> Principal Engineer : <small>Stratergy and Architecture </small>
+                </li>
+                <li>
+                    SANKARAN KANNAN <br /> Senior Engineer : <small>Information Security</small>
+                    <ul>
+                        <li>MAHMOOD <br /> Engineer</li>
+                    </ul>
+                </li>
+                <li>
+                    ISSA AL ZADJALI <br /> Senior Engineer : <small>Network</small>
+                    <ul>
+                        <li>ALIA AL SIYABI <br /> Engineer</li>
+                        <li>BADAR AL SALAMI <br /> Engineer</li>
+                    </ul>
+                </li>
+                <li>
+                    Vacant<br /> Senior Engineer : <small>Network Services</small>
+                    <ul>
+                        <li>SYED RAHMAN BOKHARI <br /> Engineer</li>
+                    </ul>
+                </li>
+                <li>
+                    SAIF AL SHARJI<br /> Senior Engineer : <small>System Support</small>
+                    <ul>
+                        <li>ISMAIL AL BUSAIDI <br /> Engineer</li>
+                    </ul>
+                </li>
+                <li>
+                    JAMAL AL HUSSEINI <br /> Senior Engineer : <small>Customer Support</small>
+                    <ul>
+                        <li>JAMAL AL SAIDAIRI <br /> Engineer</li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+
+    <script src="/Scripts/jquery.jOrgChart.js"></script>
+    <link href="/Content/jquery.jOrgChart.css" rel="stylesheet" />
+
+    <script lang="en" type="text/javascript">
+
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS,#liOrgChart').addClass("active");
+
+            $("#org").jOrgChart({
+                chartElement: '#chart',
+                dragAndDrop: true
+            });
+
+            //$("#show-list").click(function (e) {
+            //    e.preventDefault();
+            //    $('#list-html').toggle('fast', function () {
+            //        if ($(this).is(':visible')) {
+            //            $('#show-list').text('Hide underlying list.');
+            //            $(".topbar").fadeTo('fast', 0.9);
+            //        }
+            //        else {
+            //            $('#show-list').text('Show underlying list.');
+            //            $(".topbar").fadeTo('fast', 1);
+            //        }
+            //    });
+            //});
+
+            //$('#list-html').text($('#org').html());
+            //$("#org").bind("DOMSubtreeModified", function () {
+            //    $('#list-html').text('');
+            //    $('#list-html').text($('#org').html());
+            //    prettyPrint();
+            //});
+
+        });
+
+    </script>

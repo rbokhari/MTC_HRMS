@@ -1,0 +1,54 @@
+﻿<div id="dvPassport" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Passport">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">Add Passport</h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmPassport" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="tPassportNo" class="control-label">Passport No :</label>
+                    <div class="controls">
+                        <input type="text" id="tPassportNo" name="tPassportNo" ng-model="employeePassport.passportNo" required />
+                        <div class="help-inline" ng-show="frmPassport.tPassportNo.$error.required && frmPassport.tPassportNo.$dirty">Please enter code !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Issue Place :</label>
+                    <div class="controls">
+                        <input type="text" id="tIssuePlace" name="tIssuePlace" ng-model="employeePassport.issuePlace" required />
+                        <div class="help-inline" ng-show="frmPassport.tIssuePlace.$error.required && frmPassport.tIssuePlace.$dirty">Please enter code !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Issue Date :</label>
+                    <div class="controls">
+                        <input type="text" id="tIssueDate" name="tIssueDate" datepicker ng-model="employeePassport.issueDate" required />
+                        <div class="help-inline" ng-show="frmPassport.tIssueDate.$error.required && frmPassport.tIssueDate.$dirty">Please enter Name !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Expiry Date :</label>
+                    <div class="controls">
+                        <input type="text" id="tExpirtyDate" name="tExpirtyDate" datepicker ng-model="employeePassport.expiryDate" required />
+                        <div class="help-inline" ng-show="frmPassport.tExpirtyDate.$error.required && frmPassport.tExpirtyDate.$dirty">Please enter Name !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Status :</label>
+                    <div class="controls">
+                        <input type="checkbox" id="tStatusId" name="tStatusId" ng-true-value="1" ng-false-value="0" ng-model="employeePassport.statusId" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a class="btn btn-primary" type="submit" ng-submit="saveEmployeePassport(parentId, employeePassport);" ng-disabled="frmPassport.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </a>
+    </div>
+
+</div>

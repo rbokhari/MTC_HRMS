@@ -1,0 +1,105 @@
+﻿    <div id="sidebar" class="nav-collapse collapse">
+        <div class="sidebar-toggler hidden-phone"></div>
+
+        <ul class="sidebar-menu">
+            <li id="liDashboard" ng-class="{active: activetab=='/HRMSPortal'}">
+                <a class="" href="/hrmsportal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
+            </li>
+            <li class="has-sub" id="liHRMS" ng-class="{open: activetab=='/HRMSPortal/*'}">
+                <a href="javascript:;" class="">
+                    <span class="icon-box">
+                        <i class="icon-user"></i>
+                    </span> HRMS
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub">
+                    <li id="liDepartment" ng-class="{active: activetab=='/HRMSPortal/department'}">
+                        <a class="" href="/HRMSPortal/department">Department</a>
+                    </li>
+                    <li id="liOrgChart">
+                        <a class="" href="/HRMSPortal/oc">Organization Chart</a>
+                    </li>
+                    <li id="liStaffRegistration">
+                        <a class="" href="/HRMSPortal/employee">Staff</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="has-sub" id="liStaffServices">
+                <a href="javascript:;" class="">
+                    <span class="icon-box">
+                        <i class="icon-user"></i>
+                    </span> Staff Services
+                    <span class="arrow"></span>
+                </a>
+                <ul class="sub">
+                    <li id="liLeaveRequest">
+                        <a class="" href="/HRMSPortal/leaverequest">Leave Request</a>
+                    </li>
+                    <li id="liItemRequest">
+                        <a class="" href="#">Item Request</a>
+                    </li>
+                    <li id="liGatePass">
+                        <a class="" href="#">Gate Pass</a>
+                    </li>
+                </ul>
+            </li>
+            <li id="liLock">
+                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="lock()"><span class="icon-box"><i class="icon-lock"></i></span> Lock</a>
+            </li>
+            <li id="liLogout">
+                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="logOut()"><span class="icon-box"><i class="icon-key"></i></span> Log Out</a>
+            </li>
+        </ul>
+
+        <!-- END SIDEBAR MENU -->
+    </div>
+<script language="javascript" type="text/javascript">
+    $(function() {
+        jQuery('#sidebar .has-sub > a').click(function () {
+
+            var last = jQuery('.has-sub.open', $('#sidebar'));
+            last.removeClass("open");
+            jQuery('.arrow', last).removeClass("open");
+            jQuery('.sub', last).slideUp(200);
+            var sub = jQuery(this).next();
+            if (sub.is(":visible")) {
+                jQuery('.arrow', jQuery(this)).removeClass("open");
+                jQuery(this).parent().removeClass("open");
+                sub.slideUp(200);
+            } else {
+                jQuery('.arrow', jQuery(this)).addClass("open");
+                jQuery(this).parent().addClass("open");
+                sub.slideDown(200);
+            }
+        });
+
+        $('.sidebar-toggler').click(function () {
+            if ($('#sidebar > ul').is(":visible") === true) {
+                $('#main-content').animate({
+                    'margin-left': '25px'
+                });
+
+                $('#sidebar').animate({
+                    'margin-left': '-190px'
+                }, {
+                    complete: function () {
+                        $('#sidebar > ul').hide();
+                        $("#container").addClass("sidebar-closed");
+                    }
+                });
+            } else {
+                $('#main-content').animate({
+                    'margin-left': '215px'
+                });
+                $('#sidebar > ul').show();
+                $('#sidebar').animate({
+                    'margin-left': '0'
+                }, {
+                    complete: function () {
+                        $("#container").removeClass("sidebar-closed");
+                    }
+                });
+            }
+        });
+    });
+</script>

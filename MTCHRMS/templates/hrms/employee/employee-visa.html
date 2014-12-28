@@ -1,0 +1,49 @@
+﻿<div id="dvVisa" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Visa">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">Add Visa</h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmVisa" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Visa No :</label>
+                    <div class="controls">
+                        <input type="text" id="tVisaNo" name="tVisaNo" ng-model="employeeVisa.visaNumber" required />
+                        <div class="help-inline" ng-show="frmVisa.tVisaNo.$error.required && frmVisa.tVisaNo.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Issue Date :</label>
+                    <div class="controls">
+                        <input type="text" id="tVisaIssueDate" name="tVisaIssueDate" datepicker ng-model="employeeVisa.issueDate" required />
+                        <div class="help-inline" ng-show="frmVisa.tVisaIssueDate.$error.required && frmVisa.tVisaIssueDate.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Expiry Date :</label>
+                    <div class="controls">
+                        <input type="text" id="tVisaExpirtyDate" name="tVisaExpirtyDate" datepicker ng-model="employeeVisa.expiryDate" required />
+                        <div class="help-inline" ng-show="frmVisa.tVisaExpirtyDate.$error.required && frmVisa.tVisaExpirtyDate.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Status :</label>
+                    <div class="controls">
+                        <input type="checkbox" id="tStatusId" name="tStatusId" ng-true-value="1" ng-false-value="0" ng-model="employeeVisa.statusId" />
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeVisa(parentId, employeeVisa)" ng-disabled="frmVisa.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </a>
+
+    </div>
+
+</div>

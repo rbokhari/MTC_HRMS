@@ -1,0 +1,33 @@
+﻿<div class="top-nav ">
+    <ul class="nav pull-right top-menu">
+        <!-- BEGIN SUPPORT -->
+        <li class="dropdown mtop5">
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
+                <i class="icon-comments-alt"></i>
+            </a>
+        </li>
+        <li class="dropdown mtop5">
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Help">
+                <i class="icon-headphones"></i>
+            </a>
+        </li>
+        <!-- END SUPPORT -->
+        <!-- BEGIN USER LOGIN DROPDOWN -->
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <img data-img-loading-value="{{authentication.empPicture}}" data-img-loading-size="mini" style="height: 35px; width: 35px;" alt="">
+                <span class="username">{{authentication.fullName}}&nbsp;</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a ng-href="/HRMSPortal/employee/detail/{{authentication.employeeId}}"><i class="icon-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+                <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
+                <li class="divider"></li>
+                <li><a style="cursor: pointer; cursor: hand;" data-ng-click="logOut()"><i class="icon-key"></i> Log Out</a></li>
+            </ul>
+        </li>
+        <!-- END USER LOGIN DROPDOWN -->
+    </ul>
+    <!-- END TOP NAVIGATION MENU -->
+</div>

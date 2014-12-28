@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section PageTitle
+{
+    Dashboard
+}
+
+@section BreadCrumbs{
+    <li>
+        <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+    </li>
+    <li class="active">
+        <i class="fa fa-bar-chart-o"></i> Charts
+    </li>
+}
+
+<div>
+    <!-- Render Body goes here -->
+    this is home index view
+</div>
+
+@section scripts{
+    <script language="javascript">
+        $(function () {
+            $('#mnuDashboard').addClass('active');
+
+        });
+    </script>
+}

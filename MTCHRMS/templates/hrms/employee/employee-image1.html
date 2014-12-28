@@ -1,0 +1,17 @@
+﻿
+<div id="dvImage1" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Picture">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">Add Picture</h3>
+    </div>
+    <div class="modal-body">
+        <div class="col-md-9" style="margin-bottom: 40px">
+            <input type="file" ng-file-select="onFileSelect(parentId, $files)" />
+            <!--ng-file-select="onFileSelect(parentId, $files)" multiple-->
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
+
+</div>

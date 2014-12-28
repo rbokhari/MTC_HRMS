@@ -1,0 +1,16 @@
+﻿<div class="row-fluid">
+    <h4>All Departments</h4>
+
+    <div class="progress progress-striped active" ng-show="isBusy">
+        <div style="width: 100%;" class="bar"></div>
+    </div>
+    <a class="icon-btn span2 red" href="#" ng-repeat="department in departments">
+        <i class="icon-group"></i>
+        <div>{{ department.departmentName}}</div>
+
+        <div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id})">
+            <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
+            <span class="badge badge-important">{{ filtered.length }}</span>
+        </div>
+    </a>
+</div>

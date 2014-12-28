@@ -1,0 +1,42 @@
+﻿<div id="dvChildren" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Children">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">Add Child</h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmChild" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Child Name :</label>
+                    <div class="controls">
+                        <input type="text" id="tChildName" name="tChildName" ng-model="employeeChild.childrenName" required />
+                        <div class="help-inline" ng-show="frmChild.tChildName.$error.required && frmChild.tChildName.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Birth Date :</label>
+                    <div class="controls">
+                        <input type="text" id="tChildBirthDate" name="tChildBirthDate" datepicker ng-model="employeeChild.birthDate" required />
+                        <div class="help-inline" ng-show="frmChild.tChildBirthDate.$error.required && frmChild.tChildBirthDate.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Gender :</label>
+                    <div class="controls">
+                        <select id="cChildGender" name="cChildGender" ng-model="employeeChild.genderId" ng-options="gender.id as gender.nameEn for gender in genders" required></select>
+                        <div class="help-inline" ng-show="frmChild.tPrecChildGenderviousEndDate.$error.required && frmChild.cChildGender.$dirty">*</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a id="cmdSave" class="btn btn-primary" type="submit" ng-submit="saveEmployeeChild(parentId, employeeChild)" ng-disabled="frmChild.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </a>
+
+    </div>
+
+</div>
