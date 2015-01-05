@@ -14,6 +14,9 @@ hrmsModule.controller('AccountController',
         $scope.message = "";
         $scope.login = function() {
             authRepository.login($scope.loginData).then(function (response) {
+                    //moduleDetail();
+                //roleDetail();
+                    
                     $window.location.href = '/HRMSPortal';
                 },
                 function (err) {
@@ -24,35 +27,35 @@ hrmsModule.controller('AccountController',
                 });
         };
 
-        $scope.userDetail = function(id) {
-            accountRepository.getUserById(id)
-                .then(function(response) {
-                    $scope.userInfo = response.data;
+        //var userDetail = function(id) {
+        //    accountRepository.getUserById(id)
+        //        .then(function(response) {
+        //            $scope.userInfo = response.data;
 
-                }, function(err) {
+        //        }, function(err) {
 
-                });
-        };
+        //        });
+        //};
 
-        $scope.RoleDetail = function (id) {
-            accountRepository.getRoleById(id)
-                .then(function (response) {
-                    $scope.roleInfo = response.data;
+        //var roleDetail = function (id) {
+        //    accountRepository.getRoleById(id)
+        //        .then(function (response) {
+        //            $scope.roleInfo = response.data;
 
-                }, function (err) {
+        //        }, function (err) {
 
-                });
-        };
+        //        });
+        //};
 
-        $scope.moduleDetail = function (id) {
-            accountRepository.getModuleById(id)
-                .then(function (response) {
-                    $scope.moduleInfo = response.data;
+        //var moduleDetail = function (id) {
+        //    accountRepository.getModuleById(id)
+        //        .then(function (response) {
+        //            $scope.moduleInfo = response.data;
 
-                }, function (err) {
+        //        }, function (err) {
 
-                });
-        };
+        //        });
+        //};
 
 
     }
