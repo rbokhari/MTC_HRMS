@@ -21,7 +21,6 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
     };
 
     var _editEmployee = function (employeeDef) {
-        //alert(employeeDef.employeeName);
         return $http.put('/api/employee/' + employeeDef.id, employeeDef);
     };
 
@@ -29,9 +28,16 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/' + employeePassport.employeeDefId + '/PostEmployeePassport').save(employeePassport);
     };
 
+    var _deleteEmployeePassport = function (employeePassport) {
+        return $resource('/api/employee/' + employeePassport.employeeDefId + '/DeleteEmployeePassport').save(employeePassport);
+    };
+
     var _addEmployeeVisa = function (employeeVisa) {
-       // alert(employeeVisa.employeeDefId);
         return $resource('/api/employee/' + employeeVisa.employeeDefId + '/PostEmployeeVisa').save(employeeVisa);
+    };
+
+    var _deleteEmployeeVisa = function (employeeVisa) {
+        return $resource('/api/employee/' + employeeVisa.employeeDefId + '/DeleteEmployeeVisa').save(employeeVisa);
     };
 
     var _addEmployeeQualification = function(employeeQualification) {
@@ -56,7 +62,6 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
     };
 
     var _addEmployeeImage = function (employee) {
-        alert("AddEmployeeImage");
         return $resource('/api/employee/upload').save(employee);
     };
 
@@ -67,7 +72,9 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         addEmployee: _addEmployee,
         editEmployee: _editEmployee,
         addEmployeePassport: _addEmployeePassport,
+        deleteEmployeePassport: _deleteEmployeePassport,
         addEmployeeVisa: _addEmployeeVisa,
+        deleteEmployeeVisa: _deleteEmployeeVisa,
         addEmployeeQualification: _addEmployeeQualification,
         addEmployeePreviousEmployment: _addEmployeePreviousEmployment,
         addEmployeeMarital: _addEmployeeMarital,

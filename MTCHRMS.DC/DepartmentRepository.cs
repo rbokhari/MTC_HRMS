@@ -55,8 +55,8 @@ namespace MTCHRMS.DC
         {
             try
             {
-                newDepartment.CreatedBy = 1;
-                newDepartment.CreatedOn = DateTime.UtcNow;
+                //newDepartment.CreatedBy = 1;
+                //newDepartment.CreatedOn = DateTime.UtcNow;
                 _ctx.Departments.Add(newDepartment);
                 return true;
             }

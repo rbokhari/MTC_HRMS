@@ -1,7 +1,7 @@
 ﻿<div id="dvPassport" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Passport">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel1">Add Passport</h3>
+        <h3 id="myModalLabel1">{{title}}</h3>
     </div>
     <div class="modal-body">
         <form id="frmPassport" novalidate>
@@ -45,10 +45,10 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <a class="btn btn-primary" type="submit" ng-submit="saveEmployeePassport(parentId, employeePassport);" ng-disabled="frmPassport.$invalid">
+        <button type="submit" class="btn btn-primary" ng-click="saveEmployeePassport(parentId, employeePassport);" ng-disabled="frmPassport.$invalid">
             <i class="icon-save"></i>
             Save
-        </a>
+        </button>
     </div>
 
 </div>

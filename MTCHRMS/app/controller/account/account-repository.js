@@ -5,16 +5,15 @@
 hrmsModule.factory('accountRepository', ['$resource', function ($resource) {
 
     var _getUserById = function (id) {
-        return $resource('/api/account/GetUserDetail/' + id).get();
+        return $resource('/api/account/GetUserDetail/?id' + id).get();
     };
 
     var _getRoleById = function (id) {
-        //alert("roleid ; " + id);
         return $resource('/api/account/GetRoleDetail/?id=' + id).get();
     };
 
     var _getModuleById = function (id) {
-        return $resource('/api/account/GetModuleDetail/' + id).get();
+        return $resource('/api/account/GetModuleDetail/?id' + id).get();
     };
 
     return {

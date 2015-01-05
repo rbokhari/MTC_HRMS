@@ -3,8 +3,6 @@
     .config(function($routeProvider, $locationProvider, $httpProvider) {
         console.log('hrms module router call !');
 
-        //alert(config.headers.Authorization);
-
         $httpProvider.interceptors.push('authInterceptorService');
 
         $routeProvider
@@ -71,7 +69,6 @@
     });
 
 hrmsModule.run(['authRepository', function (authRepository) {
-    //alert($scope.author);
     authRepository.fillAuthData();
 }]);
 

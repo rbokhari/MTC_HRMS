@@ -34,6 +34,8 @@ hrmsModule.controller('EmployeeController',
                 inputs: {
                     title: "Add New Passport",
                     parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
                     resultData: {}
                 }
             }).then(function(modal) {
@@ -50,6 +52,38 @@ hrmsModule.controller('EmployeeController',
             });
         };
 
+        $scope.editPassport = function (passport) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/templates/hrms/employee/employee-passport.html",
+                controller: "EmployeeModalController",
+                inputs: {
+                    title: "Update Passport",
+                    parentId: passport.employeeDefId,
+                    employeePassport: passport,
+                    employeeVisa: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.deletePassport = function (passport) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                employeeRepository.deleteEmployeePassport(passport)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.employee[0].employeePassports.pop(passport);
+                    }, function(error) {
+                        appRepository.showErrorGritterNotification();
+                });
+            }
+        };
+
+
         $scope.showVisa = function (id) {
             ModalService.showModal({
                 templateUrl: "/templates/hrms/employee/employee-visa.html",
@@ -57,6 +91,8 @@ hrmsModule.controller('EmployeeController',
                 inputs: {
                     title: "Add New Visa",
                     parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -67,6 +103,42 @@ hrmsModule.controller('EmployeeController',
 
             });
         };
+
+        $scope.editVisa = function (visa) {
+            console.log(visa);
+            //var visaCopy = {};
+
+            //angular.copy(visa, visaCopy);
+
+            ModalService.showModal({
+                templateUrl: "/templates/hrms/employee/employee-visa.html",
+                controller: "EmployeeModalController",
+                inputs: {
+                    title: "Update Visa",
+                    parentId: visa.employeeDefId,
+                    employeePassport: {},
+                    employeeVisa: visa,
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.deleteVisa = function(visa) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                employeeRepository.deleteEmployeeVisa(visa)
+                    .$promise
+                    .then(function() {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.employee[0].employeeVisas.pop(visa);
+                    }, function(error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            } 
+        };
+
 
         $scope.showPreviousEmployement = function (id) {
             ModalService.showModal({
@@ -151,10 +223,11 @@ hrmsModule.controller('EmployeeController',
         }
         
         $scope.save = function(employeeDef) {
-            //alert(employeeDef.employeeCode);
             $scope.errors = [];
 
-            employeeRepository.addEmployee(employeeDef).$promise.then(
+            employeeRepository.addEmployee(employeeDef)
+                .$promise
+                .then(
                 function(resultEmployeeDef) {
                     // success case
                     console.log("save - Successfully !");
@@ -214,7 +287,6 @@ hrmsModule.controller('EmployeeController',
         };
 
         $scope.saveEmployeeQualification = function(id, employeeQualification) {
-            //alert(employeeDef.employeeCode);
             $scope.errors = [];
             employeeQualification.employeeDefId = id;
             employeeRepository.addEmployeeQualification(employeeQualification).$promise.then(
@@ -233,7 +305,6 @@ hrmsModule.controller('EmployeeController',
         };
 
         $scope.saveEmployeeMarital = function(id, employeeMarital) {
-            //alert(employeeDef.employeeCode);
             $scope.errors = [];
             employeeMarital.employeeDefId = id;
             employeeRepository.addEmployeeMarital(employeeMarital).$promise.then(
@@ -252,7 +323,6 @@ hrmsModule.controller('EmployeeController',
         };
 
         $scope.saveEmployeeKin = function (id, employeeKin) {
-            //alert(employeeDef.employeeCode);
             $scope.errors = [];
             employeeKin.employeeDefId = id;
             employeeRepository.addEmployeeKin(employeeKin).$promise.then(

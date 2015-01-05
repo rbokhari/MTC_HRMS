@@ -26,11 +26,11 @@ namespace MTCHRMS.Controllers
         public HttpResponseMessage Post(string userName, string password)
         {
             bool isValid = false;
-            using (var pc = new PrincipalContext(ContextType.Domain, "mtc.edu.om"))
-            {
-                isValid = pc.ValidateCredentials(userName, password);
-            }
-
+            //using (var pc = new PrincipalContext(ContextType.Domain, "mtc.edu.om"))
+            //{
+            //    isValid = pc.ValidateCredentials(userName, password);
+            //}
+            //isValid = true;
             
             return isValid ? Request.CreateResponse(HttpStatusCode.OK) : Request.CreateResponse(HttpStatusCode.BadRequest);
         }

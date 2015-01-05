@@ -35,38 +35,38 @@
                     </span>
                 </div>
                 <div class="widget-body">
-                    <form name="departmentForm" novalidate >
+                    <form name="frmDepartment" novalidate >
 
                         <div class="form-horizontal">
                             <div class="control-group">
-                                <label class="control-label">Department Code</label>
+                                <label class="control-label" for="txtCode">Department Code</label>
                                 <div class="controls">
                                     <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
-                                    <div class="help-inline" ng-show="departmentForm.txtCode.$error.required && departmentForm.txtCode.$dirty">Please enter code !</div>
+                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty">Please enter code !</div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Department Name</label>
+                                <label class="control-label" for="txtName">Department Name</label>
                                 <div class="controls">
                                     <input type="text" name="txtName" id="txtName" ng-model="department.departmentName" required="required" />
-                                    <div class="help-inline red-color" ng-show="departmentForm.txtName.$error.required && departmentForm.txtName.$dirty">Please enter name !</div>
+                                    <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty">Please enter name !</div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label">Is Active</label>
+                                <label class="control-label" for="statusId">Is Active</label>
                                 <div class="controls">
                                     <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <a type="submit" id="cmdSave" class="btn btn-primary" ng-submit="save(department)" ng-disabled="departmentForm.$invalid">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(department)" ng-disabled="frmDepartment.$invalid">
                                     <i class="icon-save"></i>
                                     Save
-                                </a>
-                                <a type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-submit="saveAddNew(department)" ng-disabled="departmentForm.$invalid">
+                                </button>
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(department)" ng-disabled="frmDepartment.$invalid">
                                     <i class="icon-save"></i>
                                     Save and Add New
-                                </a>
+                                </button>
                                 <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/department">
                                     <i class="icon-undo"></i>
                                     Cancel

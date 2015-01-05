@@ -364,10 +364,7 @@
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <Content Include="Content\template2\img\avatar-mini.png" />
-    <Content Include="Content\template2\img\avatar.png" />
     <Content Include="Content\img\avatar1.jpg" />
-    <Content Include="Content\template2\img\avatar1_small.png" />
     <Content Include="Content\img\avatar2.jpg" />
     <Content Include="Content\img\bg-default.jpg" />
     <Content Include="Content\img\bg-denim.png" />
@@ -384,11 +381,9 @@
     <Content Include="Content\img\login-btn.jpg" />
     <Content Include="Content\img\logoname1.png" />
     <Content Include="Content\img\menu-selected-bg.png" />
-    <Content Include="Content\img\mtc logo.png" />
     <Content Include="Content\img\newlogo.png" />
     <Content Include="Content\img\overlay-icon.png" />
     <Content Include="Content\img\photo.jpg" />
-    <Content Include="Content\template2\img\profile-pic.jpg" />
     <Content Include="Content\img\side-bar-list-bg.png" />
     <Content Include="Content\img\submenu_border.png" />
     <Content Include="Content\img\submenu_hover.png" />
@@ -844,6 +839,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\template2\img\" />
     <Folder Include="include\" />
   </ItemGroup>
   <ItemGroup>

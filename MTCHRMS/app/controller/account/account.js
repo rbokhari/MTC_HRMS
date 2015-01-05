@@ -20,7 +20,6 @@ hrmsModule.factory('authInterceptorService', ['$q', '$location', 'localStorageSe
     };
 
     var _responseError = function (rejection) {
-        //alert("response error");
         if (rejection.status === 401) {
             //alert("401 status");
             console.log("unauthorized call");
@@ -79,8 +78,6 @@ hrmsModule.factory('authRepository', ['$http', '$q', 'localStorageService', 'emp
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
 
-            //alert(_authentication.userName);
-
             deferred.resolve(response);
 
         }).error(function (err, status) {
@@ -113,7 +110,6 @@ hrmsModule.factory('authRepository', ['$http', '$q', 'localStorageService', 'emp
             employeeRepository.getEmployeeDetailByUserName(authData.userName).$promise
                 .then(function(response) {
                     //console.log("authData.fill");
-                    //alert("auth-repository->fillAuthDate");
                     _authentication.isAuth = true;
                     _authentication.userName = response.userName;
                     _authentication.fullName = response.employeeName;

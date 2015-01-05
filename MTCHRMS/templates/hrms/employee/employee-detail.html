@@ -191,11 +191,12 @@
                                                     <th>Issue Date</th>
                                                     <th>Expiry Date</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="odd" ng-repeat="passport in employee[0].employeePassports">
-                                                    <td><a href="/HRMSPortal/employee/passport/edit/{{ passport.id}}">{{ passport.passportNo}}</a>  </td>
+                                                    <td><a href="" ng-click="editPassport(passport)">{{ passport.passportNo}}</a>  </td>
                                                     <td>{{ passport.issueDate | date:'longDate'}}</td>
                                                     <td>{{ passport.expiryDate | date:'longDate'}}</td>
                                                     <td>
@@ -203,10 +204,13 @@
                                                             <ng-pluralize count="passport.statusId" when="{'0':'expire', '1':'active'}"></ng-pluralize>
                                                         </label>
                                                     </td>
+                                                    <td>
+                                                        <a href="" ng-click="deletePassport(passport)"> <i class="icon-trash red"></i></a>
+                                                    </td>
+
                                                 </tr>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 </div>
                                 <br /><br />
@@ -221,11 +225,12 @@
                                                     <th>Issue Date</th>
                                                     <th>Expiry Date</th>
                                                     <th>Status</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="odd " ng-repeat="visa in employee[0].employeeVisas">
-                                                    <td><a ng-href="{{visa.id}}">{{ visa.visaNumber}}</a></td>
+                                                    <td><a href="" ng-click="editVisa(visa)">{{ visa.visaNumber}}</a></td>
                                                     <td>{{ visa.issueDate | date:'longDate'}}</td>
                                                     <td>{{ visa.expiryDate | date:'longDate' }}</td>
                                                     <td>
@@ -233,6 +238,9 @@
                                                             <ng-pluralize count="visa.statusId" when="{'0':'expire', '1':'active'}"></ng-pluralize>
                                                         </label>
 
+                                                    </td>
+                                                    <td>
+                                                        <a href="" ng-click="deleteVisa(visa)"> <i class="icon-trash red"></i></a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -396,7 +404,7 @@
                             </div>
                             <div class="tab-pane" id="tab6" ng-show="isTabSelected(6)">
                                 <form id="frmKin" name="frmKin" novalidate>
-                                    <i class="icon-hand-right"></i>  <strong>Next of Kind Detail</strong>
+                                    <i class="icon-hand-right"></i>  <strong>Next of Kin Detail</strong>
                                     <hr />
                                     <div class="row-fluid">
                                         <div class="span6">
@@ -439,7 +447,7 @@
                                         </div>
                                     </div>
 
-                                    <i class="icon-hand-right"></i>  <strong>Additional Next of Kind Detail (if any)</strong>
+                                    <i class="icon-hand-right"></i>  <strong>Additional Next of Kin Detail (if any)</strong>
                                     <hr />
                                     <div class="row-fluid">
                                         <div class="span6">

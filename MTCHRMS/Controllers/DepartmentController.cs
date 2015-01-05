@@ -52,6 +52,13 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    newDepartment.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+
+                newDepartment.CreatedOn = DateTime.Now;
+
                 if (_repo.AddDepartment(newDepartment) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, newDepartment);
@@ -68,6 +75,13 @@ namespace MTCHRMS.Controllers
             //return Request.CreateResponse(HttpStatusCode.OK);
             if (ModelState.IsValid)
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    updateDepartment.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+
+                updateDepartment.ModifiedOn = DateTime.Now;
+
                 if (_repo.UpdateDepartment(updateDepartment) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, updateDepartment);

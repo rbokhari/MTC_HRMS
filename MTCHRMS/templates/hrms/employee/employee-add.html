@@ -141,14 +141,14 @@
                             </div>
                         </div>
                         <div class="form-actions">
-                            <a id="cmdSave" class="btn btn-primary" ng-click="save(employeeDef)" ng-disabled="staffForm.$isvalid">
+                            <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(employeeDef)" ng-disabled="staffForm.$invalid">
                                 <i class="icon-save"></i>
                                 Save
-                            </a>
-                            <a id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(employeeDef)" ng-disabled="staffForm.$isvalid">
+                            </button>
+                            <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(employeeDef)" ng-disabled="staffForm.$invalid">
                                 <i class="icon-save"></i>
                                 Save and Add New
-                            </a>
+                            </button>
                             <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/employee">
                                 <i class="icon-undo"></i>
                                 Cancel

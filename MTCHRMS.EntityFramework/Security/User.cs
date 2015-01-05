@@ -26,5 +26,7 @@ namespace MTCHRMS.EntityFramework.Security
 
         public string CurrLang { get; set; }
 
+        public int EmployeeId { get; set; }
+
     }
 }

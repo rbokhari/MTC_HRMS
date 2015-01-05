@@ -6,7 +6,6 @@ hrmsModule.directive("imgLoadingValue", function () {
         restrict: 'A',
         link: function (scope, element, attrs) {
             attrs.$observe("imgLoadingValue", function(value) {
-                //alert(value);
                 if (value) {
                     attrs.$set('src',"data:image/jpeg;base64," + value);
                 } else {

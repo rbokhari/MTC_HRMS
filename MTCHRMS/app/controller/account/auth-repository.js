@@ -3,7 +3,7 @@ hrmsModule.factory('authRepository', [
     '$http', '$q', 'localStorageService', 'employeeRepository', 'accountRepository',
     function($http, $q, localStorageService, employeeRepository, accountRepository) {
 
-        var serviceBase = 'http://localhost:90/';
+        var serviceBase = 'http://localhost:38618/';
         var authServiceFactory = {};
 
         var _authentication = {
@@ -16,8 +16,9 @@ hrmsModule.factory('authRepository', [
             empPicture: "",
             email: "",
             phone: "",
-            roles:""
-        };
+            roles: "",
+            roleId:""
+    };
 
         //var _saveRegistration = function (registration) {
         //    _logOut();
@@ -48,22 +49,16 @@ hrmsModule.factory('authRepository', [
         };
 
         var _login = function(loginData) {
-
             var data = "grant_type=password&username=" + loginData.userName + "&password=" + loginData.password;
 
             var deferred = $q.defer();
 
             $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function(response) {
 
-                //alert("login :" + loginData.userName);
-                //employeeData(loginData.userName);
-
                 localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, role: _authentication.roles });
 
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;
-
-                //alert(_authentication.userName);
 
                 deferred.resolve(response);
 
@@ -78,7 +73,7 @@ hrmsModule.factory('authRepository', [
 
         var _logOut = function() {
 
-            console.log("logOut from System 111");
+            console.log("logOut from System");
 
             localStorageService.remove('authorizationData');
 
@@ -94,7 +89,6 @@ hrmsModule.factory('authRepository', [
             if (authData) {
                 //console.log("authData.yes :(" + authData + ")");
                 //var employeeData = employeeRepository.getEmployeeDetailByUserName(authData.userName);
-                //alert("auth : " + authData.userName);
                 employeeData(authData.userName);
 
                 //console.log(employeeData.d.employeeName);
@@ -103,12 +97,11 @@ hrmsModule.factory('authRepository', [
         };
 
         function employeeData(userName) {
-            //alert(userName);
+            
             employeeRepository.getEmployeeDetailByUserName(userName)
                 .$promise
                 .then(function(response) {
                     //console.log(response);
-                    //alert("auth-repository->fillAuthDate");
                     _authentication.isAuth = true;
                     _authentication.userName = response.userName;
                     _authentication.fullName = response.employeeName;
@@ -118,17 +111,25 @@ hrmsModule.factory('authRepository', [
                     _authentication.email = response.email;
                     _authentication.phone = response.phone;
 
-                    accountRepository.getRoleById(response.id)
-                        .$promise
-                        .then(function (response1) {
-                        
-                        _authentication.roles = response1.roleName;
 
-                        localStorageService.set('userData', { userName: userName, role: _authentication.roles });
+                accountRepository.getUserById(response.id)
+                    .$promise
+                    .then(function(res) {
+
+                        accountRepository.getRoleById(res.roleId)
+                            .$promise
+                            .then(function (response1) {
+
+                                _authentication.roles = response1.roleName;
+                                _authentication.roleId = response1.roleId;
+
+                                localStorageService.set('userData', { userName: userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
+                            });
+
                     });
 
+
             }, function(err) {
-                    //alert("authData.fail :" + err);
                     _logOut();
                     _authentication.isAuth = false;
                 });

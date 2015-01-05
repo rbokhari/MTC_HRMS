@@ -2,22 +2,25 @@
 hrmsModule.controller('EmployeeModalController',
 [
     '$scope', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', '$upload',
+    'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa',
 
     function ($scope, appRepository, employeeRepository, validationRepository, title, close,
-        parentId, resultData, $timeout, $upload) {
+        parentId, resultData, $timeout, $upload, employeePassport, employeeVisa) {
 
         //$scope.name = null;
         //$scope.age = null;
         $scope.resultData = {};
         $scope.title = title;
         $scope.parentId = parentId;
+        $scope.employeePassport = employeePassport;
+        $scope.employeeVisa = employeeVisa;
 
         $scope.genders = validationRepository.getAllDetailsByValidationId(5);
 
         $scope.saveEmployeePassport = function(parentId, employeePassport) {
             $scope.errors = [];
             employeePassport.employeeDefId = parentId;
+            
             employeeRepository.addEmployeePassport(employeePassport)
                 .$promise
                 .then(
@@ -105,24 +108,6 @@ hrmsModule.controller('EmployeeModalController',
                 );
         };
 
-        //$scope.saveImage = function(parentId, employeeDef) {
-        //    //alert(employeeDef.employeeCode);
-        //    $scope.errors = [];
-        //    employeeRepository.addEmployeeImage(employeeDef).$promise.then(
-        //        function(resultEmployeeDef) {
-        //            // success case
-        //            console.log("save - Successfully !");
-        //            appRepository.showAddSuccessGritterNotification();
-        //            $location.url('/HRMSPortal/employee/detail/' + resultEmployeeDef.id);
-        //        }, function(response) {
-        //            // failure case
-        //            console.log("save - Error !");
-        //            appRepository.showErrorGritterNotification();
-        //            $scope.errors = response.data;
-        //        }
-        //    );
-        //};
-
         $scope.close = function() {
             console.log("close funciton modal controller :");
             close({
@@ -135,6 +120,8 @@ hrmsModule.controller('EmployeeModalController',
         //$scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
 
         $scope.onFileSelect = function (parentId, $files) {
+            console.log(parentId);
+            console.log($files[0]);
             //$files: an array of files selected, each file has name, size, and type.
             for (var i = 0; i < $files.length; i++) {
                 var $file = $files[i];

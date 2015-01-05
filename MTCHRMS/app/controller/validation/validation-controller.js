@@ -13,13 +13,13 @@ hrmsModule.controller('ValidationController',
 
     $scope.validationDetails = validationRepository.get();
     $scope.validationDetails.$promise.then(function() {
-        //alert("success");
+        // success
     }, function() {
-        //alert("error");
+        // error
     })
     .then(function() { $scope.isBusy = false; });
 
-    //alert($routeParams.id);
+    // $routeParams.id
     if ($routeParams.id != undefined) {
         $scope.validationDetail = validationRepository.getSingleDetailByValidationId($routeParams.id);
     }

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Http;
 using MTCHRMS.DC;
 using MTCHRMS.EntityFramework;
@@ -67,14 +68,21 @@ namespace MTCHRMS.Controllers
         }
 
 
-        [ActionName("PostNewEmployee")]
+        //[ActionName("PostNewEmployee")]
         [HttpPost]
         [Route("api/employee/")]
         [Authorize]
         public HttpResponseMessage Post([FromBody] EmployeeDef newEmployee)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid) 
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    newEmployee.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+
+                newEmployee.CreatedOn = DateTime.Now;
+
                 if (_repo.AddEmployee(newEmployee) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
@@ -91,6 +99,12 @@ namespace MTCHRMS.Controllers
             //return Request.CreateResponse(HttpStatusCode.OK);
             if (ModelState.IsValid)
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    updateEmployee.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+                updateEmployee.ModifiedOn = DateTime.Now;
+
                 if (_repo.UpdateEmployee(updateEmployee) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, updateEmployee);
@@ -105,18 +119,21 @@ namespace MTCHRMS.Controllers
         [Authorize]
         public async Task<HttpResponseMessage> Upload()
         {
+            try
+            {
+
             if (!Request.Content.IsMimeMultipartContent())
             {
                 this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
             }
+            HttpPostedFile _file = HttpContext.Current.Request.Files[0];
+
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
 
             // Remove this line as well as GetFormData method if you're not 
             // sending any form data with your upload request
             int paramData = GetFormData<int>(result);
-
-            HttpPostedFile _file = HttpContext.Current.Request.Files[0];
 
             var memstream = new MemoryStream();
 
@@ -144,6 +161,11 @@ namespace MTCHRMS.Controllers
             // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
             //var returnData = "ReturnTest";
             //return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
         }
 
         // You could extract these two private methods to a separate utility class since
@@ -224,15 +246,60 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_repo.AddEmployeePassport(newPassport) && _repo.Save())
+                if (newPassport.Id == 0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.Created, newPassport);
-                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newPassport.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newPassport.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeePassport(newPassport) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newPassport);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
                 }
+                else if (newPassport.Id != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newPassport.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newPassport.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateEmployeePassport(newPassport) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newPassport);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                    
+                }
+
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
+
+        [ActionName("DeleteEmployeePassport")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteEmployeePassport([FromBody] EmployeePassport deletePassport)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteEmployeePassport(deletePassport) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deletePassport);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
 
         [ActionName("PostEmployeeVisa")]
         [HttpPost]
@@ -241,11 +308,54 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_repo.AddEmployeeVisa(newVisa) && _repo.Save())
+                if (newVisa.Id == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newVisa.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newVisa.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeeVisa(newVisa) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newVisa);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newVisa.Id != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newVisa.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newVisa.ModifiedOn = DateTime.UtcNow;
+
+                    if (_repo.UpdateEmployeeVisa(newVisa) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newVisa);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteEmployeeVisa")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteEmployeeVisa([FromBody] EmployeeVisa newVisa)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteEmployeeVisa(newVisa) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, newVisa);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
+
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());

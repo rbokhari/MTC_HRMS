@@ -16,6 +16,18 @@ hrmsModule.factory('appRepository', ['$resource', '$http', function ($resource, 
         return true;
     };
 
+    var _showDeleteSuccessGritterNotification = function () {
+        $.gritter.add({
+            title: "MTC",
+            text: "Record deleted successfully !",
+            time: 4000,
+            image: '/Content/img/tick.png',
+            position: 'center'
+        });
+
+        return true;
+    };
+
     var _showUpdateSuccessGritterNotification = function () {
         $.gritter.add({
             title: "MTC",
@@ -43,7 +55,8 @@ hrmsModule.factory('appRepository', ['$resource', '$http', function ($resource, 
     return {
         showAddSuccessGritterNotification: _showAddSuccessGritterNotification,
         showUpdateSuccessGritterNotification: _showUpdateSuccessGritterNotification,
-        showErrorGritterNotification: _showErrorGritterNotification
+        showErrorGritterNotification: _showErrorGritterNotification,
+        showDeleteGritterNotification: _showDeleteSuccessGritterNotification
     };
 
 }]);
