@@ -321,6 +321,7 @@
     <Content Include="Content\img\loaderAr.gif" />
     <Content Include="Content\img\loaderEN.gif" />
     <Content Include="Content\img\logo-eng.png" />
+    <Content Include="Content\img\logo1.png" />
     <Content Include="Content\img\mtclogo.ico" />
     <Content Include="Content\img\Thin_broken_ring.gif" />
     <Content Include="Content\jquery.gritter.css" />

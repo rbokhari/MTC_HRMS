@@ -31,7 +31,7 @@ namespace MTCHRMS.Provider
             {
                 isValid = pc.ValidateCredentials(context.UserName, context.Password);
             }
-            isValid = true;
+            //isValid = true;
 
             // Below is database authentication
             //using (AuthRepository _repo = new AuthRepository())
