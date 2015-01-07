@@ -368,11 +368,36 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    newPreviousEmployment.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+                newPreviousEmployment.CreatedOn = DateTime.UtcNow;
+
                 if (_repo.AddPreviousExperience(newPreviousEmployment) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, newPreviousEmployment);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeletePreviousEmployement")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeletePreviousEmployement([FromBody] EmployeePreviousEmployment deleteEmployment)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeletePreviousExperience(deleteEmployment) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteEmployment);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
@@ -385,11 +410,36 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (Request.Headers.Contains("userId"))
+                {
+                    newChildren.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                }
+                newChildren.CreatedOn = DateTime.UtcNow;
+
                 if (_repo.AddEmployeeChild(newChildren) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.Created, newChildren);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteEmployeeChild")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteEmployeeChild([FromBody] EmployeeChildren deleteChild)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteEmployeeChild(deleteChild) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteChild);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
@@ -404,6 +454,12 @@ namespace MTCHRMS.Controllers
             {
                 if (newMarital.Id == 0)
                 {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newMarital.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newMarital.CreatedOn = DateTime.UtcNow;
+
                     if (_repo.AddEmployeeMaritals(newMarital) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newMarital);
@@ -412,11 +468,59 @@ namespace MTCHRMS.Controllers
                 }
                 else if (newMarital.Id > 0)
                 {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newMarital.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newMarital.ModifiedOn = DateTime.UtcNow;
+
                     if (_repo.UpdateEmployeeMaritals(newMarital) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newMarital);
                         //return new HttpResponseMessage(HttpStatusCode.OK);
                     }                       
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostEmployeeQualification")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage AddEmployeeQualification([FromBody] EmployeeQualification newQualification)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newQualification.Id == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newQualification.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newQualification.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeeQualification(newQualification) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newQualification);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newQualification.Id > 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newQualification.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newQualification.ModifiedOn = DateTime.UtcNow;
+
+                    if (_repo.UpdateEmployeeQualification(newQualification) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newQualification);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
                 }
 
 
@@ -434,6 +538,12 @@ namespace MTCHRMS.Controllers
             {
                 if (newKin.Id == 0)
                 {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newKin.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newKin.CreatedOn = DateTime.UtcNow;
+
                     if (_repo.AddEmployeeKin(newKin) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newKin);
@@ -442,6 +552,12 @@ namespace MTCHRMS.Controllers
                 }
                 else if (newKin.Id > 0)
                 {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newKin.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newKin.ModifiedOn = DateTime.UtcNow;
+
                     if (_repo.UpdateEmployeeKin(newKin) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newKin);

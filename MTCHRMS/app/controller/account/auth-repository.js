@@ -3,7 +3,7 @@ hrmsModule.factory('authRepository', [
     '$http', '$q', 'localStorageService', 'employeeRepository', 'accountRepository',
     function($http, $q, localStorageService, employeeRepository, accountRepository) {
 
-        var serviceBase = 'http://10.3.2.149:88/'; // http://localhost:90/';
+        var serviceBase = 'http://10.3.2.149:88/'; //'http://localhost:90/'; 
         var authServiceFactory = {};
 
         var _authentication = {
@@ -61,8 +61,8 @@ hrmsModule.factory('authRepository', [
                 _authentication.userName = loginData.userName;
 
                 deferred.resolve(response);
-
-            }).error(function(err, status) {
+                
+            }).error(function (err, status) {
                 _logOut();
                 deferred.reject(err);
             });

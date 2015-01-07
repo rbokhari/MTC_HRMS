@@ -40,22 +40,32 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/' + employeeVisa.employeeDefId + '/DeleteEmployeeVisa').save(employeeVisa);
     };
 
-    var _addEmployeeQualification = function(employeeQualification) {
-        return $resource('/api/employee/' + employeeQualification.employeeDefId + '/PostEmployeePassport').save(employeeQualification);
-    };
-
     var _addEmployeePreviousEmployment = function(employeePreviousEmployment) {
         return $resource('/api/employee/' + employeePreviousEmployment.employeeDefId + '/PostEmployeePreviousEmployment').save(employeePreviousEmployment);
     };
 
+    var _deleteEmployeePreviousEmployement = function (previousEmployement) {
+        return $resource('/api/employee/' + previousEmployement.employeeDefId + '/DeletePreviousEmployement').save(previousEmployement);
+    };
+
+
     var _addEmployeeMarital = function(employeeMaritals) {
         return $resource('/api/employee/' + employeeMaritals.employeeDefId + '/PostEmployeeMarital').save(employeeMaritals);
+    };
+
+    var _addEmployeeQualification = function(employeeQualification) {
+        return $resource('/api/employee/' + employeeQualification.employeeDefId + '/PostEmployeeQualification').save(employeeQualification);
     };
 
     var _addEmployeeChild = function (employeeChildrens) {
         
         return $resource('/api/employee/' + employeeChildrens.employeeDefId + '/PostEmployeeChild').save(employeeChildrens);
     };
+
+    var _deleteEmployeeChild = function (employeeChild) {
+        return $resource('/api/employee/' + employeeChild.employeeDefId + '/DeleteEmployeeChild').save(employeeChild);
+    };
+
 
     var _addEmployeeKin = function(employeeKins) {
         return $resource('/api/employee/' + employeeKins.employeeDefId + '/PostEmployeeKin').save(employeeKins);
@@ -77,8 +87,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         deleteEmployeeVisa: _deleteEmployeeVisa,
         addEmployeeQualification: _addEmployeeQualification,
         addEmployeePreviousEmployment: _addEmployeePreviousEmployment,
+        deleteEmployeePreviousEmployement: _deleteEmployeePreviousEmployement,
         addEmployeeMarital: _addEmployeeMarital,
         addEmployeeChild: _addEmployeeChild,
+        deleteEmployeeChild: _deleteEmployeeChild,
         addEmployeeKin: _addEmployeeKin,
         addEmployeeImage: _addEmployeeImage
     };

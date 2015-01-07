@@ -72,6 +72,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual ICollection<EmployeePassport> EmployeePassports { get; set; }
         public virtual ICollection<EmployeeVisa> EmployeeVisas { get; set; }
 
+        public virtual ICollection<EmployeeQualification> EmployeeQualifications { get; set; }
+
         public virtual ICollection<EmployeePreviousEmployment> PreviousEmployments { get; set; }
 
         public virtual ICollection<EmployeeMarital> EmployeeMarital { get; set; }
@@ -173,7 +175,10 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public DateTime BirthDate { get; set; }
 
+        [ForeignKey("ValidationDetailId")]
         public int GenderId { get; set; }
+
+        public virtual ValidationDetail ValidationDetailId { get; set; }
 
     }
 
@@ -207,6 +212,21 @@ namespace MTCHRMS.EntityFramework.HRMS
         public string Airport2 { get; set; }
 
         public string Notes { get; set; }
+    }
+
+
+    public class EmployeeQualification : TableStrutcture
+    {
+        public int Id { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        public string EducationSchool { get; set; }
+
+        public string EducationDegree { get; set; }
+
+
+
     }
 
 }

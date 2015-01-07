@@ -259,19 +259,19 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Educational (School Level) :</label>
                                                     <div class="controls">
-                                                        <textarea id="tSchoolLevel" name="tSchoolLevel" class="span12"></textarea>
+                                                        <textarea id="tSchoolLevel" name="tSchoolLevel" ng-model="employee[0].employeeQualifications[0].educationSchool" class="span12"></textarea>
                                                         <div class="help-inline" ng-show="staffForm.tCode.$error.required && staffForm.tCode.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">Educational Degrees :</label>
                                                     <div class="controls">
-                                                        <textarea id="tDegree" name="tDegree" class="span12"></textarea>
+                                                        <textarea id="tDegree" name="tDegree" class="span12" ng-model="employee[0].employeeQualifications[0].educationDegree"></textarea>
                                                         <div class="help-inline" ng-show="staffForm.cNationality.$error.required && staffForm.cNationality.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">
-                                                    <a id="cmdSave" class="btn btn-primary" ng-click="save(employeeDef)" ng-disabled="staffForm.$isvalid">
+                                                    <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeQualification(employee[0].id, employee[0].employeeQualifications[0])" ng-disabled="staffForm.$isvalid">
                                                         <i class="icon-save"></i>
                                                         Update
                                                     </a>
@@ -295,6 +295,7 @@
                                             <th>Company Name</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -303,6 +304,10 @@
                                             <td>{{pemployment.companyName}}</td>
                                             <td>{{pemployment.startDate | date:'longDate'}}</td>
                                             <td>{{pemployment.endDate | date:'longDate' }}</td>
+                                            <td>
+                                                <a href="" ng-click="deletePreviousEmployement(pemployment)"> <i class="icon-trash red"></i></a>
+                                            </td>
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -326,14 +331,14 @@
                                                 <div class="control-group">
                                                     <label class="control-label">Birth Date :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tFamilyBirthDate" name="tFamilyBirthDate" ng-model="employee[0].employeeMarital[0].birthDate" datepicker />
+                                                        <input type="text" id="tFamilyBirthDate" name="tFamilyBirthDate" ng-model="employee[0].employeeMarital[0].birthDate" data-date-format="dd/mm/yyyy" datepicker />
                                                         <div class="help-inline" ng-show="frmFamily.tFamilyBirthDate.$error.required && frmFamily.tFamilyBirthDate.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
                                                     <label class="control-label">Marriage Date :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tMarriageDate" name="tMarriageDate" ng-model="employee[0].employeeMarital[0].marriageDate" datepicker />
+                                                        <input type="text" id="tMarriageDate" name="tMarriageDate" ng-model="employee[0].employeeMarital[0].marriageDate" data-date-format="dd/mm/yyyy" datepicker />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
@@ -388,6 +393,7 @@
                                                 <th>Name</th>
                                                 <th>Age</th>
                                                 <th>Gender</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -396,6 +402,9 @@
                                                 <td>{{child.childrenName}}</td>
                                                 <td>{{child.birthDate | date:'longDate'}}</td>
                                                 <td>{{child.genderId}}</td>
+                                                <td>
+                                                    <a href="" ng-click="deleteEmployeeChild(child)"> <i class="icon-trash red"></i></a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>

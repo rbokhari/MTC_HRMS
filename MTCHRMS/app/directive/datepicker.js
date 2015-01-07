@@ -14,8 +14,8 @@
                 var _date = new Date(ngModel.$viewValue);
                 //alert(typeof (ngModel.$viewValue) != "undefined");
                 //element.val((_date.getUTCMonth() + 1) + '/' + (_date.getUTCDate()) + '/' + _date.getUTCFullYear());
-                
-                    element.val((_date.getUTCDate()) + '/' + (_date.getUTCMonth() + 1) + '/' + _date.getUTCFullYear());
+                    element.val(_date);
+                    //element.val((_date.getUTCDate()) + '/' + (_date.getUTCMonth() + 1) + '/' + _date.getUTCFullYear());
                 }
 
             };
@@ -27,8 +27,10 @@
                     //var today = new Date(event.date.getUTCFullYear(), event.date.getUTCMonth() + 1, event.date.getUTCDate() + 1, 0, 0, 0, 0);
                     //alert((event.date.getUTCDate() + 1) + "/" + (event.date.getUTCMonth() + 1) + "/" + event.date.getUTCFullYear());
                     //alert("changeDate");
+                    //alert(event.date.getDate());
                     //ngModel.$setViewValue(event.date);
-                    ngModel.$setViewValue((event.date.getUTCMonth() + 1) + '/' + (event.date.getUTCDate() + 1) + '/' + event.date.getUTCFullYear());//This will update the model property bound to your ng-model whenever the datepicker's date changes.
+                    //if ()
+                    ngModel.$setViewValue((event.date.getMonth() + 1) + '/' + (event.date.getDate()) + '/' + event.date.getFullYear());//This will update the model property bound to your ng-model whenever the datepicker's date changes.
                 });
             });
         }

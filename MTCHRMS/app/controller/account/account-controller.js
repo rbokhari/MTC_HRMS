@@ -12,11 +12,10 @@ hrmsModule.controller('AccountController',
             password: ""
         };
         $scope.message = "";
-        $scope.login = function() {
+        $scope.login = function () {
             authRepository.login($scope.loginData).then(function (response) {
                     //moduleDetail();
                 //roleDetail();
-                    
                     $window.location.href = '/HRMSPortal';
                 },
                 function (err) {

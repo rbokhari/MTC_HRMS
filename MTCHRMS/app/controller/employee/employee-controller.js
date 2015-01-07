@@ -147,6 +147,8 @@ hrmsModule.controller('EmployeeController',
                 inputs: {
                     title: "Add New Employement",
                     parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -158,6 +160,21 @@ hrmsModule.controller('EmployeeController',
             });
         };
 
+        $scope.deletePreviousEmployement = function (previousEmployement) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                employeeRepository.deleteEmployeePreviousEmployement(previousEmployement)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.employee[0].previousEmployments.pop(previousEmployement);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
+
         $scope.showChild = function (id) {
             ModalService.showModal({
                 templateUrl: "/templates/hrms/employee/employee-child.html",
@@ -165,6 +182,8 @@ hrmsModule.controller('EmployeeController',
                 inputs: {
                     title: "Add New Child",
                     parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -176,6 +195,20 @@ hrmsModule.controller('EmployeeController',
             });
         };
 
+        $scope.deleteEmployeeChild = function (employeeChild) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                employeeRepository.deleteEmployeeChild(employeeChild)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.employee[0].childrens.pop(employeeChild);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
         $scope.showImageForm = function (id) {
             
             ModalService.showModal({
@@ -184,6 +217,8 @@ hrmsModule.controller('EmployeeController',
                 inputs: {
                     title: "Update Picture",
                     parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -314,6 +349,24 @@ hrmsModule.controller('EmployeeController',
                     appRepository.showAddSuccessGritterNotification();
                     //$location.url('/HRMSPortal/employee/detail/' + resultEmployeeDef.id);
                 }, function(response) {
+                    // failure case
+                    console.log("saveEmployeeMarital - Error !");
+                    appRepository.showErrorGritterNotification();
+                    $scope.errors = response.data;
+                }
+            );
+        };
+
+        $scope.saveEmployeeQualification = function (id, employeeQualification) {
+            $scope.errors = [];
+            employeeQualification.employeeDefId = id;
+            employeeRepository.addEmployeeQualification(employeeQualification).$promise.then(
+                function (resultemployeeMarital) {
+                    // success case
+                    console.log("saveEmployeeMarital - Successfully !");
+                    appRepository.showAddSuccessGritterNotification();
+                    //$location.url('/HRMSPortal/employee/detail/' + resultEmployeeDef.id);
+                }, function (response) {
                     // failure case
                     console.log("saveEmployeeMarital - Error !");
                     appRepository.showErrorGritterNotification();

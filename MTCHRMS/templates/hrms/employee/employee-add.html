@@ -93,7 +93,7 @@
                                     <div class="control-group">
                                         <label class="control-label">Appointment Date :</label>
                                         <div class="controls">
-                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" ng-model="employeeDef.appointment" datepicker required />
+                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" data-date-format="mm/dd/yyyy" ng-model="employeeDef.appointment" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tAppintmentDate.$error.required && staffForm.tAppintmentDate.$dirty">*</div>
                                         </div>
                                     </div>
@@ -119,14 +119,14 @@
                                     <div class="control-group">
                                         <label class="control-label">Date of Birth :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOB" name="tDOB" class="date-picker" ng-model="employeeDef.dateOfBirth" datepicker required />
+                                            <input type="text" id="tDOB" name="tDOB" ng-model="employeeDef.dateOfBirth" data-date-format="mm/dd/yyyy" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Expirty Date :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOE" name="tDOE" class="date-picker" ng-model="employeeDef.serviceEndDate" datepicker required />
+                                            <input type="text" id="tDOE" name="tDOE" ng-model="employeeDef.serviceEndDate" data-date-format="mm/dd/yyyy" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOE.$error.required && staffForm.tDOE.$dirty">*</div>
                                         </div>
                                     </div>

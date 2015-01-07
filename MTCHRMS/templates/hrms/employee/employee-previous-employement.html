@@ -16,14 +16,14 @@
                 <div class="control-group">
                     <label class="control-label">Start Date :</label>
                     <div class="controls">
-                        <input type="text" id="tStartDate" name="tStartDate" datepicker ng-model="employeePreviousEmployment.startDate" required />
+                        <input type="text" id="tStartDate" name="tStartDate" data-date-format="dd/mm/yyyy" datepicker ng-model="employeePreviousEmployment.startDate" required />
                         <div class="help-inline" ng-show="frmPreviousCompany.tStartDate.$error.required && frmPreviousCompany.tStartDate.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">End Date :</label>
                     <div class="controls">
-                        <input type="text" id="tEndDate" name="tEndDate" datepicker ng-model="employeePreviousEmployment.endDate" required />
+                        <input type="text" id="tEndDate" name="tEndDate" data-date-format="dd/mm/yyyy" datepicker ng-model="employeePreviousEmployment.endDate" required />
                         <div class="help-inline" ng-show="frmPreviousCompany.tEndDate.$error.required && frmPreviousCompany.tEndDate.$dirty">*</div>
                     </div>
                 </div>
