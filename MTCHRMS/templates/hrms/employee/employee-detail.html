@@ -401,7 +401,7 @@
                                                 <td>{{ $index + 1}}</td>
                                                 <td>{{child.childrenName}}</td>
                                                 <td>{{child.birthDate | date:'longDate'}}</td>
-                                                <td>{{child.genderId}}</td>
+                                                <td>{{child.childGenderDetail.nameEn}}</td>
                                                 <td>
                                                     <a href="" ng-click="deleteEmployeeChild(child)"> <i class="icon-trash red"></i></a>
                                                 </td>

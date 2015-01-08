@@ -189,7 +189,13 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
+                    //console.log(result);
+                    //var childGenderDetail = { 'nameEn': 'Male111' };
+
+                    //result.push(childGenderDetail);
+                    //console.log(result);
                     $scope.employee[0].childrens.push(result.resultData);
+                    //$scope.employee[0].childrens[2].childGenderDetail.push({ 'nameEn': 'Male' });
                 });
 
             });

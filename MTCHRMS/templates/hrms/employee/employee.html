@@ -44,21 +44,21 @@
             </a>-->
 
 
-                <div data-desktop="span2" data-tablet="span2" class="span3" style="max-width: 275px; -moz-min-width: 200px; -ms-min-width: 200px; -o-min-width: 200px; -webkit-min-width: 200px; min-width: 200px;" ng-repeat="employee in filtered = (employees | filter:empSearch)">
-                    <div class="metro-overview green-color clearfix">
-                        <div class="display">
-                            <img alt="" data-img-loading-value="{{employee.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+            <div data-desktop="span2" data-tablet="span2" class="span3" style="max-width: 300px; -moz-min-width: 300px; -ms-min-width:300px; -o-min-width: 300px; -webkit-min-width: 300px; min-width: 300px;" ng-repeat="employee in filtered = (employees | filter:empSearch)">
+                <div class="metro-overview green-color clearfix">
+                    <div class="display">
+                        <img alt="" data-img-loading-value="{{employee.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
 
-                            <!--<img src="/Content/img/avatar.png" ng-show="!employee.empPicture" /><img ng-show="employee.empPicture" src="data:image/jpeg;base64,{{employee.empPicture}}" style="height: 48px; width: 48px;" width="48px" height="48px" />-->
-                            <div class="percent">{{ employee.employeeCode}}</div>
-                        </div>
-                        <div class="details">
-                            <div class="number"><a ng-href="/HRMSPortal/employee/detail/{{ employee.id}}">{{ employee.employeeName}}</a></div>
-                            <div class="title">{{ employee.departmentId.departmentName}}</div>
-                            <div class="title">{{ employee.rank}}</div>
-                        </div>
+                        <!--<img src="/Content/img/avatar.png" ng-show="!employee.empPicture" /><img ng-show="employee.empPicture" src="data:image/jpeg;base64,{{employee.empPicture}}" style="height: 48px; width: 48px;" width="48px" height="48px" />-->
+                        <div class="percent">{{ employee.employeeCode}}</div>
+                    </div>
+                    <div class="details">
+                        <div class="number"><a title="{{employee.employeename}}" ng-href="/HRMSPortal/employee/detail/{{ employee.id}}">{{ employee.employeeName | limitTo:20}} {{employee.employeeName > 20 ? '...' : ''}}</a></div>
+                        <div class="title">{{ employee.departmentId.departmentName}}</div>
+                        <div class="title">{{ employee.rank}}</div>
                     </div>
                 </div>
+            </div>
 
             <!--<div class="row">
                 <div class="widget">

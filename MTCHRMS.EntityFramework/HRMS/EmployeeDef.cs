@@ -154,11 +154,11 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public int NationalityId { get; set; }
 
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
 
         public string BirthPlace { get; set; }
 
-        public DateTime MarriageDate { get; set; }
+        public DateTime? MarriageDate { get; set; }
 
         public string MarriagePlace { get; set; }
 

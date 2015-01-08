@@ -3,7 +3,7 @@ hrmsModule.factory('authRepository', [
     '$http', '$q', 'localStorageService', 'employeeRepository', 'accountRepository',
     function($http, $q, localStorageService, employeeRepository, accountRepository) {
 
-        var serviceBase = 'http://10.3.2.149:88/'; //'http://localhost:90/'; 
+        var serviceBase = 'http://localhost:90/';  //'http://10.3.2.149:88/'; 
         var authServiceFactory = {};
 
         var _authentication = {

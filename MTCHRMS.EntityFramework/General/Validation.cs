@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace MTCHRMS.EntityFramework.General
 {
     public class Validation : TableStrutcture
     {
+        [Key]
         public int Id { get; set; }
         public int ModuleId { get; set; }
 
