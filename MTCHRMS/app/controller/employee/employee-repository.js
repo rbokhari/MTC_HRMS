@@ -8,6 +8,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee').query();
     };
 
+    var _getSingleEmployee = function (id) {
+        return $resource('/api/employee/GetSingleEmployee/?id=' + id).query();
+    };
+
     var _getEmployeeDetailById = function (id) {
         return $resource('/api/employee/' + id).query();
     };
@@ -16,7 +20,24 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/GetEmployeeByUserName/?userName=' + userName).get();
     };
 
-    var _addEmployee = function(employeeDef) {
+    var _getEmployeesPassportExpiry = function () {
+        return $resource('/api/employee/GetPassportExpiryList').query();
+    };
+
+    var _getEmployeesVisaExpiry = function () {
+        return $resource('/api/employee/GetVisaExpiryList').query();
+    };
+
+    var _getEmployeesContractExpiry = function () {
+        return $resource('/api/employee/GetContractExpiryList').query();
+    };
+
+    var _getEmployeesProbationExpiry = function () {
+        return $resource('/api/employee/GetProbationExpiryList').query();
+    };
+
+
+    var _addEmployee = function (employeeDef) {
         return $resource('/api/employee').save(employeeDef);
     };
 
@@ -77,8 +98,13 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
 
     return {
         getAllEmployees: _getAllEmployees,
+        getSingleEmployee : _getSingleEmployee,
         getEmployeeDetailById: _getEmployeeDetailById,
         getEmployeeDetailByUserName: _getEmployeeDetailByUserName,
+        getEmployeesPassportExpiry: _getEmployeesPassportExpiry,
+        getEmployeesVisaExpiry: _getEmployeesVisaExpiry,
+        getEmployeesContractExpiry: _getEmployeesContractExpiry,
+        getEmployeesProbationExpiry: _getEmployeesProbationExpiry,
         addEmployee: _addEmployee,
         editEmployee: _editEmployee,
         addEmployeePassport: _addEmployeePassport,

@@ -14,8 +14,8 @@
                 var _date = new Date(ngModel.$viewValue);
                 //alert(typeof (ngModel.$viewValue) != "undefined");
                 //element.val((_date.getUTCMonth() + 1) + '/' + (_date.getUTCDate()) + '/' + _date.getUTCFullYear());
-                    element.val(_date);
-                    //element.val((_date.getUTCDate()) + '/' + (_date.getUTCMonth() + 1) + '/' + _date.getUTCFullYear());
+                    //element.val(_date);
+                element.val((_date.getDate()) + '/' + (_date.getMonth() + 1) + '/' + _date.getFullYear());
                 }
 
             };

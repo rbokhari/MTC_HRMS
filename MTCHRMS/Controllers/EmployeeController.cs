@@ -8,13 +8,18 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.SignalR;
 using MTCHRMS.DC;
 using MTCHRMS.EntityFramework;
 using MTCHRMS.EntityFramework.HRMS;
+using MTCHRMS.Hubs;
 using Newtonsoft.Json;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace MTCHRMS.Controllers
 {
+    
     public class EmployeeController : ApiController
     {
         public IEmployeesRepository _repo;
@@ -26,7 +31,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/employee/")]
         [HttpGet]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get()
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
@@ -36,7 +41,59 @@ namespace MTCHRMS.Controllers
             return employees;
         }
 
-        [Authorize]
+        [Route("api/employee/GetPassportExpiryList")]
+        [HttpGet]
+        //[System.Web.Http.Authorize]
+        public async Task<List<EmployeePassport>> GetPassportExpiry()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeesPassportExpiry();
+        }
+
+        [Route("api/employee/GetVisaExpiryList")]
+        [HttpGet]
+        //[System.Web.Http.Authorize]
+        public async Task<List<EmployeeVisa>> GetVisaExpiry()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeesVisaExpiry();
+        }
+
+        [Route("api/employee/GetContractExpiryList")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetContractExpiry()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeesContractExpiry();
+        }
+
+        [Route("api/employee/GetProbationExpiryList")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetProbationExpiry()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeesProbationExpiry();
+        }
+
+        [Route("api/employee/GetSingleEmployee")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public IQueryable<EmployeeDef> GetSingle(int id)
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            var employees = _repo.GetEmployees().Where(c=>c.Id == id);
+
+            return employees;
+        }
+
+        [System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get(int id)
         {
             //System.Threading.Thread.Sleep(4000);
@@ -53,7 +110,7 @@ namespace MTCHRMS.Controllers
         //[ActionName("GetEmployeeByUserName")]
         [HttpGet]
         [Route("api/employee/GetEmployeeByUserName")]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public EmployeeDef EmployeeByUserName(string userName)
         {
             //System.Threading.Thread.Sleep(4000);
@@ -71,52 +128,76 @@ namespace MTCHRMS.Controllers
         //[ActionName("PostNewEmployee")]
         [HttpPost]
         [Route("api/employee/")]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage Post([FromBody] EmployeeDef newEmployee)
         {
             if (ModelState.IsValid) 
             {
-                if (Request.Headers.Contains("userId"))
+                if (newEmployee.Id == 0)
                 {
-                    newEmployee.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newEmployee.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+
+                    newEmployee.CreatedOn = DateTime.Now;
+
+                    if (_repo.AddEmployee(newEmployee) && _repo.Save())
+                    {
+                        //var context = GlobalHost.ConnectionManager.GetHubContext<HRMSStaffHub>();
+
+                        //context.Clients.All.addNewEmployee(newEmployee.Id, newEmployee.CreatedBy);
+
+                        return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newEmployee.Id != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newEmployee.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newEmployee.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateEmployee(newEmployee) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
                 }
 
-                newEmployee.CreatedOn = DateTime.Now;
-
-                if (_repo.AddEmployee(newEmployee) && _repo.Save())
-                {
-                    return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
-                    //return new HttpResponseMessage(HttpStatusCode.OK);
-                }
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
 
-        [Authorize]
-        public HttpResponseMessage Put(int id, [FromBody] EmployeeDef updateEmployee)
-        {
-            //return Request.CreateResponse(HttpStatusCode.OK);
-            if (ModelState.IsValid)
-            {
-                if (Request.Headers.Contains("userId"))
-                {
-                    updateEmployee.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
-                }
-                updateEmployee.ModifiedOn = DateTime.Now;
+        //[Route("api/employee/")]
+        //[System.Web.Http.Authorize]
+        //public HttpResponseMessage Put(int id, [FromBody] EmployeeDef updateEmployee)
+        //{
+        //    //return Request.CreateResponse(HttpStatusCode.OK);
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (Request.Headers.Contains("userId"))
+        //        {
+        //            updateEmployee.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+        //        }
+        //        updateEmployee.ModifiedOn = DateTime.Now;
 
-                if (_repo.UpdateEmployee(updateEmployee) && _repo.Save())
-                {
-                    return Request.CreateResponse(HttpStatusCode.Created, updateEmployee);
-                    //return new HttpResponseMessage(HttpStatusCode.OK);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
-            }
-            return null;
-        }
+        //        if (_repo.UpdateEmployee(updateEmployee) && _repo.Save())
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.Created, updateEmployee);
+        //            //return new HttpResponseMessage(HttpStatusCode.OK);
+        //        }
+        //        return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        //    }
+        //    return null;
+        //}
 
         [HttpPost, Route("api/employee/upload")]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public async Task<HttpResponseMessage> Upload()
         {
             try
@@ -241,7 +322,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeePassport")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeePassport([FromBody] EmployeePassport newPassport)
         {
             if (ModelState.IsValid)
@@ -283,7 +364,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("DeleteEmployeePassport")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage DeleteEmployeePassport([FromBody] EmployeePassport deletePassport)
         {
             if (ModelState.IsValid)
@@ -303,7 +384,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeeVisa")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeeVisa([FromBody] EmployeeVisa newVisa)
         {
             if (ModelState.IsValid)
@@ -344,7 +425,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("DeleteEmployeeVisa")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage DeleteEmployeeVisa([FromBody] EmployeeVisa newVisa)
         {
             if (ModelState.IsValid)
@@ -363,7 +444,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeePreviousEmployment")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeePreviousEmployment([FromBody] EmployeePreviousEmployment newPreviousEmployment)
         {
             if (ModelState.IsValid)
@@ -386,7 +467,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("DeletePreviousEmployement")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage DeletePreviousEmployement([FromBody] EmployeePreviousEmployment deleteEmployment)
         {
             if (ModelState.IsValid)
@@ -405,7 +486,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeeChild")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeeChild([FromBody] EmployeeChildren newChildren)
         {
             if (ModelState.IsValid)
@@ -428,7 +509,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("DeleteEmployeeChild")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage DeleteEmployeeChild([FromBody] EmployeeChildren deleteChild)
         {
             if (ModelState.IsValid)
@@ -447,7 +528,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeeMarital")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeeMarital([FromBody] EmployeeMarital newMarital)
         {
             if (ModelState.IsValid)
@@ -489,7 +570,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeeQualification")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeeQualification([FromBody] EmployeeQualification newQualification)
         {
             if (ModelState.IsValid)
@@ -531,7 +612,7 @@ namespace MTCHRMS.Controllers
 
         [ActionName("PostEmployeeKin")]
         [HttpPost]
-        [Authorize]
+        [System.Web.Http.Authorize]
         public HttpResponseMessage AddEmployeeKin([FromBody] EmployeeKin newKin)
         {
             if (ModelState.IsValid)

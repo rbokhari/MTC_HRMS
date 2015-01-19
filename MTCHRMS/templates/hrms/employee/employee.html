@@ -43,8 +43,17 @@
                 <div>{{ employee.validationDetailId.nameEn}}</div>
             </a>-->
 
+            <div style="height:30px;">
+                <span class="pull-left bottom-left" ng-show="employees.length>0">
+                    Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+                </span>
+                <span class="pull-right">
+                    <dir-pagination-controls template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                </span>
 
-            <div data-desktop="span2" data-tablet="span2" class="span3" style="max-width: 300px; -moz-min-width: 300px; -ms-min-width:300px; -o-min-width: 300px; -webkit-min-width: 300px; min-width: 300px;" ng-repeat="employee in filtered = (employees | filter:empSearch)">
+            </div>
+
+            <div data-desktop="span2" data-tablet="span2" class="span3" style="max-width: 300px; -moz-min-width: 300px; -ms-min-width:300px; -o-min-width: 300px; -webkit-min-width: 300px; min-width: 300px;" dir-paginate="employee in employees | filter:empSearch | itemsPerPage: 25">
                 <div class="metro-overview green-color clearfix">
                     <div class="display">
                         <img alt="" data-img-loading-value="{{employee.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
@@ -53,7 +62,7 @@
                         <div class="percent">{{ employee.employeeCode}}</div>
                     </div>
                     <div class="details">
-                        <div class="number"><a title="{{employee.employeename}}" ng-href="/HRMSPortal/employee/detail/{{ employee.id}}">{{ employee.employeeName | limitTo:20}} {{employee.employeeName > 20 ? '...' : ''}}</a></div>
+                        <div class="number"><a title="{{employee.employeeName}}" ng-href="/HRMSPortal/employee/detail/{{employee.id}}">{{ employee.employeeName | limitTo:18}} {{employee.employeeName.length > 18 ? '...' : ''}}</a></div>
                         <div class="title">{{ employee.departmentId.departmentName}}</div>
                         <div class="title">{{ employee.rank}}</div>
                     </div>

@@ -5,13 +5,12 @@
 
 hrmsModule.controller('EmployeeController',
 [
-    '$scope', 'appRepository', 'employeeRepository', '$location', '$routeParams', 'departmentRepository', 'validationRepository', 'ModalService',
-    function ($scope, appRepository, employeeRepository, $location, $routeParams, departmentRepository, validationRepository, ModalService) {
+    '$scope', 'appRepository', 'employeeRepository', '$location', '$routeParams', 'departmentRepository', 'validationRepository', 'ModalService', 'EmployeeStream',
+    function ($scope, appRepository, employeeRepository, $location, $routeParams, departmentRepository, validationRepository, ModalService, EmployeeStream) {
 
         console.log("employee controller");
 
         $scope.isBusy = false;
-
 
         // bootstrap tab setting property and function for angularjs
         $scope.tab = 1;       // set active tab bydefault
@@ -207,7 +206,7 @@ hrmsModule.controller('EmployeeController',
                 employeeRepository.deleteEmployeeChild(employeeChild)
                     .$promise
                     .then(function () {
-                        appRepository.showDeleteGritterNotification();
+                        appRepository.showAddSuccessGritterNotification();
                         $scope.employee[0].childrens.pop(employeeChild);
                     }, function (error) {
                         appRepository.showErrorGritterNotification();
@@ -237,9 +236,7 @@ hrmsModule.controller('EmployeeController',
             });
 
         };
-
         // Modal service end -------------------
-
 
         $scope.employees = employeeRepository.getAllEmployees();
         $scope.employees.$promise.then(function() {
@@ -247,7 +244,17 @@ hrmsModule.controller('EmployeeController',
             }, function() {
                 //alert("error");
             })
-            .then(function() { $scope.isBusy = true; });
+            .then(function () { $scope.isBusy = true; });
+
+        // Call employee hub service
+        EmployeeStream.on('addNewEmployee', function (empId, userId) {
+            console.log("empID: " + empId + " , userId: " + userId);
+            $scope.singleEmp = employeeRepository.getSingleEmployee(empId);
+            $scope.singleEmp.$promise.then(function() {
+                $scope.employees.push($scope.singleEmp[0]);
+                appRepository.showAddSuccessGritterNotification();
+            });
+        });
 
         $scope.departments = departmentRepository.getAllDepartment();
         $scope.nationalities = validationRepository.getAllDetailsByValidationId(2);
@@ -312,7 +319,10 @@ hrmsModule.controller('EmployeeController',
 
         $scope.edit = function(employeeDef) {
             $scope.errors = [];
-            employeeRepository.editEmployee(employeeDef).then(
+            //employeeRepository.editEmployee(employeeDef).then(
+            employeeRepository.addEmployee(employeeDef)
+                .$promise
+                .then(
                 function() {
                     // success case
                     appRepository.showUpdateSuccessGritterNotification();

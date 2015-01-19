@@ -122,6 +122,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public DateTime ExpiryDate { get; set; }
 
         public int StatusId { get; set; }
+
+        //public  EmployeeDef EmployeeDefDetail { get; set; }
     }
 
     public class EmployeePreviousEmployment : TableStrutcture
@@ -175,10 +177,10 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public DateTime BirthDate { get; set; }
 
-        [ForeignKey("ValidationDetailId")]
+        [ForeignKey("ChildGenderDetail")]
         public int GenderId { get; set; }
 
-        public virtual ValidationDetail ValidationDetailId { get; set; }
+        public virtual ValidationDetail ChildGenderDetail { get; set; }
 
     }
 

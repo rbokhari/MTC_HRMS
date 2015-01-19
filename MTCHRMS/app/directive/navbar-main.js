@@ -10,7 +10,8 @@ hrmsModule.directive("navbarMain", function() {
 hrmsModule.directive("navbarNotify", function () {
     return {
         restrict: 'E',
-        templateUrl: '/templates/main/navbar-notify.html'
+        templateUrl: '/templates/main/navbar-notify.html',
+        controller: 'DashboardController'
     };
 });
 

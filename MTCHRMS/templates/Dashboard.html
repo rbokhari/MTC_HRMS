@@ -43,51 +43,71 @@
                             <div class="title">New Staff</div>
                         </div>
                         <div class="progress progress-info">
-                            <div style="width:{{empcount}}%" class="bar"></div>
+                            <div ng-style="{'width':10%}" class="bar">10%</div>
                         </div>
                     </div>
                 </div>
-                <div data-desktop="span" data-tablet="span4" class="span3 responsive">
+
+                <div data-desktop="span2" data-tablet="span4 fix-margin" class="span2 responsive" data-ng-init="loadProbation()">
                     <div class="metro-overview red-color clearfix">
                         <div class="display">
-                            <i class="icon-star"></i>
-                            <div class="percent">+36%</div>
+                            <i class="icon-columns"></i>
+                            <div class="percent">+{{(probations.length / employees.length ) * 100  | number:0}}%</div>
                         </div>
                         <div class="details">
-                            <div class="numbers">54</div>
-                            <div class="title">Employee On Leave</div>
+                            <div class="numbers" data-ng-show="isProbationBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
+                            <div class="numbers" data-ng-hide="isProbationBusy" data-ng-bind="probations.length"></div>
+                            <div class="title">Probation Expiry</div>
                             <div class="progress progress-warning">
-                                <div style="width: 36%" class="bar"></div>
+                                <div style="width: {{(probations.length / employees.length)*100}}%" class="bar"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div data-desktop="span2" data-tablet="span4" class="span2 responsive">
+                <div data-desktop="span2" data-tablet="span4" class="span2 responsive" data-ng-init="loadContract()">
                     <div class="metro-overview green-color clearfix">
                         <div class="display">
                             <i class="icon-signout"></i>
-                            <div class="percent">+46%</div>
+                            <div class="percent">+{{(contracts.length / employees.length ) * 100 | number:0}}%</div>
                         </div>
                         <div class="details">
-                            <div class="numbers">30</div>
+                            <div class="numbers" data-ng-show="isContractBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
+                            <div class="numbers" data-ng-hide="isContractBusy" data-ng-bind="contracts.length"></div>
                             <div class="title">Contract Expire</div>
                             <div class="progress progress-success">
-                                <div style="width: 46%" class="bar"></div>
+                                <div style="width: {{ (contracts.length / employees.length ) * 100 }}%" class="bar"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div data-desktop="span2" data-tablet="span4 fix-margin" class="span2 responsive">
+                <div data-desktop="span2" data-tablet="span4 fix-margin" class="span2 responsive" data-ng-init="loadVisa()">
                     <div class="metro-overview gray-color clearfix">
                         <div class="display">
                             <i class="icon-plane"></i>
-                            <div class="percent">+26%</div>
+                            <div class="percent">+{{(visas.length / employees.length ) * 100 | number:0}}%</div>
                         </div>
                         <div class="details">
-                            <div class="numbers">17</div>
+                            <div class="numbers" data-ng-show="isVisaBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
+                            <div class="numbers" data-ng-hide="isVisaBusy" data-ng-bind="visas.length"></div>
                             <div class="title">Visa Expiry</div>
                             <div class="progress progress-warning">
-                                <div style="width: 26%" class="bar"></div>
+                                <div style="width: {{(visas.length / employees.length ) * 100 }}%" class="bar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div data-desktop="span2" data-tablet="span4 fix-margin" class="span2 responsive" data-ng-init="loadPassport()">
+                    <div class="metro-overview blue-color clearfix">
+                        <div class="display">
+                            <i class="icon-plane"></i>
+                            <div class="percent">+{{(passports.length / employees.length ) * 100 | number:0}}%</div>
+                        </div>
+                        <div class="details">
+                            <div class="numbers" data-ng-show="isPassportBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
+                            <div class="numbers" data-ng-hide="isPassportBusy" data-ng-bind="passports.length"></div>
+                            <div class="title">Passport Expiry</div>
+                            <div class="progress progress-warning">
+                                <div style="width: {{ (passports.length / employees.length ) * 100}}%" class="bar"></div>
                             </div>
                         </div>
                     </div>

@@ -21,6 +21,8 @@ namespace MTCHRMS
 
         public void ConfigureOAuth(IAppBuilder app)
         {
+            app.MapSignalR();
+
             //app.CreatePerOwinContext<DbEntityContext>(DbEntityContext);
 
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);

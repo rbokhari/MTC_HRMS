@@ -204,6 +204,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
+    <Compile Include="Hubs\HRMSStaffHub.cs" />
     <Compile Include="Provider\DomainAuthorizationServerProvider.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -239,6 +240,7 @@
     <Content Include="app\directive\dashboard.js" />
     <Content Include="app\directive\imgShow.js" />
     <Content Include="app\directive\navbar-main.js" />
+    <Content Include="app\hubs\employee-hub.js" />
     <Content Include="app\provider\common.js" />
     <Content Include="app\provider\localStorageService.js" />
     <Content Include="Content\animate.css">
@@ -529,9 +531,13 @@
     <Content Include="Scripts\angular-file-upload-shim.min.js" />
     <Content Include="Scripts\angular-file-upload.js" />
     <Content Include="Scripts\angular-file-upload.min.js" />
+    <Content Include="Scripts\angular-signalr-hub.js" />
+    <Content Include="Scripts\angular-signalr-hub.min.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.js" />
+    <Content Include="Scripts\dirPagination\dirPagination - Copy.js" />
     <Content Include="Scripts\dirPagination\dirPagination.js" />
+    <Content Include="Scripts\dirPagination\dirPagination.tpl - Copy.html" />
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.min.js" />
     <Content Include="Scripts\jquery.jOrgChart.js" />

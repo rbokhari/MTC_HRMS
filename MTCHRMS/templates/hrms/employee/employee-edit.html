@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Address :</label>
+                                        <label class="control-label">Residential Address :</label>
                                         <div class="controls">
                                             <textarea ng-model="employee[0].address" class="input-xlarge"></textarea>
                                         </div>
@@ -115,15 +115,15 @@
                             <div class="span6">
                                 <div class="form-horizontal">
                                     <div class="control-group">
-                                        <label class="control-label">Appointment Date :</label>
+                                        <label class="control-label">Joining Date :</label>
                                         <div class="controls">
-                                            <input type="text" ng-model="employee[0].appointment" datepicker required />
+                                            <input type="text" ng-model="employee[0].appointment" data-date-format="dd/mm/yyyy" datepicker required />
                                             <!--<input type="text" id="tAppintmentDate" name="tAppintmentDate" ng-model="employee[0].appointment" datepicker data-date-format="dd/mm/yyyy" required />-->
                                             <div class="help-inline" ng-show="staffForm.tAppintmentDate.$error.required && staffForm.tAppintmentDate.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Posted To :</label>
+                                        <label class="control-label">Department :</label>
                                         <div class="controls">
                                             <select id="cPostedTo" name="cPostedTo" ng-model="employee[0].postedTo" ng-options="department.id as department.departmentName for department in departments" required></select>
                                             <div class="help-inline" ng-show="staffForm.cPostedTo.$error.required && staffForm.cPostedTo.$dirty">*</div>
@@ -136,7 +136,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Phone :</label>
+                                        <label class="control-label">Office Contact :</label>
                                         <div class="controls">
                                             <input type="text" id="tPhone" name="tRegiment" ng-model="employee[0].phone" />
                                         </div>
