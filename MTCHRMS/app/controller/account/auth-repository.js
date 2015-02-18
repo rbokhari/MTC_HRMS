@@ -40,7 +40,7 @@ hrmsModule.factory('authRepository', [
                     deferred.resolve(response);
 
                 }).error(function(err, status) {
-                    //_logOut();
+                    _logOut();
                     deferred.reject(err);
                 });
 
@@ -64,6 +64,7 @@ hrmsModule.factory('authRepository', [
                 
             }).error(function (err, status) {
                 _logOut();
+                console.log(err);
                 deferred.reject(err);
             });
 
@@ -97,11 +98,11 @@ hrmsModule.factory('authRepository', [
         };
 
         function employeeData(userName) {
-            
+            ;
             employeeRepository.getEmployeeDetailByUserName(userName)
                 .$promise
                 .then(function(response) {
-                    //console.log(response);
+
                     _authentication.isAuth = true;
                     _authentication.userName = response.userName;
                     _authentication.fullName = response.employeeName;
@@ -111,25 +112,24 @@ hrmsModule.factory('authRepository', [
                     _authentication.email = response.email;
                     _authentication.phone = response.phone;
 
+                    accountRepository.getUserById(response.id)
+                        .$promise
+                        .then(function(res) {
 
-                accountRepository.getUserById(response.id)
-                    .$promise
-                    .then(function(res) {
+                            accountRepository.getRoleById(res.roleId)
+                                .$promise
+                                .then(function(response1) {
 
-                        accountRepository.getRoleById(res.roleId)
-                            .$promise
-                            .then(function (response1) {
+                                    _authentication.roles = response1.roleName;
+                                    _authentication.roleId = response1.roleId;
 
-                                _authentication.roles = response1.roleName;
-                                _authentication.roleId = response1.roleId;
+                                    localStorageService.set('userData', { userName: userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
+                                });
 
-                                localStorageService.set('userData', { userName: userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
-                            });
-
-                    });
+                        });
 
 
-            }, function(err) {
+                }, function(err) {
                     _logOut();
                     _authentication.isAuth = false;
                 });

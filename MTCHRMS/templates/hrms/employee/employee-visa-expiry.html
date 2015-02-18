@@ -1,0 +1,124 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Staff <small> visa expiry list </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/HRMSPortal">Dashboard</a><span class="divider">&nbsp;</span></li>
+                <li><a href="#">Visa Expiry List</a><span class="divider-last">&nbsp;</span></li>
+                <li class="pull-right search-wrap">
+                    <div class="search-input-area">
+                        <input id=" " class="search-query" type="text" placeholder="Search" ng-model="search">
+                        <i class="icon-search"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        <form name="staffForm" novalidate>
+            <div class="span12">
+                <div class="widget">
+                    <div class="widget-title">
+                        <h4><i class="icon-user"></i>  Personal Information</h4>
+                        <span class="tools">
+                            <a href="" ng-click="loadVisa()" class="icon-refresh"></a>
+                            <a href="" ng-click=""><i class="icon-print"></i></a>
+
+                            <a href="javascript:;" class="icon-chevron-down"></a>
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row-fluid" data-ng-init="loadVisa()">
+                            <div class="span12">
+                                <div class="form-horizontal">
+                                    <div class="control-group pull-left">
+                                        <label class="control-label">
+                                            Record Per Page:
+                                        </label>
+                                        <div class="controls">
+                                            <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
+                                                <option value="10" selected="selected">10</option>
+                                                <option value="15">15</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
+                                    <thead>
+                                        <tr>
+                                            <th class="hidden-phone">Employee No</th>
+                                            <th>Name</th>
+                                            <th class="hidden-phone">Department</th>
+                                            <th class="hidden-phone">Nationality</th>
+                                            <th>Visa No</th>
+                                            <th>Expire Date</th>
+                                            <th>Days</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-show="isVisaBusy">
+                                            <td colspan="7">
+                                                <div class="progress progress-striped active">
+                                                    <div style="width: 100%;" class="bar"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="odd" dir-paginate="visa in visas | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
+                                            <td class="hidden-phone" style="vertical-align: middle;"><a ng-href="/HRMSPortal/employee/detail/{{visa.id}}">{{ visa.employeeCode}}</a></td>
+                                            <td>
+                                                <img class="circular" alt="" data-img-loading-value="{{visa.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+                                                <a ng-href="/HRMSPortal/employee/detail/{{visa.id}}">{{ visa.employeeName }}</a>
+                                            </td>
+                                            <td class="hidden-phone" style="vertical-align: middle;">{{visa.departmentId.departmentName}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;">{{visa.validationDetailId.nameEn}}</td>
+                                            <td style="vertical-align: middle;">{{visa.employeeVisas[0].visaNumber}}</td>
+                                            <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(visa.employeeVisas[0].expiryDate) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{visa.employeeVisas[0].expiryDate | date: 'longDate'}}</label></td>
+                                            <td style="vertical-align: middle;">{{daysDiffMoment(visa.employeeVisas[0].expiryDate)}}</td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div style="height:40px;">
+                                    <span class="pull-left bottom" ng-show="departments.length>0">
+                                        Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+                                    </span>
+                                    <span class="pull-right">
+                                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                                    </span>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS, #liStaffRegistration').addClass('active open');
+            $('#tDOB, #tDOE').datepicker({
+                format: 'dd/mm/yyyy',
+                autoclose:'true'
+            });
+
+        });
+</script>

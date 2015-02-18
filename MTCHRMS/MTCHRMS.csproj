@@ -237,6 +237,7 @@
     <Content Include="app\controller\account\auth-repository.js" />
     <Content Include="app\controller\account\authInterceptorService.js" />
     <Content Include="app\controller\app\app-controller.js" />
+    <Content Include="app\translate\translate-service.js" />
     <Content Include="app\directive\dashboard.js" />
     <Content Include="app\directive\imgShow.js" />
     <Content Include="app\directive\navbar-main.js" />
@@ -531,10 +532,13 @@
     <Content Include="Scripts\angular-file-upload-shim.min.js" />
     <Content Include="Scripts\angular-file-upload.js" />
     <Content Include="Scripts\angular-file-upload.min.js" />
+    <Content Include="Scripts\angular-moment.js" />
     <Content Include="Scripts\angular-signalr-hub.js" />
     <Content Include="Scripts\angular-signalr-hub.min.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.js" />
+    <Content Include="Scripts\angularTranslate\angular-translate.js" />
+    <Content Include="Scripts\angularTranslate\angular-translate.min.js" />
     <Content Include="Scripts\dirPagination\dirPagination - Copy.js" />
     <Content Include="Scripts\dirPagination\dirPagination.js" />
     <Content Include="Scripts\dirPagination\dirPagination.tpl - Copy.html" />
@@ -542,6 +546,7 @@
     <Content Include="Scripts\FileAPI.min.js" />
     <Content Include="Scripts\jquery.jOrgChart.js" />
     <Content Include="Scripts\modal\angular-modal-service.js" />
+    <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-0.12.0.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -553,6 +558,9 @@
     <Content Include="app\controller\account\account.min.js.map">
       <DependentUpon>account.min.js</DependentUpon>
     </Content>
+    <Content Include="app\translate\translation_en.json" />
+    <Content Include="app\translate\translation_ar.json" />
+    <Content Include="app\translate\en-US.json" />
     <None Include="Content\Site.less" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -767,6 +775,9 @@
     <Content Include="Scripts\dirPagination\dirPagination.tpl.html" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.map" />
     <None Include="Properties\PublishProfiles\LocalServer.pubxml" />
+    <Content Include="Scripts\angularTranslate\angular-translate.min.js.map">
+      <DependentUpon>angular-translate.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery.gritter.js" />
     <Content Include="Scripts\jquery.gritter.min.js" />
@@ -814,10 +825,18 @@
     <Content Include="templates\hrms\employee\employee-add.html" />
     <Content Include="templates\hrms\employee\employee-image.html" />
     <Content Include="templates\hrms\employee\employee-image1.html" />
+    <Content Include="templates\hrms\listing\employee-appraisal-list.html" />
+    <Content Include="templates\hrms\employee\employee-qualification.html" />
     <Content Include="templates\hrms\employee\employee-passport.html" />
     <Content Include="templates\hrms\employee\employee-previous-employement.html" />
+    <Content Include="templates\hrms\employee\employee-contract-expiry.html" />
+    <Content Include="templates\hrms\employee\employee-probation-expiry.html" />
+    <Content Include="templates\hrms\employee\employee-passport-expiry.html" />
+    <Content Include="templates\hrms\employee\employee-visa-expiry.html" />
     <Content Include="templates\hrms\employee\employee-visa.html" />
     <Content Include="templates\hrms\employee\employee.html" />
+    <Content Include="templates\hrms\listing\employee-contact-list.html" />
+    <Content Include="templates\hrms\listing\list.html" />
     <Content Include="templates\hrms\oc\organization-chart.html" />
     <Content Include="templates\main\menu-main.html" />
     <Content Include="templates\main\navbar-user.html" />

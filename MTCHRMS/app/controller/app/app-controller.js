@@ -3,12 +3,20 @@
 'use strict';
 hrmsModule.controller('AppController',
 [
-    '$scope', '$location', 'authRepository', '$window','appRepository',
+    '$scope', '$location', 'authRepository', '$window','appRepository',  
     function ($scope, $location, authRepository, $window, appRepository) {
 
         console.log("app controller");
 
         $scope.message = "";
+
+        //$scope.translate = function () {
+        //    translationService.getTranslation($scope, $scope.selectedLanguage);
+        //};
+
+        //Init
+        //$scope.selectedLanguage = 'en';
+        //$scope.translate();
 
         $scope.lock = function () {
             $window.location.href = '/lock';

@@ -36,6 +36,14 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/GetProbationExpiryList').query();
     };
 
+    var _getEmployeesContactNoList = function () {
+        return $resource('/api/employee/GetEmployeeContactNoList').query();
+    };
+
+    var _getEmployeesAppraisalList = function () {
+        return $resource('/api/employee/GetAppraisalList').query();
+    };
+
 
     var _addEmployee = function (employeeDef) {
         return $resource('/api/employee').save(employeeDef);
@@ -78,6 +86,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/' + employeeQualification.employeeDefId + '/PostEmployeeQualification').save(employeeQualification);
     };
 
+    var _deleteEmployeeQualification = function (employeeQualification) {
+        return $resource('/api/employee/' + employeeQualification.employeeDefId + '/DeleteEmployeeQualification').save(employeeQualification);
+    };
+
     var _addEmployeeChild = function (employeeChildrens) {
         
         return $resource('/api/employee/' + employeeChildrens.employeeDefId + '/PostEmployeeChild').save(employeeChildrens);
@@ -105,6 +117,8 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         getEmployeesVisaExpiry: _getEmployeesVisaExpiry,
         getEmployeesContractExpiry: _getEmployeesContractExpiry,
         getEmployeesProbationExpiry: _getEmployeesProbationExpiry,
+        getEmployeesContactNoList: _getEmployeesContactNoList,
+        getEmployeesAppraisalList: _getEmployeesAppraisalList,
         addEmployee: _addEmployee,
         editEmployee: _editEmployee,
         addEmployeePassport: _addEmployeePassport,
@@ -112,6 +126,7 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         addEmployeeVisa: _addEmployeeVisa,
         deleteEmployeeVisa: _deleteEmployeeVisa,
         addEmployeeQualification: _addEmployeeQualification,
+        deleteEmployeeQualification: _deleteEmployeeQualification,
         addEmployeePreviousEmployment: _addEmployeePreviousEmployment,
         deleteEmployeePreviousEmployement: _deleteEmployeePreviousEmployement,
         addEmployeeMarital: _addEmployeeMarital,
@@ -119,6 +134,7 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         deleteEmployeeChild: _deleteEmployeeChild,
         addEmployeeKin: _addEmployeeKin,
         addEmployeeImage: _addEmployeeImage
+        
     };
 
 }]);

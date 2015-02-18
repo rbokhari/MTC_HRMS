@@ -12,6 +12,10 @@ hrmsModule.controller('EmployeeController',
 
         $scope.isBusy = false;
 
+        $scope.daysDiff = function (start) {
+            return moment(start).diff(moment(new Date()), 'day');
+        };
+
         // bootstrap tab setting property and function for angularjs
         $scope.tab = 1;       // set active tab bydefault
 
@@ -35,6 +39,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function(modal) {
@@ -61,6 +66,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: passport.employeeDefId,
                     employeePassport: passport,
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -92,6 +98,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -104,7 +111,7 @@ hrmsModule.controller('EmployeeController',
         };
 
         $scope.editVisa = function (visa) {
-            console.log(visa);
+            //console.log(visa);
             //var visaCopy = {};
 
             //angular.copy(visa, visaCopy);
@@ -117,6 +124,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: visa.employeeDefId,
                     employeePassport: {},
                     employeeVisa: visa,
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -138,6 +146,65 @@ hrmsModule.controller('EmployeeController',
             } 
         };
 
+        $scope.showQualification = function (id) {
+            
+            ModalService.showModal({
+                templateUrl: "/templates/hrms/employee/employee-qualification.html",
+                controller: "EmployeeModalController",
+                inputs: {
+                    title: "Add New Qualification",
+                    parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
+                    employeeQualification: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.employee[0].employeeQualifications.push(result.resultData);
+                });
+
+            });
+        };
+
+        $scope.editQualification = function (qualification) {
+            //console.log(qualification);
+            //var visaCopy = {};
+           
+            //angular.copy(visa, visaCopy);
+            ModalService.showModal({
+                templateUrl: "/templates/hrms/employee/employee-qualification.html",
+                controller: "EmployeeModalController",
+                inputs: {
+                    title: "Update Qualification",
+                    parentId: qualification.employeeDefId,
+                    employeePassport: {},
+                    employeeVisa: {},
+                    employeeQualification: qualification,
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.deleteQualification = function (qualification) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                employeeRepository.deleteEmployeeQualification(qualification)
+                    .$promise
+                    .then(function () {
+                        console.log($scope.employee[0].employeeQualifications);
+                        appRepository.showDeleteGritterNotification();
+                        console.log(qualification);
+                        $scope.employee[0].employeeQualifications.pop(qualification);
+                        console.log($scope.employee[0].employeeQualifications);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
 
         $scope.showPreviousEmployement = function (id) {
             ModalService.showModal({
@@ -148,6 +215,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -183,6 +251,7 @@ hrmsModule.controller('EmployeeController',
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -224,12 +293,13 @@ hrmsModule.controller('EmployeeController',
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
+                    employeeQualification: {},
                     resultData: {}
                 }
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    console.log(result);
+                    //console.log(result);
                     $scope.employee[0].empPicture = result.resultData.empPicture;
                 });
 
@@ -248,7 +318,7 @@ hrmsModule.controller('EmployeeController',
 
         // Call employee hub service
         EmployeeStream.on('addNewEmployee', function (empId, userId) {
-            console.log("empID: " + empId + " , userId: " + userId);
+            //console.log("empID: " + empId + " , userId: " + userId);
             $scope.singleEmp = employeeRepository.getSingleEmployee(empId);
             $scope.singleEmp.$promise.then(function() {
                 $scope.employees.push($scope.singleEmp[0]);
@@ -261,6 +331,7 @@ hrmsModule.controller('EmployeeController',
         $scope.countries = validationRepository.getAllDetailsByValidationId(3);
         $scope.maritals = validationRepository.getAllDetailsByValidationId(4);
         $scope.genders = validationRepository.getAllDetailsByValidationId(5);
+        
 
         if ($routeParams.id != undefined) {
             $scope.isBusy = false;
@@ -407,6 +478,23 @@ hrmsModule.controller('EmployeeController',
                     $scope.errors = response.data;
                 }
             );
+        };
+
+        $scope.employeeContactNo = function() {
+            $scope.isBusy = true;
+            $scope.employeeContactNoList = employeeRepository.getEmployeesContactNoList();
+            $scope.employeeContactNoList.$promise
+                .then(function(response) {
+                        //
+                    },
+                    function() {
+                        //
+                    })
+                    .then(function() {
+                        //alert("aa");
+                        $scope.isBusy = false;
+                    });
+            
         };
 
     }

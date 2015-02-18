@@ -69,7 +69,9 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual Department DepartmentId { get; set; }
 
         public virtual ValidationDetail ValidationDetailId { get; set; }
+
         public virtual ICollection<EmployeePassport> EmployeePassports { get; set; }
+
         public virtual ICollection<EmployeeVisa> EmployeeVisas { get; set; }
 
         public virtual ICollection<EmployeeQualification> EmployeeQualifications { get; set; }
@@ -227,7 +229,10 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public string EducationDegree { get; set; }
 
+        [ForeignKey("QualificationLevel")]
+        public int? LevelId { get; set; }
 
+        public virtual ValidationDetail QualificationLevel { get; set; }
 
     }
 

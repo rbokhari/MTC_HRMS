@@ -13,6 +13,7 @@ hrmsModule.controller('AccountController',
         };
         $scope.message = "";
         $scope.login = function () {
+            
             authRepository.login($scope.loginData).then(function (response) {
                     //moduleDetail();
                 //roleDetail();

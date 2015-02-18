@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Configuration;
 using System.Web.Http;
+using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.SignalR;
 using MTCHRMS.DC;
@@ -43,8 +44,8 @@ namespace MTCHRMS.Controllers
 
         [Route("api/employee/GetPassportExpiryList")]
         [HttpGet]
-        //[System.Web.Http.Authorize]
-        public async Task<List<EmployeePassport>> GetPassportExpiry()
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetPassportExpiry()
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
@@ -53,8 +54,8 @@ namespace MTCHRMS.Controllers
 
         [Route("api/employee/GetVisaExpiryList")]
         [HttpGet]
-        //[System.Web.Http.Authorize]
-        public async Task<List<EmployeeVisa>> GetVisaExpiry()
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetVisaExpiry()
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
@@ -79,6 +80,27 @@ namespace MTCHRMS.Controllers
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
             return await _repo.GetEmployeesProbationExpiry();
+        }
+
+        [Route("api/employee/GetAppraisalList")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetAppraisalList()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeesAppraisalList();
+        }
+
+
+        [Route("api/employee/GetEmployeeContactNoList")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public IQueryable GetEmployeeContactNoList()
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return _repo.GetEmployeesContactNo();
         }
 
         [Route("api/employee/GetSingleEmployee")]
@@ -609,6 +631,26 @@ namespace MTCHRMS.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
+
+        [ActionName("DeleteEmployeeQualification")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage DeleteEmployeeQualification([FromBody] EmployeeQualification deleteQualification)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteEmployeeQualification(deleteQualification) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteQualification);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
 
         [ActionName("PostEmployeeKin")]
         [HttpPost]

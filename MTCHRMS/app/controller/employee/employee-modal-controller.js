@@ -2,10 +2,10 @@
 hrmsModule.controller('EmployeeModalController',
 [
     '$scope', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa',
+    'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification',
 
     function ($scope, appRepository, employeeRepository, validationRepository, title, close,
-        parentId, resultData, $timeout, $upload, employeePassport, employeeVisa) {
+        parentId, resultData, $timeout, $upload, employeePassport, employeeVisa, employeeQualification) {
 
         //$scope.name = null;
         //$scope.age = null;
@@ -14,8 +14,9 @@ hrmsModule.controller('EmployeeModalController',
         $scope.parentId = parentId;
         $scope.employeePassport = employeePassport;
         $scope.employeeVisa = employeeVisa;
-
+        $scope.employeeQualification = employeeQualification;
         $scope.genders = validationRepository.getAllDetailsByValidationId(5);
+        $scope.qualificationLevels = validationRepository.getAllDetailsByValidationId(6);
 
         $scope.saveEmployeePassport = function(parentId, employeePassport) {
             $scope.errors = [];
@@ -28,11 +29,8 @@ hrmsModule.controller('EmployeeModalController',
                         // success case
                         $scope.resultData = resultEmployeePassport;
                         appRepository.showAddSuccessGritterNotification();
-                        //console.log("employee passport save - Successfully !" + resultEmployeePassport.issuePlace);
-                        //console.log("employee passport save - Successfully !" + $scope.newPassport.issuePlace);
                         $scope.close();
                         $('#dvPassport').modal('hide');
-                        //$location.url('/HRMSPortal/employee/detail/' + resultEmployeePassport.id);
                     }, function(response) {
                         // failure case
                         console.log("employee passport save - Error !");
@@ -86,6 +84,28 @@ hrmsModule.controller('EmployeeModalController',
                 );
         };
 
+        $scope.saveEmployeeQualification = function (parentId, employeeQualification) {
+            $scope.errors = [];
+
+            employeeQualification.employeeDefId = parentId;
+            employeeRepository.addEmployeeQualification(employeeQualification)
+                .$promise
+                .then(
+                    function (resultEmployee) {
+                        // success case
+                        $scope.resultData = resultEmployee;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvQualification').modal('hide');
+                    }, function (response) {
+                        // failure case
+                        console.log("saveEmployeeQualification save - Error !");
+                        appRepository.showErrorGritterNotification();
+                        $scope.errors = response.data;
+                    }
+                );
+        };
+
         $scope.saveEmployeeChild = function(parentId, employeeChild) {
             $scope.errors = [];
 
@@ -116,5 +136,42 @@ hrmsModule.controller('EmployeeModalController',
 
         };
 
+
+        $scope.upload = [];
+        //$scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
+
+        $scope.onFileSelect = function (parentId, $files) {
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < $files.length; i++) {
+                var $file = $files[i];
+                (function (index) {
+                    $scope.upload[index] = $upload.upload({
+                        url: "/api/employee/upload", // webapi url
+                        method: "POST",
+                        data: { parentId1: parentId },
+                        file: $file
+                    }).progress(function (evt) {
+                        // get upload percentage
+                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                    }).success(function (data, status, headers, config) {
+                        // file is uploaded successfully
+                        $scope.resultData = data;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvImage1').modal('hide');
+                        //$scope.employee[0].empPicture = data.empPicture;
+                        console.log(data);
+                    }).error(function (data, status, headers, config) {
+                        // file failed to upload
+                        appRepository.showErrorGritterNotification();
+                        console.log(data);
+                    });
+                })(i);
+            }
+        };
+
+        $scope.abortUpload = function (index) {
+            $scope.upload[index].abort();
+        };
     }
 ]);

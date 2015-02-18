@@ -1,0 +1,41 @@
+﻿<div id="dvQualification" class="modal fade"  role="dialog" aria-hidden="true" aria-labelledby="Add Qualification">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmQualification" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="tDegree" class="control-label">Degree :</label>
+                    <div class="controls">
+                        <input type="text" id="tDegree" name="tDegree" ng-model="employeeQualification.educationDegree" required />
+                        <div class="help-inline" ng-show="frmQualification.tDegree.$error.required && frmQualification.tDegree.$dirty">Please enter code !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">University :</label>
+                    <div class="controls">
+                        <input type="text" id="tUniversity" name="tUniversity" ng-model="employeeQualification.educationSchool" required />
+                        <div class="help-inline" ng-show="frmQualification.tUniversity.$error.required && frmQualification.tUniversity.$dirty">Please enter code !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Level :</label>
+                    <div class="controls">
+                        <select id="cLevelId" name="cLevelId" ng-model="employeeQualification.levelId" ng-options="level.id as level.nameEn for level in qualificationLevels" required></select>
+                        <div class="help-inline" ng-show="frmQualification.cLevelId.$error.required && frmQualification.cLevelId.$dirty">Please select level !</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" class="btn btn-primary" ng-click="saveEmployeeQualification(parentId, employeeQualification);" ng-disabled="frmQualification.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </button>
+    </div>
+
+</div>

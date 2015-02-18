@@ -63,7 +63,7 @@
                     </div>
                     <div class="details">
                         <div class="number"><a title="{{employee.employeeName}}" ng-href="/HRMSPortal/employee/detail/{{employee.id}}">{{ employee.employeeName | limitTo:18}} {{employee.employeeName.length > 18 ? '...' : ''}}</a></div>
-                        <div class="title">{{ employee.departmentId.departmentName}}</div>
+                        <div class="title">{{ employee.departmentId.departmentName | limitTo:18}} {{employee.departmentId.departmentName.length > 18 ? '...' : ''}}</div>
                         <div class="title">{{ employee.rank}}</div>
                     </div>
                 </div>

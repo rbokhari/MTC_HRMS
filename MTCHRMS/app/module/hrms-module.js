@@ -1,6 +1,8 @@
-﻿var hrmsModule = angular.module("hrmsModule",
-    ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination', 'angularFileUpload', 'LocalStorageModule'])
-    .config(function($routeProvider, $locationProvider, $httpProvider) {
+﻿var hrmsModule = angular.module("hrmsModule", 
+    ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
+        'angularFileUpload', 'LocalStorageModule'])
+    .config(function ($routeProvider, $locationProvider, $httpProvider) {
+
         console.log('hrms module router call !');
 
         $httpProvider.interceptors.push('authInterceptorService');
@@ -61,10 +63,60 @@
             });
 
         $routeProvider
+            .when('/HRMSPortal/employee/visaexpire', {
+                templateUrl: '/templates/hrms/employee/employee-visa-expiry.html',
+                controller: 'DashboardController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/passportexpire', {
+                templateUrl: '/templates/hrms/employee/employee-passport-expiry.html',
+                controller: 'DashboardController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/contractexpire', {
+                templateUrl: '/templates/hrms/employee/employee-contract-expiry.html',
+                controller: 'DashboardController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/probationexpire', {
+                templateUrl: '/templates/hrms/employee/employee-probation-expiry.html',
+                controller: 'DashboardController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/listing', {
+                templateUrl: '/templates/hrms/listing/list.html',
+                controller: 'EmployeeController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/contactlist', {
+                templateUrl: '/templates/hrms/listing/employee-contact-list.html',
+                controller: 'EmployeeController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/employee/appraisal', {
+                templateUrl: '/templates/hrms/listing/employee-appraisal-list.html',
+                controller: 'EmployeeController'
+            });
+
+        $routeProvider
             .otherwise({ redirectTo: '/HRMSPortal' });
 
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
 
+        //$translateProvider.useStaticFilesLoader({
+        //    prefix: '/hrmsportal/app/translate/',
+        //    suffix: '.json'
+        //});
+
+        //$translateProvider.fallbackLanguage('en-US');
+        //$translateProvider.useLocalStorage();
+        //$translateProvider.preferredLanguage('en-US');
 
     });
 
@@ -81,3 +133,4 @@ hrmsModule.run(['authRepository', function (authRepository) {
     //        });
     //    }
     //]);
+

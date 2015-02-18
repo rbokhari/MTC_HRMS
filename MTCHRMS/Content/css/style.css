@@ -3512,3 +3512,10 @@ ul.amounts li {
     margin-bottom: 15px;
 }
 
+.circular {
+    float: left;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 15px;
+}

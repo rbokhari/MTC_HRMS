@@ -406,6 +406,7 @@ angularLocalStorage.provider('localStorageService', function () {
             isSupported: browserSupportsLocalStorage,
             getStorageType: getStorageType,
             set: addToLocalStorage,
+            put: addToLocalStorage,
             add: addToLocalStorage, //DEPRECATED
             get: getFromLocalStorage,
             keys: getKeysForLocalStorage,
