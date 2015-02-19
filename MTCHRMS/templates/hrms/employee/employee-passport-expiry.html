@@ -81,7 +81,7 @@
                                                 <a ng-href="/HRMSPortal/employee/detail/{{passport.id}}">{{ passport.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{passport.departmentId.departmentName}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;">{{passport.validationDetailId.nameEn}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{passport.nationalityId}}.png" /> &nbsp;{{passport.validationDetailId.nameEn}}</td>
                                             <td style="vertical-align: middle;">{{passport.employeePassports[0].passportNo}}</td>
                                             <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(passport.employeePassports[0].expiryDate) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{passport.employeePassports[0].expiryDate | date: 'longDate'}}</label></td>
                                             <td style="vertical-align: middle;">{{daysDiffMoment(passport.employeePassports[0].expiryDate)}}</td>

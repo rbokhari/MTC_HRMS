@@ -82,7 +82,7 @@
                                                 <a style="vertical-align: middle;" ng-href="/HRMSPortal/employee/detail/{{list.empId}}">{{ list.empName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{list.empDepartment}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;">{{list.empNationalityEn}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="" ng-src="/Content/img/flag/{{list.nationalityId}}.png" /> &nbsp;{{list.empNationalityEn}}</td>
                                             <td style="vertical-align: middle;"><label class="label label-info" ng-bind="list.empContactNo" ng-show="list.empContactNo.length>3"></label></td>
                                             <td style="vertical-align: middle;"><label class="label label-success" ng-bind="list.empMobile" ng-show="list.empMobile.length>3"></label></td>
                                         </tr>

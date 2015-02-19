@@ -80,9 +80,9 @@
                                                 <a ng-href="/HRMSPortal/employee/detail/{{appraisal.id}}">{{ appraisal.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{appraisal.departmentId.departmentName}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;">{{appraisal.validationDetailId.nameEn}}</td>
-                                            <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(appraisal.appointment) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{appraisal.appointment | date: 'longDate'}}</label></td>
-                                            <td style="vertical-align: middle;">{{daysDiffMoment(appraisal.appointment)}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{appraisal.nationalityId}}.png" /> &nbsp;{{appraisal.validationDetailId.nameEn}}</td>
+                                            <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(appraisal.appointment) > 0) ? 'label label-warning' : 'label label-success'" class="label"> {{appraisal.appointment | date: 'longDate'}}</label></td>
+                                            <td style="vertical-align: middle;">{{appraisalDaysCount(appraisal.appointment)}}</td>
 
 
                                         </tr>

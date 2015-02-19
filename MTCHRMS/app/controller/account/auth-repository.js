@@ -98,11 +98,11 @@ hrmsModule.factory('authRepository', [
         };
 
         function employeeData(userName) {
-            ;
+            
             employeeRepository.getEmployeeDetailByUserName(userName)
                 .$promise
                 .then(function(response) {
-
+                console.log(response.data);
                     _authentication.isAuth = true;
                     _authentication.userName = response.userName;
                     _authentication.fullName = response.employeeName;
@@ -111,7 +111,7 @@ hrmsModule.factory('authRepository', [
                     _authentication.empPicture = response.empPicture;
                     _authentication.email = response.email;
                     _authentication.phone = response.phone;
-
+                alert(_authentication.fullName);
                     accountRepository.getUserById(response.id)
                         .$promise
                         .then(function(res) {

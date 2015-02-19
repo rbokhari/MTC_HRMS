@@ -10,6 +10,8 @@ hrmsModule.controller('AppController',
 
         $scope.message = "";
 
+        $scope.currentDateNow = new Date();
+
         //$scope.translate = function () {
         //    translationService.getTranslation($scope, $scope.selectedLanguage);
         //};
