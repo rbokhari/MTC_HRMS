@@ -83,7 +83,7 @@
                                                 <a ng-href="/HRMSPortal/employee/detail/{{contract.id}}">{{ contract.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{contract.departmentId.departmentName}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{contract.nationalityId}}.png" /> &nbsp;{{contract.validationDetailId.nameEn}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="" ng-src="/Content/img/flag/{{contract.nationalityId}}.png" /> &nbsp;<!--{{contract.validationDetailId.nameEn}}--></td>
                                             <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(contract.serviceEndDate) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{contract.serviceEndDate | date: 'longDate'}}</label></td>
                                             <td style="vertical-align: middle;">{{daysDiffMoment(contract.serviceEndDate)}}</td>
 

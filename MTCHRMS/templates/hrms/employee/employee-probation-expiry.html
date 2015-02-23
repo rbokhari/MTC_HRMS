@@ -83,7 +83,7 @@
                                                 <a style="vertical-align: middle;" ng-href="/HRMSPortal/employee/detail/{{probation.id}}">{{ probation.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{probation.departmentId.departmentName}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{probation.nationalityId}}.png" /> &nbsp;{{probation.validationDetailId.nameEn}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{probation.nationalityId}}.png" /> &nbsp;<!--{{probation.validationDetailId.nameEn}}--></td>
                                             <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(visa.employeeVisas[0].appointment) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{probation.appointment | date: 'longDate'}}</label></td>
                                             <td style="vertical-align: middle;">{{daysDiffMoment(probation.appointment)}}</td>
 

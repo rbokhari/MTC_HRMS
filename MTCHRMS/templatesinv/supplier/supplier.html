@@ -1,0 +1,110 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Department <small> Listing </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Listing</h4>
+                    <span class="tools">
+                        <a class="icon-plus-sign" href="/INVPortal/supplier/add"></a>
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body" ng-init="loadSupplier()">
+                    <div class="form-horizontal">
+                        <div class="control-group pull-left">
+                            <label class="control-label">
+                                Record Per Page:
+                            </label>
+                            <div class="controls">
+                                <select ng-model="recordPage" ng-init="recordPage=5" class="input-small m-wrap">
+                                    <option value="5" selected="selected">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                </select>
+                            </div>
+                        </div>
+                        <span class="pull-right">
+                            search : <input type="text" ng-model="departmentSearch" />
+                        </span>
+                    </div>
+                    <table class="table table-striped table-bordered table-advance table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Status</th>
+                                    <th>Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-show="isBusy">
+                                    <td colspan="4">
+                                        <div class="progress progress-striped active">
+                                            <div style="width: 100%;" class="bar"></div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr dir-paginate="department in departments | filter:departmentSearch | itemsPerPage: recordPage">
+                                    <td>
+                                        <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentCode }} </a>
+                                    </td>
+                                    <td>
+                                        <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentName }} </a>
+                                    </td>
+                                    <td>
+                                        <label ng-class="{'label label-info': department.statusId, 'label label-inverse': department.statusId==0}">
+                                            <ng-pluralize count="department.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-important">{{filtered = (employees  | filter:{postedTo:department.id}).length}}</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    <div style="height:40px;">
+                        <span class="pull-left bottom" ng-show="departments.length>0">
+                            Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+                        </span>
+                        <span class="pull-right">
+                            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active');
+            //$('.sidebar-menu > .sub .active').removeClass('active open');
+            //$('#liHRMS, #liDepartment').addClass('active open');
+        });
+    </script>
+</div>

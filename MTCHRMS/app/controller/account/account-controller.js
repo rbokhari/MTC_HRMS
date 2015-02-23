@@ -16,7 +16,7 @@ hrmsModule.controller('AccountController',
             
             authRepository.login($scope.loginData).then(function (response) {
                     //moduleDetail();
-                //roleDetail();
+                    //roleDetail();
                     $window.location.href = '/HRMSPortal';
                 },
                 function (err) {

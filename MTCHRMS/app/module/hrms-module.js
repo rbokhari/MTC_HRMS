@@ -105,6 +105,12 @@
             });
 
         $routeProvider
+            .when('/INVPortal', {
+                redirectTo: '/INVPortal'
+                
+            });
+
+        $routeProvider
             .otherwise({ redirectTo: '/HRMSPortal' });
 
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
