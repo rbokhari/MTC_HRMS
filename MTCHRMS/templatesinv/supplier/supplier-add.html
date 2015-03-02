@@ -1,0 +1,183 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Supplier <small> Add New </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="widget widget-tabs">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Supplier</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="tabbable portlet-tabs">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#dvAttachment" data-toggle="tab">History</a></li>
+                            <li><a href="#dvAttachment" data-toggle="tab">Attachment</a></li>
+                            <li><a href="#dvContactInfo" data-toggle="tab">Contact Info</a></li>
+                            <li class="active"><a href="#dvGeneral" data-toggle="tab">General</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="dvGeneral">
+                                <div class="form-horizontal">
+                                    <form name="frm" novalidate>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Supplier Code</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-medium" placeholder="[Auto Number]" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtSupplierName">Supplier Name</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtSupplierName" class="input-xlarge" />
+                                                <div class="help-inline" ng-show="frm.txtSupplierName.$error.required && frm.txtSupplierName.$dirty">Please enter name !</div>                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtDescription">Description</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtDescription" class="input-xlarge" />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtAddress">Address</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtAddress" class="input-xlarge" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="cCountry">Country</label>
+                                            <div class="controls">
+                                                <select id="cCountry" name="cCountry" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="cCity">City</label>
+                                            <div class="controls">
+                                                <select id="cCity" name="cCity" required></select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="tWebSite">Web Site</label>
+                                            <div class="controls">
+                                                <asp:TextBox runat="server" ID="tWebSite" />
+                                            </div>
+                                        </div>
+                                        <div class="form-actions">
+                                            <button type="submit" id="cmdSave" class="btn btn-primary">
+                                                <i class="icon-ok"></i>&nbsp;Save
+                                            </button>
+                                            <button id="cmdSaveAddNew" class="btn btn-primary" >
+                                                <i class="icon-ok"></i>&nbsp; Save and Add New
+                                                    
+                                            </button>
+                                            <button id="cmdCancel" class="btn btn-inverse">
+                                                <i class=" icon-remove"></i>&nbsp; Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="dvContactInfo">
+                                <i class="icon-hand-right"></i>  <strong>Contact Information</strong>
+                                <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Contact</a></span>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Persone Name</th>
+                                                    <th>Email</th>
+                                                    <th>Mobile</th>
+                                                    <th>Phone</th>
+                                                    <th>Fax</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <i class="icon-hand-right"></i>  <strong>Contract Information</strong>
+                                        <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Contract</a></span>
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Notes</th>
+                                                    <th>Attachment</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="dvAttachment">
+                                <i class="icon-hand-right"></i>  <strong>Attachment</strong>
+                                <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <table class="table table-striped table-bordered table-advance table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Notes</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

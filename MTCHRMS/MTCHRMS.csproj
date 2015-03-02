@@ -264,6 +264,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style_gray.css" />
+    <Content Include="Content\css\style_navy-blue.css" />
+    <Content Include="Content\css\style_purple.css" />
     <Content Include="Content\DataTables-1.10.3\css\dataTables.autoFill.css" />
     <Content Include="Content\DataTables-1.10.3\css\dataTables.autoFill.min.css" />
     <Content Include="Content\DataTables-1.10.3\css\dataTables.bootstrap.css" />
@@ -1106,10 +1109,13 @@
     <Content Include="Content\template2\js\scripts.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="templatesinv\Dashboard.html" />
+    <Content Include="templatesinv\item\item-add.html" />
+    <Content Include="templatesinv\item\items.html" />
     <Content Include="templatesinv\main\menu-main.html" />
     <Content Include="templatesinv\main\navbar-notify.html" />
     <Content Include="templatesinv\main\navbar-user.html" />
     <Content Include="templatesinv\main\navbar.html" />
+    <Content Include="templatesinv\supplier\supplier-add.html" />
     <Content Include="templatesinv\supplier\supplier.html" />
     <Content Include="templates\Dashboard.html" />
     <Content Include="templates\dashboard\nationalities.html" />

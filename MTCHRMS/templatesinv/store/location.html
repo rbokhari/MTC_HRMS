@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Suppliers <small> Listing </small>
+                Store <small> Listing </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -13,7 +13,7 @@
                 <li>
                     <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="#">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="#">Store List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/supplier/add"></a>
+                        <a class="icon-plus-sign" href="/INVPortal/store/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -51,40 +51,36 @@
                         </span>
                     </div>
                     <table class="table table-striped table-bordered table-advance table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Items</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-show="isBusy">
-                                    <td colspan="4">
-                                        <div class="progress progress-striped active">
-                                            <div style="width: 100%;" class="bar"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr dir-paginate="department in departments | filter:departmentSearch | itemsPerPage: recordPage">
-                                    <td>
-                                        <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentCode }} </a>
-                                    </td>
-                                    <td>
-                                        <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentName }} </a>
-                                    </td>
-                                    <td>
-                                        <label ng-class="{'label label-info': department.statusId, 'label label-inverse': department.statusId==0}">
-                                            <ng-pluralize count="department.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
-                                        </label>
-                                    </td>
-                                    <td>
-                                        <span class="badge badge-important">{{filtered = (employees  | filter:{postedTo:department.id}).length}}</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <thead>
+                            <tr>
+                                <th>Sr. #</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="isBusy">
+                                <td colspan="4">
+                                    <div class="progress progress-striped active">
+                                        <div style="width: 100%;" class="bar"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr dir-paginate="department in departments | filter:departmentSearch | itemsPerPage: recordPage">
+                                <td>
+                                    <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentCode }} </a>
+                                </td>
+                                <td>
+                                    <a ng-href="/HRMSPortal/department/edit/{{ department.id}}"> {{ department.departmentName }} </a>
+                                </td>
+                                <td>
+                                    <label ng-class="{'label label-info': department.statusId, 'label label-inverse': department.statusId==0}">
+                                        <ng-pluralize count="department.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                                    </label>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div style="height:40px;">
                         <span class="pull-left bottom" ng-show="departments.length>0">
                             Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
@@ -99,12 +95,4 @@
 
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(function () {
-            $('.sidebar-menu > .active').removeClass('active');
-            //$('.sidebar-menu > .sub .active').removeClass('active open');
-            //$('#liHRMS, #liDepartment').addClass('active open');
-        });
-    </script>
 </div>

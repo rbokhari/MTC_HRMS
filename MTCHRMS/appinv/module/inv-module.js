@@ -13,11 +13,42 @@
             });
 
     $routeProvider
-        .when('/HRMSPortal', {
-            //$location.path: '/HRMSPortal'
-    redirectTo: '/HRMSPortal'
+        .when('/INVPortal/supplier/list', {
+            templateUrl: '/templatesinv/supplier/supplier.html',
+            controller: 'DashboardController'
+        });
 
-});
+    $routeProvider
+        .when('/INVPortal/supplier/add', {
+            templateUrl: '/templatesinv/supplier/supplier-add.html',
+            controller: 'DashboardController'
+        });
+
+
+    $routeProvider
+        .when('/INVPortal/store/list', {
+            templateUrl: '/templatesinv/store/location.html',
+            controller: 'DashboardController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/store/add', {
+            templateUrl: '/templatesinv/store/location-add.html',
+            controller: 'DashboardController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/item/list', {
+            templateUrl: '/templatesinv/item/items.html',
+            controller: 'DashboardController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/item/add', {
+            templateUrl: '/templatesinv/item/item-add.html',
+            controller: 'DashboardController'
+        });
+
 
         $routeProvider
             .otherwise({ redirectTo: '/INVPortal' });

@@ -2,10 +2,10 @@
         <div class="sidebar-toggler hidden-phone"></div>
 
         <ul class="sidebar-menu">
-            <li id="liDashboard" ng-class="{active: activetab=='/HRMSPortal'}">
+            <li id="liDashboard" ng-class="{ active: isActiveParentNavigation('/HRMSPortal')}">
                 <a class="" href="/hrmsportal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
             </li>
-            <li class="has-sub" id="liHRMS" ng-class="{open: activetab=='/HRMSPortal/*'}">
+            <li class="has-sub" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/HRMSPortal/')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -13,24 +13,21 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liDepartment" ng-class="{active: activetab=='/HRMSPortal/department'}">
+                    <li id="liDepartment" ng-class="{ active: isActiveNavigation('/HRMSPortal/department')}">
                         <a class="" href="/HRMSPortal/department">Department</a>
                     </li>
-                    <li id="liOrgChart">
+                    <li id="liOrgChart" ng-class="{ active: isActiveNavigation('/HRMSPortal/oc')}">
                         <a class="" href="/HRMSPortal/oc">Organization Chart</a>
                     </li>
-                    <li id="liOrgChart">
-                        <a class="" href="/INVPortal">Inventory</a>
-                    </li>
-                    <li id="liStaffRegistration">
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee')}">
                         <a class="" href="/HRMSPortal/employee">Staff</a>
                     </li>
-                    <li id="liStaffListing">
+                    <li id="liStaffListing" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee/listing')}">
                         <a class="" href="/HRMSPortal/employee/listing">Listings</a>
                     </li>
                 </ul>
             </li>
-            <li class="has-sub" id="liStaffServices">
+            <li class="has-sub" id="liStaffServices" ng-class="{ active: isActiveParentNavigation('/HRMSPortal/leaverequest')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -38,7 +35,7 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liLeaveRequest">
+                    <li id="liLeaveRequest" ng-class="{ active: isActiveNavigation('/HRMSPortal/leaverequest')}">
                         <a class="" href="/HRMSPortal/leaverequest">Leave Request</a>
                     </li>
                     <li id="liItemRequest">

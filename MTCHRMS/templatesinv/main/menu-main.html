@@ -2,10 +2,10 @@
         <div class="sidebar-toggler hidden-phone"></div>
 
         <ul class="sidebar-menu">
-            <li id="liDashboard" ng-class="{active: activetab=='/HRMSPortal'}">
+            <li id="liDashboard" ng-class="{ active: isActiveParentNavigation('/INVPortal')}">
                 <a class="" href="/hrmsportal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
             </li>
-            <li class="has-sub" id="liHRMS" ng-class="{open: activetab=='/HRMSPortal/*'}">
+            <li class="has-sub" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition/')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -13,15 +13,15 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liStaffRegistration">
-                        <a class="" href="/INVPortal/supplier">Supplier</a>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/supplier/list')}">
+                        <a class="" href="/INVPortal/supplier/list">Supplier</a>
                     </li>
-                    <li id="liStaffRegistration">
-                        <a class="" href="/HRMSPortal/employee">Store Location</a>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/store/list')}">
+                        <a class="" href="/INVPortal/store/list">Store Location</a>
                     </li>
                 </ul>
             </li>
-            <li class="has-sub" id="liHRMS" ng-class="{open: activetab=='/HRMSPortal/*'}">
+            <li class="has-sub" ng-class="{ active: isActiveParentNavigation('/INVPortal/item/')}" id="liHRMS">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -29,8 +29,8 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liOrgChart">
-                        <a class="" href="/INVPortal">Items</a>
+                    <li id="liOrgChart" ng-class="{ active: isActiveNavigation('/INVPortal/item/list')}">
+                        <a href="/INVPortal/item/list">Items</a>
                     </li>
                 </ul>
             </li>

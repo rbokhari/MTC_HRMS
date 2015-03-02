@@ -1,0 +1,84 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Store Location <small> Add </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    Inventory <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/HRMSPortal/department">Stores</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Location - Add New</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="frmDepartment" novalidate>
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="txtCode">Location Code</label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
+                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty">Please enter code !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtName">Location Name</label>
+                                <div class="controls">
+                                    <input type="text" name="txtName" id="txtName" ng-model="department.departmentName" required="required" />
+                                    <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty">Please enter name !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="statusId">Is Active</label>
+                                <div class="controls">
+                                    <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(department)" ng-disabled="frmDepartment.$invalid">
+                                    <i class="icon-save"></i>
+                                    Save
+                                </button>
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(department)" ng-disabled="frmDepartment.$invalid">
+                                    <i class="icon-save"></i>
+                                    Save and Add New
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/store/list">
+                                    <i class="icon-undo"></i>
+                                    Cancel
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
