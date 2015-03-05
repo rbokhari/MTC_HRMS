@@ -2,7 +2,7 @@
 <html lang="en" ng-app="InventoryModule">
 <head>
     <meta charset="utf-8" />
-    <title>MTC Staff Services</title>
+    <title>MTC Inventory System</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -40,7 +40,6 @@
     <!-- END HEADER -->
     <!-- BEGIN CONTAINER -->
     <div id="container" class="row-fluid">
-        
         <!-- BEGIN SIDEBAR -->
         <menu-main-inv></menu-main-inv>
         <!-- END SIDEBAR -->
@@ -95,21 +94,20 @@
 
     <script src="/appinv/controller/dashboard/dashboard-repository.js" type="text/javascript"></script>
     <script src="/appinv/controller/dashboard/dashboard-constroller.js" type="text/javascript"></script>
+    
+    <script src="/appinv/controller/validation/validation-repository.js" type="text/javascript"></script>
+    <script src="/appinv/controller/validation/validation-controller.js" type="text/javascript"></script>
 
+    <script src="/appinv/controller/supplier/supplier-repository.js" type="text/javascript"></script>
+    <script src="/appinv/controller/supplier/supplier-controller.js" type="text/javascript"></script>
+
+    <script src="/appinv/controller/store/location-repository.js" type="text/javascript"></script>
+    <script src="/appinv/controller/store/location-controller.js" type="text/javascript"></script>
+    
+    <script src="/appinv/controller/item/item-repository.js" type="text/javascript"></script>
+    <script src="/appinv/controller/item/item-controller.js" type="text/javascript"></script>
 
     <!-- Angular Module Controller END -->
-
-    <script type="text/javascript">
-        $(function () {
-            //$('.has-sub').removeClass('active');
-            //$('#liDashboard').addClass('active');
-            //console.log("Main script load");
-            // initiate layout and plugins
-            //alert("yahoo:");
-            //App.init();
-
-        });
-    </script>
     <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

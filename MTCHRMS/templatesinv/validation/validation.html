@@ -4,16 +4,16 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Inventory <small> Listing </small>
+                {{validation.nameEn}} <small> Listing </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
                     <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
-                    <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="#">List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="#">{{validation.nameEn}} List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -23,16 +23,16 @@
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="widget">
+            <div class="widget" data-ng-init="loadValidationDetails()">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i>Items Listing</h4>
+                    <h4><i class="icon-reorder"></i>&nbsp;{{validation.nameEn}}</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/item/add"></a>
+                        <a class="icon-plus-sign" href="/INVPortal/definition/validation/{{validation.id}}/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
                 </div>
-                <div class="widget-body" ng-init="loadItems()">
+                <div class="widget-body">
                     <div class="form-horizontal">
                         <div class="control-group pull-left">
                             <label class="control-label">
@@ -53,40 +53,36 @@
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
-                                <th>Sr. #</th>
-                                <th>Code</th>
                                 <th>Name</th>
-                                <th>Type</th>
-                                <th>Category</th>
-                                <th>Store</th>
-                                <th>Stock</th>
+                                <th>Notes</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-show="isBusy">
-                                <td colspan="7">
-                                    <div class="progress progress-striped active">
+                                <td colspan="4">
+                                    <div class="progress progress-striped progress-bar-warning active">
                                         <div style="width: 100%;" class="bar"></div>
                                     </div>
                                 </td>
                             </tr>
-                            <tr dir-paginate="item in items | filter:search | itemsPerPage: recordPage">
-                                <td>{{$index + 1}}</td>
+                            <tr dir-paginate="validation in validationDetails | filter:search | itemsPerPage: recordPage">
                                 <td>
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
+                                    <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.nameEn }} </a>
                                 </td>
                                 <td>
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemName }} </a>
+                                    <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.description }} </a>
                                 </td>
-                                <td>{{item.typeDetail.nameEn}}</td>
-                                <td>{{item.categoryDetail.nameEn}}</td>
-                                <td>{{item.storeLocation.storeName}}</td>
-                                <td>{{ item.itemStock }}</td>
+                                <td>
+                                    <label ng-class="{'label label-info': validation.isActive, 'label label-inverse': validation.isActive==0}">
+                                        <ng-pluralize count="validation.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                                    </label>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                     <div style="height:40px;">
-                        <span class="pull-left bottom" ng-show="items.length>0">
+                        <span class="pull-left bottom" ng-show="supplier.length>0">
                             Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
                         </span>
                         <span class="pull-right">
@@ -99,4 +95,12 @@
 
         </div>
     </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.sidebar-menu > .active').removeClass('active');
+            //$('.sidebar-menu > .sub .active').removeClass('active open');
+            //$('#liHRMS, #liDepartment').addClass('active open');
+        });
+    </script>
 </div>

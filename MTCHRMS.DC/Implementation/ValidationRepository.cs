@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,29 @@ namespace MTCHRMS.DC
             }
             catch (Exception ex)
             {
+                return false;
+            }
+        }
+
+
+        public EntityFramework.General.Validation GetValidation(int id)
+        {
+            return _ctx.Validations.Single(r => r.Id == id);
+        }
+
+
+        public bool UpdateValidationDetail(EntityFramework.General.ValidationDetail updateValidationDetail)
+        {
+            try
+            {
+                //_ctx.Departments.Attach(_ctx.Departments.Single(r => r.Id == department.Id));
+                _ctx.Entry(updateValidationDetail).State = EntityState.Modified;
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
                 return false;
             }
         }

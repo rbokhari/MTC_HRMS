@@ -32,10 +32,10 @@ namespace MTCHRMS
                 );
 
             config.Routes.MapHttpRoute(
-                            name: "DefaultApiActionWithId",
-                            routeTemplate: "api/{controller}/{action}/{id}"
+                name: "DefaultApiActionWithId",
+                routeTemplate: "api/{controller}/{action}/{id}"
                 //defaults: new { id = RouteParameter.Optional }
-                            );
+                );
 
             //var jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
             //jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

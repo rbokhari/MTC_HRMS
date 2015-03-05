@@ -204,6 +204,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
+    <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Controllers\SupplierController.cs" />
+    <Compile Include="Controllers\StoreLocationController.cs" />
     <Compile Include="Hubs\HRMSStaffHub.cs" />
     <Compile Include="Provider\DomainAuthorizationServerProvider.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -229,8 +232,14 @@
   <ItemGroup>
     <Content Include="appinv\controller\dashboard\dashboard-constroller.js" />
     <Content Include="appinv\controller\dashboard\dashboard-repository.js" />
+    <Content Include="appinv\controller\item\item-controller.js" />
+    <Content Include="appinv\controller\item\item-repository.js" />
+    <Content Include="appinv\controller\store\location-controller.js" />
+    <Content Include="appinv\controller\store\location-repository.js" />
     <Content Include="appinv\controller\supplier\supplier-controller.js" />
     <Content Include="appinv\controller\supplier\supplier-repository.js" />
+    <Content Include="appinv\controller\validation\validation-controller.js" />
+    <Content Include="appinv\controller\validation\validation-repository.js" />
     <Content Include="appinv\directive\navbar-main.js" />
     <Content Include="app\controller\account\account-repository.js" />
     <Content Include="app\controller\account\account.js">
@@ -611,7 +620,9 @@
     <Content Include="Content\img\gritter-light.png" />
     <Content Include="Content\img\gritter-long.png" />
     <Content Include="Content\img\gritter.png" />
+    <Content Include="Content\img\hrms-128.png" />
     <Content Include="Content\img\ie-spacer.gif" />
+    <Content Include="Content\img\Inventory-128.png" />
     <Content Include="Content\img\loader.gif" />
     <Content Include="Content\img\loaderAr.gif" />
     <Content Include="Content\img\loaderEN.gif" />
@@ -1110,13 +1121,21 @@
     <Content Include="Scripts\_references.js" />
     <Content Include="templatesinv\Dashboard.html" />
     <Content Include="templatesinv\item\item-add.html" />
+    <Content Include="templatesinv\item\item-detail.html" />
+    <Content Include="templatesinv\item\item-edit.html" />
     <Content Include="templatesinv\item\items.html" />
     <Content Include="templatesinv\main\menu-main.html" />
     <Content Include="templatesinv\main\navbar-notify.html" />
     <Content Include="templatesinv\main\navbar-user.html" />
     <Content Include="templatesinv\main\navbar.html" />
+    <Content Include="templatesinv\store\location-add.html" />
+    <Content Include="templatesinv\store\location.html" />
+    <Content Include="templatesinv\supplier\supplier-edit.html" />
     <Content Include="templatesinv\supplier\supplier-add.html" />
     <Content Include="templatesinv\supplier\supplier.html" />
+    <Content Include="templatesinv\validation\validation-add.html" />
+    <Content Include="templatesinv\validation\validation-edit.html" />
+    <Content Include="templatesinv\validation\validation.html" />
     <Content Include="templates\Dashboard.html" />
     <Content Include="templates\dashboard\nationalities.html" />
     <Content Include="templates\dashboard\departments.html" />

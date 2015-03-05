@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using MTCHRMS.EntityFramework.General;
 
 namespace MTCHRMS.EntityFramework.Inventory
 {
@@ -19,10 +20,15 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string ItemName { get; set; }
 
+        [ForeignKey("TypeDetail")]
         public int TypeId { get; set; }
+
+        [ForeignKey("CategoryDetail")]
+        public int CategoryId { get; set; }
 
         public string Utilization { get; set; }
 
+        [ForeignKey("StoreLocation")]
         public int StoreId { get; set; }
 
         public decimal ItemStock { get; set; }
@@ -30,5 +36,10 @@ namespace MTCHRMS.EntityFramework.Inventory
         public string Notes { get; set; }
 
 
+        public virtual ValidationDetail TypeDetail { get; set; }
+
+        public virtual ValidationDetail CategoryDetail { get; set; }
+
+        public virtual StoreLocation StoreLocation { get; set; }
     }
 }

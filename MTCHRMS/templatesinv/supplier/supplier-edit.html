@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Supplier <small> Add New </small>
+                Supplier <small> update </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -13,7 +13,7 @@
                 <li>
                     <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="#">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="/INVPortal/supplier">Supplier List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -43,6 +43,7 @@
                                             <label class="control-label" for="txtCode">Supplier Code</label>
                                             <div class="controls">
                                                 <input type="text" id="txtCode" ng-model="supplier.supplierCode" class="input-medium" required placeholder="[Auto Number]" />
+                                                <input type="hidden" id="hdId" ng-model="supplier.supplierId" />
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -86,11 +87,11 @@
                                             <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
                                                 <i class="icon-ok"></i>&nbsp;Save
                                             </button>
-                                            <button id="cmdSaveAddNew" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
+                                            <!--<button id="cmdSaveAddNew" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
                                                 <i class="icon-ok"></i>&nbsp; Save and Add New
 
-                                            </button>
-                                            <button id="cmdCancel" class="btn btn-inverse" href="/INVPortal/supplier">
+                                            </button>-->
+                                            <button id="cmdCancel" class="btn btn-inverse" ng-href="/INVPortal/supplier/list" >
                                                 <i class=" icon-remove"></i>&nbsp; Cancel
                                             </button>
                                         </div>

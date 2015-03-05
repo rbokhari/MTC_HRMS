@@ -27,7 +27,7 @@ hrmsModule.controller('ValidationController',
     $scope.save = function(validationDetail) {
         $scope.errors = [];
 
-        validationAddRepository.save(validationDetail).$promise.then(
+        validationAddRepository.addValidationDetail(validationDetail).$promise.then(
             function() {
                 // success case
                 $.gritter.add({

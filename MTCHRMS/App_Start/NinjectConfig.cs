@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MTCHRMS.DC;
 using MTCHRMS.EntityFramework;
+using MTCHRMS.EntityFramework.Inventory;
 using Ninject;
 
 namespace MTCHRMS.App_Start
@@ -20,6 +21,9 @@ namespace MTCHRMS.App_Start
             kernel.Bind<IEmployeesRepository>().To<EmployeeRepository>();
             kernel.Bind<IValidationRepository>().To<ValidationRepository>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();
+            kernel.Bind<ISuppliersRepository>().To<SupplierRepository>();
+            kernel.Bind<IStoreLocationRepository>().To<StoreLocationRepository>();
+            kernel.Bind<IItemsRepository>().To<ItemsRepository>();
 
             return kernel;
         }

@@ -1,11 +1,11 @@
 ﻿    <div id="sidebar" class="nav-collapse collapse">
         <div class="sidebar-toggler hidden-phone"></div>
 
-        <ul class="sidebar-menu">
-            <li id="liDashboard" ng-class="{ active: isActiveParentNavigation('/INVPortal')}">
-                <a class="" href="/hrmsportal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
+        <ul class="sidebar-menu" >
+            <li id="liDashboard">
+                <a href="/INVPortal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
             </li>
-            <li class="has-sub" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition/')}">
+            <li class="has-sub active" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -13,11 +13,17 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/supplier/list')}">
-                        <a class="" href="/INVPortal/supplier/list">Supplier</a>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
+                        <a class="" href="/INVPortal/definition/supplier/list">Supplier</a>
                     </li>
-                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/store/list')}">
-                        <a class="" href="/INVPortal/store/list">Store Location</a>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
+                        <a class="" href="/INVPortal/definition/store/list">Store Location</a>
+                    </li>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
+                        <a class="" href="/INVPortal/definition/validation/7">Item Type</a>
+                    </li>
+                    <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
+                        <a class="" href="/INVPortal/definition/validation/8">Item Category</a>
                     </li>
                 </ul>
             </li>

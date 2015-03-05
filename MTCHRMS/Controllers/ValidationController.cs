@@ -9,6 +9,7 @@ using MTCHRMS.EntityFramework.General;
 
 namespace MTCHRMS.Controllers
 {
+    [RoutePrefix("/api/validation")]
     public class ValidationController : ApiController
     {
         public IValidationRepository _repo;
@@ -20,20 +21,30 @@ namespace MTCHRMS.Controllers
 
         [ActionName("GetValidationDetailByValidationId")]
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public IQueryable<ValidationDetail> ValiationDetailsByValidationId(int id)
         {
-            //IDepartmentsRepository _repo = new DepartmentRepository();
             var validationDetails = _repo.GetValidationDetails(id);
 
             return validationDetails;
         }
 
-        [Authorize]
-        public ValidationDetail Get(int vId)
+        [ActionName("GetValiationById")]
+        [HttpGet]
+        //[Authorize]
+        public Validation ValiationById(int id)
         {
-            //IDepartmentsRepository _repo = new DepartmentRepository();
-            var validationDetail = _repo.GetValidationDetail(vId);
+            var validation = _repo.GetValidation(id);
+
+            return validation;
+        }
+
+        [ActionName("GetValidationDetailById")]
+        [HttpGet]
+        //[Authorize]
+        public ValidationDetail ValidationDetailById(int id)
+        {
+            var validationDetail = _repo.GetValidationDetail(id);
 
             if (validationDetail == null)
             {
@@ -42,7 +53,7 @@ namespace MTCHRMS.Controllers
             return validationDetail;
         }
 
-        [Authorize]
+        //[Authorize]
         public HttpResponseMessage Post([FromBody] ValidationDetail newValidationDetail)
         {
             if (ModelState.IsValid)
@@ -52,22 +63,22 @@ namespace MTCHRMS.Controllers
                     return Request.CreateResponse(HttpStatusCode.Created, newValidationDetail);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+                return Request.CreateResponse(HttpStatusCode.BadGateway, GetErrorMessages());
             }
             return null;
         }
 
-        [Authorize]
+        //[Authorize]
         public HttpResponseMessage Put(int id, [FromBody] ValidationDetail updateValidationDetail)
         {
             //return Request.CreateResponse(HttpStatusCode.OK);
             if (ModelState.IsValid)
             {
-                //if (_repo(updateDepartment) && _repo.Save())
-                //{
-                //    return Request.CreateResponse(HttpStatusCode.Created, updateDepartment);
-                //    //return new HttpResponseMessage(HttpStatusCode.OK);
-                //}
+                if (_repo.UpdateValidationDetail(updateValidationDetail) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, updateValidationDetail);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
             return null;

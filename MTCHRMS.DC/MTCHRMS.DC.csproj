@@ -51,15 +51,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountRepository.cs" />
-    <Compile Include="DepartmentRepository.cs" />
-    <Compile Include="EmployeeRepository.cs" />
-    <Compile Include="IAccountRepository.cs" />
-    <Compile Include="IEmployeesRepository.cs" />
-    <Compile Include="IDepartmentsRepository.cs" />
-    <Compile Include="IValidationRepository.cs" />
+    <Compile Include="Implementation\AccountRepository.cs" />
+    <Compile Include="Implementation\ItemsRepository.cs" />
+    <Compile Include="Interface\IItemsRepository.cs" />
+    <Compile Include="Implementation\StoreLocationRepository.cs" />
+    <Compile Include="Interface\IStoreLocationRepository.cs" />
+    <Compile Include="Implementation\SupplierRepository.cs" />
+    <Compile Include="Implementation\DepartmentRepository.cs" />
+    <Compile Include="Implementation\EmployeeRepository.cs" />
+    <Compile Include="Interface\IAccountRepository.cs" />
+    <Compile Include="Interface\ISuppliersRepository.cs" />
+    <Compile Include="Interface\IEmployeesRepository.cs" />
+    <Compile Include="Interface\IDepartmentsRepository.cs" />
+    <Compile Include="Interface\IValidationRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ValidationRepository.cs" />
+    <Compile Include="Implementation\ValidationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MTCHRMS.EntityFramework\MTCHRMS.EntityFramework.csproj">

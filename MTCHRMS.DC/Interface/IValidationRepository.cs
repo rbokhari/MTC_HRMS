@@ -13,9 +13,13 @@ namespace MTCHRMS.DC
 
         ValidationDetail GetValidationDetail(int vId);
 
+        Validation GetValidation(int id);
+
         bool Save();
 
         bool AddValidationDetail(ValidationDetail newValidationDetail);
+
+        bool UpdateValidationDetail(ValidationDetail updateValidationDetail);
 
     }
 }

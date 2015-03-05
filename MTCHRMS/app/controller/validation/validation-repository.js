@@ -14,11 +14,15 @@ hrmsModule.factory('validationRepository', ['$resource', function ($resource) {
         return $resource('/api/validation/' + vid).get();
     };
 
+    var _getValidationById = function (id) {
+        return $resource('/api/validation/ValiationById/' + id).get();
+    };
 
     return {
 
         getAllDetailsByValidationId: _getAllDetailsByValidationId,
-        getSingleDetailByValidationId: _getSingleDetailByValidationId
+        getSingleDetailByValidationId: _getSingleDetailByValidationId,
+        getValidationById: _getValidationById
 
     //    get: function() {
     //        return $resource('/api/validation').query(); // can use get() instead of query(), but using query() because it except to return back array of objects
@@ -26,32 +30,3 @@ hrmsModule.factory('validationRepository', ['$resource', function ($resource) {
     };
 
 }]);
-
-//hrmsModule.factory('validationSingleRepository', ['$resource', function ($resource) {
-//    return {
-//        get: function (id) {
-//            return $resource('/api/validation/' + id).get();
-//        }
-//    };
-
-//}]);
-
-//hrmsModule.factory('validationAddRepository', ['$resource', function ($resource) {
-
-//    return {
-//        save: function (validationDetail) {
-//            return $resource('/api/validation').save(validationDetail);
-//        }
-//    };
-
-//}]);
-
-//hrmsModule.factory('validationEditRepository', ['$http', function ($http) {
-
-//    return {
-//        put: function (id, validationDetail) {
-//            return $http.put('/api/validation/' + id, validationDetail);
-//        }
-//    };
-
-//}]);

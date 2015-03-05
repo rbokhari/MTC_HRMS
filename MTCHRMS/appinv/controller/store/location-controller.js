@@ -2,44 +2,39 @@
 /// <reference path="supplier-repository.js" />
 
 'use strict';
-invModule.controller('SupplierController',
+invModule.controller('LocationController',
 [
-    '$scope', '$location', '$routeParams','supplierRepository',
-    function ($scope, $location, $routeParams, supplierRepository) {
+    '$scope', '$location', '$routeParams','locationRepository',
+    function ($scope, $location, $routeParams, locationRepository) {
 
-        console.log("supplier dashboard controller");
+        console.log("location dashboard controller");
         //$scope.myname = "yahoo";
 
         $scope.isBusy = false;
 
-        $scope.loadSupplier = function () {
+        $scope.loadLocation = function () {
             $scope.isBusy = true;
-            $scope.suppliers = supplierRepository.getAllSuppliers();
+            $scope.locations = locationRepository.getAllLocations();
 
-            $scope.suppliers.$promise.then(function(response) {
-                //alert("success");
-                    //console.log(response);
+            $scope.locations.$promise.then(function () {
+                    //alert("success");
                 }, function() {
                     //alert("error");
                 })
                 .then(function() {
 
                 })
-                .then(function () { $scope.isBusy = false; });
-
-            console.log($scope.suppliers);
+                .then(function() { $scope.isBusy = false; });
         };
 
-        
-
-        $scope.save = function (supplier) {
+        $scope.save = function (location) {
 
             $scope.errors = [];
-            supplierRepository.addSupplier(supplier).$promise.then(
+            locationRepository.addLocation(location).$promise.then(
                 function () {
 //                    appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    $location.url('/INVPortal/supplier');
+                    $location.url('/INVPortal/store/list');
                 }, function (response) {
                     // failure case
                     console.log("save - Error !");
@@ -49,15 +44,15 @@ invModule.controller('SupplierController',
             );
         };
 
-        $scope.edit = function (supplier) {
+        $scope.edit = function (location) {
             $scope.errors = [];
-            supplierRepository.editSupplier(supplier).then(
+            locationRepository.editLocation(location).then(
                 function () {
                     // success case
                     console.log("edit done - Successfully !");
                     //appRepository.showUpdateSuccessGritterNotification();
 
-                    $location.url('/INVPortal/supplier');
+                    $location.url('/INVPortal/store/list');
                 }, function (response) {
                     // failure case
                     console.log("edit - Error !");
@@ -69,7 +64,7 @@ invModule.controller('SupplierController',
 
         //alert($routeParams.id);
         if ($routeParams.id != undefined) {
-            $scope.supplier = supplierRepository.getSupplierById($routeParams.id);
+            $scope.location = locationRepository.getLocationById($routeParams.id);
         }
 
 

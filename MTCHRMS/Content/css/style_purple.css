@@ -173,3 +173,24 @@ ul.social-link li a:hover, .blog .date .month {
     color: #625893;
 }
 
+.widget-title {
+    background-color: #625893;
+    /*background: #f2f2f2;
+    background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background-image: -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background-image: -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
+    background-image: -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);*/
+    /*background-image: -linear-gradient(top, #ffffff 0%, #f2f2f2 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );*/
+    height: 36px;
+    border-bottom: 1px solid #625893; /*#fff;*/
+}
+
+.widget-body {
+    padding: 15px 15px;
+    -webkit-border-radius: 0px 0px 3px 3px;
+    -moz-border-radius: 0px 0px 3px 3px;
+    border-radius: 0px 0px 3px 3px;
+    border: 1px solid #625893; /*#fff;*/
+}

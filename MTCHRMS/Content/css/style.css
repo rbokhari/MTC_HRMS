@@ -827,26 +827,16 @@ form legend {
     box-shadow: 0 0px 5px #ddd;
 }
 
-.widget-title {
-    background: #f2f2f2;
-    background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#f2f2f2));
-    background-image: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
-    background-image: -moz-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
-    background-image: -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
-    background-image: -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
-    /*background-image: -linear-gradient(top, #ffffff 0%, #f2f2f2 100%);*/
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );
-    height: 36px;
-    border-bottom: 1px solid #fff;
-}
+
 
 .widget-title > h4 {
     float: left;
-    font-size: 13px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 300;
     padding: 12px 11px 10px 15px;
     line-height: 12px;
     margin: 0;
+    color: #ffffff;
 }
 
 .widget-title > h4 i {
@@ -864,7 +854,7 @@ form legend {
 .widget-title span.tools > a {
     display: inline-block;
     margin-right: 5px;
-    color: #979797;
+    color: #ffffff;
     font-size: 14px;
     text-decoration: none;
 }
@@ -887,13 +877,6 @@ form legend {
 .widget-title .btn-group .caret {
     margin-top: 8px;
     margin-left: 3px;
-}
-
-.widget-body {
-    padding: 15px 15px;
-    -webkit-border-radius: 0px 0px 3px 3px;
-    -moz-border-radius: 0px 0px 3px 3px;
-    border-radius: 0px 0px 3px 3px;
 }
 
 /* charts & stats */
@@ -2367,6 +2350,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
     border-radius: 0px;
+    color: #ffffff;
 }
 
 .widget-tabs .nav-tabs > li:last-child > a {
@@ -2387,6 +2371,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     border-left: 0;
     border-right: 0;
     background-color: #fff;
+    color: #4C4C4C;
 }
 .widget-tabs .nav-tabs > .active > a  {
     color: #555555;

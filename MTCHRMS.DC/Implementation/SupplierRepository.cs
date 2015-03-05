@@ -5,14 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MTCHRMS.EntityFramework;
+using MTCHRMS.EntityFramework.Inventory;
+
 namespace MTCHRMS.DC
 
 {
-    public class DepartmentRepository: IDepartmentsRepository
+    public class SupplierRepository: ISuppliersRepository
     {
         DbEntityContext _ctx;
 
-        public DepartmentRepository(DbEntityContext ctx)
+        public SupplierRepository(DbEntityContext ctx)
         {
             // here we can pass this as ref object, so that it can use everytime, like, DbEntityContext ctxContext
             // use then ninject to create constructor instance auto and reference it if available.
@@ -27,15 +29,15 @@ namespace MTCHRMS.DC
         //    return _ctx.Departments;
         //}
 
-        public async Task<IQueryable<Department>> GetDepartments()
+        public async Task<IQueryable<Supplier>> GetSuppliers()
         {
             //System.Threading.Thread.Sleep(100);
-            return await Task.Run(() => _ctx.Departments);
+            return await Task.Run(() => _ctx.Suppliers);
         }
 
-        public Department GetDepartment(int id)
+        public Supplier GetSupplier(int id)
         {
-            return _ctx.Departments.Single(r=>r.Id == id);
+            return _ctx.Suppliers.Single(r=>r.SupplierId == id);
         }
 
         public bool Save()
@@ -51,13 +53,13 @@ namespace MTCHRMS.DC
             }
         }
 
-        public bool AddDepartment(Department newDepartment)
+        public bool AddSupplier(Supplier newSupplier)
         {
             try
             {
                 //newDepartment.CreatedBy = 1;
                 //newDepartment.CreatedOn = DateTime.UtcNow;
-                _ctx.Departments.Add(newDepartment);
+                _ctx.Suppliers.Add(newSupplier);
                 return true;
             }
             catch (Exception ex)
@@ -67,12 +69,12 @@ namespace MTCHRMS.DC
             }
         }
 
-        public bool UpdateDepartment(Department department)
+        public bool UpdateSupplier(Supplier updateSupplier)
         {
             try
             {
                 //_ctx.Departments.Attach(_ctx.Departments.Single(r => r.Id == department.Id));
-                _ctx.Entry(department).State = EntityState.Modified;
+                _ctx.Entry(updateSupplier).State = EntityState.Modified;
                 return true;
 
             }
