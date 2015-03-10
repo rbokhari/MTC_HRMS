@@ -3,27 +3,27 @@
 
         <ul class="sidebar-menu">
             <li id="liDashboard" ng-class="{ active: isActiveParentNavigation('/HRMSPortal')}">
-                <a class="" href="/hrmsportal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
+                <a class="" href="/{{mainPortal}}"><span class="icon-box"><i class="icon-dashboard"></i></span> <span translate="DASHBOARD"></span></a>
             </li>
             <li class="has-sub" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/HRMSPortal/')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
-                    </span> HRMS
+                    </span> <span translate="HRMS"></span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
                     <li id="liDepartment" ng-class="{ active: isActiveNavigation('/HRMSPortal/department')}">
-                        <a class="" href="/HRMSPortal/department">Department</a>
+                        <a class="" ng-href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span></a>
                     </li>
                     <li id="liOrgChart" ng-class="{ active: isActiveNavigation('/HRMSPortal/oc')}">
-                        <a class="" href="/HRMSPortal/oc">Organization Chart</a>
+                        <a class="" href="/{{mainPortal}}/oc"><span translate="ORGANIZATION_CHART"></span></a>
                     </li>
                     <li id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee')}">
-                        <a class="" href="/HRMSPortal/employee">Staff</a>
+                        <a class="" href="/{{mainPortal}}/employee"><span translate="STAFF"></span></a>
                     </li>
                     <li id="liStaffListing" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee/listing')}">
-                        <a class="" href="/HRMSPortal/employee/listing">Listings</a>
+                        <a class="" href="/{{mainPortal}}/employee/listing"><span translate="LISTINGS"></span></a>
                     </li>
                 </ul>
             </li>
@@ -31,26 +31,26 @@
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
-                    </span> Staff Services
+                    </span> <span translate="STAFF_SERVICES"></span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
                     <li id="liLeaveRequest" ng-class="{ active: isActiveNavigation('/HRMSPortal/leaverequest')}">
-                        <a class="" href="/HRMSPortal/leaverequest">Leave Request</a>
+                        <a class="" href="/{{mainPortal}}/leaverequest"><span translate="LEAVE_REQUEST"></span></a>
                     </li>
                     <li id="liItemRequest">
-                        <a class="" href="#">Item Request</a>
+                        <a class="" href="#"><span translate="ITEM_REQUEST"></span></a>
                     </li>
                     <li id="liGatePass">
-                        <a class="" href="#">Gate Pass</a>
+                        <a class="" href="#"><span translate="GATE_PASS"></span></a>
                     </li>
                 </ul>
             </li>
             <li id="liLock">
-                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="lock()"><span class="icon-box"><i class="icon-lock"></i></span> Lock</a>
+                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="lock()"><span class="icon-box"><i class="icon-lock"></i></span> <span translate="LOCK"></span></a>
             </li>
             <li id="liLogout">
-                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="logOut()"><span class="icon-box"><i class="icon-key"></i></span> Log Out</a>
+                <a class="" style="cursor: pointer; cursor: hand;" data-ng-click="logOut()"><span class="icon-box"><i class="icon-key"></i></span> <span translate="LOG_OUT"></span></a>
             </li>
         </ul>
 

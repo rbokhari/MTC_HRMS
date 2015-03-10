@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html lang="en" ng-app="hrmsModule">
+<head dir="rtl">
+    <meta charset="utf-8" />
+    <title>MTC HRMS System - Arabic</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    
+    <link rel="icon" href="/Content/img/mtclogo.ico" />
+    <link rel="Shortcut Icon" href="/Content/img/mtclogo.ico" />
+
+    <link href="/Content/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-responsive-rtl.min.css" rel="stylesheet" />
+    <link href="/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="/Content/css/style-rtl.css" rel="stylesheet" />
+    <link href="/Content/css/style_responsive.css" rel="stylesheet" />
+    <link href="/Content/css/style_default.css" rel="stylesheet" />
+    <link href="/Content/jquery.gritter.css" rel="stylesheet" />
+    <link href="/Content/uniform/css/uniform.default.css" rel="stylesheet" />
+    <link href="/Content/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
+    <link href="/Content/animate.min.css" rel="stylesheet" />
+
+    <style>
+        [data-ng-cloak] {
+            display: none;
+        }
+    </style>
+    
+</head>
+<!-- BEGIN BODY -->
+<body class="fixed-top" data-ng-controller="AppController">
+    <!-- BEGIN HEADER -->
+    <div id="header" class="navbar navbar-inverse navbar-fixed-top" data-ng-init="getAuthenticationData()">
+        <!-- BEGIN TOP NAVIGATION BAR -->
+        <navbar-main></navbar-main>
+
+        <!-- END TOP NAVIGATION BAR -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <menu-main></menu-main>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div data-ng-view data-ng-animate="fade-in"></div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div id="footer">
+        2014 &copy; MTC HRMS Application.
+        <div class="span1 pull-right">
+            <span class="go-top"><i class="icon-arrow-up"></i></span>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+    <!-- BEGIN JAVASCRIPTS -->
+    <!-- Load javascripts at bottom, this will reduce page load time -->
+
+    <script src="/Scripts/jquery-2.1.1.min.js" type="Application/javascript"></script>
+    <script src="/Scripts/bootstrap-rtl.min.js" type="text/javascript"></script>
+    <script src="/Scripts/jquery.gritter.js" type="text/javascript"></script>
+    <script src="/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+    <script src="/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="/Scripts/jquery.signalR-2.1.2.min.js" type="text/javascript"></script>
+
+    <script src="/Scripts/angular-file-upload-shim.min.js" type="text/javascript"></script>
+
+    <script src="/Scripts/angular.min.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-route.min.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-resource.min.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-animate.min.js" type="text/javascript"></script>
+    <script src="/Scripts/dirPagination/dirPagination.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-sanitize.min.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-file-upload.min.js" type="text/javascript"></script>
+
+    <script src="/Scripts/angularTranslate/angular-translate.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/translate.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/service/default-interpolation.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/service/handler-log.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/service/loader-static-files.js" type="text/javascript"></script>
+
+
+    <script src="/Scripts/angularTranslate/service/storage-key.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/service/storage-local.js" type="text/javascript"></script>
+    <!--<script src="/Scripts/angularTranslate/service/storage-cookie.js" type="text/javascript"></script>-->
+    <script src="/Scripts/angularTranslate/service/translate.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/directive/translate.js" type="text/javascript"></script>
+    <script src="/Scripts/angularTranslate/filter/translate.js" type="text/javascript"></script>
+
+    <script src="/Scripts/moment.js" type="text/javascript"></script>
+    <script src="/Scripts/angular-moment.js" type="text/javascript"></script>
+
+    <!--<script src="/Scripts/ui-bootstrap-tpls-0.12.0.min.js" type="text/javascript"></script>-->
+    <!--<script src="Content/template2/js/scripts.js"></script>-->
+    <!-- Angular Module Controller START -->
+    <script src="/app/module/hrms-module-ar.js" type="text/javascript"></script>
+    <!--<script src="/app/controller/translate/translate-service.js" type="text/javascript"></script>-->
+    <script src="/app/controller/app/app-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/app/app-controller.js" type="text/javascript"></script>
+    <script src="/app/controller/account/account-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/account/auth-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/account/authInterceptorService.js" type="text/javascript"></script>
+
+    <script src="/app/controller/dashboard/dashboard-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/dashboard/dashboard-constroller.js" type="text/javascript"></script>
+
+    <script src="/app/controller/department/department-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/department/department-controller.js" type="text/javascript"></script>
+
+    <script src="/app/hubs/employee-hub.js" type="text/javascript"></script>
+    <script src="/app/controller/employee/employee-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/employee/employee-controller.js" type="text/javascript"></script>
+
+    <script src="/app/controller/validation/validation-repository.js" type="text/javascript"></script>
+    <script src="/app/controller/validation/validation-controller.js" type="text/javascript"></script>
+
+    <script src="/app/directive/datepicker.js" type="text/javascript"></script>
+    <script src="/app/directive/navbar-main.js" type="text/javascript"></script>
+    <script src="/app/directive/dashboard.js" type="text/javascript"></script>
+    <script src="/app/directive/imgShow.js" type="text/javascript"></script>
+
+    <script src="/Scripts/modal/angular-modal-service.js" type="text/javascript"></script>
+    <script src="/app/controller/employee/employee-modal-controller.js" type="text/javascript"></script>
+    <script src="/app/provider/common.js" type="text/javascript"></script>
+    <script src="/app/provider/localStorageService.js" type="text/javascript"></script>
+
+    <!-- Angular Module Controller END -->
+
+    <script type="text/javascript">
+        $(function () {
+            $('.has-sub').removeClass('active');
+            $('#liDashboard').addClass('active');
+            //console.log("Main script load");
+            // initiate layout and plugins
+            //alert("yahoo:");
+            //App.init();
+
+        });
+    </script>
+    <!-- END JAVASCRIPTS -->
+</body>
+<!-- END BODY -->
+</html>

@@ -1,0 +1,314 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Item <small> Add New </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Items List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid " data-ng-init="loadItem()">
+        <div class="span12">
+            <div class="widget widget-tabs">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>&nbsp; Item Detail</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs">
+                            <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)" data-toggle="tab">History</a></li>
+                            <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)" data-toggle="tab">Attachment</a></li>
+                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)" data-toggle="tab">Suppliers</a></li>
+                            <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)" data-toggle="tab">Detail</a></li>
+                            <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)" data-toggle="tab">General</a></li>
+                        </ul>
+                        <div class="tab-pane active" id="dvGeneral" ng-show="isTabSelected(1)">
+                            <div class="span3">
+                                <div class="text-center profile-pic">
+                                    <img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px" />
+                                </div>
+                                <ul class="nav nav-stacked">
+                                    <li><a ng-href="/HRMSPortal/employee/edit/1"><i class="icon-save"></i> Update</a></li>
+                                </ul>
+                            </div>
+                            <div class="span6">
+                                <h4>{{ item[0].itemCode }} - {{ item[0].itemName }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="span2">Item Type :</td>
+                                            <td>
+                                                {{ item[0].typeDetail.nameEn}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Item Category :</td>
+                                            <td>
+                                                {{ item[0].categoryDetail.nameEn}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Store Location :</td>
+                                            <td>
+                                                {{ item[0].storeLocation.storeName}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Item Stock :</td>
+                                            <td>
+                                                {{ item[0].itemStock}}
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                <h4>Utilization</h4>
+                                <div class="well">
+                                    {{ item[0].utilization}}
+                                </div>
+                                <h4>Required</h4>
+                                <div class="well">
+                                    <ul class="icons push">
+                                        <li>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; FY
+                                            </label>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 1
+                                            </label>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="txtCode" value="" checked="" />&nbsp;&nbsp; Yr 2
+                                            </label>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 3
+                                            </label>
+                                            <label class="checkbox">
+                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 4
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <h4>Notes</h4>
+                                <div class="well">
+                                    {{ item[0].notes}}
+                                </div>
+                                <hr />
+                                <a ng-href="/hrmsportal/employee/edit/{{employee[0].id}}" class="btn btn-info">
+                                    <i class="icon-save"></i>
+                                    Update
+                                </a>
+                            </div>
+                            <div class="span3">
+                                <h4>Suppliers</h4>
+                                <ul class="icons push">
+                                    <li>
+                                        <i class="icon-hand-right"></i> <strong>ROP</strong><br/>
+                                        <em>
+                                            Date : 12-March-2014
+                                        </em><br />
+                                        <em>
+                                            Stock : 1
+                                        </em><br>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane" id="dvContactInfo" ng-show="isTabSelected(2)">
+                            <i class="icon-hand-right"></i>  <strong>Additional Requirement</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Update</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="form-horizontal alert alert-block alert-success fade in">
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">IT</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Spares</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Callibration</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Maintenance</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Technician</label>
+                                            <div class="controls">
+                                                <select id="cCountry" name="cCountry" required>
+                                                    <option>General</option>
+                                                    <option>Technician</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <i class="icon-hand-right"></i>  <strong>Procurement Committee</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Update</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <div class="form-horizontal alert alert-block alert-info fade in">
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Identify Supplier</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Lead Time </label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Cost</label>
+                                            <div class="controls">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" id="txtCode" /> Per Item
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Total</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Guarantee Start Date</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Guarantee Duration</label>
+                                            <div class="controls">
+                                                <input type="text" id="txtCode" class="input-large" />
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="control-group">
+                                            <label class="control-label" for="txtCode">Agreed ?</label>
+                                            <div class="controls">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" id="txtCode" /> Yes
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvSupplier" ng-show="isTabSelected(3)">
+                            <i class="icon-hand-right"></i>  <strong>Supplier</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Supplier</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Contact Person</th>
+                                                <th>Contact No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvAttachment" ng-show="isTabSelected(4)">
+                            <i class="icon-paper-clip"></i>  <strong>Attachment</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvHistory" ng-show="isTabSelected(5)">
+                            <i class="icon-time"></i>  <strong>History</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

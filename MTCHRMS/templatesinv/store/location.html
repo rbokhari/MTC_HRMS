@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/store/add"></a>
+                        <a class="icon-plus-sign" href="/INVPortal/definition/store/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -66,7 +66,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr dir-paginate="location in locations | filter:search | itemsPerPage: recordPage">
+                            <tr dir-paginate="store in locations | filter:search | itemsPerPage: recordPage">
                                 <td>
                                     <a ng-href="/INVPortal/location/edit/{{ store.storeId}}"> {{ store.storeCode }} </a>
                                 </td>

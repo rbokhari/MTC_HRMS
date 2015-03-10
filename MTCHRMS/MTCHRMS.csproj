@@ -252,6 +252,7 @@
     <Content Include="app\controller\account\authInterceptorService.js" />
     <Content Include="app\controller\app\app-controller.js" />
     <Content Include="appinv\module\inv-module.js" />
+    <Content Include="app\module\hrms-module-ar.js" />
     <Content Include="app\translate\translate-service.js" />
     <Content Include="app\directive\dashboard.js" />
     <Content Include="app\directive\imgShow.js" />
@@ -267,12 +268,15 @@
     </Content>
     <Content Include="Content\bootstrap-datepicker\css\datepicker.css" />
     <Content Include="Content\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Content\bootstrap-responsive-rtl.min.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
+    <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style-rtl.css" />
     <Content Include="Content\css\style_gray.css" />
     <Content Include="Content\css\style_navy-blue.css" />
     <Content Include="Content\css\style_purple.css" />
@@ -334,6 +338,8 @@
     <Content Include="Content\font-awesome\font\myriadprobold.svg" />
     <Content Include="Content\font-awesome\font\myriadprolight.svg" />
     <Content Include="Content\font-awesome\font\myriadproregular.svg" />
+    <Content Include="Content\img\bread-crumb-divider-rtl.jpg" />
+    <Content Include="Content\img\bread-crumb-last-rtl.jpg" />
     <Content Include="Content\img\flag\1.png" />
     <Content Include="Content\img\flag\10.png" />
     <Content Include="Content\img\flag\1037.png" />
@@ -827,6 +833,7 @@
     <Content Include="app\controller\dashboard\dashboard-constroller.js" />
     <Content Include="app\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\controller\employee\employee-modal-controller.js" />
+    <Content Include="HRMSPortalAr.html" />
     <Content Include="INVPortal.html" />
     <Content Include="lock.html" />
     <Content Include="login.html" />
@@ -843,6 +850,22 @@
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.js" />
     <Content Include="Scripts\angularTranslate\angular-translate.js" />
     <Content Include="Scripts\angularTranslate\angular-translate.min.js" />
+    <Content Include="Scripts\angularTranslate\directive\translate-cloak.js" />
+    <Content Include="Scripts\angularTranslate\directive\translate.js" />
+    <Content Include="Scripts\angularTranslate\filter\translate.js" />
+    <Content Include="Scripts\angularTranslate\service\default-interpolation.js" />
+    <Content Include="Scripts\angularTranslate\service\handler-log.js" />
+    <Content Include="Scripts\angularTranslate\service\loader-partial.js" />
+    <Content Include="Scripts\angularTranslate\service\loader-static-files.js" />
+    <Content Include="Scripts\angularTranslate\service\loader-url.js" />
+    <Content Include="Scripts\angularTranslate\service\messageformat-interpolation.js" />
+    <Content Include="Scripts\angularTranslate\service\storage-cookie.js" />
+    <Content Include="Scripts\angularTranslate\service\storage-key.js" />
+    <Content Include="Scripts\angularTranslate\service\storage-local.js" />
+    <Content Include="Scripts\angularTranslate\service\translate.js" />
+    <Content Include="Scripts\angularTranslate\service\translationCache.js" />
+    <Content Include="Scripts\angularTranslate\translate.js" />
+    <Content Include="Scripts\bootstrap-rtl.min.js" />
     <Content Include="Scripts\dirPagination\dirPagination - Copy.js" />
     <Content Include="Scripts\dirPagination\dirPagination.js" />
     <Content Include="Scripts\dirPagination\dirPagination.tpl - Copy.html" />
@@ -1079,10 +1102,13 @@
     </Content>
     <Content Include="Scripts\dirPagination\dirPagination.tpl.html" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.map" />
+    <Content Include="en_US.json" />
     <None Include="Properties\PublishProfiles\LocalServer.pubxml" />
     <Content Include="Scripts\angularTranslate\angular-translate.min.js.map">
       <DependentUpon>angular-translate.min.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\angularTranslate\lang\en_US.json" />
+    <Content Include="Scripts\angularTranslate\lang\ar_OM.json" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery.gritter.js" />
     <Content Include="Scripts\jquery.gritter.min.js" />

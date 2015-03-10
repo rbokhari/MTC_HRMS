@@ -3,14 +3,15 @@
 'use strict';
 hrmsModule.controller('AppController',
 [
-    '$scope', '$location', 'authRepository', '$window','appRepository',  
-    function ($scope, $location, authRepository, $window, appRepository) {
+    '$scope', '$location', 'authRepository', '$window','appRepository', '$translate', 
+    function ($scope, $location, authRepository, $window, appRepository, $translate) {
 
         console.log("app controller");
 
         $scope.message = "";
 
         $scope.currentDateNow = new Date();
+        $translate.use('en_US');
 
         //$scope.translate = function () {
         //    translationService.getTranslation($scope, $scope.selectedLanguage);

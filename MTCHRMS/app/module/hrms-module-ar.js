@@ -29,98 +29,98 @@
         });
     //alert(mainPortal);
         $routeProvider
-            .when('/HRMSPortal', {
+            .when('/HRMSPortalAr', {
                 templateUrl: '/templates/dashboard.html',
                 controller: 'DashboardController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/department', {
+            .when('/HRMSPortalAr/department', {
                 templateUrl: '/templates/hrms/department/department.html',
                 controller: 'DepartmentController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/department/add', {
+            .when('/HRMSPortalAr/department/add', {
                 templateUrl: '/templates/hrms/department/department-add.html',
                 controller: 'DepartmentController'
             });
         $routeProvider
-            .when('/HRMSPortal/department/edit/:id', {
+            .when('/HRMSPortalAr/department/edit/:id', {
                 templateUrl: '/templates/hrms/department/department-edit.html',
                 controller: 'DepartmentController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee', {
+            .when('/HRMSPortalAr/employee', {
                 templateUrl: '/templates/hrms/employee/employee.html',
                 controller: 'EmployeeController'
             });
         $routeProvider
-            .when('/HRMSPortal/employee/add', {
+            .when('/HRMSPortalAr/employee/add', {
                 templateUrl: '/templates/hrms/employee/employee-add.html',
                 controller: 'EmployeeController'
             });
         $routeProvider
-            .when('/HRMSPortal/employee/detail/:id', {
+            .when('/HRMSPortalAr/employee/detail/:id', {
                 templateUrl: '/templates/hrms/employee/employee-detail.html',
                 controller: 'EmployeeController'
             });
         $routeProvider
-            .when('/HRMSPortal/employee/edit/:id', {
+            .when('/HRMSPortalAr/employee/edit/:id', {
                 templateUrl: '/templates/hrms/employee/employee-edit.html',
                 controller: 'EmployeeController'
             });
         $routeProvider
-            .when('/HRMSPortal/oc', {
+            .when('/HRMSPortalAr/oc', {
                 templateUrl: '/templates/hrms/oc/organization-chart.html',
                 controller: 'EmployeeController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/leaverequest', {
+            .when('/HRMSPortalAr/leaverequest', {
                 templateUrl: '/templates/services/leave-request-form.html',
                 controller: 'EmployeeController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/visaexpire', {
+            .when('/HRMSPortalAr/employee/visaexpire', {
                 templateUrl: '/templates/hrms/employee/employee-visa-expiry.html',
                 controller: 'DashboardController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/passportexpire', {
+            .when('/HRMSPortalAr/employee/passportexpire', {
                 templateUrl: '/templates/hrms/employee/employee-passport-expiry.html',
                 controller: 'DashboardController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/contractexpire', {
+            .when('/HRMSPortalAr/employee/contractexpire', {
                 templateUrl: '/templates/hrms/employee/employee-contract-expiry.html',
                 controller: 'DashboardController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/probationexpire', {
+            .when('/HRMSPortalAr/employee/probationexpire', {
                 templateUrl: '/templates/hrms/employee/employee-probation-expiry.html',
                 controller: 'DashboardController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/listing', {
+            .when('/HRMSPortalAr/employee/listing', {
                 templateUrl: '/templates/hrms/listing/list.html',
                 controller: 'EmployeeController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/contactlist', {
+            .when('/HRMSPortalAr/employee/contactlist', {
                 templateUrl: '/templates/hrms/listing/employee-contact-list.html',
                 controller: 'EmployeeController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/employee/appraisal', {
+            .when('/HRMSPortalAr/employee/appraisal', {
                 templateUrl: '/templates/hrms/listing/employee-appraisal-list.html',
                 controller: 'EmployeeController'
             });

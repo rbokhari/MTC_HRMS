@@ -1,0 +1,28 @@
+﻿{
+    "LAYOUT_DIRECTION": "ltr",
+    "HRMS_WELCOME_MESSAGE": "Welcome to the <strong>MTC HRMS System</strong>!",
+    "DASHBOARD": "Dashboard",
+    "HRMS": "HRMS",
+    "DEPARTMENT": "Department",
+    "ORGANIZATION_CHART": "Organization Chart",
+    "STAFF": "Staff",
+    "LISTINGS": "Listings",
+    "STAFF_SERVICES": "Staff Services",
+    "LEAVE_REQUEST": "Leave Request",
+    "ITEM_REQUEST": "Item Request",
+    "GATE_PASS": "Gate Pass",
+    "LOCK": "Lock",
+    "LOG_OUT": "Log Out",
+    "NEW_STAFF": "New Staff",
+    "PROBATION_EXPIRY": "Probation Expiry",
+    "APPRAISAL": "Appraisal",
+    "CONTRACT_EXPIRE": "Contract Expire",
+    "VISA_EXPIRE": "Visa Expiry",
+    "PASSPORT_EXPIRY": "Passport Expiry",
+    "ALL_DEPARTMENTS": "All Departments",
+    "ALL_NATIONALITIES": "All Nationalities"
+
+
+
+
+}

@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/supplier/add"></a>
+                        <a class="icon-plus-sign" href="/INVPortal/definition/supplier/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -69,10 +69,10 @@
                                 </tr>
                                 <tr dir-paginate="supplier in suppliers | filter:search | itemsPerPage: recordPage">
                                     <td>
-                                        <a ng-href="/INVPortal/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierCode }} </a>
+                                        <a ng-href="/INVPortal/definition/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierCode }} </a>
                                     </td>
                                     <td>
-                                        <a ng-href="/INVPortal/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierName }} </a>
+                                        <a ng-href="/INVPortal/definition/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierName }} </a>
                                     </td>
                                     <td>
                                         {{ supplier.countryId }}

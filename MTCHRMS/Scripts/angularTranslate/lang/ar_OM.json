@@ -1,0 +1,25 @@
+﻿{
+    "LAYOUT_DIRECTION": "rtl",
+    "HRMS_WELCOME_MESSAGE": "مرحبا بكم في <strong>MTC HRMS System</strong>!",
+    "DASHBOARD": "قائــمـة",
+    "HRMS": "إدارة الموارد البشرية",
+    "DEPARTMENT": "دائرة",
+    "ORGANIZATION_CHART": "الهيكل التنظيمي",
+    "STAFF": "موظف",
+    "LISTINGS": "قوائم",
+    "STAFF_SERVICES": "خدمات الموظفين",
+    "LEAVE_REQUEST": "إجازة السنوية",
+    "ITEM_REQUEST": "طلب المادة",
+    "GATE_PASS": "طلب بوابة ممر",
+    "LOCK": "قفل",
+    "LOG_OUT": "تسجيل الخروج",
+     "NEW_STAFF": "الموظفين جديد",
+    "PROBATION_EXPIRY": "الاختبار انتهاء",
+    "APPRAISAL": "تقييم",
+    "CONTRACT_EXPIRE": "انتهاء العقد",
+    "VISA_EXPIRE": "تأشيرة انتهاء",
+    "PASSPORT_EXPIRY": "جواز سفر انتهاء",
+    "ALL_DEPARTMENTS": "جميع الأقسام",
+    "ALL_NATIONALITIES": "جميع الجنسيات"
+
+}

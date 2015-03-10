@@ -1,8 +1,11 @@
 ﻿<div class="top-nav ">
-    <ul class="nav pull-right top-menu">
+    <ul class="nav top-menu" ng-class="{'pull-left' : lang == 'ar_OM', 'pull-right' : lang == 'en_US'}">
         <!-- BEGIN SUPPORT -->
         <li class="dropdown mtop5">
-            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="lang=='en_US'" href="/HRMSPortalAr" target="_self" data-original-title="Chat">
+                <i class="icon-comments-alt"></i>
+            </a>
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="lang=='ar_OM'" href="/HRMSPortal" target="_self" data-original-title="Chat">
                 <i class="icon-comments-alt"></i>
             </a>
         </li>
