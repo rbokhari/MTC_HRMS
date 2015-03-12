@@ -8,10 +8,10 @@ Website: http://thevectorlab.net/
 /* body styles */
 body {
     color: #000;
-    font-family: 'Arial';
+    font-family: 'Arial'; /*'s';*/
     padding: 0px !important;
     margin: 0px !important;
-    font-size:13px;
+    font-size:14px;
     direction: rtl;
 }
 
@@ -560,8 +560,8 @@ ul.sidebar-menu span.icon-box  {
     padding: 10px 60px 10px 10px;
     color: #ccc;
     text-decoration: none;
-    text-shadow: 0 1px 1px #000;
-    font-size: 13px;
+    /*text-shadow: 0 1px 1px #000;*/
+    font-size: 18px;        /* Did change this for larger arabic font - mine*/
     font-weight: normal;
 }
 
@@ -695,8 +695,8 @@ form legend {
 }
 
 .widget-title > h4, .breadcrumb > li> a:hover, .chats li.in .name {
-    color: #4C4C4C;
-    text-shadow: 0 1px 1px #FFFFFF;
+    color: #ffffff;  /*#4C4C4C;*/
+    /*text-shadow: 0 1px 1px #FFFFFF;*/
 }
 
 /* custom form input error states with icons */
@@ -830,7 +830,7 @@ form legend {
     box-shadow: 0 0px 5px #ddd;
 }
 
-.widget-title {
+/*.widget-title {
     background: #f2f2f2;
     background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#f2f2f2));
     background-image: -webkit-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
@@ -838,10 +838,11 @@ form legend {
     background-image: -ms-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
     background-image: -o-linear-gradient(top, #ffffff 0%, #f2f2f2 100%);
     /*background-image: -linear-gradient(top, #ffffff 0%, #f2f2f2 100%);*/
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );
+    /*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2',GradientType=0 );
     height: 36px;
     border-bottom: 1px solid #fff;
 }
+    */
 
 .widget-title > h4 {
     float: right;
@@ -867,7 +868,7 @@ form legend {
 .widget-title span.tools > a {
     display: inline-block;
     margin-left: 5px;
-    color: #979797;
+    color: #ffffff;
     font-size: 14px;
     text-decoration: none;
 }

@@ -20,9 +20,24 @@
     "VISA_EXPIRE": "Visa Expiry",
     "PASSPORT_EXPIRY": "Passport Expiry",
     "ALL_DEPARTMENTS": "All Departments",
-    "ALL_NATIONALITIES": "All Nationalities"
-
-
+    "ALL_NATIONALITIES": "All Nationalities",
+    "CODE": "Code",
+    "NAME": "Name",
+    "STATUS": "Status",
+    "EMPLOYEES": "Employees",
+    "SEARCH": "search",
+    "RECORD_PER_PAGE": "Record Per Page",
+    "LISTING": "Listing",
+    "LIST": "List",
+    "DISPLAYING": "Displaying",
+    "OF": "of",
+    "EDIT": "Edit",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "SAVE_AND_ADD_NEW": "Save and Add New",
+    "CANCEL": "Cancel",
+    "UPDATE": "Update",
+    "MANDATORY_FIELD_MISSING": "Mandatory field, Can't be blank !"
 
 
 }

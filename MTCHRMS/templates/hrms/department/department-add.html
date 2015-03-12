@@ -4,16 +4,16 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Department <small> Add </small>
+                <span translate="DEPARTMENT"></span>&nbsp;<small> <span translate="ADD"></span> </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/HRMSPortal/department">Departments</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -28,7 +28,7 @@
         <div class="span12">
             <div class="widget">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i>Departmnet - Add New</h4>
+                    <h4><i class="icon-reorder"></i><span translate="DEPARTMENT"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
                     <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
@@ -39,21 +39,21 @@
 
                         <div class="form-horizontal">
                             <div class="control-group">
-                                <label class="control-label" for="txtCode">Department Code</label>
+                                <label class="control-label" for="txtCode"><span translate="DEPARTMENT"></span>&nbsp; <span translate="CODE"></span>&nbsp;</label>
                                 <div class="controls">
                                     <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
-                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty">Please enter code !</div>
+                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="txtName">Department Name</label>
+                                <label class="control-label" for="txtName"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp;</label>
                                 <div class="controls">
                                     <input type="text" name="txtName" id="txtName" ng-model="department.departmentName" required="required" />
-                                    <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty">Please enter name !</div>
+                                    <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="statusId">Is Active</label>
+                                <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
                                 <div class="controls">
                                     <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
                                 </div>
@@ -61,15 +61,15 @@
                             <div class="form-actions">
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(department)" ng-disabled="frmDepartment.$invalid">
                                     <i class="icon-save"></i>
-                                    Save
+                                    <span translate="SAVE"></span>&nbsp;
                                 </button>
                                 <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(department)" ng-disabled="frmDepartment.$invalid">
                                     <i class="icon-save"></i>
-                                    Save and Add New
+                                    <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
                                 </button>
-                                <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/department">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/department">
                                     <i class="icon-undo"></i>
-                                    Cancel
+                                    <span translate="CANCEL"></span>&nbsp;
                                 </a>
                             </div>
                         </div>
@@ -81,11 +81,4 @@
 
         </div>
     </div>
-
-    <script type="text/javascript">
-        $(function () {
-            $('.sidebar-menu > .active').removeClass('active open');
-            $('#liHRMS, #liDepartment').addClass('active open');
-        });
-    </script>
 </div>

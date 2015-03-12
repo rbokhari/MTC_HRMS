@@ -8,7 +8,7 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li><a href="#"><span translate="DASHBOARD"></span></a><span class="divider-last">&nbsp;</span></li>
             </ul>
@@ -51,7 +51,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-show="isProbationBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-hide="isProbationBusy" data-ng-bind="probations.length"></div>
-                            <div class="title"><a ng-href="/HRMSPortal/employee/probationexpire/" style="color:#000000;"><span translate="PROBATION_EXPIRY"></span></a></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/probationexpire/" style="color:#000000;"><span translate="PROBATION_EXPIRY"></span></a></div>
                             <div class="progress progress-warning">
                                 <div style="width: {{(probations.length / employees.length)*100}}%" class="bar"></div>
                             </div>
@@ -67,7 +67,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-show="isAppraisalBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-hide="isAppraisalBusy" data-ng-bind="appraisals.length"></div>
-                            <div class="title"><a ng-href="/HRMSPortal/employee/appraisal/" style="color: #000000;"><span translate="APPRAISAL"></span></a></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/appraisal/" style="color: #000000;"><span translate="APPRAISAL"></span></a></div>
                             <div class="progress progress-warning">
                                 <div style="width: {{ (appraisals.length / employees.length ) * 100}}%" class="bar"></div>
                             </div>
@@ -83,7 +83,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-show="isContractBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-hide="isContractBusy" data-ng-bind="contracts.length"></div>
-                            <div class="title"><a ng-href="/HRMSPortal/employee/contractexpire/" style="color: #000000;"><span translate="CONTRACT_EXPIRE"></span></a></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/contractexpire/" style="color: #000000;"><span translate="CONTRACT_EXPIRE"></span></a></div>
                             <div class="progress progress-success">
                                 <div style="width: {{ (contracts.length / employees.length ) * 100 }}%" class="bar"></div>
                             </div>
@@ -99,7 +99,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-show="isVisaBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-hide="isVisaBusy" data-ng-bind="visas.length"></div>
-                            <div class="title"><a ng-href="/HRMSPortal/employee/visaexpire/" style="color: #000000;"><span translate="VISA_EXPIRE"></span></a></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/visaexpire/" style="color: #000000;"><span translate="VISA_EXPIRE"></span></a></div>
                             <div class="progress progress-warning">
                                 <div style="width: {{(visas.length / employees.length ) * 100 }}%" class="bar"></div>
                             </div>
@@ -115,7 +115,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-show="isPassportBusy"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-hide="isPassportBusy" data-ng-bind="passports.length"></div>
-                            <div class="title"><a ng-href="/HRMSPortal/employee/passportexpire/" style="color: #000000;"><span translate="PASSPORT_EXPIRY"></span></a></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/passportexpire/" style="color: #000000;"><span translate="PASSPORT_EXPIRY"></span></a></div>
                             <div class="progress progress-warning">
                                 <div style="width: {{ (passports.length / employees.length ) * 100}}%" class="bar"></div>
                             </div>
