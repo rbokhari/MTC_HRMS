@@ -2,7 +2,7 @@
 
 'use strict';
 
-hrmsModule.factory('accountRepository', ['$resource', function ($resource) {
+accModule.factory('accountRepository', ['$resource', function ($resource) {
 
     var _getUserById = function (id) {
         return $resource('/api/account/GetUserDetail/?id' + id).get();

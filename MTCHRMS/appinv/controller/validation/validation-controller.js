@@ -4,8 +4,8 @@
 'use strict';
 
 invModule.controller('ValidationController',
-    ['$scope', 'validationRepository', '$location', '$routeParams',
-        function ($scope, validationRepository, $location, $routeParams) {
+    ['$scope', 'appRepository', 'validationRepository', '$location', '$routeParams',
+        function ($scope, appRepository, validationRepository, $location, $routeParams) {
 
     console.log("validation controller");
 
@@ -56,12 +56,12 @@ invModule.controller('ValidationController',
                     time: 2000,
                     position: 'center'
                 });
-
+                appRepository.showAddSuccessGritterNotification();
                 console.log("save - Successfully !");
                 $location.url('/INVPortal/definition/validation/' + id);
             }, function(error) {
                 // failure case
-                console.log("save - Error !");
+                appRepository.showErrorGritterNotification();
                 console.log(error);
                 $scope.errors = error.data;
             }
@@ -82,10 +82,12 @@ invModule.controller('ValidationController',
                 // success case
                 $scope.departmentForm.$setPristine();
                 $scope.department = clearDept;
+                appRepository.showAddSuccessGritterNotification();
                 console.log("saveAddNew - Successfully !");
 
             }, function(response) {
                 // failure case
+                appRepository.showErrorGritterNotification();
                 $scope.errors = response.data;
                 console.log("saveAddNew - Error !");
             }
@@ -99,9 +101,11 @@ invModule.controller('ValidationController',
             function (response) {
                 // success case
                 console.log("edit - Successfully !");
+                appRepository.showUpdateSuccessGritterNotification();
                 $location.url('/INVPortal/definition/validation/' + validationDetail.validationId);
             }, function (error) {
                 // failure case
+                appRepository.showErrorGritterNotification();
                 console.log("edit - Error !");
                 $scope.errors = response.data;
             }

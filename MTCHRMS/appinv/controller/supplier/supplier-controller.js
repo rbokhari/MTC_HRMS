@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('SupplierController',
 [
-    '$scope', '$location', '$routeParams','supplierRepository',
-    function ($scope, $location, $routeParams, supplierRepository) {
+    '$scope', '$location', '$routeParams','supplierRepository','appRepository',
+    function ($scope, $location, $routeParams, supplierRepository, appRepository) {
 
         console.log("supplier dashboard controller");
         //$scope.myname = "yahoo";
@@ -37,13 +37,13 @@ invModule.controller('SupplierController',
             $scope.errors = [];
             supplierRepository.addSupplier(supplier).$promise.then(
                 function () {
-//                    appRepository.showAddSuccessGritterNotification();
+                    appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    $location.url('/INVPortal/supplier');
+                    $location.url('/INVPortal/definition/supplier/list');
                 }, function (response) {
                     // failure case
                     console.log("save - Error !");
-                    //appRepository.showErrorGritterNotification();
+                    appRepository.showErrorGritterNotification();
                     $scope.errors = response.data;
                 }
             );
@@ -55,13 +55,13 @@ invModule.controller('SupplierController',
                 function () {
                     // success case
                     console.log("edit done - Successfully !");
-                    //appRepository.showUpdateSuccessGritterNotification();
+                    appRepository.showUpdateSuccessGritterNotification();
 
-                    $location.url('/INVPortal/supplier');
+                    $location.url('/INVPortal/definition/supplier/list');
                 }, function (response) {
                     // failure case
                     console.log("edit - Error !");
-                    //appRepository.showErrorGritterNotification();
+                    appRepository.showErrorGritterNotification();
                     $scope.errors = response.data;
                 }
             );

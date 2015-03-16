@@ -252,6 +252,7 @@
     <Content Include="app\controller\account\authInterceptorService.js" />
     <Content Include="app\controller\app\app-controller.js" />
     <Content Include="appinv\module\inv-module.js" />
+    <Content Include="app\module\acc-module.js" />
     <Content Include="app\module\hrms-module-ar.js" />
     <Content Include="app\translate\translate-service.js" />
     <Content Include="app\directive\dashboard.js" />

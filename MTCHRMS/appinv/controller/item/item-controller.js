@@ -48,7 +48,7 @@ invModule.controller('ItemController',
         };
 
         $scope.save = function(item) {
-
+            console.log(item);
             $scope.errors = [];
             itemRepository.addItem(item).$promise.then(
                 function() {

@@ -23,7 +23,7 @@ namespace MTCHRMS.Controllers
             _repo = pRepository;
         }
 
-        //[Authorize]
+        [Authorize]
         public Task<IQueryable<Supplier>> Get()     
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
@@ -35,7 +35,7 @@ namespace MTCHRMS.Controllers
             return suppliers;
         }
 
-        //[Authorize]
+        [Authorize]
         public Supplier Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
@@ -48,7 +48,7 @@ namespace MTCHRMS.Controllers
             return supplier;
         }
 
-        //[Authorize]
+        [Authorize]
         public HttpResponseMessage Post([FromBody] Supplier newSupplier)
         {
             if (ModelState.IsValid)
@@ -71,7 +71,7 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
-        //[Authorize]
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody] Supplier updateSupplier)
         {
             //return Request.CreateResponse(HttpStatusCode.OK);

@@ -23,7 +23,7 @@ namespace MTCHRMS.Controllers
             _repo = pRepository;
         }
 
-        //[Authorize]
+        [Authorize]
         public Task<IQueryable<StoreLocation>> Get()     
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
@@ -34,8 +34,8 @@ namespace MTCHRMS.Controllers
 
             return locations;
         }
-
-        //[Authorize]
+        
+        [Authorize]
         public StoreLocation Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
@@ -48,7 +48,7 @@ namespace MTCHRMS.Controllers
             return location;
         }
 
-        //[Authorize]
+        [Authorize]
         public HttpResponseMessage Post([FromBody] StoreLocation newLocation)
         {
             if (ModelState.IsValid)
@@ -70,7 +70,7 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
-        //[Authorize]
+        [Authorize]
         public HttpResponseMessage Put(int id, [FromBody] StoreLocation updateLocation)
         {
             //return Request.CreateResponse(HttpStatusCode.OK);

@@ -1,5 +1,5 @@
 ﻿
-hrmsModule.directive("imgLoadingValue", function () {
+accModule.directive("imgLoadingValue", function () {
     return {
         // Usage
         // <img data-img-loading-value="{{value}}" data-img-loading-size="" alt="" />

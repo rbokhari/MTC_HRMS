@@ -1,10 +1,10 @@
 ﻿
 //'use strict';
 
-hrmsModule.controller('AccountController',
+accModule.controller('AccountController',
 [
-    '$scope', 'authRepository', '$location','$window', 'accountRepository',
-    function ($scope, authRepository, $location, $window, accountRepository) {
+    '$scope', 'authRepository', '$location','$window', 'accountRepository','appModules',
+    function ($scope, authRepository, $location, $window, accountRepository, appModules) {
 
         console.log("account controller");
         $scope.loginData = {
@@ -14,10 +14,23 @@ hrmsModule.controller('AccountController',
         $scope.message = "";
         $scope.login = function () {
             
-            authRepository.login($scope.loginData).then(function (response) {
+            authRepository.login($scope.loginData)
+                .then(function (response) {
                     //moduleDetail();
-                    //roleDetail();
-                    $window.location.href = '/HRMSPortal';
+                //roleDetail();
+                    //authRepository.fillAuthData();
+                    $scope.authentication = authRepository.authentication;
+                    //console.log($scope.authentication.moduleId);
+
+                    if ($scope.authentication.moduleId == appModules.HRMS_Module) {
+                        // check language also here
+                        $window.location.href = '/HRMSPortal';
+                    } else if ($scope.authentication.moduleId == appModules.INV_Module) {
+                        $window.location.href = '/INVPortal';
+                    }
+
+                   
+                    //$window.location.href = '/HRMSPortal';
                 },
                 function (err) {
                     console.log(err);

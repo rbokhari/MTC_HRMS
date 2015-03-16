@@ -1,5 +1,5 @@
 ﻿//'use strict';
-hrmsModule.factory('authRepository', [
+accModule.factory('authRepository', [
     '$http', '$q', 'localStorageService', 'employeeRepository', 'accountRepository',
     function($http, $q, localStorageService, employeeRepository, accountRepository) {
 
@@ -17,7 +17,8 @@ hrmsModule.factory('authRepository', [
             email: "",
             phone: "",
             roles: "",
-            roleId:""
+            roleId: "",
+            moduleId:""
     };
 
         //var _saveRegistration = function (registration) {
@@ -60,6 +61,8 @@ hrmsModule.factory('authRepository', [
                 _authentication.isAuth = true;
                 _authentication.userName = loginData.userName;
 
+                _fillAuthData();
+
                 deferred.resolve(response);
                 
             }).error(function (err, status) {
@@ -86,23 +89,23 @@ hrmsModule.factory('authRepository', [
         var _fillAuthData = function() {
 
             var authData = localStorageService.get('authorizationData');
-
+            
             if (authData) {
                 //console.log("authData.yes :(" + authData + ")");
                 //var employeeData = employeeRepository.getEmployeeDetailByUserName(authData.userName);
                 employeeData(authData.userName);
-
-                //console.log(employeeData.d.employeeName);
-                _authentication.isAuth = true;
+                //console.log(_authentication);
+                
+                //_authentication.isAuth = true;
             }
         };
 
         function employeeData(userName) {
-            
+            //console.log("employeedata:" + userName);
             employeeRepository.getEmployeeDetailByUserName(userName)
                 .$promise
                 .then(function(response) {
-                console.log(response);
+                //console.log(response);
                     _authentication.isAuth = true;
                     _authentication.userName = response.userName;
                     _authentication.fullName = response.employeeName;
@@ -111,25 +114,27 @@ hrmsModule.factory('authRepository', [
                     _authentication.empPicture = response.empPicture;
                     _authentication.email = response.email;
                     _authentication.phone = response.phone;
+
                     accountRepository.getUserById(response.id)
                         .$promise
                         .then(function(res) {
+                            //console.log("employeedata fullname:" + _authentication.fullName);
+                            _authentication.moduleId = res.moduleId;
 
                             accountRepository.getRoleById(res.roleId)
                                 .$promise
                                 .then(function(response1) {
-
+                                    //console.log(_authentication);
                                     _authentication.roles = response1.roleName;
                                     _authentication.roleId = response1.roleId;
 
                                     localStorageService.set('userData', { userName: userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
                                 });
-
                         });
 
 
                 }, function (err) {
-                alert("employeeData - error");
+                //alert("employeeData - error");
                     _logOut();
                     _authentication.isAuth = false;
                 });

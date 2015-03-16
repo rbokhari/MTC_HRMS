@@ -35,6 +35,18 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string Notes { get; set; }
 
+        public int IsIT { get; set; }
+
+        public int IsCallibration { get; set; }
+
+        public int IsMaintenance { get; set; }
+
+        public int TechnicanTypeId { get; set; }
+
+        public string Spares { get; set; }
+
+        public int? StatusId { get; set; }
+
 
         public virtual ValidationDetail TypeDetail { get; set; }
 

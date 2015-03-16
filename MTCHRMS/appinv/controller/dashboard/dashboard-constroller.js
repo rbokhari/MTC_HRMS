@@ -1,14 +1,16 @@
-﻿/// <reference path="../../module/hrms-module.js" />
+﻿/// <reference path="../../module/inv-module.js" />
+
 
 'use strict';
 invModule.controller('DashboardController',
 [
-    '$scope', '$location', '$routeParams',
-    function($scope, $location, $routeParams) {
+    '$scope', '$location', '$routeParams', 'authRepository',
+    function ($scope, $location, $routeParams, authRepository) {
 
         console.log("inventory dashboard controller");
         //$scope.myname = "yahoo";
-      
+
+        console.log(authRepository.authentication);
 
         $scope.isActiveNavigation = function (viewLocation) {
             //alert(viewLocation === $location.path());

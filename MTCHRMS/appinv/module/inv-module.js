@@ -1,6 +1,6 @@
 ﻿var invModule = angular.module("InventoryModule", 
-    ['ngRoute', 'ngResource', 'angularUtils.directives.dirPagination'])
-    .config(function ($routeProvider, $locationProvider) {
+    ['ngRoute', 'ngResource', 'angularUtils.directives.dirPagination','accModule','hrmsModule'])
+    .config(function ($routeProvider, $httpProvider, $locationProvider) {
 
         console.log('inventory module router call !');
 
@@ -100,17 +100,8 @@
 
     });
 
-//hrmsModule.run(['authRepository', function (authRepository) {
-//    authRepository.fillAuthData();
+//invModule.run(['authRepository', function (authServiceFactory) {
+//    authServiceFactory.fillAuthData();
+//    console.log(authServiceFactory.authentication);
 //}]);
-
-    //.run([
-    //    '$rootScope', '$location', function($rootScope, $location) {
-    //        var path = function() { return $location.path(); };
-    //        $rootScope.$watch(path, function(newVal, oldVal) {
-    //            $rootScope.activetab = newVal;
-    //            // alert(newVal);
-    //        });
-    //    }
-    //]);
 

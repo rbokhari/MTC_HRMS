@@ -2,7 +2,7 @@
 
 'use strict';
 
-hrmsModule.factory('appRepository', ['$resource', '$http', function ($resource, $http) {
+accModule.factory('appRepository', ['$resource', '$http', function ($resource, $http) {
 
     var _showAddSuccessGritterNotification = function () {
         $.gritter.add({

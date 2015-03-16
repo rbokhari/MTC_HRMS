@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../module/hrms-module.js" />
 
 'use strict';
-hrmsModule.controller('AppController',
+accModule.controller('AppController',
 [
     '$scope', '$location', 'authRepository', '$window','appRepository', '$translate', 
     function ($scope, $location, authRepository, $window, appRepository, $translate) {
@@ -45,7 +45,7 @@ hrmsModule.controller('AppController',
                 });
         };
 
-        $scope.getAuthenticationData = function() {
+        $scope.getAuthenticationData = function () {
             $scope.authentication = authRepository.authentication;
         };
 
