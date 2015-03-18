@@ -1,0 +1,180 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Supplier <small> update </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/INVPortal/supplier">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="widget widget-tabs">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Supplier</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="tabbable portlet-tabs">
+                        <ul class="nav nav-tabs">
+                            <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)">History</a></li>
+                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)">Attachment</a></li>
+                            <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)">Contact Info</a></li>
+                            <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)">General</a></li>
+                        </ul>
+                        
+                        <div class="tab-pane active" id="dvGeneral" ng-show="isTabSelected(1)">
+                            <div class="form-horizontal">
+                                <form name="frm" novalidate>
+                                    <div class="control-group">
+                                        <label class="control-label" for="txtCode">Supplier Code</label>
+                                        <div class="controls">
+                                            <input type="text" id="txtCode" ng-model="supplier[0].supplierCode" class="input-medium" required placeholder="[Auto Number]" />
+                                            <input type="hidden" id="hdId" ng-model="supplier[0].supplierId" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="txtSupplierName">Supplier Name</label>
+                                        <div class="controls">
+                                            <input type="text" id="txtSupplierName" ng-model="supplier[0].supplierName" class="input-xlarge" required />
+                                            <div class="help-inline" ng-show="frm.txtSupplierName.$error.required && frm.txtSupplierName.$dirty">Please enter name !</div>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="txtDescription">Description</label>
+                                        <div class="controls">
+                                            <input type="text" id="txtDescription" ng-model="supplier[0].description" class="input-xlarge" />
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="control-group">
+                                        <label class="control-label" for="txtAddress">Address</label>
+                                        <div class="controls">
+                                            <input type="text" id="txtAddress" ng-model="supplier[0].address" class="input-xlarge" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="cCountry">Country</label>
+                                        <div class="controls" ng-init="loadCountries()">
+                                            <select id="cCountry" name="cCountry" ng-model="supplier[0].countryId" ng-options="country.id as country.nameEn for country in countries"></select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="tWebSite">Web Site</label>
+                                        <div class="controls">
+                                            <input type="text" id="tWebSite" ng-model="supplier[0].webSite" />
+                                        </div>
+                                    </div>
+                                    <div class="form-actions">
+                                        <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(supplier[0])" ng-disabled="frm.$invalid">
+                                            <i class="icon-ok"></i>&nbsp;Save
+                                        </button>
+                                        <!--<button id="cmdSaveAddNew" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
+                                                <i class="icon-ok"></i>&nbsp; Save and Add New
+
+                                            </button>-->
+                                        <button id="cmdCancel" class="btn btn-inverse" ng-href="/INVPortal/supplier/list">
+                                            <i class=" icon-remove"></i>&nbsp; Cancel
+                                        </button>
+                                    </div>
+                                    <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvContactInfo" ng-show="isTabSelected(2)">
+                            <i class="icon-hand-right"></i>  <strong>Contact Information</strong>
+                            <span class="pull-right"><a href="" ng-click="showContact(supplier[0].supplierId)"><i class="icon-external-link"></i> Add Contact</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Persone Name</th>
+                                                <th>Email</th>
+                                                <th>Mobile</th>
+                                                <th>Phone</th>
+                                                <th>Fax</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="contact in supplier[0].supplierContactPersons">
+                                                <td>{{contact.contactPerson}}</td>
+                                                <td>{{contact.email}}</td>
+                                                <td>{{contact.mobileNo}}</td>
+                                                <td>{{contact.phoneNo}}</td>
+                                                <td>{{contact.faxNo}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <i class="icon-hand-right"></i>  <strong>Contract Information</strong>
+                                    <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Contract</a></span>
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Start Date</th>
+                                                <th>End Date</th>
+                                                <th>Notes</th>
+                                                <th>Attachment</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvAttachment" ng-show="isTabSelected(3)">
+                            <i class="icon-hand-right"></i>  <strong>Attachment</strong>
+                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

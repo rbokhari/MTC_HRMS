@@ -1,16 +1,8 @@
 ﻿using System;
-using System.Web.Http;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
-using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
-using MTCHRMS.DC;
-using MTCHRMS.EntityFramework;
-using Newtonsoft.Json.Serialization;
 using Owin;
-using MTCHRMS.Models;
 using MTCHRMS.Provider;
 
 namespace MTCHRMS

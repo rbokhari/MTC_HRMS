@@ -15,9 +15,20 @@ namespace MTCHRMS.DC
         //IQueryable<Department> GetDepartments();
         Supplier GetSupplier(int id);
 
+        IQueryable<Supplier> GetSupplierDetail(int id);
+
         bool Save();
 
         bool AddSupplier(Supplier newSupplier);
         bool UpdateSupplier(Supplier updateSupplier);
+
+        bool AddSupplierContact(SupplierContactPerson newContactPerson);
+
+        bool UpdateSupplierContact(SupplierContactPerson updateContactPerson);
+
+        bool AddSupplierContract(SupplierContract newContract);
+
+        bool UpdateSupplierContract(SupplierContract updateContract);
+
     }
 }

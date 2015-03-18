@@ -1,0 +1,89 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Supplier <small> Add New </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Supplier List</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="widget widget-tabs">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Supplier</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="form-horizontal">
+                        <form name="frm" novalidate>
+                            <div class="control-group">
+                                <label class="control-label" for="txtCode">Supplier Code</label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" ng-model="supplier.supplierCode" class="input-medium" required placeholder="" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtSupplierName">Supplier Name</label>
+                                <div class="controls">
+                                    <input type="text" id="txtSupplierName" ng-model="supplier.supplierName" class="input-xlarge" required />
+                                    <div class="help-inline" ng-show="frm.txtSupplierName.$error.required && frm.txtSupplierName.$dirty">Please enter name !</div>                                            </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtDescription">Description</label>
+                                <div class="controls">
+                                    <input type="text" id="txtDescription" ng-model="supplier.description" class="input-xlarge" />
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="control-group">
+                                <label class="control-label" for="txtAddress">Address</label>
+                                <div class="controls">
+                                    <input type="text" id="txtAddress" ng-model="supplier.address" class="input-xlarge" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="cCountry">Country</label>
+                                <div class="controls" ng-init="loadCountries()">
+                                    <select id="cCountry" name="cCountry" ng-model="supplier.countryId" ng-options="country.id as country.nameEn for country in countries"></select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tWebSite">Web Site</label>
+                                <div class="controls">
+                                    <input type="text" id="tWebSite" ng-model="supplier.webSite" />
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
+                                    <i class="icon-ok"></i>&nbsp;Save
+                                </button>
+                                <button id="cmdSaveAddNew" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
+                                    <i class="icon-ok"></i>&nbsp; Save and Add New
+
+                                </button>
+                                <button id="cmdCancel" class="btn btn-inverse" href="/INVPortal/supplier">
+                                    <i class=" icon-remove"></i>&nbsp; Cancel
+                                </button>
+                            </div>
+                            <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

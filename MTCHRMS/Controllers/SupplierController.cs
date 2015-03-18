@@ -36,10 +36,10 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        public Supplier Get(int id)
+        public IQueryable<Supplier> Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
-            var supplier = _repo.GetSupplier(id);
+            var supplier = _repo.GetSupplierDetail(id);
 
             if (supplier == null)
             {
@@ -47,6 +47,22 @@ namespace MTCHRMS.Controllers
             }
             return supplier;
         }
+
+        //[HttpGet]
+        //[Route("api/supplier/GetSupplierDetail")]
+        //[System.Web.Http.Authorize]
+        //public IQueryable<Supplier> SupplierDetail(int id)
+        //{
+        //    //System.Threading.Thread.Sleep(4000);
+        //    //IDepartmentsRepository _repo = new DepartmentRepository();
+        //    var supplier = _repo.GetSupplierDetail(id);
+
+        //    if (supplier == null)
+        //    {
+        //        //return Request.CreateErrorResponse(HttpStatusCode.BadRequest)
+        //    }
+        //    return supplier;
+        //}
 
         [Authorize]
         public HttpResponseMessage Post([FromBody] Supplier newSupplier)
@@ -93,6 +109,91 @@ namespace MTCHRMS.Controllers
             }
             return null;
         }
+
+        [ActionName("PostSupplierContact")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddSupplierContact([FromBody] SupplierContactPerson newContactPerson)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newContactPerson.ContactPersonId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContactPerson.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContactPerson.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddSupplierContact(newContactPerson) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContactPerson);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newContactPerson.ContactPersonId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContactPerson.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContactPerson.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateSupplierContact(newContactPerson) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContactPerson);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostSupplierContract")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddSupplierContract([FromBody] SupplierContract newContract)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newContract.SupplierId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddSupplierContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newContract.SupplierId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateSupplierContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
 
         private IEnumerable<string> GetErrorMessages()
         {

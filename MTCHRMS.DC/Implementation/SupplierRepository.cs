@@ -84,5 +84,81 @@ namespace MTCHRMS.DC
                 return false;
             }
         }
+
+
+        public bool AddSupplierContact(SupplierContactPerson newContactPerson)
+        {
+            try
+            {
+                _ctx.SupplierContactPersons.Add(newContactPerson);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+
+        }
+
+        public bool AddSupplierContract(SupplierContract newContract)
+        {
+            try
+            {
+                _ctx.SupplierContracts.Add(newContract);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+
+        }
+
+
+        public bool UpdateSupplierContact(SupplierContactPerson updateContactPerson)
+        {
+            try
+            {
+                updateContactPerson.SupplierId = GetSupplier(updateContactPerson.SupplierId).SupplierId;
+                _ctx.Entry(updateContactPerson).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateSupplierContract(SupplierContract updateContract)
+        {
+            try
+            {
+                updateContract.SupplierId = GetSupplier(updateContract.SupplierId).SupplierId;
+                _ctx.Entry(updateContract).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        public IQueryable<Supplier> GetSupplierDetail(int id)
+        {
+            try
+            {
+                return _ctx.Suppliers.Where(r => r.SupplierId == id)
+                    .Include(p => p.SupplierContactPersons)
+                    .Include(v => v.SupplierContracts);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }

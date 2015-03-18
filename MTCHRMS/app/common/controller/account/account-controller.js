@@ -1,0 +1,96 @@
+﻿
+//'use strict';
+
+accModule.controller('AccountController',
+[
+    '$scope', 'authRepository', '$location','$window','appModules','appRoles',
+    function ($scope, authRepository, $location, $window, appModules, appRoles) {
+
+        console.log("account controller");
+        $scope.loginData = {
+            userName: "",
+            password: ""
+        };
+        $scope.message = "";
+        $scope.login = function () {
+            authRepository.login($scope.loginData)
+                .then(function (response) {
+                    //moduleDetail();
+                //roleDetail();
+                    authRepository.fillAuthData();
+                    
+                    //$scope.authentication = authRepository.authentication;
+                    //alert($scope.authentication.moduleId);
+                    $window.location.href = '/index';
+                    //if ($scope.authentication.moduleId == appModules.HRMS_Module) {
+                    //    // check language also here
+                    //    $window.location.href = '/HRMSPortal';
+                    //} else if ($scope.authentication.moduleId == appModules.INV_Module) {
+                    //    $window.location.href = '/INVPortal';
+                    //}
+                    
+                   
+                    //$window.location.href = '/HRMSPortal';
+                },
+                function (err) {
+                    console.log(err);
+                    //$scope.message = err.error_description;
+                    //$scope.message = err.error;
+                    $scope.message = "Invalid Username or Password !";
+                });
+        };
+
+        $scope.authData = function() {
+            authRepository.fillAuthData();
+            $scope.authentication = authRepository.authentication;
+        };
+
+        $scope.redirect = function () {
+            authRepository.fillAuthData()
+                .then(function(res) {
+                    $scope.authentication = authRepository.authentication;
+                    if ($scope.authentication.moduleId == appModules.HRMS_Module) {
+                        // check language also here
+                        $window.location.href = '/HRMSPortal';
+                    } else if ($scope.authentication.moduleId == appModules.INV_Module) {
+                        $window.location.href = '/INVPortal';
+                    }
+                },
+                function(err) {
+                    console.log(err);
+                });
+        };
+
+        //var userDetail = function(id) {
+        //    accountRepository.getUserById(id)
+        //        .then(function(response) {
+        //            $scope.userInfo = response.data;
+
+        //        }, function(err) {
+
+        //        });
+        //};
+
+        //var roleDetail = function (id) {
+        //    accountRepository.getRoleById(id)
+        //        .then(function (response) {
+        //            $scope.roleInfo = response.data;
+
+        //        }, function (err) {
+
+        //        });
+        //};
+
+        //var moduleDetail = function (id) {
+        //    accountRepository.getModuleById(id)
+        //        .then(function (response) {
+        //            $scope.moduleInfo = response.data;
+
+        //        }, function (err) {
+
+        //        });
+        //};
+
+
+    }
+]);
