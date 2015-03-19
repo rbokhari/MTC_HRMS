@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -45,7 +46,33 @@ namespace MTCHRMS.DC
         {
             try
             {
+                //var itemDept = new ItemDepartment()
+                //{
+                //    DepartmentId = 5,
+                //    CreatedBy = newItem.CreatedBy,
+                //    CreatedOn = DateTime.Now
+                //};
+
+                //var itemDept1 = new ItemDepartment()
+                //{
+                //    DepartmentId = 6,
+                //    CreatedBy = newItem.CreatedBy,
+                //    CreatedOn = DateTime.Now
+                //};
+
+                for (int i = 0; i < 1; i++)
+                {
+                    newItem.ItemDepartments.Add(new ItemDepartment(){DepartmentId = 6, CreatedBy = 1, CreatedOn = DateTime.Now});
+                }
+
+
+                //newItem.ItemDepartments.Add(itemDept);
+                //newItem.ItemDepartments.Add(itemDept1);
+
+
                 _ctx.Items.Add(newItem);
+
+
                 return true;
             }
             catch (Exception ex)

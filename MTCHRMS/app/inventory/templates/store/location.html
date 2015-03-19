@@ -68,10 +68,10 @@
                             </tr>
                             <tr dir-paginate="store in locations | filter:search | itemsPerPage: recordPage">
                                 <td>
-                                    <a ng-href="/INVPortal/definition/location/edit/{{ store.storeId}}"> {{ store.storeCode }} </a>
+                                    <a ng-href="/INVPortal/definition/store/edit/{{ store.storeId}}"> {{ store.storeCode }} </a>
                                 </td>
                                 <td>
-                                    <a ng-href="/INVPortal/definition/location/edit/{{ store.storeId}}"> {{ store.storeName }} </a>
+                                    <a ng-href="/INVPortal/definition/store/edit/{{ store.storeId}}"> {{ store.storeName }} </a>
                                 </td>
                                 <td>
                                     <label ng-class="{'label label-info': store.statusId, 'label label-inverse': store.statusId==0}">

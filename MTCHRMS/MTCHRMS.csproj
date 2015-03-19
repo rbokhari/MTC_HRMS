@@ -256,6 +256,8 @@
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
+    <Content Include="app\inventory\templates\store\location-edit.html" />
+    <Content Include="app\inventory\templates\supplier\supplier-contract.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contact.html" />
     <Content Include="Content\animate.css">
       <DependentUpon>animate.less</DependentUpon>
@@ -1152,9 +1154,9 @@
     <Content Include="app\inventory\templates\supplier\supplier-edit.html" />
     <Content Include="app\inventory\templates\supplier\supplier-add.html" />
     <Content Include="app\inventory\templates\supplier\supplier.html" />
-    <Content Include="app\inventory\templates\validation\validation-add.html" />
-    <Content Include="app\inventory\templates\validation\validation-edit.html" />
-    <Content Include="app\inventory\templates\validation\validation.html" />
+    <Content Include="app\common\templates\validation\validation-add.html" />
+    <Content Include="app\common\templates\validation\validation-edit.html" />
+    <Content Include="app\common\templates\validation\validation.html" />
     <Content Include="app\hrms\templates\Dashboard.html" />
     <Content Include="app\hrms\templates\dashboard\nationalities.html" />
     <Content Include="app\hrms\templates\dashboard\departments.html" />

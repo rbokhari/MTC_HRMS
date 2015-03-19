@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace MTCHRMS.EntityFramework.Inventory
     [Table("IV_Item")]
     public class Item : TableStrutcture
     {
+        public Item()
+        {
+            ItemDepartments = new Collection<ItemDepartment>();
+        }
+
         [Key]
         public int ItemId { get; set; }
 
@@ -53,5 +59,20 @@ namespace MTCHRMS.EntityFramework.Inventory
         public virtual ValidationDetail CategoryDetail { get; set; }
 
         public virtual StoreLocation StoreLocation { get; set; }
+
+        public virtual ICollection<ItemDepartment> ItemDepartments { get; set; }
+    }
+
+    [Table("IV_ItemDepartment")]
+    public class ItemDepartment : TableStrutcture
+    {
+        [Key]
+        public int ItemDepartmentId { get; set; }
+
+        public int ItemId { get; set; }
+
+        public int DepartmentId { get; set; }
+
+        public virtual Department Department { get; set; }
     }
 }

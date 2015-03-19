@@ -97,6 +97,12 @@
                             </div>
                             <h4>Additional Requirements</h4>
                             <div class="well">
+                                <div class="control-group">{{item.departmentids}}
+                                    <label class="control-label" for="cStore">Departments</label>
+                                    <div class="controls">
+                                        <select multiple="multiple" type="checkbox" class="input-xlarge" ng-options="department.id as department.departmentName for department in departments"></select>
+                                    </div>
+                                </div>
                                 <div class="control-group">
                                     <label class="control-label" for="cStore">IT</label>
                                     <div class="controls">
@@ -145,13 +151,13 @@
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(item)" ng-disabled="frm.$invalid">
                                     <i class="icon-ok"></i>&nbsp;Save
                                 </button>
-                                <button id="cmdSaveAddNew" class="btn btn-primary">
+                                <button id="cmdSaveAddNew" class="btn btn-primary" ng-disabled="frm.$invalid">
                                     <i class="icon-ok"></i>&nbsp; Save and Add New
 
                                 </button>
-                                <button id="cmdCancel" class="btn btn-inverse">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/item/list">
                                     <i class=" icon-remove"></i>&nbsp; Cancel
-                                </button>
+                                </a>
                             </div>
                         </form>
                     </div>

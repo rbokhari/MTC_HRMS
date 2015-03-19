@@ -1,4 +1,26 @@
-﻿
+﻿<style type="text/css">
+    .item1 {
+    }
+
+        .item1.ng-move,
+        .item1.ng-enter,
+        .item1.ng-leave {
+            -webkit-transition: all linear 0.5s;
+            transition: all linear 0.5s;
+        }
+
+            .item1.ng-leave.ng-leave-active,
+            .item1.ng-move,
+            .item1.ng-enter {
+                opacity: 0;
+            }
+
+                .item1.ng-leave,
+                .item1.ng-move.ng-move-active,
+                .item1.ng-enter.ng-enter-active {
+                    opacity: 1;
+                }
+</style>
 <div class="container-fluid">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
@@ -86,9 +108,9 @@
                                                 <i class="icon-ok"></i>&nbsp; Save and Add New
 
                                             </button>-->
-                                        <button id="cmdCancel" class="btn btn-inverse" ng-href="/INVPortal/supplier/list">
+                                        <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/supplier/list">
                                             <i class=" icon-remove"></i>&nbsp; Cancel
-                                        </button>
+                                        </a>
                                     </div>
                                     <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
                                 </form>
@@ -111,7 +133,7 @@
                                         </thead>
                                         <tbody>
                                             <tr ng-repeat="contact in supplier[0].supplierContactPersons">
-                                                <td>{{contact.contactPerson}}</td>
+                                                <td><a href="" ng-click="editContact(contact)">{{contact.contactPerson}}</a></td>
                                                 <td>{{contact.email}}</td>
                                                 <td>{{contact.mobileNo}}</td>
                                                 <td>{{contact.phoneNo}}</td>
@@ -125,22 +147,22 @@
                             <div class="row-fluid">
                                 <div class="span12">
                                     <i class="icon-hand-right"></i>  <strong>Contract Information</strong>
-                                    <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Contract</a></span>
+                                    <span class="pull-right"><a href="" ng-click="showContract(supplier[0].supplierId)"><i class="icon-external-link"></i> Add Contract</a></span>
                                     <table class="table table-striped table-bordered table-advance table-hover">
                                         <thead>
                                             <tr>
+                                                <th>Contract No</th>
                                                 <th>Start Date</th>
                                                 <th>End Date</th>
                                                 <th>Notes</th>
-                                                <th>Attachment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
+                                            <tr ng-repeat="contract in supplier[0].supplierContracts">
+                                                <td><a href="" ng-click="editContract(contract)">{{contract.contractNo}}</a></td>
+                                                <td>{{contract.startDate | date:'longDate'}}</td>
+                                                <td>{{contract.endDate | date:'longDate'}}</td>
+                                                <td>{{contract.notes}}</td>
                                             </tr>
                                         </tbody>
                                     </table>

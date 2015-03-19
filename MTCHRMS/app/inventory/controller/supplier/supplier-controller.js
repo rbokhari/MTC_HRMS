@@ -89,6 +89,7 @@ invModule.controller('SupplierController',
                     title: "Add New Contact",
                     parentId: id,
                     supplierContact: {},
+                    supplierContract: {},
                     resultData: {}
                 }
             }).then(function (modal) {
@@ -96,7 +97,7 @@ invModule.controller('SupplierController',
                 modal.close.then(function (result) {
                     //employee[0].employeePassports.splice(0, 0, resultEmployeePassport.data);
                     //console.log("show passport close : " + result.newPassport.id);
-                    $scope.supplier.supplierContactPersons.push(result.resultData);
+                    $scope.supplier[0].supplierContactPersons.push(result.resultData);
                     //$scope.complexResult = "Name: " + result.name + ", age: " + result.age;
                     //$('.modal').modal('hide');
                     //modal.element.close();
@@ -104,5 +105,61 @@ invModule.controller('SupplierController',
 
             });
         };
+
+        $scope.editContact = function (contact) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/supplier/supplier-contact.html",
+                controller: "SupplierModalController",
+                inputs: {
+                    title: "Update Contact",
+                    parentId: contact.supplierId,
+                    supplierContact: contact,
+                    supplierContract: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.showContract = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/supplier/supplier-contract.html",
+                controller: "SupplierModalController",
+                inputs: {
+                    title: "Add New Contract",
+                    parentId: id,
+                    supplierContact: {},
+                    supplierContract: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.supplier[0].supplierContracts.push(result.resultData);
+                });
+            });
+        };
+
+        $scope.editContract = function (contract) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/supplier/supplier-contract.html",
+                controller: "SupplierModalController",
+                inputs: {
+                    title: "Update Contract",
+                    parentId: contract.supplierId,
+                    supplierContact: {},
+                    supplierContract: contract,
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+
     }
 ]);

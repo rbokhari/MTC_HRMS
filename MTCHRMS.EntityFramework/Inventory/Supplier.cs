@@ -79,7 +79,9 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string Notes { get; set; }
 
-        public int StatusId { get; set; }
+        public int NotifyBeforeDays { get; set; }
+
+        public int? StatusId { get; set; }
     }
 
 }

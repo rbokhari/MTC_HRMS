@@ -3,10 +3,10 @@
 module.controller('SupplierModalController',
 [
     '$scope', 'appRepository', 'supplierRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', '$upload', 'supplierContact', 
+    'parentId', 'resultData', '$timeout', '$upload', 'supplierContact', 'supplierContract',
 
     function ($scope, appRepository, supplierRepository, title, close,
-        parentId, resultData, $timeout, $upload, supplierContact) {
+        parentId, resultData, $timeout, $upload, supplierContact, supplierContract) {
         
         //$scope.name = null;
         //$scope.age = null;
@@ -14,6 +14,7 @@ module.controller('SupplierModalController',
         $scope.title = title;
         $scope.parentId = parentId;
         $scope.supplierContact = supplierContact;
+        $scope.supplierContract = supplierContract;
 
         $scope.saveSupplierContact = function (parentId, supplierContact) {
             $scope.errors = [];
@@ -38,6 +39,28 @@ module.controller('SupplierModalController',
             //.then(function () { $scope.close(); });
         };
 
+        $scope.saveSupplierContract = function (parentId, supplierContract) {
+            $scope.errors = [];
+            supplierContract.supplierId = parentId;
+
+            supplierRepository.addSupplierContract(supplierContract)
+                .$promise
+                .then(
+                    function (result) {
+                        // success case
+                        $scope.resultData = result;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvContract').modal('hide');
+                    }, function (response) {
+                        // failure case
+                        console.log("supplier contract save - Error !");
+                        appRepository.showErrorGritterNotification();
+                        $scope.errors = response.data;
+                    }
+                );
+            //.then(function () { $scope.close(); });
+        };
 
         $scope.close = function () {
             console.log("close funciton modal controller :");

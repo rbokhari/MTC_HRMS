@@ -159,7 +159,7 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (newContract.SupplierId == 0)
+                if (newContract.ContractId == 0)
                 {
                     if (Request.Headers.Contains("userId"))
                     {
@@ -173,7 +173,7 @@ namespace MTCHRMS.Controllers
                         //return new HttpResponseMessage(HttpStatusCode.OK);
                     }
                 }
-                else if (newContract.SupplierId != 0)
+                else if (newContract.ContractId != 0)
                 {
                     if (Request.Headers.Contains("userId"))
                     {

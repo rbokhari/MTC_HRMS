@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                {{validation.nameEn}} <small> add new </small>
+                {{validation.nameEn}} <small> update </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -27,14 +27,16 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>{{validation.nameEn}}</h4>
                 </div>
-                <div class="widget-body">
+                <div class="widget-body" data-ng-init="loadDetail()">
                     <div class="form-horizontal">
                         <form name="frm" novalidate>
                             <div class="control-group">
-                                <label class="control-label" for="tName">Name</label>
+                                <label class="control-label" for="txtCode">Name </label>
                                 <div class="controls">
-                                    <input type="text" id="tName" ng-model="validationDetail.nameEn" class="input-medium" required />
-                                    <div class="help-inline" ng-show="frm.tName.$error.required && frm.tName.$dirty">Please enter name !</div>
+                                    <input type="text" id="txtCode" ng-model="validationDetail.nameEn" class="input-medium" required />
+                                    <div class="help-inline" ng-show="frm.tNameAr.$error.required && frm.tNameAr.$dirty">Please enter arabic name !</div>
+                                    <input type="hidden" id="hdId" ng-model="validationDetail.id" />
+                                    <input type="hidden" id="hdId" ng-model="validationDetail.validationId" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -47,26 +49,27 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtDescription">Description</label>
                                 <div class="controls">
-                                    <textarea id="txtDescription" ng-model="validationDetail.description" class="input-xlarge"></textarea>
+                                    <input type="text" id="txtDescription" ng-model="validationDetail.description" class="input-xlarge" />
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="cActive">Status</label>
+                                <label class="control-label" for="txtDescription">Status</label>
                                 <div class="controls">
                                     <input type="checkbox" id="cActive" name="cActive" ng-model="validationDetail.isActive" ng-true-value="1" ng-false-value="0" />
                                 </div>
                             </div>
+
                             <div class="form-actions">
-                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(validation.id, validationDetail)" ng-disabled="frm.$invalid">
-                                    <i class="icon-ok"></i>&nbsp;Save
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(validationDetail)" ng-disabled="frm.$invalid">
+                                    <i class="icon-ok"></i>&nbsp;Update
                                 </button>
                                 <!--<button id="cmdSaveAddNew" class="btn btn-primary" ng-click="save(supplier)" ng-disabled="frm.$invalid">
-                                        <i class="icon-ok"></i>&nbsp; Save and Add New
+                            <i class="icon-ok"></i>&nbsp; Save and Add New
 
-                                    </button>-->
-                                <button id="cmdCancel" class="btn btn-inverse" ng-href="/INVPortal/definition/validation/{{validation.id}}">
+                        </button>-->
+                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/definition/validation/{{validationDetail.validationId}}">
                                     <i class=" icon-remove"></i>&nbsp; Cancel
-                                </button>
+                                </a>
                             </div>
                             <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
                         </form>

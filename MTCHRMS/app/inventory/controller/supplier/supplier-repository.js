@@ -23,8 +23,12 @@ invModule.factory('supplierRepository', ['$resource', '$http', function ($resour
     };
 
     var _addSupplierContact = function (supplierContact) {
-        console.log(supplierContact);
         return $resource('/api/supplier/' + supplierContact.supplierId + '/PostSupplierContact').save(supplierContact);
+    };
+
+    var _addSupplierContract = function (supplierContract) {
+        console.log(supplierContract);
+        return $resource('/api/supplier/' + supplierContract.supplierId + '/PostSupplierContract').save(supplierContract);
     };
 
     return {
@@ -32,7 +36,8 @@ invModule.factory('supplierRepository', ['$resource', '$http', function ($resour
         getSupplierById: _getSupplierById,
         addSupplier: _addSupplier,
         editSupplier: _editSupplier,
-        addSupplierContact: _addSupplierContact
+        addSupplierContact: _addSupplierContact,
+        addSupplierContract: _addSupplierContract
     };
 
 }]);

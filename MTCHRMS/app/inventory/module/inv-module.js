@@ -37,23 +37,6 @@
             controller: 'SupplierController'
         });
 
-    $routeProvider
-        .when('/INVPortal/definition/validation/:id', {
-            templateUrl: '/app/inventory/templates/validation/validation.html',
-            controller: 'ValidationController'
-        });
-
-    $routeProvider
-        .when('/INVPortal/definition/validation/:id/edit/:pid', {
-            templateUrl: '/app/inventory/templates/validation-edit.html',
-            controller: 'ValidationController'
-        });
-
-    $routeProvider
-        .when('/INVPortal/definition/validation/:id/add', {
-            templateUrl: '/app/inventory/templates/validation-add.html',
-            controller: 'ValidationController'
-        });
 
 
     $routeProvider
@@ -65,6 +48,12 @@
     $routeProvider
         .when('/INVPortal/definition/store/add', {
             templateUrl: '/app/inventory/templates/store/location-add.html',
+            controller: 'LocationController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/definition/store/edit/:id', {
+            templateUrl: '/app/inventory/templates/store/location-edit.html',
             controller: 'LocationController'
         });
 

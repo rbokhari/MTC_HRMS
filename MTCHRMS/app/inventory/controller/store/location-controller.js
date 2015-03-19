@@ -28,13 +28,13 @@ invModule.controller('LocationController',
         };
 
         $scope.save = function (location) {
-
+            console.log(location);
             $scope.errors = [];
             locationRepository.addLocation(location).$promise.then(
                 function () {
 //                    appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    $location.url('/INVPortal/store/list');
+                    $location.url('/INVPortal/definition/store/list');
                 }, function (response) {
                     // failure case
                     console.log("save - Error !");
@@ -52,7 +52,7 @@ invModule.controller('LocationController',
                     console.log("edit done - Successfully !");
                     //appRepository.showUpdateSuccessGritterNotification();
 
-                    $location.url('/INVPortal/store/list');
+                    $location.url('/INVPortal/definition/store/list');
                 }, function (response) {
                     // failure case
                     console.log("edit - Error !");
@@ -64,7 +64,7 @@ invModule.controller('LocationController',
 
         //alert($routeParams.id);
         if ($routeParams.id != undefined) {
-            $scope.location = locationRepository.getLocationById($routeParams.id);
+            $scope.store = locationRepository.getLocationById($routeParams.id);
         }
 
 

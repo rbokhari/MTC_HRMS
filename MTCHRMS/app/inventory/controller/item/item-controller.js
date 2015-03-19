@@ -5,8 +5,8 @@
 'use strict';
 invModule.controller('ItemController',
 [
-    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository', 'locationRepository',
-    function($scope, $location, $routeParams, itemRepository, validationRepository, locationRepository) {
+    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository', 'locationRepository','departmentRepository',
+    function ($scope, $location, $routeParams, itemRepository, validationRepository, locationRepository, departmentRepository) {
 
         console.log("item controller");
 
@@ -29,6 +29,7 @@ invModule.controller('ItemController',
             $scope.itemTypes = validationRepository.getAllDetailsByValidationId(7);
             $scope.itemCategories = validationRepository.getAllDetailsByValidationId(8);
             $scope.storeLocations = locationRepository.getAllLocations();
+            $scope.departments = departmentRepository.getAllDepartment();
             console.log($scope.storeLocations);
         };
 
