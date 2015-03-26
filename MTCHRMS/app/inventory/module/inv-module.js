@@ -1,6 +1,6 @@
 ﻿var invModule = angular.module("InventoryModule", 
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
-        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'accModule', 'hrmsModule'])
+        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule', 'hrmsModule'])
     .config(function ($routeProvider, $httpProvider, $locationProvider) {
 
         console.log('inventory module router call !');

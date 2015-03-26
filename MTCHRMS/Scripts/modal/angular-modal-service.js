@@ -8,10 +8,10 @@
 
   'use strict';
 
-  var module = angular.module('angularModalService', []);
+  var moduleModal = angular.module('angularModalService', []);
 
   //hrmsModule
-  module.factory('ModalService', ['$document', '$compile', '$controller', '$http', '$rootScope', '$q', '$timeout', '$templateCache',
+  moduleModal.factory('ModalService', ['$document', '$compile', '$controller', '$http', '$rootScope', '$q', '$timeout', '$templateCache',
     function($document, $compile, $controller, $http, $rootScope, $q, $timeout, $templateCache) {
 
     //  Get the body of the document, we'll add the modal to this.

@@ -61,27 +61,6 @@
                                     <textarea id="tUtilization" ng-model="item.utilization" class="span12"></textarea>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label">Required</label>
-                                <div class="controls">
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="txtCode" ng-true-value="1" ng-false-value="0" /> FY
-                                    </label><br />
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="txtCode" ng-true-value="1" ng-false-value="0" /> Yr 1
-                                    </label><br />
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="txtCode" ng-true-value="1" ng-false-value="0" /> Yr 2
-                                    </label><br />
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="txtCode" ng-true-value="1" ng-false-value="0" /> Yr 3
-                                    </label><br />
-                                    <label class="checkbox">
-                                        <input type="checkbox" id="txtCode" ng-true-value="1" ng-false-value="0" /> Yr 4
-                                    </label>
-                                </div>
-                            </div>
-
                             <hr />
                             <div class="control-group">
                                 <label class="control-label" for="cStore">Store Location</label>
@@ -97,51 +76,41 @@
                             </div>
                             <h4>Additional Requirements</h4>
                             <div class="well">
-                                <div class="control-group">{{item.departmentids}}
-                                    <label class="control-label" for="cStore">Departments</label>
+                                <div class="control-group">
+                                    <label class="control-label">IT</label>
                                     <div class="controls">
-                                        <select multiple="multiple" type="checkbox" class="input-xlarge" ng-options="department.id as department.departmentName for department in departments"></select>
+                                        <toggle-switch html="true" model="item.isIT" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="cStore">IT</label>
+                                    <label class="control-label">Callibration</label>
                                     <div class="controls">
-                                        <input type="checkbox" ng-model="item.isIT" ng-true-value="1" ng-false-value="0" />
+                                        <toggle-switch html="true" model="item.isCallibration" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="cStore">Callibration</label>
+                                    <label class="control-label">Maintenance</label>
                                     <div class="controls">
-                                        <input type="checkbox" ng-model="item.isCallibration" ng-true-value="1" ng-false-value="0" />
+                                        <toggle-switch html="true" model="item.isMaintenance" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="cStore">Maintenance</label>
+                                    <label class="control-label" for="cTechnician">Technician</label>
                                     <div class="controls">
-                                        <input type="checkbox" id="ckMaintenance" ng-model="item.isMaintenance" ng-true-value="1" ng-false-value="0" />
+                                        <select id="cTechnician" name="cTechnician" ng-model="item.technicanTypeId" ng-options="tech.id as tech.nameEn for tech in itemTechnicians" required></select>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label" for="cStore">Technician</label>
+                                    <label class="control-label" for="tSpares">Spares</label>
                                     <div class="controls">
-                                        <select id="cTechnician" name="cTechnician" ng-model="item.technicanTypeId">
-                                            <option value="1">General</option>
-                                            <option value="2">Technician</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label" for="txtCode">Spares</label>
-                                    <div class="controls">
-                                        <input type="text" id="txtCode" class="input-large" ng-model="item.spares" />
+                                        <input type="text" id="tSpares" class="input-large" ng-model="item.spares" />
                                     </div>
                                 </div>
 
                             </div>
 
                             <div class="control-group">
-                                <label class="control-label" for="tComments">Comments</label>
+                                <label class="control-label" for="tComments">Notes</label>
                                 <div class="controls">
                                     <textarea id="tComments" ng-model="item.notes" class="span12"></textarea>
                                 </div>
@@ -151,7 +120,7 @@
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(item)" ng-disabled="frm.$invalid">
                                     <i class="icon-ok"></i>&nbsp;Save
                                 </button>
-                                <button id="cmdSaveAddNew" class="btn btn-primary" ng-disabled="frm.$invalid">
+                                <button id="cmdSaveAddNew" class="btn btn-primary hidden-phone" ng-disabled="frm.$invalid">
                                     <i class="icon-ok"></i>&nbsp; Save and Add New
 
                                 </button>

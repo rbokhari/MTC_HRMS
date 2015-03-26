@@ -13,6 +13,18 @@
         "INV_ADMIN": "4",
         "INV_USER":"5"
     })
+    .constant("validations", {
+        "NATIONALITY": "2",
+        "COUNTRY": "3",
+        "MARITAL_STATUS": "4",
+        "GENDER": "5",
+        "QUALIFICATION_LEVEL": "6",
+        "ITEM_TYPE": "7",
+        "ITEM_CATEGORY": "8",
+        "ITEM_TECHNICIAN": "9",
+        "ITEM_YEAR":"10"
+
+    })
     .config(function ($httpProvider, $routeProvider) {
         $httpProvider.interceptors.push('authInterceptorService');
 

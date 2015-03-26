@@ -6,13 +6,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using MTCHRMS.DC;
-using MTCHRMS.EntityFramework;
 using MTCHRMS.EntityFramework.Inventory;
+using System.Web;
+using System.IO;
 
 namespace MTCHRMS.Controllers
 {
 
-    [RoutePrefix("/api/item")]
+    //[RoutePrefix("/api/item")]
     public class ItemController : ApiController
     {
         public IItemsRepository _repo;
@@ -38,7 +39,7 @@ namespace MTCHRMS.Controllers
         public IQueryable<Item> Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
-            var item = _repo.GetItem(id);
+            var item = _repo.GetItemDetail(id);
 
             if (item == null)
             {
@@ -69,6 +70,85 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
+        [Route("api/item/upload")]
+        [HttpPost]
+        [Authorize]
+        public async Task<HttpResponseMessage> Upload()
+        {
+            try
+            {
+
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
+                }
+                HttpPostedFile _file = HttpContext.Current.Request.Files[0];
+
+                var provider = GetMultipartProvider();
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+                // Remove this line as well as GetFormData method if you're not 
+                // sending any form data with your upload request
+                int paramData = GetFormData<int>(result);
+
+                var memstream = new MemoryStream();
+
+                _file.InputStream.CopyTo(memstream);
+                var item = _repo.GetItem(paramData);
+                item.ItemPicture = memstream.ToArray();
+
+                if (_repo.UpdateItemImage(ref item) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, item);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+                // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
+                // so this is how you can get the original file name
+                //var originalFileName = GetDeserializedFileName(result.FileData.First());
+
+                // uploadedFileInfo object will give you some additional stuff like file length,
+                // creation time, directory name, a few filesystem methods etc..
+                //var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
+
+
+                // Through the request response you can return an object to the Angular controller
+                // You will be able to access this in the .success callback through its data attribute
+                // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
+                //var returnData = "ReturnTest";
+                //return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
+            }
+            catch (Exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+        }
+
+        private MultipartFormDataStreamProvider GetMultipartProvider()
+        {
+            var uploadFolder = "~/App_Data/Tmp/FileUploads"; // you could put this to web.config
+            var root = HttpContext.Current.Server.MapPath(uploadFolder);
+            Directory.CreateDirectory(root);
+            return new MultipartFormDataStreamProvider(root);
+        }
+
+        // Extracts Request FormatData as a strongly typed model
+        private int GetFormData<T>(MultipartFormDataStreamProvider result)
+        {
+            if (result.FormData.HasKeys())
+            {
+                var unescapedFormData = Uri.UnescapeDataString(result.FormData.GetValues(0).FirstOrDefault() ?? String.Empty);
+                if (!String.IsNullOrEmpty(unescapedFormData))
+                {
+                    //return JsonConvert.DeserializeObject<T>(unescapedFormData);
+                    return Convert.ToInt32(unescapedFormData); // JsonConvert.DeserializeObject(unescapedFormData);
+                }
+            }
+
+            return 0;
+        }
+
+
         [Authorize]
         public HttpResponseMessage Put(int id, [FromBody] Item updateItem)
         {
@@ -91,6 +171,222 @@ namespace MTCHRMS.Controllers
             }
             return null;
         }
+
+
+        [ActionName("PostItemDepartment")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage AddItemDepartment([FromBody] ItemDepartment newItemDepartment)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newItemDepartment.ItemDepartmentId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemDepartment.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemDepartment.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.CheckItemDepartmentDuplicate(0, newItemDepartment.DepartmentId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemDepartment);
+                    }
+                    if (_repo.AddItemDepartment(newItemDepartment) && _repo.Save())
+                    {
+                        newItemDepartment = _repo.GetItemDepartment(newItemDepartment.ItemDepartmentId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemDepartment);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newItemDepartment.ItemDepartmentId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemDepartment.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemDepartment.ModifiedOn = DateTime.Now;
+
+                    if (_repo.CheckItemDepartmentDuplicate(newItemDepartment.ItemDepartmentId, newItemDepartment.DepartmentId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemDepartment);
+                    }
+
+                    if (_repo.UpdateItemDepartment(newItemDepartment) && _repo.Save())
+                    {
+                        newItemDepartment = _repo.GetItemDepartment(newItemDepartment.ItemDepartmentId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemDepartment);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteItemDepartment")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteItemDepartment([FromBody] ItemDepartment deleteDepartment)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteItemDepartment(deleteDepartment) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteDepartment);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+
+        [ActionName("PostItemYear")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage AddItemYear([FromBody] ItemYear newItemYear)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newItemYear.ItemYearId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemYear.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemYear.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.CheckItemYearDuplicate(0, newItemYear.YearId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemYear);
+                    }
+
+
+                    if (_repo.AddItemYear(newItemYear) && _repo.Save())
+                    {
+                        newItemYear = _repo.GetItemYear(newItemYear.ItemYearId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemYear);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newItemYear.ItemYearId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemYear.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemYear.ModifiedOn = DateTime.Now;
+
+                    if (_repo.CheckItemYearDuplicate(newItemYear.ItemYearId, newItemYear.YearId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemYear);
+                    }
+
+                    if (_repo.UpdateItemYear(newItemYear) && _repo.Save())
+                    {
+                        newItemYear = _repo.GetItemYear(newItemYear.ItemYearId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemYear);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteItemYear")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteItemYear([FromBody] ItemYear deleteYear)
+        {
+            if (ModelState.IsValid)
+            {
+
+                if (_repo.DeleteItemYear(deleteYear) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteYear);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostItemSupplier")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage AddItemSupplier([FromBody] ItemSupplier newItemSupplier)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newItemSupplier.ItemSupplierId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemSupplier.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemSupplier.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.CheckItemSupplierDuplicate(0, newItemSupplier.SupplierId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemSupplier);
+                    }
+
+
+                    if (_repo.AddItemSupplier(newItemSupplier) && _repo.Save())
+                    {
+                        newItemSupplier = _repo.GetItemSupplier(newItemSupplier.ItemSupplierId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemSupplier);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newItemSupplier.ItemSupplierId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemSupplier.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemSupplier.ModifiedOn = DateTime.Now;
+
+                    if (_repo.CheckItemSupplierDuplicate(newItemSupplier.ItemSupplierId, newItemSupplier.SupplierId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemSupplier);
+                    }
+
+                    if (_repo.UpdateItemSupplier(newItemSupplier) && _repo.Save())
+                    {
+                        newItemSupplier = _repo.GetItemSupplier(newItemSupplier.ItemSupplierId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemSupplier);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteItemSupplier")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteItemSupplier([FromBody] ItemSupplier deleteSupplier)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_repo.DeleteItemSupplier(deleteSupplier) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteSupplier);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
 
         private IEnumerable<string> GetErrorMessages()
         {

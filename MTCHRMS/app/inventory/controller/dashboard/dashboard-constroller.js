@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('DashboardController',
 [
-    '$scope', '$location', '$window','$routeParams', 'authRepository',
-    function ($scope, $location, $window, $routeParams, authRepository) {
+    '$scope', '$location', '$window','$routeParams', 'authRepository','supplierRepository', 'itemRepository','locationRepository',
+    function ($scope, $location, $window, $routeParams, authRepository, supplierRepository, itemRepository, locationRepository) {
 
         console.log("inventory dashboard controller");
         //$scope.myname = "yahoo";
@@ -27,5 +27,10 @@ invModule.controller('DashboardController',
             $window.location.href = '/HRMSPortal';
         }
 
+        $scope.loadDasboard = function() {
+            $scope.items = itemRepository.getAllItems();
+            $scope.suppliers = supplierRepository.getAllSuppliers();
+            $scope.locations = locationRepository.getAllLocations();
+        };
     }
 ]);

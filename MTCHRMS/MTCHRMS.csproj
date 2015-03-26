@@ -234,6 +234,7 @@
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />
     <Content Include="app\inventory\controller\item\item-repository.js" />
+    <Content Include="app\inventory\controller\item\item-modal-controller.js" />
     <Content Include="app\inventory\controller\store\location-controller.js" />
     <Content Include="app\inventory\controller\store\location-repository.js" />
     <Content Include="app\inventory\controller\supplier\supplier-controller.js" />
@@ -256,6 +257,10 @@
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
+    <Content Include="app\inventory\templates\item\item-image.html" />
+    <Content Include="app\inventory\templates\item\item-supplier.html" />
+    <Content Include="app\inventory\templates\item\item-year.html" />
+    <Content Include="app\inventory\templates\item\item-department.html" />
     <Content Include="app\inventory\templates\store\location-edit.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contract.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contact.html" />
@@ -273,6 +278,19 @@
     <Content Include="Content\bootstrap-rtl.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap-toggle.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap-toggle.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap2-toggle.css" />
+    <Content Include="Content\bootstrap-toggle-master\css\bootstrap2-toggle.min.css" />
+    <Content Include="Content\bootstrap-toggle-master\doc\header.png" />
+    <Content Include="Content\bootstrap-toggle-master\doc\nyt.png" />
+    <Content Include="Content\bootstrap-toggle-master\doc\nytdev.svg" />
+    <Content Include="Content\bootstrap-toggle-master\doc\script.js" />
+    <Content Include="Content\bootstrap-toggle-master\doc\stylesheet.css" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.js" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\style-rtl.css" />
@@ -635,6 +653,7 @@
     <Content Include="Content\img\logo1.png" />
     <Content Include="Content\img\mtclogo.ico" />
     <Content Include="Content\img\Thin_broken_ring.gif" />
+    <Content Include="Content\img\warning-icon.png" />
     <Content Include="Content\jquery.gritter.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style_default.css" />
@@ -846,6 +865,10 @@
     <Content Include="Scripts\angular-moment.js" />
     <Content Include="Scripts\angular-signalr-hub.js" />
     <Content Include="Scripts\angular-signalr-hub.min.js" />
+    <Content Include="Scripts\angular-toggle\css\bootstrap3\angular-toggle-switch-bootstrap-3.css" />
+    <Content Include="Scripts\angular-toggle\css\default\angular-toggle-switch.css" />
+    <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.js" />
+    <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.min.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.js" />
     <Content Include="Scripts\angularTranslate\angular-translate.js" />
@@ -885,6 +908,8 @@
     <Content Include="app\common\translate\translation_ar.json" />
     <Content Include="app\common\translate\en-US.json" />
     <Content Include="Content\img\flag\small\.DS_Store" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js.map" />
+    <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js.map" />
     <None Include="Content\Site.less" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -1104,6 +1129,14 @@
     </Content>
     <Content Include="Scripts\angularTranslate\lang\en_US.json" />
     <Content Include="Scripts\angularTranslate\lang\ar_OM.json" />
+    <Content Include="Scripts\angular-toggle\css\bootstrap3\angular-toggle-switch-bootstrap-3.less" />
+    <Content Include="Scripts\angular-toggle\css\bootstrap3\mixins.less" />
+    <Content Include="Scripts\angular-toggle\css\bootstrap3\toggle-switch.less" />
+    <Content Include="Scripts\angular-toggle\css\bootstrap3\variables.less" />
+    <Content Include="Scripts\angular-toggle\css\default\angular-toggle-switch.less" />
+    <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.min.js.map">
+      <DependentUpon>angular-toggle-switch.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery.gritter.js" />
     <Content Include="Scripts\jquery.gritter.min.js" />

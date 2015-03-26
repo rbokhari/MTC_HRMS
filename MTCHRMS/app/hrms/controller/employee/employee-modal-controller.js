@@ -1,5 +1,5 @@
 ﻿
-module.controller('EmployeeModalController',
+moduleModal.controller('EmployeeModalController',
 [
     '$scope', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
     'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification',

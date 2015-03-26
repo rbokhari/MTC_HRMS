@@ -1,0 +1,32 @@
+﻿<div id="dvSupplier" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Supplier">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body" ng-init="loadSuppliers()">
+        <form id="frm" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label class="control-label">Supplier Name :</label>
+                    <div class="controls">
+                        <select id="cSupplier" name="cSupplier" ng-model="itemSupplier.supplierId" ng-options="supplier.supplierId as supplier.supplierName for supplier in itemSuppliers" required></select>
+                        <div class="help-inline" ng-show="frm.cSupplier.$error.required && frm.cSupplier.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Notes :</label>
+                    <div class="controls">
+                        <textarea ng-model="itemSupplier.notes"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" id="cmdSave" class="btn btn-primary" type="submit" ng-click="saveItemSupplier(parentId, itemSupplier)" ng-disabled="frm.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </button>
+    </div>
+</div>

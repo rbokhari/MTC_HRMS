@@ -13,7 +13,7 @@
                 <li>
                     <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="#">Items List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="/INVPortal/item/list">Items List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -21,7 +21,7 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid " data-ng-init="loadItem()">
+    <div class="row-fluid" data-ng-init="loadItem()">
         <div class="span12">
             <div class="widget widget-tabs">
                 <div class="widget-title">
@@ -39,10 +39,12 @@
                         <div class="tab-pane active" id="dvGeneral" ng-show="isTabSelected(1)">
                             <div class="span3">
                                 <div class="text-center profile-pic">
-                                    <img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px" />
+                                    <!--<img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px" />-->
+                                    <img data-img-loading-value="{{item[0].itemPicture}}" data-img-loading-size="item" alt="" style="height: 220px; width:220px;" width="220px" height="220px" />
                                 </div>
                                 <ul class="nav nav-stacked">
-                                    <li><a ng-href="/HRMSPortal/employee/edit/1"><i class="icon-save"></i> Update</a></li>
+                                    <li><a ng-href="/INVPortal/item/edit/{{item[0].itemId}}"><i class="icon-save"></i> Update</a></li>
+                                    <li><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-external-link"></i> Update Picture</a></li>
                                 </ul>
                             </div>
                             <div class="span6">
@@ -73,6 +75,36 @@
                                                 {{ item[0].itemStock}}
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td class="span2">IT :</td>
+                                            <td>
+                                                <toggle-switch html="true" model="item[0].isit" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" is-disabled="disabled"></toggle-switch>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Callibration :</td>
+                                            <td>
+                                                <toggle-switch html="true" model="item[0].isCallibration" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" is-disabled="disabled"></toggle-switch>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Maintenance :</td>
+                                            <td>
+                                                <toggle-switch html="true" model="item[0].isMaintenance" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" is-disabled="disabled"></toggle-switch>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Technician :</td>
+                                            <td>
+                                                {{ item[0].technicianType.nameEn}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Spares :</td>
+                                            <td>
+                                                {{ item[0].spares}}
+                                            </td>
+                                        </tr>
 
                                     </tbody>
                                 </table>
@@ -80,29 +112,7 @@
                                 <div class="well">
                                     {{ item[0].utilization}}
                                 </div>
-                                <h4>Required</h4>
-                                <div class="well">
-                                    <ul class="icons push">
-                                        <li>
-                                            <label class="checkbox">
-                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; FY
-                                            </label>
-                                            <label class="checkbox">
-                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 1
-                                            </label>
-                                            <label class="checkbox">
-                                                <input type="checkbox" id="txtCode" value="" checked="" />&nbsp;&nbsp; Yr 2
-                                            </label>
-                                            <label class="checkbox">
-                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 3
-                                            </label>
-                                            <label class="checkbox">
-                                                <input type="checkbox" id="txtCode" value="" />&nbsp;&nbsp; Yr 4
-                                            </label>
-                                        </li>
-                                    </ul>
 
-                                </div>
                                 <h4>Notes</h4>
                                 <div class="well">
                                     {{ item[0].notes}}
@@ -117,7 +127,7 @@
                                 <h4>Suppliers</h4>
                                 <ul class="icons push">
                                     <li>
-                                        <i class="icon-hand-right"></i> <strong>ROP</strong><br/>
+                                        <i class="icon-hand-right"></i> <strong>ROP</strong><br />
                                         <em>
                                             Date : 12-March-2014
                                         </em><br />
@@ -130,127 +140,76 @@
 
                         </div>
                         <div class="tab-pane" id="dvContactInfo" ng-show="isTabSelected(2)">
-                            <i class="icon-hand-right"></i>  <strong>Additional Requirement</strong>
-                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Update</a></span>
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <div class="form-horizontal alert alert-block alert-success fade in">
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">IT</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Spares</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Callibration</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Maintenance</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Technician</label>
-                                            <div class="controls">
-                                                <select id="cCountry" name="cCountry">
-                                                    <option>General</option>
-                                                    <option>Technician</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <i class="icon-hand-right"></i>  <strong>Procurement Committee</strong>
-                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Update</a></span>
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <div class="form-horizontal alert alert-block alert-info fade in">
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Identify Supplier</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Lead Time </label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Cost</label>
-                                            <div class="controls">
-                                                <label class="checkbox">
-                                                    <input type="checkbox" id="txtCode" /> Per Item
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Total</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Guarantee Start Date</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Guarantee Duration</label>
-                                            <div class="controls">
-                                                <input type="text" id="txtCode" class="input-large" />
-                                            </div>
-                                        </div>
-                                        <hr />
-                                        <div class="control-group">
-                                            <label class="control-label" for="txtCode">Agreed ?</label>
-                                            <div class="controls">
-                                                <label class="checkbox">
-                                                    <input type="checkbox" id="txtCode" /> Yes
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane" id="dvSupplier" ng-show="isTabSelected(3)">
-                            <i class="icon-hand-right"></i>  <strong>Supplier</strong>
-                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Supplier</a></span>
+                            <i class="icon-hand-right"></i>  <strong>Item's Department</strong>
+                            <span class="pull-right"><a href="" ng-click="showDepartment(item[0].itemId)"><i class="icon-external-link"></i> Add Department</a></span>
                             <div class="row-fluid">
                                 <div class="span12">
                                     <table class="table table-striped table-bordered table-advance table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Code</th>
-                                                <th>Name</th>
-                                                <th>Contact Person</th>
-                                                <th>Contact No</th>
+                                                <th>#</th>
+                                                <th>Department Name</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <tr ng-repeat="dept in item[0].itemDepartments">
+                                                <td>{{$index+1}}</td>
+                                                <td><a href="" ng-click="editDepartment(dept)">{{dept.departmentDetail.departmentName}}</a></td>
+                                                <td>{{dept.notes}}</td>
+                                                <td><a href="" ng-click="deleteDepartment(dept)"> <i class="icon-trash red"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br/><br/>
+                            <i class="icon-hand-right"></i>  <strong>Year base Requirement</strong>
+                            <span class="pull-right"><a href="" ng-click="showYear(item[0].itemId)"><i class="icon-external-link"></i> Add Year</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
                                             <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
+                                                <th>#</th>
+                                                <th>Years</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="year in item[0].itemYears">
+                                                <td>{{$index+1}}</td>
+                                                <td><a href="" ng-click="editYear(year)">{{year.yearDetail.nameEn}}</a></td>
+                                                <td>{{year.notes}}</td>
+                                                <td><a href="" ng-click="deleteYear(year)"> <i class="icon-trash red"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="dvSupplier" ng-show="isTabSelected(3)">
+                            <i class="icon-hand-right"></i>  <strong>Supplier</strong>
+                            <span class="pull-right"><a href="" ng-click="showSupplier(item[0].itemId)"><i class="icon-external-link"></i> Add Supplier</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Code</th>
+                                                <th>Name</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="supp in item[0].itemSuppliers">
+                                                <td>{{$index + 1}}</td>
+                                                <td>{{supp.supplierDetail.supplierCode}}</td>
+                                                <td>{{supp.supplierDetail.supplierName}}</td>
+                                                <td><a href="" ng-click="deleteSupplier(supp)"> <i class="icon-trash red"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>

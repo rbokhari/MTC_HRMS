@@ -5,8 +5,8 @@
 'use strict';
 invModule.controller('ItemController',
 [
-    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository', 'locationRepository','departmentRepository',
-    function ($scope, $location, $routeParams, itemRepository, validationRepository, locationRepository, departmentRepository) {
+    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository','appRepository', 'locationRepository','departmentRepository', 'ModalService',
+    function ($scope, $location, $routeParams, itemRepository, validationRepository, appRepository, locationRepository, departmentRepository, ModalService) {
 
         console.log("item controller");
 
@@ -26,8 +26,9 @@ invModule.controller('ItemController',
 
         $scope.loadDefinition = function() {
 
-            $scope.itemTypes = validationRepository.getAllDetailsByValidationId(7);
-            $scope.itemCategories = validationRepository.getAllDetailsByValidationId(8);
+            $scope.itemTypes = validationRepository.getItemTypes; 
+            $scope.itemCategories = validationRepository.getItemCategories;
+            $scope.itemTechnicians = validationRepository.getItemTechnicians;
             $scope.storeLocations = locationRepository.getAllLocations();
             $scope.departments = departmentRepository.getAllDepartment();
             console.log($scope.storeLocations);
@@ -49,6 +50,25 @@ invModule.controller('ItemController',
         };
 
         $scope.save = function(item) {
+            console.log(item);
+
+            if (angular.isUndefined(item.isIT) || item.isIT == 'false') {
+                item.isIT = 0;
+            } else {
+                item.isIT = 1;
+            }
+
+            if (angular.isUndefined(item.isCallibration) || item.isCallibration == 'false') {
+                item.isCallibration = 0;
+            } else {
+                item.isCallibration = 1;
+            }
+
+            if (angular.isUndefined(item.isMaintenance) || item.isMaintenance == 'false') {
+                item.isMaintenance = 0;
+            } else {
+                item.isMaintenance = 1;
+            }
             console.log(item);
             $scope.errors = [];
             itemRepository.addItem(item).$promise.then(
@@ -88,6 +108,164 @@ invModule.controller('ItemController',
             if ($routeParams.id != undefined) {
                 $scope.item = itemRepository.getItemById($routeParams.id);
             }
+        };
+
+
+        // Modal service start ----------------
+        $scope.showDepartment = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-department.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Add Department",
+                    parentId: id,
+                    itemDepartment: {},
+                    itemYear: {},
+                    itemSupplier: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.item[0].itemDepartments.push(result.resultData);
+                });
+            });
+        };
+
+        $scope.editDepartment = function (dept) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-department.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Update Department",
+                    parentId: dept.itemId,
+                    itemDepartment: dept,
+                    itemYear: {},
+                    itemSupplier: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.deleteDepartment = function (dept) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                itemRepository.deleteItemDepartment(dept)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.item[0].itemDepartments.pop(dept);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
+
+        $scope.showYear = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-year.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Add Year",
+                    parentId: id,
+                    itemDepartment: {},
+                    itemYear: {},
+                    itemSupplier: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.item[0].itemYears.push(result.resultData);
+                });
+
+            });
+        };
+
+        $scope.deleteYear = function (year) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                itemRepository.deleteItemYear(year)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.item[0].itemYears.pop(year);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
+
+        $scope.showSupplier = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-supplier.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Add Supplier",
+                    parentId: id,
+                    itemDepartment: {},
+                    itemYear: {},
+                    itemSupplier: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    //employee[0].employeePassports.splice(0, 0, resultEmployeePassport.data);
+                    //console.log("show passport close : " + result.newPassport.id);
+                    $scope.item[0].itemSuppliers.push(result.resultData);
+                    //$scope.complexResult = "Name: " + result.name + ", age: " + result.age;
+                    //$('.modal').modal('hide');
+                    //modal.element.close();
+                });
+
+            });
+        };
+
+        $scope.deleteSupplier = function (supplier) {
+            var x;
+            if (confirm("Are you sure to delete this record ?") == true) {
+                itemRepository.deleteItemSupplier(supplier)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.item[0].itemSuppliers.pop(supplier);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
+        $scope.showImageForm = function (id) {
+
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-image.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Update Picture",
+                    parentId: id,
+                    itemDepartment: {},
+                    itemYear: {},
+                    itemSupplier: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    //console.log(result);
+                    $scope.item[0].itemPicture = result.resultData.itemPicture;
+                });
+
+            });
+
         };
 
 

@@ -1,6 +1,6 @@
 ﻿
 
-module.controller('SupplierModalController',
+moduleModal.controller('SupplierModalController',
 [
     '$scope', 'appRepository', 'supplierRepository', 'title', 'close',
     'parentId', 'resultData', '$timeout', '$upload', 'supplierContact', 'supplierContract',

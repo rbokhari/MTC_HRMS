@@ -16,6 +16,18 @@ accModule.factory('appRepository', ['$resource', '$http', function ($resource, $
         return true;
     };
 
+    var _showDuplicateGritterNotification = function () {
+        $.gritter.add({
+            title: "MTC",
+            text: "Record already exists !",
+            time: 4000,
+            image: '/Content/img/warning-icon.png',
+            position: 'center'
+        });
+
+        return true;
+    };
+
     var _showDeleteSuccessGritterNotification = function () {
         $.gritter.add({
             title: "MTC",
@@ -56,7 +68,8 @@ accModule.factory('appRepository', ['$resource', '$http', function ($resource, $
         showAddSuccessGritterNotification: _showAddSuccessGritterNotification,
         showUpdateSuccessGritterNotification: _showUpdateSuccessGritterNotification,
         showErrorGritterNotification: _showErrorGritterNotification,
-        showDeleteGritterNotification: _showDeleteSuccessGritterNotification
+        showDeleteGritterNotification: _showDeleteSuccessGritterNotification,
+        showDuplicateGritterNotification: _showDuplicateGritterNotification
     };
 
 }]);

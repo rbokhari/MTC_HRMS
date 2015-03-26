@@ -16,6 +16,9 @@ accModule.directive("imgLoadingValue", function () {
                         else if (value1 == 'profile') {
                             attrs.$set('src', "/Content/img/profile-pic.jpg");
                         }
+                        else if (value1 == 'item') {
+                            attrs.$set('src', "/Content/img/item.jpg");
+                        }
                     });
                 }
             });
