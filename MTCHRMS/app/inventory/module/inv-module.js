@@ -37,6 +37,23 @@
             controller: 'SupplierController'
         });
 
+    $routeProvider
+        .when('/INVPortal/definition/manufacturer', {
+            templateUrl: '/app/inventory/templates/manufacturer/manufacturer.html',
+            controller: 'ManufacturerController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/definition/manufacturer/add', {
+            templateUrl: '/app/inventory/templates/manufacturer/manufacturer-add.html',
+            controller: 'ManufacturerController'
+        });
+
+    $routeProvider
+        .when('/INVPortal/definition/manufacturer/edit/:id', {
+            templateUrl: '/app/inventory/templates/manufacturer/manufacturer-edit.html',
+            controller: 'ManufacturerController'
+        });
 
 
     $routeProvider

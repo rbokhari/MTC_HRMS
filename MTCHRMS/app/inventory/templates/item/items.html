@@ -73,15 +73,19 @@
                             <tr dir-paginate="item in items | filter:search | itemsPerPage: recordPage">
                                 <td>{{$index + 1}}</td>
                                 <td>
+                                    <div class="zoom">
+                                        <img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+                                        <div class="zoom-icon"></div>
+                                    </div>
                                     <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
                                 </td>
-                                <td>
+                                <td style="vertical-align: middle;">
                                     <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemName }} </a>
                                 </td>
-                                <td>{{item.typeDetail.nameEn}}</td>
-                                <td>{{item.categoryDetail.nameEn}}</td>
-                                <td>{{item.storeLocation.storeName}}</td>
-                                <td>{{ item.itemStock }}</td>
+                                <td style="vertical-align: middle;">{{item.typeDetail.nameEn}}</td>
+                                <td style="vertical-align: middle;">{{item.categoryDetail.nameEn}}</td>
+                                <td style="vertical-align: middle;">{{item.storeLocation.storeName}}</td>
+                                <td style="vertical-align: middle;">{{ item.itemStock }}</td>
                             </tr>
                         </tbody>
                     </table>

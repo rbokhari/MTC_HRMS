@@ -32,7 +32,7 @@ namespace MTCHRMS.DC
         public async Task<IQueryable<Supplier>> GetSuppliers()
         {
             //System.Threading.Thread.Sleep(100);
-            return await Task.Run(() => _ctx.Suppliers);
+            return await Task.Run(() => _ctx.Suppliers.Include(a=>a.CountryDetail));
         }
 
         public Supplier GetSupplier(int id)

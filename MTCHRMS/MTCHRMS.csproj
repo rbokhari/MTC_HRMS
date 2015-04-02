@@ -204,6 +204,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
+    <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\StoreLocationController.cs" />
@@ -235,6 +236,8 @@
     <Content Include="app\inventory\controller\item\item-controller.js" />
     <Content Include="app\inventory\controller\item\item-repository.js" />
     <Content Include="app\inventory\controller\item\item-modal-controller.js" />
+    <Content Include="app\inventory\controller\manufacturer\manufacturer-controller.js" />
+    <Content Include="app\inventory\controller\manufacturer\manufacturer-repository.js" />
     <Content Include="app\inventory\controller\store\location-controller.js" />
     <Content Include="app\inventory\controller\store\location-repository.js" />
     <Content Include="app\inventory\controller\supplier\supplier-controller.js" />
@@ -257,10 +260,14 @@
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
+    <Content Include="app\inventory\templates\item\item-manufacturer.html" />
     <Content Include="app\inventory\templates\item\item-image.html" />
     <Content Include="app\inventory\templates\item\item-supplier.html" />
     <Content Include="app\inventory\templates\item\item-year.html" />
     <Content Include="app\inventory\templates\item\item-department.html" />
+    <Content Include="app\inventory\templates\manufacturer\manufacturer-add.html" />
+    <Content Include="app\inventory\templates\manufacturer\manufacturer-edit.html" />
+    <Content Include="app\inventory\templates\manufacturer\manufacturer.html" />
     <Content Include="app\inventory\templates\store\location-edit.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contract.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contact.html" />
@@ -293,6 +300,12 @@
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\style-common.css">
+      <DependentUpon>style-common.less</DependentUpon>
+    </Content>
+    <Content Include="Content\css\style-common.min.css">
+      <DependentUpon>style-common.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\style-rtl.css" />
     <Content Include="Content\css\style_gray.css" />
     <Content Include="Content\css\style_navy-blue.css" />
@@ -720,6 +733,19 @@
     <Content Include="Content\img\submenu_hover.png" />
     <Content Include="Content\img\tick.png" />
     <Content Include="Content\img\top-bg.jpg" />
+    <Content Include="Content\fancybox\blank.gif" />
+    <Content Include="Content\fancybox\fancybox_loading.gif" />
+    <Content Include="Content\fancybox\fancybox_overlay.png" />
+    <Content Include="Content\fancybox\fancybox_sprite.png" />
+    <Content Include="Content\fancybox\helpers\fancybox_buttons.png" />
+    <Content Include="Content\fancybox\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Content\fancybox\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Content\fancybox\helpers\jquery.fancybox-media.js" />
+    <Content Include="Content\fancybox\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Content\fancybox\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Content\fancybox\jquery.fancybox.css" />
+    <Content Include="Content\fancybox\jquery.fancybox.js" />
+    <Content Include="Content\fancybox\jquery.fancybox.pack.js" />
     <Content Include="Content\uniform\css\uniform.default.css" />
     <Content Include="Content\uniform\demo\demo.html" />
     <Content Include="Content\uniform\images\bg-input-focus.png" />
@@ -910,6 +936,10 @@
     <Content Include="Content\img\flag\small\.DS_Store" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js.map" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js.map" />
+    <Content Include="Content\css\style-common.less" />
+    <Content Include="Content\css\style-common.css.map">
+      <DependentUpon>style-common.css</DependentUpon>
+    </Content>
     <None Include="Content\Site.less" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -1123,6 +1153,7 @@
     </Content>
     <Content Include="Scripts\dirPagination\dirPagination.tpl.html" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.map" />
+    <Content Include="Content\fancybox\.DS_Store" />
     <None Include="Properties\PublishProfiles\LocalServer.pubxml" />
     <Content Include="Scripts\angularTranslate\angular-translate.min.js.map">
       <DependentUpon>angular-translate.min.js</DependentUpon>

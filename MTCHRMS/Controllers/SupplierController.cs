@@ -23,6 +23,8 @@ namespace MTCHRMS.Controllers
             _repo = pRepository;
         }
 
+        [Route("api/supplier")]
+        [HttpGet]
         [Authorize]
         public Task<IQueryable<Supplier>> Get()     
         {
@@ -64,6 +66,8 @@ namespace MTCHRMS.Controllers
         //    return supplier;
         //}
 
+        [Route("api/supplier")]
+        [HttpPost]
         [Authorize]
         public HttpResponseMessage Post([FromBody] Supplier newSupplier)
         {

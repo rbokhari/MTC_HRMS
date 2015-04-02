@@ -23,6 +23,8 @@ namespace MTCHRMS.Controllers
             _repo = repo;
         }
 
+        [Route("api/item/")]
+        [HttpGet]
         [Authorize]
         public Task<IQueryable<Item>> Get()
         {
@@ -35,6 +37,8 @@ namespace MTCHRMS.Controllers
             return items;
         }
 
+        [Route("api/item/GetSingleItem")]
+        [HttpGet]
         [Authorize]
         public IQueryable<Item> Get(int id)
         {
@@ -48,22 +52,49 @@ namespace MTCHRMS.Controllers
             return item;
         }
 
+        [Route("api/item/")]
+        [HttpPost]
         [Authorize]
         public HttpResponseMessage Post([FromBody] Item newItem)
         {
             if (ModelState.IsValid)
             {
-                if (Request.Headers.Contains("userId"))
+                if (newItem.ItemId == 0)
                 {
-                    newItem.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+
+
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItem.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+
+                    newItem.CreatedOn = DateTime.Now;
+
+                    if (_repo.CheckItemDuplicate(newItem.ItemId, newItem.ItemCode))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItem);
+                    }
+
+                    if (_repo.AddItem(newItem) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newItem);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
                 }
-
-                newItem.CreatedOn = DateTime.Now;
-
-                if (_repo.AddItem(newItem) && _repo.Save())
+                else if (newItem.ItemId!=0)
                 {
-                    return Request.CreateResponse(HttpStatusCode.Created, newItem);
-                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItem.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItem.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateItem(newItem) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newItem);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
@@ -188,7 +219,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemDepartment.CreatedOn = DateTime.UtcNow;
 
-                    if (_repo.CheckItemDepartmentDuplicate(0, newItemDepartment.DepartmentId))
+                    if (_repo.CheckItemDepartmentDuplicate(newItemDepartment.ItemId, 0, newItemDepartment.DepartmentId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemDepartment);
                     }
@@ -207,7 +238,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemDepartment.ModifiedOn = DateTime.Now;
 
-                    if (_repo.CheckItemDepartmentDuplicate(newItemDepartment.ItemDepartmentId, newItemDepartment.DepartmentId))
+                    if (_repo.CheckItemDepartmentDuplicate(newItemDepartment.ItemId, newItemDepartment.ItemDepartmentId, newItemDepartment.DepartmentId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemDepartment);
                     }
@@ -259,7 +290,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemYear.CreatedOn = DateTime.UtcNow;
 
-                    if (_repo.CheckItemYearDuplicate(0, newItemYear.YearId))
+                    if (_repo.CheckItemYearDuplicate(newItemYear.ItemId, 0, newItemYear.YearId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemYear);
                     }
@@ -280,7 +311,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemYear.ModifiedOn = DateTime.Now;
 
-                    if (_repo.CheckItemYearDuplicate(newItemYear.ItemYearId, newItemYear.YearId))
+                    if (_repo.CheckItemYearDuplicate(newItemYear.ItemId, newItemYear.ItemYearId, newItemYear.YearId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemYear);
                     }
@@ -331,7 +362,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemSupplier.CreatedOn = DateTime.UtcNow;
 
-                    if (_repo.CheckItemSupplierDuplicate(0, newItemSupplier.SupplierId))
+                    if (_repo.CheckItemSupplierDuplicate(newItemSupplier.ItemId, 0, newItemSupplier.SupplierId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemSupplier);
                     }
@@ -352,7 +383,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemSupplier.ModifiedOn = DateTime.Now;
 
-                    if (_repo.CheckItemSupplierDuplicate(newItemSupplier.ItemSupplierId, newItemSupplier.SupplierId))
+                    if (_repo.CheckItemSupplierDuplicate(newItemSupplier.ItemId, newItemSupplier.ItemSupplierId, newItemSupplier.SupplierId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemSupplier);
                     }
@@ -387,6 +418,76 @@ namespace MTCHRMS.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
 
+        [ActionName("PostItemManufacturer")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage AddItemManufacturer([FromBody] ItemManufacturer newItemManufacturer)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newItemManufacturer.ItemManufacturerId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemManufacturer.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemManufacturer.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.CheckItemSupplierDuplicate(newItemManufacturer.ItemId, 0, newItemManufacturer.ManufacturerId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemManufacturer);
+                    }
+
+
+                    if (_repo.AddItemManufacturer(newItemManufacturer) && _repo.Save())
+                    {
+                        newItemManufacturer = _repo.GetItemManufactuer(newItemManufacturer.ItemManufacturerId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemManufacturer);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newItemManufacturer.ItemManufacturerId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newItemManufacturer.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newItemManufacturer.ModifiedOn = DateTime.Now;
+
+                    if (_repo.CheckItemSupplierDuplicate(newItemManufacturer.ItemId, newItemManufacturer.ItemManufacturerId, newItemManufacturer.ManufacturerId))
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Found, newItemManufacturer);
+                    }
+
+                    if (_repo.UpdateItemManufacturer(newItemManufacturer) && _repo.Save())
+                    {
+                        newItemManufacturer = _repo.GetItemManufactuer(newItemManufacturer.ItemManufacturerId).FirstOrDefault();
+                        return Request.CreateResponse(HttpStatusCode.Created, newItemManufacturer);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteItemManufacturer")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteItemManufacturer([FromBody] ItemManufacturer deleteManufacturer)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_repo.DeleteItemManufacturer(deleteManufacturer) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, deleteManufacturer);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
 
         private IEnumerable<string> GetErrorMessages()
         {

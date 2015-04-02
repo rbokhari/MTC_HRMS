@@ -18,9 +18,6 @@ hrmsModule.controller('DashboardController',
             $translate.use('en_US');
         }
 
-        //alert($scope.authentication.roleId);
-
-        //$scope.myname = "yahoo";
         $scope.isBusy = true;
         $scope.isProbationBusy = true;
         $scope.isContractBusy = true;

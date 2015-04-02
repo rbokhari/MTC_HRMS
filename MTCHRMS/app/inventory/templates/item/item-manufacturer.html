@@ -1,0 +1,37 @@
+﻿<div id="dvManufacturer" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Manufacturer">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <form id="frm" novalidate>
+            <div class="form-horizontal">
+                <div id="dvduplicate" class="control-group">
+                    <label class="control-label">Manufacturer :</label>
+                    <div class="controls">
+                        <ul>
+                            <li ng-repeat="man in iManufacturers">{{man.manufacturerId}} - {{man.manufacturerName}} - {{itemManufacturer.manufacturerId}},{{itemManufacturer.notes}}</li>
+                        </ul>
+                        <select ng-model="itemManufacturer.manufacturerId" ng-options="man1.manufactuerId as man1.manufacturerName for man1 in iManufacturers"></select>
+                        <select ng-model="itemSupplier.supplierId" ng-options="supplier.supplierId as supplier.supplierName for supplier in itemSuppliers" required></select>
+                        <input type="text" ng-model="itemManufacturer.manufacturerId" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Notes :</label>
+                    <div class="controls">
+                        <textarea ng-model="itemManufacturer.notes"></textarea>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" id="cmdSave" class="btn btn-primary" type="submit" ng-click="saveItemManufacturer(parentId, itemManufacturer)" ng-disabled="frm.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </button>
+
+    </div>
+</div>

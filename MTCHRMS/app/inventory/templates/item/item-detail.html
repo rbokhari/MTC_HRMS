@@ -32,23 +32,25 @@
                         <ul class="nav nav-tabs">
                             <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)" data-toggle="tab">History</a></li>
                             <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)" data-toggle="tab">Attachment</a></li>
-                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)" data-toggle="tab">Suppliers</a></li>
+                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)" data-toggle="tab">Suppliers / Manufacturer</a></li>
                             <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)" data-toggle="tab">Detail</a></li>
                             <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)" data-toggle="tab">General</a></li>
                         </ul>
                         <div class="tab-pane active" id="dvGeneral" ng-show="isTabSelected(1)">
-                            <div class="span3">
-                                <div class="text-center profile-pic">
+                            <div class="span2">
+                                <div class="text-center profile-pic polaroid">
+                                    <p>{{ item[0].itemName | limitTo:25}}</p>
                                     <!--<img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px" />-->
                                     <img data-img-loading-value="{{item[0].itemPicture}}" data-img-loading-size="item" alt="" style="height: 220px; width:220px;" width="220px" height="220px" />
                                 </div>
+                                <br/><br/>
                                 <ul class="nav nav-stacked">
                                     <li><a ng-href="/INVPortal/item/edit/{{item[0].itemId}}"><i class="icon-save"></i> Update</a></li>
                                     <li><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-external-link"></i> Update Picture</a></li>
                                 </ul>
                             </div>
-                            <div class="span6">
-                                <h4>{{ item[0].itemCode }} - {{ item[0].itemName }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
+                            <div class="span7">
+                                <h4>{{ item[0].itemCode }} - <small>{{ item[0].itemName }} </small></h4>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -78,7 +80,7 @@
                                         <tr>
                                             <td class="span2">IT :</td>
                                             <td>
-                                                <toggle-switch html="true" model="item[0].isit" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" is-disabled="disabled"></toggle-switch>
+                                                <toggle-switch html="true" model="item[0].isIt" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" is-disabled="disabled"></toggle-switch>
                                             </td>
                                         </tr>
                                         <tr>
@@ -118,26 +120,47 @@
                                     {{ item[0].notes}}
                                 </div>
                                 <hr />
-                                <a ng-href="/hrmsportal/employee/edit/{{employee[0].id}}" class="btn btn-info">
+                                <a ng-href="/INVPortal/item/edit/{{item[0].itemId}}" class="btn btn-info">
                                     <i class="icon-save"></i>
                                     Update
                                 </a>
                             </div>
                             <div class="span3">
-                                <h4>Suppliers</h4>
-                                <ul class="icons push">
-                                    <li>
-                                        <i class="icon-hand-right"></i> <strong>ROP</strong><br />
-                                        <em>
-                                            Date : 12-March-2014
-                                        </em><br />
-                                        <em>
-                                            Stock : 1
-                                        </em><br>
-                                    </li>
-                                </ul>
+                                <div ng-show="item[0].itemDepartments.length">
+                                    <h4 class="alert alert-success"><i class="icon-hand-right"></i>&nbsp;Departments</h4>
+                                    <ul class="icons col-lg-push-0">
+                                        <li ng-repeat="dept in item[0].itemDepartments">
+                                            <i class="icon-ok"></i> <strong>{{dept.departmentDetail.departmentName}}</strong><br />
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
+                                
+                                <div ng-show="item[0].itemYears.length">
+                                    <h4 class="alert alert-error"><i class="icon-hand-right"></i>&nbsp;Required Years</h4>
+                                    <ul class="icons col-lg-push-0">
+                                        <li ng-repeat="year in item[0].itemYears">
+                                            <i class="icon-ok"></i> <strong>{{year.yearDetail.nameEn}}</strong><br />
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
+                                <div ng-show="item[0].itemSuppliers.length">
+                                    <h4 class="alert alert-info"><i class="icon-hand-right"></i>&nbsp;Suppliers</h4>
+                                    <ul class="icons push">
+                                        <li ng-repeat="supp in item[0].itemSuppliers">
+                                            <i class="icon-ok"></i> <strong>{{supp.supplierDetail.supplierCode}}&nbsp;-&nbsp;{{supp.supplierDetail.supplierName}}</strong><br />
+                                            <!--<em>
+                                                    Date : 12-March-2014
+                                                </em><br />
+                                                <em>
+                                                    Stock : 1
+                                                </em><br>-->
+                                        </li>
+                                    </ul>
+                                    
+                                </div>
                             </div>
-
                         </div>
                         <div class="tab-pane" id="dvContactInfo" ng-show="isTabSelected(2)">
                             <i class="icon-hand-right"></i>  <strong>Item's Department</strong>
@@ -156,9 +179,9 @@
                                         <tbody>
                                             <tr ng-repeat="dept in item[0].itemDepartments">
                                                 <td>{{$index+1}}</td>
-                                                <td><a href="" ng-click="editDepartment(dept)">{{dept.departmentDetail.departmentName}}</a></td>
+                                                <td>{{dept.departmentDetail.departmentName}}</td>
                                                 <td>{{dept.notes}}</td>
-                                                <td><a href="" ng-click="deleteDepartment(dept)"> <i class="icon-trash red"></i></a></td>
+                                                <td><a href="" ng-click="deleteDepartment($index, dept)"> <i class="icon-trash red"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -181,9 +204,9 @@
                                         <tbody>
                                             <tr ng-repeat="year in item[0].itemYears">
                                                 <td>{{$index+1}}</td>
-                                                <td><a href="" ng-click="editYear(year)">{{year.yearDetail.nameEn}}</a></td>
+                                                <td>{{year.yearDetail.nameEn}}</td>
                                                 <td>{{year.notes}}</td>
-                                                <td><a href="" ng-click="deleteYear(year)"> <i class="icon-trash red"></i></a></td>
+                                                <td><a href="" ng-click="deleteYear($index, year)"> <i class="icon-trash red"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -209,7 +232,34 @@
                                                 <td>{{$index + 1}}</td>
                                                 <td>{{supp.supplierDetail.supplierCode}}</td>
                                                 <td>{{supp.supplierDetail.supplierName}}</td>
-                                                <td><a href="" ng-click="deleteSupplier(supp)"> <i class="icon-trash red"></i></a></td>
+                                                <td><a href="" ng-click="deleteSupplier($index, supp)"> <i class="icon-trash red"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <br /><br />
+                            <i class="icon-hand-right"></i>  <strong>Manufacturer</strong>
+                            <span class="pull-right"><a href="" ng-click="showManufacturer(item[0].itemId)"><i class="icon-external-link"></i> Add Manufacturer</a></span>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <table class="table table-striped table-bordered table-advance table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Manufacturer Name</th>
+                                                <th>Country</th>
+                                                <th>Notes</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="man in item[0].itemManufacturers">
+                                                <td>{{$index+1}}</td>
+                                                <td>{{man.manufacturerName}}</td>
+                                                <td>{{man.countryDetail.nameEn}}</td>
+                                                <td>{{man.notes}}</td>
+                                                <td><a href="" ng-click="deleteManufacturer($index, man)"> <i class="icon-trash red"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>

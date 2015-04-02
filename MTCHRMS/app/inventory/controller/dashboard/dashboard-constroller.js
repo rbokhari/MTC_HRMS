@@ -8,8 +8,6 @@ invModule.controller('DashboardController',
     function ($scope, $location, $window, $routeParams, authRepository, supplierRepository, itemRepository, locationRepository) {
 
         console.log("inventory dashboard controller");
-        //$scope.myname = "yahoo";
-        console.log($scope.authentication);
 
         $scope.isActiveNavigation = function (viewLocation) {
             //alert(viewLocation === $location.path());

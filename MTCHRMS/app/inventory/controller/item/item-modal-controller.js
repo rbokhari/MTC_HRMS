@@ -3,10 +3,12 @@
 moduleModal.controller('ItemModalController',
 [
     '$scope', 'appRepository', 'itemRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', '$upload', 'itemDepartment', 'itemYear', 'itemSupplier','departmentRepository','validationRepository','supplierRepository',
+    'parentId', 'resultData', '$timeout', '$upload', 'itemDepartment', 'itemYear', 'itemSupplier', 'itemManufacturer',
+    'departmentRepository', 'validationRepository', 'supplierRepository', 'manufacturerRepository',
 
     function ($scope, appRepository, itemRepository, title, close,
-        parentId, resultData, $timeout, $upload, itemDepartment, itemYear, itemSupplier, departmentRepository, validationRepository, supplierRepository) {
+        parentId, resultData, $timeout, $upload, itemDepartment, itemYear, itemSupplier, itemManufacturer,
+        departmentRepository, validationRepository, supplierRepository, manufacturerRepository) {
         
         //$scope.name = null;
         //$scope.age = null;
@@ -16,11 +18,15 @@ moduleModal.controller('ItemModalController',
         $scope.itemDepartment = itemDepartment;
         $scope.itemYear = itemYear;
         $scope.itemSupplier = itemSupplier;
+        $scope.itemManufacturer = itemManufacturer;
 
         
         $scope.departments = departmentRepository.getAllDepartment();
         $scope.itemYears = validationRepository.getItemYears;
         $scope.itemSuppliers = supplierRepository.getAllSuppliers();
+        $scope.iManufacturers = manufacturerRepository.getAllManufacturers();
+        console.log("---------------------");
+        console.log($scope.iManufacturers);
 
         //$scope.loadDepartments = function () {
         //    alert("loading department");
@@ -35,8 +41,6 @@ moduleModal.controller('ItemModalController',
         //    $scope.suppliers = supplierRepository.getAllSuppliers;
         //};
         
-        
-
         $scope.saveItemDepartment = function (parentId, itemDepartment) {
             $scope.errors = [];
             itemDepartment.itemId = parentId;
@@ -50,18 +54,18 @@ moduleModal.controller('ItemModalController',
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvDepartment').modal('hide');
-                    }, function (response) {
+                    }, function (error) {
                         // failure case
                         console.log("item department save - Error !--------");
-                        console.log(response);
-                        if (response.status == 302) {   
+                        //console.log(error);
+                        if (error.status == 302) {
                             $("#dvduplicate").addClass("error");
                             //$("#imgError").visibility="visible";
                             appRepository.showDuplicateGritterNotification();
                         } else {
                             appRepository.showErrorGritterNotification();
                         }
-                        $scope.errors = response.data;
+                        $scope.errors = error.data;
                     }
                 );
             //.then(function () { $scope.close(); });
@@ -80,27 +84,57 @@ moduleModal.controller('ItemModalController',
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvYear').modal('hide');
-                    }, function (response) {
-                        // failure case
-                        console.log("item year save - Error !");
-                    if (response.status == 302) {
+                    }, function(error) {
+                    // failure case
+                    console.log("item year save - Error !");
+                    if (error.status == 302) {
                         $("#dvduplicate").addClass("error");
                         //$("#imgError").visibility="visible";
                         appRepository.showDuplicateGritterNotification();
                     } else {
                         appRepository.showErrorGritterNotification();
                     }
-                    $scope.errors = response.data;
+                    $scope.errors = error.data;
                 }
-                );
+            );
             //.then(function () { $scope.close(); });
         };
 
-        $scope.saveItemSupplier = function (parentId, itemSupplier) {
+        $scope.saveItemSupplier = function(parentId, itemSupplier) {
             $scope.errors = [];
             itemSupplier.itemId = parentId;
 
             itemRepository.addItemSupplier(itemSupplier)
+                .$promise
+                .then(
+                    function(result) {
+                        // success case
+                        $scope.resultData = result;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvSupplier').modal('hide');
+                        console.log("close done");
+                    }, function(error) {
+                        // failure case
+                        console.log("item supplier save - Error !");
+                        if (error.status == 302) {
+                            $("#dvduplicate").addClass("error");
+                            appRepository.showDuplicateGritterNotification();
+                        } else {
+                            appRepository.showErrorGritterNotification();
+                        }
+                        $scope.errors = error.data;
+                    }
+                );
+            //.then(function () { $scope.close(); });
+        };
+
+
+        $scope.saveItemManufacturer = function (parentId, itemManufacturer) {
+            $scope.errors = [];
+            itemManufacturer.itemId = parentId;
+            console.log(itemManufacturer);
+            itemRepository.addItemManufacturer(itemManufacturer)
                 .$promise
                 .then(
                     function (result) {
@@ -108,12 +142,19 @@ moduleModal.controller('ItemModalController',
                         $scope.resultData = result;
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
-                        $('#dvSupplier').modal('hide');
-                    }, function (response) {
+                        $('#dvManufacturer').modal('hide');
+                    }, function (error) {
                         // failure case
-                        console.log("item supplier save - Error !");
-                        appRepository.showErrorGritterNotification();
-                        $scope.errors = response.data;
+                        console.log("item manufacturer save - Error !--------");
+                        //console.log(error);
+                        if (error.status == 302) {
+                            $("#dvduplicate").addClass("error");
+                            //$("#imgError").visibility="visible";
+                            appRepository.showDuplicateGritterNotification();
+                        } else {
+                            appRepository.showErrorGritterNotification();
+                        }
+                        $scope.errors = error.data;
                     }
                 );
             //.then(function () { $scope.close(); });

@@ -1,0 +1,92 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Manufacturer&nbsp;<small> add </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal/"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    HRMS <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/INVPortal/manufacturer">Manufacturer &nbsp;List&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Manufacturer&nbsp; - Add&nbsp;</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body" ng-init="loadCountries()">
+                    <form name="frm" novalidate>
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="tCode">Manufacturer Name&nbsp;</label>
+                                <div class="controls">
+                                    <input type="text" id="tCode" name="tName" ng-model="manufacturer.manufacturerName" required="required" />
+                                    <div class="help-inline" ng-show="frm.tName.$error.required && frm.tName.$dirty">Mandatory field missing !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="cCountry">Country</label>
+                                <div class="controls">
+                                    <select id="cCountry" name="cCountry" ng-model="manufacturer.countryId" ng-options="country.id as country.nameEn for country in countries" required></select>
+                                    <div ng-if="isLoadCountry" class="help-inline"><img src="/Content/img/loader.gif" /></div>
+                                    <div class="help-inline" ng-show="frm.cCountry.$error.required && frm.cCountry.$dirty">Mandatory field missing !</div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="cCountry">Notes</label>
+                                <div class="controls">
+                                    <textarea ng-model="manufacturer.notes" class="span12" maxlength="1000"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label">Is Active</label>
+                                <div class="controls">
+                                    <toggle-switch html="true" model="manufacturer.statusId" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(manufacturer)" ng-disabled="frm.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE"></span>&nbsp;
+                                </button>
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(manufacturer)" ng-disabled="frm.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/definition/manufacturer">
+                                    <i class="icon-undo"></i>
+                                    <span translate="CANCEL"></span>&nbsp;
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -3,10 +3,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel1">{{title}}</h3>
     </div>
-    <div class="modal-body" ng-init="loadSuppliers()">
+    <div class="modal-body">
         <form id="frm" novalidate>
             <div class="form-horizontal">
-                <div class="control-group">
+                <div id="dvduplicate" class="control-group">
                     <label class="control-label">Supplier Name :</label>
                     <div class="controls">
                         <select id="cSupplier" name="cSupplier" ng-model="itemSupplier.supplierId" ng-options="supplier.supplierId as supplier.supplierName for supplier in itemSuppliers" required></select>

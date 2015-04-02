@@ -11,7 +11,7 @@ invModule.factory('itemRepository', [
         };
         
         var _getItemById = function(id) {
-            return $resource('/api/item/' + id).query();
+            return $resource('/api/item/GetSingleItem/?id=' + id).query();
         };
 
         var _addItem = function (item) {
@@ -58,6 +58,18 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/' + itemSupplier.itemId + '/DeleteItemSupplier').save(itemSupplier);
         };
 
+        var _addItemManufacturer = function (itemManufacturer) {
+            return $resource('/api/item/' + itemManufacturer.itemId + '/PostItemManufacturer').save(itemManufacturer);
+        };
+
+        var _updateItemManufacturer = function (itemManufacturer) {
+            return $resource('/api/item/' + itemManufacturer.itemId + '/UpdateItemManufacturer').save(itemManufacturer);
+        };
+
+        var _deleteItemManufacturer = function (itemManufacturer) {
+            return $resource('/api/item/' + itemManufacturer.itemId + '/DeleteItemManufacturer').save(itemManufacturer);
+        };
+
         return {
             getAllItems: _getAllItems,
             getItemById: _getItemById,
@@ -71,7 +83,10 @@ invModule.factory('itemRepository', [
             deleteItemYear: _deleteItemYear,
             addItemSupplier: _addItemSupplier,
             updateItemSupplier: _updateItemSupplier,
-            deleteItemSupplier: _deleteItemSupplier
+            deleteItemSupplier: _deleteItemSupplier,
+            addItemManufacturer: _addItemManufacturer,
+            updateItemManufacturer: _updateItemManufacturer,
+            deleteItemManufacturer: _deleteItemManufacturer
         };
 
     }

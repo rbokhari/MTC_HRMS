@@ -39,10 +39,10 @@
                                 Record Per Page:
                             </label>
                             <div class="controls">
-                                <select ng-model="recordPage" ng-init="recordPage=5" class="input-small m-wrap">
-                                    <option value="5" selected="selected">5</option>
-                                    <option value="10">10</option>
+                                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
+                                    <option value="10" selected="selected">10</option>
                                     <option value="15">15</option>
+                                    <option value="20">20</option>
                                 </select>
                             </div>
                         </div>
@@ -74,9 +74,7 @@
                                     <td>
                                         <a ng-href="/INVPortal/definition/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierName }} </a>
                                     </td>
-                                    <td>
-                                        {{ supplier.countryId }}
-                                    </td>
+                                    <td>{{ supplier.countryDetail.nameEn }}</td>
                                     <td>
                                         <label ng-class="{'label label-info': supplier.statusId, 'label label-inverse': supplier.statusId==0}">
                                             <ng-pluralize count="supplier.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>

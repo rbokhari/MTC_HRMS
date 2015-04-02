@@ -24,6 +24,7 @@ namespace MTCHRMS.App_Start
             kernel.Bind<ISuppliersRepository>().To<SupplierRepository>();
             kernel.Bind<IStoreLocationRepository>().To<StoreLocationRepository>();
             kernel.Bind<IItemsRepository>().To<ItemsRepository>();
+            kernel.Bind<IManufacturersRepository>().To<ManufactuerRepository>();
 
             return kernel;
         }

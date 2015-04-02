@@ -3,7 +3,7 @@ accModule.factory('authRepository', [
     '$http', '$q', 'localStorageService','accountRepository',
     function($http, $q, localStorageService, accountRepository) {
 
-        var serviceBase = 'http://localhost:38618/'; // 'http://10.3.2.149:88/'; //'http://localhost:90/';  
+        var serviceBase = 'http://localhost:90/'; // 'http://10.3.2.149:88/'; //'http://localhost:90/';  
         var authServiceFactory = {};
 
         var _authentication = {

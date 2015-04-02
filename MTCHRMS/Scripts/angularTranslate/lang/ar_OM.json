@@ -20,6 +20,23 @@
     "VISA_EXPIRE": "تأشيرة انتهاء",
     "PASSPORT_EXPIRY": "جواز سفر انتهاء",
     "ALL_DEPARTMENTS": "جميع الأقسام",
-    "ALL_NATIONALITIES": "جميع الجنسيات"
+    "ALL_NATIONALITIES": "جميع الجنسيات",
+    "CODE": "Code",
+    "NAME": "Name",
+    "STATUS": "Status",
+    "EMPLOYEES": "Employees",
+    "SEARCH": "search",
+    "RECORD_PER_PAGE": "Record Per Page",
+    "LISTING": "Listing",
+    "LIST": "List",
+    "DISPLAYING": "Displaying",
+    "OF": "of",
+    "EDIT": "Edit",
+    "ADD": "Add",
+    "SAVE": "Save",
+    "SAVE_AND_ADD_NEW": "Save and Add New",
+    "CANCEL": "Cancel",
+    "UPDATE": "Update",
+    "MANDATORY_FIELD_MISSING": "Mandatory field, Can't be blank !"
 
 }

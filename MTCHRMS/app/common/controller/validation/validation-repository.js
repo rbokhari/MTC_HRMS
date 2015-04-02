@@ -7,7 +7,7 @@
 
 accModule.factory('validationRepository', ['$resource', '$http', 'validations', function ($resource, $http, validations) {
 
-    var _getAllDetailsByValidationId = function(id) {
+    var _getAllDetailsByValidationId = function (id) {
         return $resource('/api/validation/' + id + '/GetValidationDetailByValidationId').query();
     };
 

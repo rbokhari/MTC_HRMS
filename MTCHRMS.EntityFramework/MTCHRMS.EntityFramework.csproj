@@ -56,6 +56,7 @@
     <Compile Include="HRMSMigrationConfiguration.cs" />
     <Compile Include="HRMS\EmployeeDef.cs" />
     <Compile Include="Inventory\Item.cs" />
+    <Compile Include="Inventory\Manufacturer.cs" />
     <Compile Include="Inventory\StoreLocation.cs" />
     <Compile Include="Inventory\Supplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -42,7 +42,7 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string Notes { get; set; }
 
-        public int IsIT { get; set; }
+        public int IsIt { get; set; }
 
         public int IsCallibration { get; set; }
 
@@ -72,6 +72,8 @@ namespace MTCHRMS.EntityFramework.Inventory
         public virtual ICollection<ItemYear> ItemYears { get; set; }
 
         public virtual ICollection<ItemSupplier> ItemSuppliers { get; set; }
+
+        public virtual ICollection<ItemManufacturer> ItemManufacturers { get; set; }
     }
 
     [Table("IV_ItemDepartment")]
@@ -121,6 +123,22 @@ namespace MTCHRMS.EntityFramework.Inventory
         public string Notes { get; set; }
 
         public virtual Supplier SupplierDetail { get; set; }
+    }
+
+    [Table("IV_ItemManufacturer")]
+    public class ItemManufacturer : TableStrutcture
+    {
+        [Key]
+        public int ItemManufacturerId { get; set; }
+
+        public int ItemId { get; set; }
+
+        [ForeignKey("ManufacturerDetail")]
+        public int ManufacturerId { get; set; }
+
+        public string Notes { get; set; }
+
+        public virtual Manufacturer ManufacturerDetail { get; set; }
     }
 
 }

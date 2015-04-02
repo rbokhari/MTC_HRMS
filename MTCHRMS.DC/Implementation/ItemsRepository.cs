@@ -29,6 +29,7 @@ namespace MTCHRMS.DC
                     .Include(f => f.TechnicianType)
                     .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                     .Include(h => h.ItemYears.Select(j => j.YearDetail))
+                    .Include(j=>j.ItemManufacturers.Select(x=>x.ManufacturerDetail))
                     .Include(q=>q.ItemSuppliers.Select(i=>i.SupplierDetail)));
         }
 
@@ -55,6 +56,18 @@ namespace MTCHRMS.DC
             return _ctx.SaveChanges() > 0;
         }
 
+        public bool CheckItemDuplicate(int itemId, string itemCode)
+        {
+            if (itemId == 0)
+            {
+                return _ctx.Items.Any(r => r.ItemCode.ToLower() == itemCode.ToLower());
+            }
+
+            return
+                _ctx.Items.Any(
+                    r => r.ItemId != itemId && r.ItemCode.ToLower() == itemCode.ToLower());
+        }
+
         public bool AddItem(Item newItem)
         {
             try
@@ -73,10 +86,10 @@ namespace MTCHRMS.DC
                 //    CreatedOn = DateTime.Now
                 //};
 
-                for (int i = 0; i < 1; i++)
-                {
-                    newItem.ItemDepartments.Add(new ItemDepartment(){DepartmentId = 6, CreatedBy = 1, CreatedOn = DateTime.Now});
-                }
+                //for (int i = 0; i < 1; i++)
+                //{
+                //    newItem.ItemDepartments.Add(new ItemDepartment(){DepartmentId = 6, CreatedBy = 1, CreatedOn = DateTime.Now});
+                //}
 
 
                 //newItem.ItemDepartments.Add(itemDept);
@@ -238,43 +251,40 @@ namespace MTCHRMS.DC
         }
 
 
-        public bool CheckItemDepartmentDuplicate(int itemDepartmentId, int departmentId)
+        public bool CheckItemDepartmentDuplicate(int itemId, int itemDepartmentId, int departmentId)
         {
             if (itemDepartmentId == 0)
             {
-                return _ctx.ItemDepartments.Any(r => r.DepartmentId == departmentId);
+                return _ctx.ItemDepartments.Any(r => r.ItemId == itemId && r.DepartmentId == departmentId);
             }
 
             return
                 _ctx.ItemDepartments.Any(
-                    r => r.ItemDepartmentId == itemDepartmentId && r.DepartmentId == departmentId);
+                    r => r.ItemId == itemId && r.ItemDepartmentId == itemDepartmentId && r.DepartmentId == departmentId);
         }
 
-        public bool CheckItemYearDuplicate(int itemYearId, int yearId)
+        public bool CheckItemYearDuplicate(int itemId, int itemYearId, int yearId)
         {
             if (itemYearId == 0)
             {
-                return _ctx.ItemYears.Any(r => r.YearId== yearId);
+                return _ctx.ItemYears.Any(r => r.ItemId == itemId && r.YearId == yearId);
             }
 
             return
                 _ctx.ItemYears.Any(
-                    r => r.ItemYearId == itemYearId && r.YearId == yearId);
+                    r => r.ItemId == itemId && r.ItemYearId == itemYearId && r.YearId == yearId);
         }
 
-
-
-
-        public bool CheckItemSupplierDuplicate(int itemSupplierId, int supplierId)
+        public bool CheckItemSupplierDuplicate(int itemId, int itemSupplierId, int supplierId)
         {
             if (itemSupplierId== 0)
             {
-                return _ctx.ItemSuppliers.Any(r => r.SupplierId== supplierId);
+                return _ctx.ItemSuppliers.Any(r => r.ItemId == itemId && r.SupplierId== supplierId);
             }
 
             return
                 _ctx.ItemSuppliers.Any(
-                    r => r.ItemSupplierId == itemSupplierId && r.SupplierId == supplierId);
+                    r => r.ItemId == itemId && r.ItemSupplierId == itemSupplierId && r.SupplierId == supplierId);
 
         }
 
@@ -331,6 +341,77 @@ namespace MTCHRMS.DC
                     .Where(r => r.ItemSupplierId == itemSupplierId)
                     .Include(b => b.SupplierDetail);
         }
+
+
+        public bool AddItemManufacturer(ItemManufacturer newItemManufacturer)
+        {
+            try
+            {
+                _ctx.ItemManufacturers.Add(newItemManufacturer);
+                return true;
+            }
+            catch (Exception)
+            {
+                //TODO log this error
+                return false;
+            }
+        }
+
+        public bool UpdateItemManufacturer(ItemManufacturer updateItemManufacturer)
+        {
+            try
+            {
+                updateItemManufacturer.ItemId = GetItem(updateItemManufacturer.ItemId).ItemId;
+
+                _ctx.Entry(updateItemManufacturer).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool DeleteItemManufacturer(ItemManufacturer deleteItemManufacturer)
+        {
+            try
+            {
+                var supplier = _ctx.ItemManufacturers.Single(i => i.ItemManufacturerId == deleteItemManufacturer.ItemManufacturerId);
+                _ctx.ItemManufacturers.Remove(deleteItemManufacturer);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+
+        public IQueryable<ItemManufacturer> GetItemManufactuer(int itemManufacturerId)
+        {
+            return
+                _ctx.ItemManufacturers
+                    .Where(r => r.ItemManufacturerId == itemManufacturerId)
+                    .Include(b => b.ManufacturerDetail);
+        }
+
+        public bool CheckItemManufacturerDuplicate(int itemId, int itemManufacturerId, int manufacturerId)
+        {
+            if (itemManufacturerId == 0)
+            {
+                return _ctx.ItemManufacturers.Any(r => r.ItemId == itemId && r.ManufacturerId == manufacturerId);
+            }
+
+            return
+                _ctx.ItemManufacturers.Any(
+                    r =>
+                        r.ItemId == itemId && r.ItemManufacturerId == itemManufacturerId &&
+                        r.ManufacturerId == manufacturerId);
+
+        }
+
     }
 }
 

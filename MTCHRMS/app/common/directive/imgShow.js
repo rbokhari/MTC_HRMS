@@ -19,6 +19,9 @@ accModule.directive("imgLoadingValue", function () {
                         else if (value1 == 'item') {
                             attrs.$set('src', "/Content/img/item.jpg");
                         }
+                        else if (value1 == 'itemmini') {
+                            attrs.$set('src', "/Content/img/item.jpg");
+                        }
                     });
                 }
             });

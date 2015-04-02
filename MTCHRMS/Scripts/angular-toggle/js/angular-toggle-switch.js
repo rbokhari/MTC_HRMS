@@ -20,6 +20,7 @@ angular.module('toggle-switch', ['ng']).directive('toggleSwitch', ['$compile', f
                 if (!$scope.isDisabled) {
                     $scope.model = !$scope.model;
                     //$scope.model = $scope.model ? "1" : "0";
+                    //$scope.model = $scope.model ? "1" : "0";
                     //alert($scope.model);
                 }
                 $scope.onChange();
@@ -75,7 +76,6 @@ angular.module('toggle-switch', ['ng']).directive('toggleSwitch', ['$compile', f
                 };
 
                 scope.$watch('html', function (newValue) {
-                    //alert(newValue);
                     bindSwitch(iElement, newValue);
                 });
             };

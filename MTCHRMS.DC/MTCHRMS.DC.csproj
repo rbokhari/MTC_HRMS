@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\AccountRepository.cs" />
+    <Compile Include="Implementation\ManufacturerRepository.cs" />
     <Compile Include="Implementation\ItemsRepository.cs" />
+    <Compile Include="Interface\IManufacturerRepository.cs" />
     <Compile Include="Interface\IItemsRepository.cs" />
     <Compile Include="Implementation\StoreLocationRepository.cs" />
     <Compile Include="Interface\IStoreLocationRepository.cs" />

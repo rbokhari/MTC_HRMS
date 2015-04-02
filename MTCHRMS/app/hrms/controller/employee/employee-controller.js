@@ -376,6 +376,7 @@ hrmsModule.controller('EmployeeController',
                     appRepository.showAddSuccessGritterNotification();
 
                     $scope.employeeForm.$setPristine();
+                    $scope.resetForm();
                     //$scope.employee = clearDept;
                     console.log("saveAddNew - Successfully !");
 
