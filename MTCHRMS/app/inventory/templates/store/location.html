@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/definition/store/add"></a>
+                        <a ng-if="authentication.isINVAdmin" class="icon-plus-sign" href="/INVPortal/definition/store/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -66,12 +66,16 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr dir-paginate="store in locations | filter:search | itemsPerPage: recordPage">
-                                <td>
+                            <tr ng-if="authentication.isSystemAdmin || authentication.isINVUser || authentication.isINVAdmin" dir-paginate="store in locations | filter:search | itemsPerPage: recordPage">
+                                <td ng-if="authentication.isINVAdmin">
                                     <a ng-href="/INVPortal/definition/store/edit/{{ store.storeId}}"> {{ store.storeCode }} </a>
                                 </td>
-                                <td>
+                                <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ store.storeCode }}</td>
+                                <td ng-if="authentication.isINVAdmin">
                                     <a ng-href="/INVPortal/definition/store/edit/{{ store.storeId}}"> {{ store.storeName }} </a>
+                                </td>
+                                <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">
+                                    {{ store.storeName }}
                                 </td>
                                 <td>
                                     <label ng-class="{'label label-info': store.statusId, 'label label-inverse': store.statusId==0}">

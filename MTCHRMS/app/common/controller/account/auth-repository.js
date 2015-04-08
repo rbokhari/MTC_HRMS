@@ -1,9 +1,9 @@
 ﻿//'use strict';
 accModule.factory('authRepository', [
-    '$http', '$q', 'localStorageService','accountRepository',
-    function($http, $q, localStorageService, accountRepository) {
+    '$http', '$q', 'localStorageService', 'accountRepository', 'appModules', 'appRoles',
+    function($http, $q, localStorageService, accountRepository, appModules, appRoles) {
 
-        var serviceBase = 'http://localhost:90/'; // 'http://10.3.2.149:88/'; //'http://localhost:90/';  
+        var serviceBase = 'http://localhost:90/'; // 'http://10.3.2.149:88/'; //'http://localhost:38618/';  
         var authServiceFactory = {};
 
         var _authentication = {
@@ -18,7 +18,14 @@ accModule.factory('authRepository', [
             phone: "",
             roles: "",
             roleId: "",
-            moduleId:""
+            moduleId: "",
+            isHRMSModule: false,
+            isINVModule: false,
+            isSystemAdmin: false,
+            isHRMSAdmin: false,
+            isHRMSUser: false,
+            isINVAdmin: false,
+            isINVUser:false
     };
 
         //var _saveRegistration = function (registration) {
@@ -90,7 +97,6 @@ accModule.factory('authRepository', [
 
             var deferred = $q.defer();
             var authData = localStorageService.get('authorizationData');
-
             $http.get('/api/employee/GetEmployeeByUserName/?userName=' + authData.userName)
                 .success(function (response) {
 
@@ -102,7 +108,7 @@ accModule.factory('authRepository', [
                     _authentication.empPicture = response.empPicture;
                     _authentication.email = response.email;
                     _authentication.phone = response.phone;
-
+                    
                     accountRepository.getUserById(response.id)
                         .$promise
                         .then(function (res) {
@@ -112,6 +118,15 @@ accModule.factory('authRepository', [
                                 .then(function (response1) {
                                     _authentication.roles = response1.roleName;
                                     _authentication.roleId = response1.roleId;
+
+                                    _authentication.isHRMSModule = _authentication.moduleId == appModules.HRMS_Module;
+                                    _authentication.isINVModule = _authentication.moduleId == appModules.INV_Module;
+                                    _authentication.isSystemAdmin = _authentication.roleId == appRoles.ADMIN;
+                                    _authentication.isHRMSAdmin = _authentication.roleId == appRoles.HRMS_ADMIN;
+                                    _authentication.isHRMSUser = _authentication.roleId == appRoles.HRMS_USER;
+                                    _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
+                                    _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
+
                                     localStorageService.set('userData', { userName: authData.userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
                                     deferred.resolve(response);
                                 });
@@ -218,12 +233,15 @@ accModule.factory('authRepository', [
 
 
                 }, function (err) {
-                //alert("employeeData - error");
                     _logOut();
                     _authentication.isAuth = false;
                 });
         }
 
+        var _isHRMSModule = function () {
+            alert("hrmsmodule ");
+            return true;// $scope.authentication.moduleId == appModules.HRMS_Module;
+        };
 
         //authServiceFactory.saveRegistration = _saveRegistration;
         authServiceFactory.login = _login;
@@ -231,6 +249,7 @@ accModule.factory('authRepository', [
         authServiceFactory.fillAuthData = _fillAuthData;
         authServiceFactory.authentication = _authentication;
         authServiceFactory.lockLogin = _lockLogin;
+        authServiceFactory.isHRMSModule = _isHRMSModule;
 
         return authServiceFactory;
 

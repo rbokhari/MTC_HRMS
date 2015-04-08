@@ -433,7 +433,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemManufacturer.CreatedOn = DateTime.UtcNow;
 
-                    if (_repo.CheckItemSupplierDuplicate(newItemManufacturer.ItemId, 0, newItemManufacturer.ManufacturerId))
+                    if (_repo.CheckItemManufacturerDuplicate(newItemManufacturer.ItemId, 0, newItemManufacturer.ManufacturerId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemManufacturer);
                     }
@@ -454,7 +454,7 @@ namespace MTCHRMS.Controllers
                     }
                     newItemManufacturer.ModifiedOn = DateTime.Now;
 
-                    if (_repo.CheckItemSupplierDuplicate(newItemManufacturer.ItemId, newItemManufacturer.ItemManufacturerId, newItemManufacturer.ManufacturerId))
+                    if (_repo.CheckItemManufacturerDuplicate(newItemManufacturer.ItemId, newItemManufacturer.ItemManufacturerId, newItemManufacturer.ManufacturerId))
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItemManufacturer);
                     }
@@ -480,7 +480,7 @@ namespace MTCHRMS.Controllers
             {
                 if (_repo.DeleteItemManufacturer(deleteManufacturer) && _repo.Save())
                 {
-                    return Request.CreateResponse(HttpStatusCode.Created, deleteManufacturer);
+                    return Request.CreateResponse(HttpStatusCode.OK, deleteManufacturer);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
 

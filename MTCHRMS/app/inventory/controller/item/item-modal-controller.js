@@ -133,7 +133,6 @@ moduleModal.controller('ItemModalController',
         $scope.saveItemManufacturer = function (parentId, itemManufacturer) {
             $scope.errors = [];
             itemManufacturer.itemId = parentId;
-            console.log(itemManufacturer);
             itemRepository.addItemManufacturer(itemManufacturer)
                 .$promise
                 .then(

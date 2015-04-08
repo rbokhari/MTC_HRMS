@@ -245,6 +245,7 @@
     <Content Include="app\inventory\controller\supplier\supplier-repository.js" />
     <Content Include="app\common\controller\validation\validation-controller.js" />
     <Content Include="app\common\controller\validation\validation-repository.js" />
+    <Content Include="app\inventory\directive\dashboard.js" />
     <Content Include="app\inventory\directive\navbar-main.js" />
     <Content Include="app\common\controller\account\account-repository.js" />
     <Content Include="app\common\controller\account\auth-repository.js" />
@@ -260,6 +261,8 @@
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
+    <Content Include="app\inventory\templates\dashboard\manufacturers.html" />
+    <Content Include="app\inventory\templates\dashboard\suppliers.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />
     <Content Include="app\inventory\templates\item\item-image.html" />
     <Content Include="app\inventory\templates\item\item-supplier.html" />
@@ -874,7 +877,7 @@
     <Content Include="Content\template\js\x-editable\tfoot th.today.html" />
     <Content Include="app\common\controller\account\account-controller.js" />
     <Content Include="app\common\controller\app\app-repository.js" />
-    <Content Include="app\hrms\controller\dashboard\dashboard-constroller.js" />
+    <Content Include="app\hrms\controller\dashboard\dashboard-controller.js" />
     <Content Include="app\hrms\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\hrms\controller\employee\employee-modal-controller.js" />
     <Content Include="HRMSPortalAr.html" />

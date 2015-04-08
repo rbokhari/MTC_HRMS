@@ -85,7 +85,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <a id="cmdSave" class="btn btn-primary" ng-click="saveImage(parentId, empPicture);" ng-disabled="frmImage.$invalid">
+            <a ng-if="authentication.isHRMSAdmin" id="cmdSave" class="btn btn-primary" ng-click="saveImage(parentId, empPicture);" ng-disabled="frmImage.$invalid">
                 <i class="icon-save"></i>
                 Save
             </a>

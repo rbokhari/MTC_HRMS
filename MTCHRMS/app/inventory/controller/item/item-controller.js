@@ -134,7 +134,19 @@ invModule.controller('ItemController',
         //alert($routeParams.id);
         $scope.loadItem = function() {
             if ($routeParams.id != undefined) {
+                $scope.isBusy = true;
                 $scope.item = itemRepository.getItemById($routeParams.id);
+                $scope.item.$promise.then(function () {
+                    //alert("success");
+                }, function () {
+                    //alert("error");
+                })
+                .then(function () {
+
+                })
+                .then(function () {
+                    $scope.isBusy = false;
+                });
             }
         };
 
@@ -335,12 +347,13 @@ invModule.controller('ItemController',
 
         $scope.deleteManufacturer = function (index, manufacturer) {
             var x;
+            console.log(manufacturer);
             if (confirm("Are you sure to delete this record ?") == true) {
                 itemRepository.deleteItemManufacturer(manufacturer)
                     .$promise
                     .then(function () {
                         appRepository.showDeleteGritterNotification();
-                        $scope.item[0].itemDepartments.splice(index, 1);
+                        $scope.item[0].itemManufacturers.splice(index, 1);
                     }, function (error) {
                         appRepository.showErrorGritterNotification();
                     });

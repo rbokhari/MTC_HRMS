@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i><span translate="LISTING"></span></h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/definition/manufacturer/add"></a>
+                        <a ng-if="authentication.isINVAdmin" class="icon-plus-sign" href="/INVPortal/definition/manufacturer/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -67,10 +67,11 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr dir-paginate="manufacturer in manufacturers | filter:search | itemsPerPage: recordPage">
-                                    <td>
+                                <tr ng-if="authentication.isSystemAdmin || authentication.isINVUser || authentication.isINVAdmin" dir-paginate="manufacturer in manufacturers | filter:search | itemsPerPage: recordPage">
+                                    <td ng-if="authentication.isINVAdmin">
                                         <a ng-href="/INVPortal/definition/manufacturer/edit/{{ manufacturer.manufacturerId}}"> {{ manufacturer.manufacturerName }} </a>
                                     </td>
+                                    <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{manufacturer.manufacturerName }}</td>
                                     <td>{{ manufacturer.notes }}</td>
                                     <td>{{ manufacturer.countryDetail.nameEn }}</td>
                                     <td>

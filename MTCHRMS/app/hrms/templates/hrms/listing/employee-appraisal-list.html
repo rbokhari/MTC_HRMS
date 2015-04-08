@@ -73,7 +73,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="odd" dir-paginate="appraisal in appraisals | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="appraisal in appraisals | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
                                             <td class="hidden-phone" style="vertical-align: middle;"><a ng-href="/HRMSPortal/employee/detail/{{appraisal.id}}">{{ appraisal.employeeCode}}</a></td>
                                             <td>
                                                 <img class="circular" alt="" data-img-loading-value="{{appraisal.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />

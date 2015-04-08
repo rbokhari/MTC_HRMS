@@ -24,7 +24,7 @@ namespace MTCHRMS.DC
 
         public AC_User GetUser(int id)
         {
-            return _ctx.Users.Single(r => r.UserId == id);
+            return _ctx.Users.Single(r => r.EmployeeId == id);
         }
 
         public bool AddUser(AC_User newUser)

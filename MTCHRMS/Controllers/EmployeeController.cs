@@ -32,7 +32,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/employee/")]
         [HttpGet]
-        [System.Web.Http.Authorize]
+        //[System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get()
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();

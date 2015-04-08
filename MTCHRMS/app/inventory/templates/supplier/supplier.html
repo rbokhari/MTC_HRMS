@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/definition/supplier/add"></a>
+                        <a ng-if="authentication.isINVAdmin" class="icon-plus-sign" href="/INVPortal/definition/supplier/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -67,13 +67,15 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr dir-paginate="supplier in suppliers | filter:search | itemsPerPage: recordPage">
-                                    <td>
+                                <tr ng-if="authentication.isSystemAdmin || authentication.isINVUser || authentication.isINVAdmin" dir-paginate="supplier in suppliers | filter:search | itemsPerPage: recordPage">
+                                    <td ng-if="authentication.isINVAdmin">
                                         <a ng-href="/INVPortal/definition/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierCode }} </a>
                                     </td>
-                                    <td>
+                                    <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ supplier.supplierCode }}</td>
+                                    <td ng-if="authentication.isINVAdmin">
                                         <a ng-href="/INVPortal/definition/supplier/edit/{{ supplier.supplierId}}"> {{ supplier.supplierName }} </a>
                                     </td>
+                                    <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ supplier.supplierName }}</td>
                                     <td>{{ supplier.countryDetail.nameEn }}</td>
                                     <td>
                                         <label ng-class="{'label label-info': supplier.statusId, 'label label-inverse': supplier.statusId==0}">

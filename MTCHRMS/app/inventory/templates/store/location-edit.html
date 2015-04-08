@@ -59,7 +59,7 @@
                                     <input type="checkbox" name="statusId" ng-model="store.statusId" ng-true-value="1" ng-false-value="0" />
                                 </div>
                             </div>
-                            <div class="form-actions">
+                            <div class="form-actions" ng-if="authentication.isINVAdmin">
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(store)" ng-disabled="frm.$invalid">
                                     <i class="icon-save"></i>
                                     Update

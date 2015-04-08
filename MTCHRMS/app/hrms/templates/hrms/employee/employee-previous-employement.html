@@ -32,7 +32,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button type="submit" class="btn btn-primary" ng-click="savePreviousEmployment(parentId, employeePreviousEmployment)" ng-disabled="frmPreviousCompany.$invalid">
+        <button ng-if="authentication.isHRMSAdmin" type="submit" class="btn btn-primary" ng-click="savePreviousEmployment(parentId, employeePreviousEmployment)" ng-disabled="frmPreviousCompany.$invalid">
             <i class="icon-save"></i>
             Save
         </button>

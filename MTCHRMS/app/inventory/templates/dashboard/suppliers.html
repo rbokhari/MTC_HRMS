@@ -1,0 +1,17 @@
+﻿<div class="row-fluid">
+    <h4>All Suppliers </h4>
+
+    <div class="progress progress-striped active" ng-show="isBusy">
+        <div style="width: 100%;" class="bar"></div>
+    </div>
+    <div class="icon-btn span2 red fade-in" ng-repeat="supplier in suppliers">
+        <a href="#">
+            <i class="icon-user"></i>
+            <div>{{ supplier.supplierName}}</div>
+
+            <!--<div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id}:true)">
+                <span class="badge badge-important">{{ filtered.length }}</span>
+            </div>-->
+        </a>
+    </div>
+</div>

@@ -4,13 +4,15 @@
     <div class="progress progress-striped active" ng-show="isBusy">
         <div style="width: 100%;" class="bar"></div>
     </div>
-    <a class="icon-btn span2 red" href="#" ng-repeat="department in departments" ng-show="filtered.length>0">
-        <i class="icon-group"></i>
-        <div>{{ department.departmentName}}</div>
+    <div class="icon-btn span2 red fade-in" ng-repeat="department in departments" ng-show="filtered.length>0">
+        <a href="#">
+            <i class="icon-group"></i>
+            <div>{{ department.departmentName}}</div>
 
-        <div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id}:true)">
-            <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
-            <span class="badge badge-important">{{ filtered.length }}</span>
-        </div>
-    </a>
+            <div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id}:true)">
+                <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
+                <span class="badge badge-important">{{ filtered.length }}</span>
+            </div>
+        </a>
+    </div>
 </div>

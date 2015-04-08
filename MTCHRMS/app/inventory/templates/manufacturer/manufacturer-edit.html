@@ -66,7 +66,7 @@
                                     <toggle-switch html="true" model="manufacturer.statusId" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                 </div>
                             </div>
-                            <div class="form-actions">
+                            <div class="form-actions" ng-if="authentication.isINVAdmin">
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(manufacturer)" ng-disabled="frm.$invalid">
                                     <i class="icon-edit"></i>
                                     <span translate="UPDATE"></span>

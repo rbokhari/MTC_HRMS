@@ -34,7 +34,7 @@
                             <div class="span6">
                                 <h4 class="title grey">Staff Listings</h4>
                                 <div class="clearfix">
-                                    <ul class="nav nav-list faq-list">
+                                    <ul class="nav nav-list faq-list" ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
                                         <li>
                                             <a href="/HRMSPortal/employee/contactlist"><i class=" icon-phone"></i> Staff Contact No Summary</a>
                                         </li>

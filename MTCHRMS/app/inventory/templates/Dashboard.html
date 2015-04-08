@@ -24,24 +24,37 @@
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="row-fluid circle-state-overview">
+            <div class="row-fluid circle-state-overview" ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser">
                 <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
                     <div class="circle-wrap">
                         <div class="stats-circle turquoise-color">
                             <i class="icon-key"></i>
                         </div>
                         <p>
-                            <strong>{{items.length}}</strong> <h4>Total Items</h4>
+                            <img data-ng-hide="items.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="items.length">{{items.length}}</strong> <h4>Total Items</h4>
                         </p>
                     </div>
                 </div>
                 <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
                     <div class="circle-wrap">
                         <div class="stats-circle red-color">
-                            <i class="icon-user-md"></i>
+                            <i class="icon-user"></i>
                         </div>
                         <p>
-                            <strong>{{suppliers.length}}</strong> <h4>Suppliers</h4>
+                            <img data-ng-hide="suppliers.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="suppliers.length">{{suppliers.length}}</strong> <h4>Suppliers</h4>
+                        </p>
+                    </div>
+                </div>
+                <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
+                    <div class="circle-wrap">
+                        <div class="stats-circle red-color">
+                            <i class="icon-list-ol"></i>
+                        </div>
+                        <p>
+                            <img data-ng-hide="manufacturers.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="manufacturers.length">{{manufacturers.length}}</strong> <h4>Manufacturers</h4>
                         </p>
                     </div>
                 </div>
@@ -51,20 +64,21 @@
                             <i class="icon-list-ol"></i>
                         </div>
                         <p>
-                            <strong>{{locations.length}}</strong> <h4>Store</h4>
+                            <img data-ng-hide="locations.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="locations.length">{{locations.length}}</strong> <h4>Store</h4>
                         </p>
                     </div>
                 </div>
             </div>
 
             <hr />
-
+            
+            <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
+            
+            <hr />
+            
+            <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function() {
-        $('.sidebar-menu > .active').removeClass('active open');
-        $('#liDashboard').addClass('active');
-    });
-</script>
+

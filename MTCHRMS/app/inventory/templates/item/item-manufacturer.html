@@ -9,12 +9,9 @@
                 <div id="dvduplicate" class="control-group">
                     <label class="control-label">Manufacturer :</label>
                     <div class="controls">
-                        <ul>
-                            <li ng-repeat="man in iManufacturers">{{man.manufacturerId}} - {{man.manufacturerName}} - {{itemManufacturer.manufacturerId}},{{itemManufacturer.notes}}</li>
-                        </ul>
-                        <select ng-model="itemManufacturer.manufacturerId" ng-options="man1.manufactuerId as man1.manufacturerName for man1 in iManufacturers"></select>
-                        <select ng-model="itemSupplier.supplierId" ng-options="supplier.supplierId as supplier.supplierName for supplier in itemSuppliers" required></select>
-                        <input type="text" ng-model="itemManufacturer.manufacturerId" />
+                        <select id="cManufacturer" name="cManufacturer" ng-model="itemManufacturer.manufacturerId" ng-options="manufacture.manufacturerId as manufacture.manufacturerName for manufacture in iManufacturers" required></select>
+                        <img id="imgError" class="help-inline" style="visibility: hidden;" src="/Content/img/warning-icon-16.png" alt="" />
+                        <div class="help-inline" ng-show="frm.cManufacturer.$error.required && frm.cManufacturer.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
@@ -28,7 +25,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button type="submit" id="cmdSave" class="btn btn-primary" type="submit" ng-click="saveItemManufacturer(parentId, itemManufacturer)" ng-disabled="frm.$invalid">
+        <button ng-if="authentication.isINVAdmin" type="submit" id="cmdSave" class="btn btn-primary" type="submit" ng-click="saveItemManufacturer(parentId, itemManufacturer)" ng-disabled="frm.$invalid">
             <i class="icon-save"></i>
             Save
         </button>

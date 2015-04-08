@@ -24,8 +24,8 @@
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="row-fluid metro-overview-cont">
-                <div data-desktop="span2" data-tablet="span4" class="span2 responsive">
+            <div class="row-fluid metro-overview-cont" ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
+                <div data-desktop="span2" data-tablet="span4" class="span2 view-animate responsive">
                     <div class="metro-overview green-color clearfix">
                         <div class="display">
                             <i class="icon-user"></i>
@@ -122,20 +122,14 @@
                         </div>
                     </div>
                 </div>
-
+                <hr />
             </div>
-            <hr/>
             
-            <departments></departments>
+            
+            <departments ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser"></departments>
             
             <hr/>
-            <nationalities></nationalities>
+            <nationalities ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser"></nationalities>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function() {
-        $('.sidebar-menu > .active').removeClass('active open');
-        $('#liDashboard').addClass('active');
-    });
-</script>

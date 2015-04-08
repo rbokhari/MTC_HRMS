@@ -39,9 +39,9 @@ namespace MTCHRMS.Controllers
         [Route("api/account/GetUserDetail/")]
         [HttpGet]
         
-        public AC_User GetUserDetail()
+        public AC_User GetUserDetail(int id)
         {
-            var user = _repo.GetUser(1);
+            var user = _repo.GetUser(id);
             return user;
         }
 

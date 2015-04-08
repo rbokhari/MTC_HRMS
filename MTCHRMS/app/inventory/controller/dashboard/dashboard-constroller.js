@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('DashboardController',
 [
-    '$scope', '$location', '$window','$routeParams', 'authRepository','supplierRepository', 'itemRepository','locationRepository',
-    function ($scope, $location, $window, $routeParams, authRepository, supplierRepository, itemRepository, locationRepository) {
+    '$scope', '$location', '$window','$routeParams', 'authRepository','supplierRepository', 'itemRepository','locationRepository','manufacturerRepository',
+    function ($scope, $location, $window, $routeParams, authRepository, supplierRepository, itemRepository, locationRepository, manufacturerRepository) {
 
         console.log("inventory dashboard controller");
 
@@ -29,6 +29,7 @@ invModule.controller('DashboardController',
             $scope.items = itemRepository.getAllItems();
             $scope.suppliers = supplierRepository.getAllSuppliers();
             $scope.locations = locationRepository.getAllLocations();
+            $scope.manufacturers = manufacturerRepository.getAllManufacturers();
         };
     }
 ]);

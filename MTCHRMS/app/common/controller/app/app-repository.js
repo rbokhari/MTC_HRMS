@@ -2,7 +2,8 @@
 
 'use strict';
 
-accModule.factory('appRepository', ['$resource', '$http', function ($resource, $http) {
+accModule.factory('appRepository', ['$resource',
+    function ($resource) {
 
     var _showAddSuccessGritterNotification = function () {
         $.gritter.add({

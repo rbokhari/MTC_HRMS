@@ -3,7 +3,7 @@
 'use strict';
 hrmsModule.controller('DashboardController',
 [
-    '$scope', 'appRepository', 'departmentRepository', 'employeeRepository', 'validationRepository', '$location', '$routeParams', '$translate', 'appModules', 'appRoles',
+    '$scope', 'appRepository', 'departmentRepository', 'employeeRepository', 'validationRepository', '$location', '$routeParams', '$translate', 
     function ($scope, appRepository, departmentRepository, employeeRepository, validationRepository, $location, $routeParams, $translate) {
 
         console.log("dashboard controller");
@@ -17,6 +17,8 @@ hrmsModule.controller('DashboardController',
             $scope.mainPortal = "HRMSPortal";
             $translate.use('en_US');
         }
+
+        //$scope.isHRMSModule1 = appRepository.isHRMSModule;
 
         $scope.isBusy = true;
         $scope.isProbationBusy = true;

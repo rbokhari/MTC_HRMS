@@ -75,7 +75,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr class="odd" dir-paginate="list in employeeContactNoList | filter:search | itemsPerPage: recordPage">
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="list in employeeContactNoList | filter:search | itemsPerPage: recordPage">
                                             <td style="vertical-align: middle;"><a ng-href="/HRMSPortal/employee/detail/{{list.empId}}">{{list.empCode}}</a></td>
                                             <td style="vertical-align: middle;">
                                                 <img class="circular" alt="" data-img-loading-value="{{list.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />

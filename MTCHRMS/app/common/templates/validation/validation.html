@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>&nbsp;{{validation.nameEn}}</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/definition/validation/{{validation.id}}/add"></a>
+                        <a ng-if="authentication.isINVAdmin" class=" icon-plus-sign" href="/INVPortal/definition/validation/{{validation.id}}/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -67,12 +67,14 @@
                                 </td>
                             </tr>
                             <tr dir-paginate="validation in validationDetails | filter:search | itemsPerPage: recordPage">
-                                <td>
+                                <td ng-if="authentication.isINVAdmin">
                                     <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.nameEn }} </a>
                                 </td>
-                                <td>
+                                <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ validation.nameEn }}</td>
+                                <td ng-if="authentication.isINVAdmin">
                                     <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.description }} </a>
                                 </td>
+                                <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ validation.description }}</td>
                                 <td>
                                     <label ng-class="{'label label-info': validation.isActive, 'label label-inverse': validation.isActive==0}">
                                         <ng-pluralize count="validation.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>

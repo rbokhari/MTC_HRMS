@@ -8,32 +8,32 @@
             <li class="has-sub active" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
-                        <i class="icon-user"></i>
+                        <i class="icon-edit"></i>
                     </span> Definition
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
                         <a class="" href="/INVPortal/definition/store/list">Store Location</a>
                     </li>
-                    <li id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
                         <a class="" href="/INVPortal/definition/validation/7">Item Type</a>
                     </li>
-                    <li id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
                         <a class="" href="/INVPortal/definition/validation/8">Item Category</a>
                     </li>
-                    <li id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
                         <a class="" href="/INVPortal/definition/manufacturer/">Manufacturer</a>
                     </li>
-                    <li id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
                         <a class="" href="/INVPortal/definition/supplier/list">Supplier</a>
                     </li>
                 </ul>
             </li>
-            <li class="has-sub" ng-class="{ active: isActiveParentNavigation('/INVPortal/item/')}" id="liHRMS">
+            <li class="has-sub" ng-class="{ active: isActiveParentNavigation('/INVPortal/item/')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
-                        <i class="icon-user"></i>
+                        <i class="icon-key"></i>
                     </span> Inventory
                     <span class="arrow"></span>
                 </a>

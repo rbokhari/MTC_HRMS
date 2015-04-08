@@ -5,7 +5,7 @@
 accModule.factory('accountRepository', ['$resource', function ($resource) {
 
     var _getUserById = function (id) {
-        return $resource('/api/account/GetUserDetail/?id' + id).get();
+        return $resource('/api/account/GetUserDetail/?id=' + id).get();
     };
 
     var _getRoleById = function (id) {

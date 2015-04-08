@@ -42,7 +42,8 @@ namespace MTCHRMS.DC
                 .Include(f => f.TechnicianType)
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
-                .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail));
+                .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
+                .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
 
         }
 
@@ -377,8 +378,8 @@ namespace MTCHRMS.DC
         {
             try
             {
-                var supplier = _ctx.ItemManufacturers.Single(i => i.ItemManufacturerId == deleteItemManufacturer.ItemManufacturerId);
-                _ctx.ItemManufacturers.Remove(deleteItemManufacturer);
+                var manufacturer = _ctx.ItemManufacturers.Single(i => i.ItemManufacturerId == deleteItemManufacturer.ItemManufacturerId);
+                _ctx.ItemManufacturers.Remove(manufacturer);
                 return true;
             }
             catch (Exception)
@@ -394,7 +395,7 @@ namespace MTCHRMS.DC
             return
                 _ctx.ItemManufacturers
                     .Where(r => r.ItemManufacturerId == itemManufacturerId)
-                    .Include(b => b.ManufacturerDetail);
+                    .Include(b => b.ManufacturerDetail.CountryDetail);
         }
 
         public bool CheckItemManufacturerDuplicate(int itemId, int itemManufacturerId, int manufacturerId)

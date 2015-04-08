@@ -47,7 +47,7 @@
         </div>
         <div class="modal-footer">
             <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button type="submit" class="btn btn-primary" ng-click="saveSupplierContract(parentId, supplierContract);" ng-disabled="frm.$invalid">
+            <button ng-if="authentication.isINVAdmin" type="submit" class="btn btn-primary" ng-click="saveSupplierContract(parentId, supplierContract);" ng-disabled="frm.$invalid">
                 <i class="icon-save"></i>&nbsp;Save
             </button>
         </div>

@@ -114,7 +114,6 @@ namespace MTCHRMS.DC
                 //    .Include("DepartmentId")
                 //    .Include("ValidationDetailId");
 
-
                 return _ctx.EmployeeDefs.Where(r => r.Id == id)
                     .Include(c => c.Childrens.Select(g => g.ChildGenderDetail))
                     .Include(p => p.EmployeePassports)
@@ -396,8 +395,6 @@ namespace MTCHRMS.DC
             }
             
         }
-
-
 
         public bool AddEmployeeQualification(EmployeeQualification newQualification)
         {

@@ -3,8 +3,8 @@
 
 accModule.controller('AccountController',
 [
-    '$scope', 'authRepository', '$location','$window','appModules','appRoles',
-    function ($scope, authRepository, $location, $window, appModules, appRoles) {
+    '$scope', 'authRepository', '$location','$window','appModules',
+    function ($scope, authRepository, $location, $window, appModules) {
 
         console.log("account controller");
         $scope.loginData = {
@@ -29,7 +29,6 @@ accModule.controller('AccountController',
                     //    $window.location.href = '/INVPortal';
                     //}
                     
-                   
                     //$window.location.href = '/HRMSPortal';
                 },
                 function (err) {
@@ -60,6 +59,9 @@ accModule.controller('AccountController',
                     console.log(err);
                 });
         };
+
+
+        
 
         //var userDetail = function(id) {
         //    accountRepository.getUserById(id)

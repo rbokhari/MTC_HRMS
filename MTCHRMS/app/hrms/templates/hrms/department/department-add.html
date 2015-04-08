@@ -58,7 +58,7 @@
                                     <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
                                 </div>
                             </div>
-                            <div class="form-actions">
+                            <div class="form-actions" ng-if="authentication.isHRMSAdmin">
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(department)" ng-disabled="frmDepartment.$invalid">
                                     <i class="icon-save"></i>
                                     <span translate="SAVE"></span>&nbsp;

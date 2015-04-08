@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>Items Listing</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/INVPortal/item/add"></a>
+                        <a ng-if="authentication.isINVAdmin" class="icon-plus-sign" href="/INVPortal/item/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -70,7 +70,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr dir-paginate="item in items | filter:search | itemsPerPage: recordPage">
+                            <tr ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" dir-paginate="item in items | filter:search | itemsPerPage: recordPage">
                                 <td>{{$index + 1}}</td>
                                 <td>
                                     <div class="zoom">
@@ -89,7 +89,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div style="height:40px;">
+                    <div ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" style="height:40px;">
                         <span class="pull-left bottom" ng-show="items.length>0">
                             Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
                         </span>

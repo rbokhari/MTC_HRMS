@@ -14,7 +14,7 @@
   text-align: center;
   width: 100%;
   bottom: 0px;
-  font: 400 18px/1 'Kaushan Script', cursive;
+  font: 400 16px/1 'Kaushan Script', cursive;
   color: #888;
 }
 .img-frame {
@@ -22,4 +22,155 @@
   padding: 8px;
   border: 1px solid #999999;
 }
+.emp-card {
+  position: relative;
+  width: 250px;
+}
+.emp-card img {
+  border: 5px solid #fff;
+  border-bottom: 35px solid #fff;
+  -webkit-box-shadow: 1px 2px 3px 3px #999999;
+  -moz-box-shadow: 1px 2px 3px 3px #999999;
+  box-shadow: 1px 2px 3px 3px #999999;
+}
+.emp-card p {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 0px;
+  font: 400 16px/1 'Kaushan Script', cursive;
+  color: #888;
+}
+#bcbg {
+  width: 250px;
+  height: 100px;
+  max-width: 200px;
+  background: transparent;
+  padding: 1px;
+  font-family: 'Ubuntu', sans-serif;
+}
+.containercard {
+  background: #222627;
+  width: 250px;
+  height: 150px;
+  border: 2px dotted #1ba9cc;
+  font-family: 'Ubuntu', sans-serif;
+}
+.line1 {
+  font-family: 'The Girl Next Door', cursive;
+  font-size: 14px;
+  color: #fff;
+  margin: 8px;
+}
+.line2 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 15px;
+  color: #fff;
+  margin: 1px 0 0 9px;
+}
+.contact {
+  font-family: 'Ubuntu', sans-serif;
+  color: #fff;
+  margin: 5px 0 0 9px;
+  padding: 5px;
+}
+.logo {
+  background: transparent ;
+  width: 200px;
+  height: 200px;
+  float: right;
+  margin: -100px 2px 0 0;
+  text-align: center;
+}
+.business-card {
+  margin: 3px;
+  position: relative;
+  max-width: 350px;
+  min-width: 350px;
+  /*width: 320px;*/
+  /*height: 200px;*/
+  color: #ffffff;
+  background: #488CC7;
+  -moz-box-shadow: 0 0 10px #999;
+  -webkit-box-shadow: 0 0 10px #999;
+  box-shadow: 0 0 10px #999;
+  overflow: hidden;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+.business-card .background-stripes {
+  position: relative;
+  background: #fff;
+}
+.business-card-link {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+  color: azure;
+}
+.business-card p > a {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 18px;
+}
+.business-card footer {
+  /*background-color:olive;*/
+  text-align: center;
+  position: relative;
+  bottom: -35px;
+  font-family: 'Kreon';
+  letter-spacing: 1px;
+}
+/*.business-card .background-stripes .stripe {
+  position: absolute;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  -webkit-transform-origin: 100% 100%;
+  -moz-transform-origin: 100% 100%;
+  -o-transform-origin: 100% 100%;
+  -ms-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
+  box-shadow: 0 0 2px #999;
+}
+
+.business-card .background-stripes .stripe-1 {
+  width: 100px;
+  height: 40px;
+  background: #eee;
+}*/
+/*.business-card header {
+  text-align: center;
+  position: relative;
+  font-size: 3em;
+  z-index: 999;
+  font-family: 'Monoton';
+  color: #222;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.25);
+}
+
+.business-card footer {
+  text-align: center;
+  position: relative;
+  bottom: -35px;
+  font-family: 'Kreon';
+  letter-spacing: 1px;
+}
+
+.business-card footer span.contact-title {
+  background: rgba(255,255,255,0.5);
+  margin-top: 20px;
+  box-shadow: 0 0 2px #ccc, inset 0 0 0px #aaa;
+  padding: 5px;
+}
+
+.business-card footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.business-card footer ul li {
+  text-shadow: 0 1px 0 rgba(255,255,255,0.25), 0 -1px 0 rgba(0,0,0,0.25);
+}*/
 /*# sourceMappingURL=style-common.css.map */
