@@ -274,6 +274,11 @@
     <Content Include="app\inventory\templates\store\location-edit.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contract.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contact.html" />
+    <Content Include="bg1.png" />
+    <Content Include="bg2.jpg" />
+    <Content Include="bg3.jpg" />
+    <Content Include="bg4.jpg" />
+    <Content Include="bg5.jpg" />
     <Content Include="Content\animate.css">
       <DependentUpon>animate.less</DependentUpon>
     </Content>

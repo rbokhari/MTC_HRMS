@@ -4,18 +4,18 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Staff <small> Update </small>
+                <span translate="EMPLOYEES"></span> <small> <span translate="UPDATE"></span> </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/HRMSPortal/employee">Staff List</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/employee"><span translate="EMPLOYEES"></span></a><span class="divider">&nbsp;</span></li>
                 <li>
-                    <a ng-href="/HRMSPortal/employee/detail/{{employee[0].id}}">Staff Detail</a><span class="divider-last">&nbsp;</span>
+                    <a ng-href="/{{mainPortal}}/employee/detail/{{employee[0].id}}"><span translate="UPDATE"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
             </ul>
         </div>
@@ -34,7 +34,7 @@
             <div class="span12">
                 <div class="widget">
                     <div class="widget-title">
-                        <h4><i class="icon-user"></i>  Personal Information</h4>
+                        <h4><i class="icon-user"></i>  <span translate="PERSONAL_INFORMATION"></span></h4>
                         <span class="tools">
                             <a href="javascript:;" class="icon-chevron-down"></a>
                         </span>
@@ -44,7 +44,7 @@
                             <div class="span6">
                                 <div class="form-horizontal">
                                     <div class="control-group">
-                                        <label for="tCode" class="control-label">Employee No :</label>
+                                        <label for="tCode" class="control-label"><span translate="EMPLOYEE_NO"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tCode" name="tCode" ng-model="employee[0].employeeCode" required />
                                             <div class="help-inline" ng-show="staffForm.tCode.$error.required && staffForm.tCode.$dirty">*</div>
@@ -52,59 +52,59 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Rank / Grade :</label>
+                                        <label class="control-label"><span translate="RANK_GRADE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="rRank" name="tRank" ng-model="employee[0].rank" required />
                                             <div class="help-inline" ng-show="staffForm.tRank.$error.required && staffForm.tRank.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Full Name :</label>
+                                        <label class="control-label"><span translate="EMPLOYEE_NAME"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tFullName" name="tFullName" ng-model="employee[0].employeeName" required />
                                             <div class="help-inline" ng-show="staffForm.tFullName.$error.required && staffForm.tFullName.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Designation :</label>
+                                        <label class="control-label"><span translate="DESIGNATION"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tDesignation" name="tDesignation" ng-model="employee[0].designation" required />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Mobile :</label>
+                                        <label class="control-label"><span translate="MOBILE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tMobile" name="tMobile" ng-model="employee[0].mobile" required />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Email :</label>
+                                        <label class="control-label"><span translate="EMAIL"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tEmail" name="tEmail" ng-model="employee[0].email" required />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Nationality :</label>
+                                        <label class="control-label"><span translate="NATIONALITY"></span> :</label>
                                         <div class="controls">
                                             <select id="cNationality" name="cNationality" ng-model="employee[0].nationalityId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities" required></select>
                                             <div class="help-inline" ng-show="staffForm.cNationality.$error.required && staffForm.cNationality.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Religion :</label>
+                                        <label class="control-label"><span translate="RELIGION"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tReligion" name="tReligion" ng-model="employee[0].religion" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Birth Place :</label>
+                                        <label class="control-label"><span translate="BIRTH_PLACE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tBirthPlace" name="tBirthPlace" ng-model="employee[0].placeOfBirth" required />
                                             <div class="help-inline" ng-show="staffForm.tBirthPlace.$error.required && staffForm.tBirthPlace.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Residential Address :</label>
+                                        <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
                                         <div class="controls">
                                             <textarea ng-model="employee[0].address" class="input-xlarge"></textarea>
                                         </div>
@@ -115,7 +115,7 @@
                             <div class="span6">
                                 <div class="form-horizontal">
                                     <div class="control-group">
-                                        <label class="control-label">Joining Date :</label>
+                                        <label class="control-label"><span translate="JOINING_DATE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" ng-model="employee[0].appointment" data-date-format="dd/mm/yyyy" datepicker required />
                                             <!--<input type="text" id="tAppintmentDate" name="tAppintmentDate" ng-model="employee[0].appointment" datepicker data-date-format="dd/mm/yyyy" required />-->
@@ -123,58 +123,58 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Department :</label>
+                                        <label class="control-label"><span translate="DEPARTMENT"></span> :</label>
                                         <div class="controls">
                                             <select id="cPostedTo" name="cPostedTo" ng-model="employee[0].postedTo" ng-options="department.id as department.departmentName for department in departments" required></select>
                                             <div class="help-inline" ng-show="staffForm.cPostedTo.$error.required && staffForm.cPostedTo.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Regiment :</label>
+                                        <label class="control-label"><span translate="REGIMENT"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tRegiment" name="tRegiment" ng-model="employee[0].parentRegiment" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Office Contact :</label>
+                                        <label class="control-label"><span translate="CONTACT_NO"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tPhone" name="tRegiment" ng-model="employee[0].phone" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Supervisor :</label>
+                                        <label class="control-label"><span translate="SUPERVISOR"></span> :</label>
                                         <div class="controls">
                                             <select id="tSupervisor" name="tSupervisor" ng-model="employee[0].managerId" ></select>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">User Name :</label>
+                                        <label class="control-label"><span translate="USER_NAME"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tUserName" name="tUserName" ng-model="employee[0].userName" required />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Blood Group :</label>
+                                        <label class="control-label"><span translate="BLOOD_GROUP"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tBlookGroup" name="tBlookGroup" ng-model="employee[0].bloodGroup" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Date of Birth :</label>
+                                        <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tDOB" name="tDOB" class="date-picker" ng-model="employee[0].dateOfBirth" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Expirty Date :</label>
+                                        <label class="control-label"><span translate="CONTRACT_EXPIRE"></span> :</label>
                                         <div class="controls">
                                             <input type="text" id="tDOE" name="tDOE" class="date-picker" ng-model="employee[0].serviceEndDate" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOE.$error.required && staffForm.tDOE.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Address (Permanent) :</label>
+                                        <label class="control-label"><span translate="PERMANENT_ADDRESS"></span> :</label>
                                         <div class="controls">
                                             <textarea ng-model="employee[0].permanentAddress" class="input-xlarge"></textarea>
                                         </div>
@@ -186,11 +186,11 @@
                         <div class="form-actions">
                             <button ng-if="authentication.isHRMSAdmin" type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(employee[0])" ng-disabled="staffForm.$isvalid">
                                 <i class="icon-save"></i>
-                                Update
+                                <span translate="UPDATE"></span>
                             </button>
                             <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/employee/detail/{{employee[0].id}}">
                                 <i class="icon-undo"></i>
-                                Cancel
+                                <span translate="CANCEL"></span>
                             </a>
                         </div>
                         <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>

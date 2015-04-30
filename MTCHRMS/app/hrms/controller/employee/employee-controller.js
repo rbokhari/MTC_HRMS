@@ -31,6 +31,7 @@ hrmsModule.controller('EmployeeController',
 
         // Modal service start ----------------
         $scope.showPassport = function (id) {
+            
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-passport.html",
                 controller: "EmployeeModalController",

@@ -32,10 +32,15 @@ accModule.controller('AccountController',
                     //$window.location.href = '/HRMSPortal';
                 },
                 function (err) {
-                    console.log(err);
+                    console.log(err.status);
                     //$scope.message = err.error_description;
                     //$scope.message = err.error;
-                    $scope.message = "Invalid Username or Password !";
+                    if (err.status == undefined) {
+                        $scope.message = "Invalid Username or Password !";
+                    }
+                    else if (err.status == 500) {
+                        $scope.message = "User not allowed to login system !";
+                    }
                 });
         };
 
@@ -57,6 +62,7 @@ accModule.controller('AccountController',
                 },
                 function(err) {
                     console.log(err);
+                    $window.location.href = '/Login';
                 });
         };
 

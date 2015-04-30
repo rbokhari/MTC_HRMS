@@ -27,6 +27,11 @@ namespace MTCHRMS.DC
             return _ctx.Users.Single(r => r.EmployeeId == id);
         }
 
+        public AC_User GetUserByUserName(string userName)
+        {
+            return _ctx.Users.Single(r => r.UserName.ToLower() == userName.ToLower());
+        }
+
         public bool AddUser(AC_User newUser)
         {
             try

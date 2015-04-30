@@ -15,10 +15,21 @@
     <link href="/Content/css/style.css" rel="stylesheet" />
     <link href="/Content/css/style_responsive.css" rel="stylesheet" />
     <link href="/Content/css/style_default.css" rel="stylesheet" id="style_color" />
+    <style>
+        html {
+            background: url(bg4.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            -ms-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body id="login-body" ng-controller="AccountController">
+<body id="login-body" ng-controller="AccountController" style="background: transparent !important;">
     <!-- BEGIN LOGIN -->
     <div id="login">
         <!-- BEGIN LOGIN FORM -->

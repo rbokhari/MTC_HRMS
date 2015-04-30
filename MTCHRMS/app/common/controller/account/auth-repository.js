@@ -61,22 +61,36 @@ accModule.factory('authRepository', [
 
             var deferred = $q.defer();
 
-            $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function(response) {
+            $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                .success(function(response) {
+                console.log("token done");
+                accountRepository.getUserByUserName(loginData.userName)
+                    .$promise
+                    .then(function(res) {
 
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, role: _authentication.roles });
+                        console.log("getuser by username done");
+                        _authentication.moduleId = res.moduleId;
+                        localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, role: _authentication.roles });
 
-                _authentication.isAuth = true;
-                _authentication.userName = loginData.userName;
+                        _authentication.isAuth = true;
+                        _authentication.userName = loginData.userName;
+
+                        deferred.resolve(response);
+
+                    },function (error) {
+                        //alert("not done");
+                        //$scope.message = "User not allowed to login this system.";
+                        deferred.reject(error);
+                    });
 
                 //_fillAuthData();
 
-                deferred.resolve(response);
-                
-            }).error(function (err, status) {
-                _logOut();
-                console.log(err);
-                deferred.reject(err);
-            });
+
+            }).error(function(err, status) {
+                    _logOut();
+                    console.log(err);
+                    deferred.reject(err);
+                });
 
             return deferred.promise;
 
@@ -97,46 +111,53 @@ accModule.factory('authRepository', [
 
             var deferred = $q.defer();
             var authData = localStorageService.get('authorizationData');
-            $http.get('/api/employee/GetEmployeeByUserName/?userName=' + authData.userName)
-                .success(function (response) {
+            
+            if (authData != null) {
+                $http.get('/api/employee/GetEmployeeByUserName/?userName=' + authData.userName)
+                    .success(function(response) {
 
-                    _authentication.isAuth = true;
-                    _authentication.userName = response.userName;
-                    _authentication.fullName = response.employeeName;
-                    _authentication.employeeId = response.id;
-                    _authentication.departmentName = response.postedTo;
-                    _authentication.empPicture = response.empPicture;
-                    _authentication.email = response.email;
-                    _authentication.phone = response.phone;
-                    
-                    accountRepository.getUserById(response.id)
-                        .$promise
-                        .then(function (res) {
-                            _authentication.moduleId = res.moduleId;
-                            accountRepository.getRoleById(res.roleId)
-                                .$promise
-                                .then(function (response1) {
-                                    _authentication.roles = response1.roleName;
-                                    _authentication.roleId = response1.roleId;
+                        _authentication.isAuth = true;
+                        _authentication.userName = response.userName;
+                        _authentication.fullName = response.employeeName;
+                        _authentication.employeeId = response.id;
+                        _authentication.departmentName = response.postedTo;
+                        _authentication.empPicture = response.empPicture;
+                        _authentication.email = response.email;
+                        _authentication.phone = response.phone;
 
-                                    _authentication.isHRMSModule = _authentication.moduleId == appModules.HRMS_Module;
-                                    _authentication.isINVModule = _authentication.moduleId == appModules.INV_Module;
-                                    _authentication.isSystemAdmin = _authentication.roleId == appRoles.ADMIN;
-                                    _authentication.isHRMSAdmin = _authentication.roleId == appRoles.HRMS_ADMIN;
-                                    _authentication.isHRMSUser = _authentication.roleId == appRoles.HRMS_USER;
-                                    _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
-                                    _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
+                        accountRepository.getUserById(response.id)
+                            .$promise
+                            .then(function(res) {
+                                _authentication.moduleId = res.moduleId;
+                                accountRepository.getRoleById(res.roleId)
+                                    .$promise
+                                    .then(function(response1) {
+                                        _authentication.roles = response1.roleName;
+                                        _authentication.roleId = response1.roleId;
 
-                                    localStorageService.set('userData', { userName: authData.userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
-                                    deferred.resolve(response);
-                                });
-                        });
-                }).error(function (err, status) {
-                    //_logOut();
-                    console.log(err);
-                    deferred.reject(err);
-                });
+                                        _authentication.isHRMSModule = _authentication.moduleId == appModules.HRMS_Module;
+                                        _authentication.isINVModule = _authentication.moduleId == appModules.INV_Module;
+                                        _authentication.isSystemAdmin = _authentication.roleId == appRoles.ADMIN;
+                                        _authentication.isHRMSAdmin = _authentication.roleId == appRoles.HRMS_ADMIN;
+                                        _authentication.isHRMSUser = _authentication.roleId == appRoles.HRMS_USER;
+                                        _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
+                                        _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
 
+                                        localStorageService.set('userData', { userName: authData.userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
+                                        deferred.resolve(response);
+                                    });
+                            }, function(error) {
+                                _logOut();
+                                deferred.reject(response);
+                            });
+                    }).error(function(err, status) {
+                        //_logOut();
+                        console.log(err);
+                        deferred.reject(err);
+                    });
+            } else {
+                deferred.reject();
+            }
             return deferred.promise;
 
 
@@ -239,7 +260,7 @@ accModule.factory('authRepository', [
         }
 
         var _isHRMSModule = function () {
-            alert("hrmsmodule ");
+            //alert("hrmsmodule ");
             return true;// $scope.authentication.moduleId == appModules.HRMS_Module;
         };
 

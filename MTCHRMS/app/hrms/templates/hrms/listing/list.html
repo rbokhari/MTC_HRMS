@@ -4,13 +4,13 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Staff <small> listing </small>
+                <span translate="EMPLOYEES"></span>  <small> <span translate="LISTING"></span>  </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/HRMSPortal">HRMS</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}">HRMS</a><span class="divider">&nbsp;</span></li>
                 <li><a href="#">Listing</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
@@ -36,22 +36,22 @@
                                 <div class="clearfix">
                                     <ul class="nav nav-list faq-list" ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
                                         <li>
-                                            <a href="/HRMSPortal/employee/contactlist"><i class=" icon-phone"></i> Staff Contact No Summary</a>
+                                            <a href="/{{mainPortal}}/employee/contactlist"><i class=" icon-phone"></i> Staff Contact No Summary</a>
                                         </li>
                                         <li>
-                                            <a href="/HRMSPortal/employee/probationexpire/"><i class=" icon-user"></i> Probation Expire</a>
+                                            <a href="/{{mainPortal}}/employee/probationexpire/"><i class=" icon-user"></i> <span translate="PROBATION_EXPIRY"></span></a>
                                         </li>
                                         <li>
-                                            <a href="/HRMSPortal/employee/appraisal/"><i class=" icon-calendar"></i> Appraisal</a>
+                                            <a href="/{{mainPortal}}/employee/appraisal/"><i class=" icon-calendar"></i> <span translate="APPRAISAL"></span></a>
                                         </li>
                                         <li>
-                                            <a href="/HRMSPortal/employee/contractexpire"><i class=" icon-signout"></i> Contract Expire</a>
+                                            <a href="/{{mainPortal}}/employee/contractexpire"><i class=" icon-signout"></i> <span translate="CONTRACT_EXPIRE"></span></a>
                                         </li>
                                         <li>
-                                            <a href="/HRMSPortal/employee/visaexpire"><i class=" icon-plane"></i> Visa Expiry</a>
+                                            <a href="/{{mainPortal}}/employee/visaexpire"><i class=" icon-plane"></i> <span translate="VISA_EXPIRE"></span></a>
                                         </li>
                                         <li>
-                                            <a href="/HRMSPortal/employee/passportexpire"><i class=" icon-plane"></i> Passport Expiry</a>
+                                            <a href="/{{mainPortal}}/employee/passportexpire"><i class=" icon-plane"></i> <span translate="PASSPORT_EXPIRY"></span></a>
                                         </li>
                                     </ul>
                                 </div>

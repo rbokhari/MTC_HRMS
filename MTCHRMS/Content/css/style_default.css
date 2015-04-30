@@ -1,6 +1,8 @@
 body {
     color: #868686;
     background: #32C2CD url(../img/bg-default.jpg) !important;
+    
+    
 }
 #main-content {
     box-shadow: 0 0 10px #757575;

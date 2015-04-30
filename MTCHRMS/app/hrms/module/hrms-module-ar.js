@@ -143,11 +143,6 @@
 
         $locationProvider.html5Mode({ enabled: true, requireBase: false });
 
-        //$translateProvider.useStaticFilesLoader({
-        //    prefix: '/hrmsportal/app/translate/',
-        //    suffix: '.json'
-        //});
-
         //$translateProvider.fallbackLanguage('en-US');
         //$translateProvider.useLocalStorage();
         //$translateProvider.preferredLanguage('en-US');

@@ -12,6 +12,9 @@ namespace MTCHRMS.DC
     {
         Task<IQueryable<AC_User>> GetUsers();
         AC_User GetUser(int id);
+
+        AC_User GetUserByUserName(string userName);
+
         bool AddUser(AC_User newUser);
         bool UpdateUser(AC_User updateUser);
 

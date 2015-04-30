@@ -10,18 +10,18 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Staff <small> Detail </small>
+                <span translate="EMPLOYEES"></span>  <small> <span translate="DETAIL"></span>  </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/HRMSPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/HRMSPortal/employee">Staff List</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/employee"><span translate="EMPLOYEES"></span> </a><span class="divider">&nbsp;</span></li>
                 <li>
-                    <a href="#">Detail</a><span class="divider-last">&nbsp;</span>
+                    <a href="#"><span translate="DETAIL"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
             </ul>
         </div>
@@ -46,12 +46,12 @@
                         <div class="tabbable">
                             <!--ng-init="tab=1"  set this in controller as tab=1  -->
                             <ul class="nav nav-tabs">
-                                <li ng-class="{active:isTabSelected(6)}"><a href="" ng-click="setTab(6)">Kin Information</a></li>
-                                <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)">Family Detail</a></li>
-                                <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)">Previous Employment</a></li>
-                                <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)">Qualification</a></li>
-                                <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)">Passport & Visa</a></li>
-                                <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)">Summary</a></li>
+                                <li ng-class="{active:isTabSelected(6)}"><a href="" ng-click="setTab(6)"><span translate="KIN_INFORMATION"></span></a></li>
+                                <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)"><span translate="FAMILY_DETAIL"></span></a></li>
+                                <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)"><span translate="PREVIOUS_EMPLOYMENT"></span></a></li>
+                                <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)"><span translate="QUALIFICATION"></span></a></li>
+                                <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)"><span translate="PASSPORT"></span> / <span translate="VISA"></span></a></li>
+                                <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)"><span translate="SUMMARY"></span></a></li>
                             </ul>
                             <div class="tab-pane" id="tab1" ng-show="isTabSelected(1)">
                                 <div class="span2">
@@ -66,12 +66,12 @@
                                         220px;" width="220px" height="220px" alt="">-->
                                     </div>
                                     <ul class="nav nav-stacked" ng-if="authentication.isHRMSAdmin">
-                                        <li><a ng-href="/HRMSPortal/employee/edit/{{employee[0].id}}"><i class="icon-save"></i> Update</a></li>
-                                        <li><a href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> Add Passport</a></li>
-                                        <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> Add Visa</a></li>
-                                        <li><a href="" ng-click="showPreviousEmployement(employee[0].id)"><i class="icon-external-link"></i> Add Experience</a></li>
-                                        <li><a href="" ng-click="showChild(employee[0].id)"><i class="icon-external-link"></i> Add Children</a></li>
-                                        <li><a href="" ng-click="showImageForm(employee[0].id)"><i class="icon-external-link"></i> Update Picture</a></li>
+                                        <li><a ng-href="/{{mainPortal}}/employee/edit/{{employee[0].id}}"><i class="icon-save"></i> <span translate="UPDATE"></span></a></li>
+                                        <li><a href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PASSPORT"></span></a></li>
+                                        <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_VISA"></span></a></li>
+                                        <li><a href="" ng-click="showPreviousEmployement(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PREVIOUS_EMPLOYMENT"></span></a></li>
+                                        <li><a href="" ng-click="showChild(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_CHILDREN"></span></a></li>
+                                        <li><a href="" ng-click="showImageForm(employee[0].id)"><i class="icon-camera"></i> <span translate="UPDATE_PICTURE"></span></a></li>
                                     </ul>
 
                                 </div>
@@ -80,100 +80,98 @@
                                     <table class="table">
                                         <tbody>
                                             <tr>
-                                                <td class="span2">Code :</td>
+                                                <td class="span2"><span translate="CODE"></span> :</td>
                                                 <td>
                                                     {{ employee[0].employeeCode}}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2">Regiment :</td>
+                                                <td class="span2"><span translate="REGIMENT"></span> :</td>
                                                 <td>
                                                     {{ employee[0].parentRegiment}}
                                                 </td>
                                             </tr>
 
                                             <tr>
-                                                <td class="span2">Nationality :</td>
+                                                <td class="span2"><span translate="NATIONALITY"></span> :</td>
                                                 <td>
                                                     {{ employee[0].validationDetailId.nameEn}}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2"> Joining Date :</td>
+                                                <td class="span2"> <span translate="JOINING_DATE"></span> :</td>
                                                 <td>
                                                     {{ employee[0].appointment | date:'longDate' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2">Birthday :</td>
+                                                <td class="span2"><span translate="BIRTH_DATE"></span> :</td>
                                                 <td>
                                                     {{ employee[0].dateOfBirth | date:'longDate' }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2"> Birth Place :</td>
+                                                <td class="span2"> <span translate="BIRTH_PLACE"></span> :</td>
                                                 <td>
                                                     {{ employee[0].placeOfBirth }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2"> Religion :</td>
+                                                <td class="span2"> <span translate="RELIGION"></span> :</td>
                                                 <td>
                                                     {{ employee[0].religion }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2">Blood Group :</td>
+                                                <td class="span2"><span translate="BLOOD_GROUP"></span> :</td>
                                                 <td>
                                                     {{ employee[0].bloodGroup }}
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td class="span2">User Name :</td>
+                                                <td class="span2"><span translate="USER_NAME"></span> :</td>
                                                 <td>
                                                     {{ employee[0].userName }}
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <h4>Contact Information</h4>
+                                    <h4><span translate="CONTACT_INFORMATION"></span></h4>
                                     <div class="well">
                                         <address>
-                                            <strong>Mobile </strong><br>
+                                            <strong><span translate="MOBILE"></span></strong><br>
                                             {{ employee[0].mobile }}
                                         </address>
                                         <address>
-                                            <strong>Contact No. </strong><br>
+                                            <strong><span translate="CONTACT_NO"></span>. </strong><br>
                                             {{ employee[0].phone }}
                                         </address>
                                         <address>
-                                            <strong>Email </strong><br>
+                                            <strong><span translate="EMAIL"></span></strong><br>
                                             {{ employee[0].email }}
                                         </address>
                                         <address>
-                                            <strong>Residential Address </strong><br>
+                                            <strong><span translate="RESIDENTIAL_ADDRESS"></span> </strong><br>
                                             {{ employee[0].address }}
                                         </address>
                                         <address>
-                                            <strong>Permanent Address </strong><br>
+                                            <strong><span translate="PERMANENT_ADDRESS"></span></strong><br>
                                             {{ employee[0].permanentAddress }}
                                         </address>
                                     </div>
                                     <hr />
-                                    <a ng-if="authentication.isHRMSAdmin" ng-href="/hrmsportal/employee/edit/{{employee[0].id}}" class="btn btn-info">
+                                    <a ng-if="authentication.isHRMSAdmin" ng-href="/{{mainPortal}}/employee/edit/{{employee[0].id}}" class="btn btn-info">
                                         <i class="icon-save"></i>
-                                        Update
+                                        <span translate="UPDATE"></span>
                                     </a>
                                 </div>
                                 <div class="span3">
-                                    <h4 class="alert alert-info">Previous Employment</h4>
+                                    <h4 class="alert alert-info"><span translate="PREVIOUS_EMPLOYEMENT"></span></h4>
                                     <ul class="icons push" ng-repeat="pemp in employee[0].previousEmployments">
                                         <li>
                                             <i class="icon-hand-right"></i> <strong>{{pemp.companyName}}</strong><br /><em>
-                                                Start Date : {{pemp.startDate |
-
-                                                date:'longDate'}}
-                                            </em><br /><em>End Date : {{ pemp.endDate | date:'longDate' }}</em><br>
+                                                <span translate="START_DATE"></span> : {{pemp.startDate | date:'longDate'}}
+                                            </em><br /><em><span translate="END_DATE"></span> : {{ pemp.endDate | date:'longDate' }}</em><br>
                                         </li>
                                     </ul>
                                     <!--<h4>Current Status</h4>
@@ -191,18 +189,18 @@
                             </div>
 
                             <div class="tab-pane" id="tab2" ng-show="isTabSelected(2)">
-                                <i class="icon-hand-right"></i>  <strong>Passport Information</strong>
-                                <span class="pull-right"><a ng-if="authentication.isHRMSAdmin" href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> Add Passport</a></span>
+                                <i class="icon-hand-right"></i>  <strong><span translate="PASSPORT_INFORMATION"></span></strong>
+                                <span class="pull-right"><a ng-if="authentication.isHRMSAdmin" href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PASSPORT"></span></a></span>
                                 <div class="row-fluid">
                                     <div class="span12">
                                         <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
                                             <thead>
                                                 <tr>
-                                                    <th>Passport No</th>
-                                                    <th>Issue Date</th>
-                                                    <th>Expiry Date</th>
-                                                    <th>Status</th>
-                                                    <th ng-if="authentication.isHRMSAdmin">Action</th>
+                                                    <th><span translate="PASSPORT_NO"></span></th>
+                                                    <th><span translate="ISSUE_DATE"></span></th>
+                                                    <th><span translate="EXPIRE_DATE"></span></th>
+                                                    <th><span translate="STATUS"></span></th>
+                                                    <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -226,18 +224,18 @@
                                     </div>
                                 </div>
                                 <br /><br />
-                                <i class="icon-hand-right"></i>  <strong>Visa Information</strong>
-                                <span class="pull-right"><a ng-if="authentication.isHRMSAdmin" href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> Add Visa</a></span>
+                                <i class="icon-hand-right"></i>  <strong><span translate="VISA_INFORMATION"></span></strong>
+                                <span class="pull-right"><a ng-if="authentication.isHRMSAdmin" href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_VISA"></span></a></span>
                                 <div class="row-fluid">
                                     <div class="span12">
                                         <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
                                             <thead>
                                                 <tr>
-                                                    <th>Visa No</th>
-                                                    <th>Issue Date</th>
-                                                    <th>Expiry Date</th>
-                                                    <th>Status</th>
-                                                    <th ng-if="authentication.isHRMSAdmin">Action</th>
+                                                    <th><span translate="VISA_NO"></span></th>
+                                                    <th><span translate="ISSUE_DATE"></span></th>
+                                                    <th><span translate="EXPIRE_DATE"></span></th>
+                                                    <th><span translate="STATUS"></span></th>
+                                                    <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -265,20 +263,20 @@
 
                             <!-- Qualification -->
                             <div class="tab-pane" id="tab3" ng-show="isTabSelected(3)">
-                                <i class="icon-hand-right"></i>  <strong>Qualification Information</strong>
+                                <i class="icon-hand-right"></i>  <strong><span translate="QUALIFICATION_INFORMATION"></span></strong>
                                 <span class="pull-right">
                                     <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showQualification(employee[0].id)">
-                                        <i class="icon-external-link"></i> Add Qualification
+                                        <i class="icon-external-link"></i> <span translate="ADD_QUALIFICATION"></span>
                                     </a>
                                 </span>
                                 <table class="table table-striped table-bordered table-advance">
                                     <thead>
                                         <tr>
-                                            <th>Sr.</th>
-                                            <th>Degree</th>
-                                            <th>University</th>
-                                            <th>Level</th>
-                                            <th ng-if="authentication.isHRMSAdmin">Action</th>
+                                            <th><span translate="SERIAL_NO"></span>.</th>
+                                            <th><span translate="DEGREE"></span></th>
+                                            <th><span translate="UNIVERSITY"></span></th>
+                                            <th><span translate="LEVEL"></span></th>
+                                            <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -330,20 +328,20 @@
 
                             <!-- Previous Employment -->
                             <div class="tab-pane" id="tab4" ng-show="isTabSelected(4)">
-                                <i class="icon-hand-right"></i>  <strong>Previous Experience</strong>
+                                <i class="icon-hand-right"></i>  <strong><span translate="PREVIOUS_EMPLOYMENT"></span></strong>
                                 <span class="pull-right">
                                     <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showPreviousEmployement(employee[0].id)">
-                                        <i class="icon-external-link"></i> Add Experience
+                                        <i class="icon-external-link"></i> <span translate="ADD_PREVIOUS_EMPLOYMENT"></span>
                                     </a>
                                 </span>
                                 <table class="table table-striped table-bordered table-advance">
                                     <thead>
                                         <tr>
-                                            <th>Sr.</th>
-                                            <th>Company Name</th>
-                                            <th>Start Date</th>
-                                            <th>End Date</th>
-                                            <th ng-if="authentication.isHRMSAdmin">Action</th>
+                                            <th><span translate="SERIAL_NO"></span>.</th>
+                                            <th><span translate="COMPANY_NAME"></span></th>
+                                            <th><span translate="START_DATE"></span></th>
+                                            <th><span translate="END_DATE"></span></th>
+                                            <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -364,47 +362,37 @@
 
                             <!-- Family Detail -->
                             <div class="tab-pane" id="tab5" ng-show="isTabSelected(5)">
-                                <i class="icon-hand-right"></i>  <strong>Marital Status</strong>
+                                <i class="icon-hand-right"></i>  <strong><span translate="MARITAL_STATUS"></span></strong>
                                 <hr />
                                 <form id="frmFamily" name="frmFamily" novalidate>
                                     <div class="row-fluid">
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Status :</label>
+                                                    <label class="control-label"><span translate="STATUS"></span> :</label>
                                                     <div class="controls">
                                                         <select id="cFamilyStatus" name="cFamilyStatus" ng-model="employee[0].employeeMarital[0].maritalStatusId" ng-
                                                                 options="marital.id as marital.nameEn for marital in maritals"></select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Birth Date :</label>
+                                                    <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tFamilyBirthDate" name="tFamilyBirthDate" ng-model="employee[0].employeeMarital
-
-[0].birthDate" data-date-format="dd/mm/yyyy" datepicker />
-                                                        <div class="help-inline" ng-show="frmFamily.tFamilyBirthDate.$error.required && frmFamily.tFamilyBirthDate.
-
-$dirty">*</div>
+                                                        <input type="text" id="tFamilyBirthDate" name="tFamilyBirthDate" ng-model="employee[0].employeeMarital[0].birthDate" data-date-format="dd/mm/yyyy" datepicker />
+                                                        <div class="help-inline" ng-show="frmFamily.tFamilyBirthDate.$error.required && frmFamily.tFamilyBirthDate.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Marriage Date :</label>
+                                                    <label class="control-label"><span translate="MARRIAGE_DATE"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tMarriageDate" name="tMarriageDate" ng-model="employee[0].employeeMarital
-
-[0].marriageDate" data-date-format="dd/mm/yyyy" datepicker />
+                                                        <input type="text" id="tMarriageDate" name="tMarriageDate" ng-model="employee[0].employeeMarital[0].marriageDate" data-date-format="dd/mm/yyyy" datepicker />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Nationlity :</label>
+                                                    <label class="control-label"><span translate="NATIONALITY"></span> :</label>
                                                     <div class="controls">
-                                                        <select id="cFamilyNationality" name="cFamilyNationality" ng-model="employee[0].employeeMarital
-
-[0].nationalityId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities"></select>
-                                                        <div class="help-inline" ng-show="frmFamily.cFamilyNationality.$error.required &&
-
-frmFamily.cFamilyNationality.$dirty">*</div>
+                                                        <select id="cFamilyNationality" name="cFamilyNationality" ng-model="employee[0].employeeMarital[0].nationalityId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities"></select>
+                                                        <div class="help-inline" ng-show="frmFamily.cFamilyNationality.$error.required && frmFamily.cFamilyNationality.$dirty">*</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -412,31 +400,23 @@ frmFamily.cFamilyNationality.$dirty">*</div>
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Spouse Name :</label>
+                                                    <label class="control-label"><span translate="SPOUSE_NAME"></span> :</label>
                                                     <div class="controls">
                                                         <input type="text" id="tSpouseName" name="tSpouseName" ng-model="employee[0].employeeMarital[0].spouseName" />
-                                                        <div class="help-inline" ng-show="frmFamily.tSpouseName.$error.required && frmFamily.tSpouseName.
-
-$dirty">*</div>
+                                                        <div class="help-inline" ng-show="frmFamily.tSpouseName.$error.required && frmFamily.tSpouseName.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Birth Place :</label>
+                                                    <label class="control-label"><span translate="BIRTH_PLACE"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tFamilyBirthPlace" name="tFamilyBirthPlace" ng-model="employee[0].employeeMarital
-
-[0].birthPlace" />
-                                                        <div class="help-inline" ng-show="frmFamily.tFamilyBirthPlace.$error.required && frmFamily.tFamilyBirthPlace.
-
-$dirty">*</div>
+                                                        <input type="text" id="tFamilyBirthPlace" name="tFamilyBirthPlace" ng-model="employee[0].employeeMarital[0].birthPlace" />
+                                                        <div class="help-inline" ng-show="frmFamily.tFamilyBirthPlace.$error.required && frmFamily.tFamilyBirthPlace.$dirty">*</div>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Marriage Place :</label>
+                                                    <label class="control-label"><span translate="MARRIAGE_PLACE"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tMarriagePlace" name="tMarriagePlace" ng-model="employee[0].employeeMarital
-
-[0].marriagePlace" />
+                                                        <input type="text" id="tMarriagePlace" name="tMarriagePlace" ng-model="employee[0].employeeMarital[0].marriagePlace" />
                                                     </div>
                                                 </div>
 
@@ -444,24 +424,23 @@ $dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="form-actions" ng-if="authentication.isHRMSAdmin">
-                                        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeMarital(employee[0].id, employee[0].employeeMarital[0])" ng-
-                                           disabled="staffForm.$isvalid">
+                                        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeMarital(employee[0].id, employee[0].employeeMarital[0])" ng-disabled="staffForm.$isvalid">
                                             <i class="icon-save"></i>
-                                            Update
+                                            <span translate="UPDATE"></span>
                                         </a>
                                     </div>
 
-                                    <i class="icon-hand-right"></i>  <strong>Children</strong>
+                                    <i class="icon-hand-right"></i>  <strong><span translate="CHILDREN"></span></strong>
                                     <span class="pull-right"><a ng-if="authentication.isHRMSAdmin" href="" ng-click="showChild(employee[0].id)"><i class="icon-external-link"></i> Add Children</a></span>
                                     <hr />
                                     <table class="table table-striped table-bordered table-advance">
                                         <thead>
                                             <tr>
-                                                <th>Sr.</th>
-                                                <th>Name</th>
-                                                <th>Age</th>
-                                                <th>Gender</th>
-                                                <th ng-if="authentication.isHRMSAdmin">Action</th>
+                                                <th><span translate="SERIAL_NO"></span>.</th>
+                                                <th><span translate="NAME"></span></th>
+                                                <th><span translate="AGE"></span></th>
+                                                <th><span translate="GENDER"></span></th>
+                                                <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -481,27 +460,25 @@ $dirty">*</div>
                             </div>
                             <div class="tab-pane" id="tab6" ng-show="isTabSelected(6)">
                                 <form id="frmKin" name="frmKin" novalidate>
-                                    <i class="icon-hand-right"></i>  <strong>Next of Kin Detail</strong>
+                                    <i class="icon-hand-right"></i>  <strong><span translate="NEXT_OF_KIN_DETAIL"></span></strong>
                                     <hr />
                                     <div class="row-fluid">
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Full Name :</label>
+                                                    <label class="control-label"><span translate="NAME"></span> :</label>
                                                     <div class="controls">
                                                         <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName1" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Country :</label>
+                                                    <label class="control-label"><span translate="COUNTRY"></span> :</label>
                                                     <div class="controls">
-                                                        <select id="cCountry1" name="cCountry1" ng-model="employee[0].employeeKin[0].countryId1" ng-options="country.id
-
-as country.nameEn for country in countries"></select>
+                                                        <select id="cCountry1" name="cCountry1" ng-model="employee[0].employeeKin[0].countryId1" ng-options="country.id as country.nameEn for country in countries"></select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Address :</label>
+                                                    <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
                                                     <div class="controls">
                                                         <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address1"></textarea>
                                                     </div>
@@ -511,46 +488,40 @@ as country.nameEn for country in countries"></select>
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Relationship :</label>
+                                                    <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin
-
-[0].relationship1" />
+                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship1" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Airport :</label>
+                                                    <label class="control-label"><span translate="AIRPORT"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin
-
-[0].airport1" />
+                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport1" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <i class="icon-hand-right"></i>  <strong>Additional Next of Kin Detail (if any)</strong>
+                                    <i class="icon-hand-right"></i>  <strong><span translate="ADDITIONAL_NEXT_OF_KIN_DETAIL"></span> (if any)</strong>
                                     <hr />
                                     <div class="row-fluid">
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Full Name :</label>
+                                                    <label class="control-label"><span translate="NAME"></span> :</label>
                                                     <div class="controls">
                                                         <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName2" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Country :</label>
+                                                    <label class="control-label"><span translate="COUNTRY"></span> :</label>
                                                     <div class="controls">
-                                                        <select id="cCountry2" name="cCountry2" ng-model="employee[0].employeeKin[0].countryId2" ng-options="country.id
-
-as country.nameEn for country in countries"></select>
+                                                        <select id="cCountry2" name="cCountry2" ng-model="employee[0].employeeKin[0].countryId2" ng-options="country.id as country.nameEn for country in countries"></select>
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Address :</label>
+                                                    <label class="control-label"><span translate="ADDRESS"></span> :</label>
                                                     <div class="controls">
                                                         <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address2"></textarea>
                                                     </div>
@@ -560,33 +531,30 @@ as country.nameEn for country in countries"></select>
                                         <div class="span6">
                                             <div class="form-horizontal">
                                                 <div class="control-group">
-                                                    <label class="control-label">Relationship :</label>
+                                                    <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
                                                     <div class="controls">
                                                         <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship2" />
                                                     </div>
                                                 </div>
                                                 <div class="control-group">
-                                                    <label class="control-label">Airport :</label>
+                                                    <label class="control-label"><span translate="AIRPORT"></span> :</label>
                                                     <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin
-
-[0].airport2" />
+                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport2" />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <i class="icon-hand-right"></i>  <strong>NOTE</strong>
+                                    <i class="icon-hand-right"></i>  <strong><span translate="NOTE"></span></strong>
                                     <em>(Incase of accident who should be contacted as alternative to or additional to Next of Kin)</em>
                                     <hr />
                                     <textarea id="tNote" name="tNode" class="input-xxlarge span12" rows="4" ng-model="employee[0].employeeKin[0].notes"></textarea>
 
                                     <div class="form-actions" ng-if="authentication.isHRMSAdmin">
-                                        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeKin(employee[0].id, employee[0].employeeKin[0])" ng-
-                                           disabled="frmKin.$isvalid">
+                                        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeKin(employee[0].id, employee[0].employeeKin[0])" ng-disabled="frmKin.$isvalid">
                                             <i class="icon-save"></i>
-                                            Update
+                                            <span translate="UPDATE"></span>
                                         </a>
                                     </div>
                                     <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>

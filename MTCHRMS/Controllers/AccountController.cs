@@ -45,6 +45,15 @@ namespace MTCHRMS.Controllers
             return user;
         }
 
+        [ActionName("GetUserDetailByUserName")]
+        [Route("api/account/GetUserDetailByUserName/")]
+        [HttpGet]
+        public AC_User GetUserDetailByUserName(string username)
+        {
+            var user = _repo.GetUserByUserName(username);
+            return user;
+        }
+
         [ActionName("GetRoleDetail")]
         //[Route("api/account")]
         [HttpGet]
