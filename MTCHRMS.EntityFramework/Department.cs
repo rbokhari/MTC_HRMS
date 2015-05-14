@@ -16,7 +16,11 @@ namespace MTCHRMS.EntityFramework
         public string DepartmentCode { get; set; }
 
         [Required(ErrorMessage = "Please enter Department Name")]
+        [MaxLength(300)]
         public string DepartmentName { get; set; }
+
+        [MaxLength(300)]
+        public String DepartmentNameAr { get; set; }
         public int StatusId { get; set; }
 
     }

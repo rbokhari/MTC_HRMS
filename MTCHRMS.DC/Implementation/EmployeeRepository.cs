@@ -25,7 +25,8 @@ namespace MTCHRMS.DC
             //from x in _ctx.EmployeeDefs
             return _ctx.EmployeeDefs
                 .Include(c => c.DepartmentId)
-                .Include(v => v.ValidationDetailId);
+                .Include(v => v.ValidationDetailId)
+                .Include(c=>c.GenderDetail);
         }
 
         public IQueryable<EmployeePassport> GetEmployeePassports(int id)

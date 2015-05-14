@@ -48,8 +48,14 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtName"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <input type="text" name="txtName" id="txtName" ng-model="department.departmentName" required="required" />
+                                    <input type="text" name="txtName" class="span6" id="txtName" ng-model="department.departmentName" required="required" />
                                     <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtNameAr"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp; (ar)</label>
+                                <div class="controls">
+                                    <input type="text" name="txtNameAr" class="span6" id="txtNameAr" ng-model="department.departmentNameAr" />
                                 </div>
                             </div>
                             <div class="control-group">

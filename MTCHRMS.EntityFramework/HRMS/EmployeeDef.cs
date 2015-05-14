@@ -25,6 +25,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         [Required(ErrorMessage = "Please enter Employee Name !")]
         public string EmployeeName { get; set; }
 
+        public string EmployeeNameAr { get; set; }
+
         [Required(ErrorMessage = "Please enter Rank !")]
         public string Rank { get; set; }
 
@@ -37,13 +39,20 @@ namespace MTCHRMS.EntityFramework.HRMS
         [ForeignKey("DepartmentId")]
         public int PostedTo { get; set; }
 
+        [ForeignKey("GenderDetail")]
+        public int? GenderId { get; set; }
+
         public string Mobile { get; set; }
 
         public string Phone { get; set; }
 
         public string Email { get; set; }
 
+        [MaxLength(300)]
         public string Designation { get; set; }
+
+        [MaxLength(300)]
+        public string DesignationAr { get; set; }   
 
         public Int32 ManagerId { get; set; }
 
@@ -61,6 +70,15 @@ namespace MTCHRMS.EntityFramework.HRMS
         public string Address { get; set; }
         public string PermanentAddress { get; set; }
         public DateTime ServiceEndDate { get; set; }
+
+        public DateTime ProbationEndDate { get; set; }
+
+        [MaxLength(100)]
+        public string ManpowerNo { get; set; }
+
+        [MaxLength(100)]
+        public string IdCardNo { get; set; }
+
         public int StatusId { get; set; }
 
         [Column(TypeName = "image")]
@@ -69,6 +87,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual Department DepartmentId { get; set; }
 
         public virtual ValidationDetail ValidationDetailId { get; set; }
+
+        public virtual ValidationDetail GenderDetail { get; set; }
 
         public virtual ICollection<EmployeePassport> EmployeePassports { get; set; }
 

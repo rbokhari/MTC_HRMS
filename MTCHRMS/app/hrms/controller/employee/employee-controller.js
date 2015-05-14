@@ -209,7 +209,7 @@ hrmsModule.controller('EmployeeController',
 
         $scope.showPreviousEmployement = function (id) {
             ModalService.showModal({
-                templateUrl: "/templates/hrms/employee/employee-previous-employement.html",
+                templateUrl: "/app/hrms/templates/hrms/employee/employee-previous-employement.html",
                 controller: "EmployeeModalController",
                 inputs: {
                     title: "Add New Employement",
@@ -328,10 +328,11 @@ hrmsModule.controller('EmployeeController',
         });
 
         $scope.departments = departmentRepository.getAllDepartment();
-        $scope.nationalities = validationRepository.getAllDetailsByValidationId(2);
-        $scope.countries = validationRepository.getAllDetailsByValidationId(3);
-        $scope.maritals = validationRepository.getAllDetailsByValidationId(4);
-        $scope.genders = validationRepository.getAllDetailsByValidationId(5);
+        $scope.nationalities = validationRepository.getNationalities; //validationRepository.getAllDetailsByValidationId(2);
+        $scope.countries = validationRepository.getCountries; //validationRepository.getAllDetailsByValidationId(3);
+        $scope.maritals = validationRepository.getMaritalStatus;  //validationRepository.getAllDetailsByValidationId(4);
+        $scope.genders = validationRepository.getGenders;   //validationRepository.getAllDetailsByValidationId(5);
+        $scope.employeeStatus = validationRepository.getEmployeeStatus;
         
 
         if ($routeParams.id != undefined) {
