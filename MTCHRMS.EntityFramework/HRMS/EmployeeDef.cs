@@ -40,7 +40,7 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int PostedTo { get; set; }
 
         [ForeignKey("GenderDetail")]
-        public int? GenderId { get; set; }
+        public int? EmployeeGenderId { get; set; }
 
         public string Mobile { get; set; }
 
@@ -59,7 +59,9 @@ namespace MTCHRMS.EntityFramework.HRMS
         [Required(ErrorMessage = "Please enter Nationality !")]
         [ForeignKey("ValidationDetailId")]
         public int NationalityId { get; set; }
+
         public string BloodGroup { get; set; }
+
         public string Religion { get; set; }
 
         [Required(ErrorMessage = "Please enter Place of birth !")]
@@ -67,8 +69,11 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         [Required(ErrorMessage = "Please enter Date of birth !")]
         public DateTime DateOfBirth { get; set; }
+
         public string Address { get; set; }
+
         public string PermanentAddress { get; set; }
+
         public DateTime ServiceEndDate { get; set; }
 
         public DateTime ProbationEndDate { get; set; }
@@ -79,7 +84,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         [MaxLength(100)]
         public string IdCardNo { get; set; }
 
-        public int StatusId { get; set; }
+        [ForeignKey("StatusDetail")]
+        public int? StatusId { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] EmpPicture { get; set; }
@@ -89,6 +95,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual ValidationDetail ValidationDetailId { get; set; }
 
         public virtual ValidationDetail GenderDetail { get; set; }
+
+        public virtual ValidationDetail StatusDetail { get; set; }
 
         public virtual ICollection<EmployeePassport> EmployeePassports { get; set; }
 

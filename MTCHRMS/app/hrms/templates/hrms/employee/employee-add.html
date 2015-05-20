@@ -214,7 +214,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="STATUS"></span> :</label>
                                         <div class="controls">
-                                            <select id="cNationality" name="cStatus" ng-model="employeeDef.statusId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities" required></select>
+                                            <select id="cNationality" name="cStatus" ng-model="employeeDef.statusId" ng-options="status.id as status.nameEn for status in employeeStatus" required></select>
                                             <div class="help-inline" ng-show="staffForm.cStatus.$error.required && staffForm.cStatus.$dirty">*</div>
                                         </div>
                                     </div>

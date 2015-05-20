@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MTCHRMS.EntityFramework.General;
 using MTCHRMS.EntityFramework.HRMS;
 using System.Data.Entity;
 
@@ -22,11 +23,20 @@ namespace MTCHRMS.DC
 
         public IQueryable<EmployeeDef> GetEmployees()
         {
+            try
+            {
+                return _ctx.EmployeeDefs
+                    .Include(c => c.DepartmentId)
+                    .Include(v => v.ValidationDetailId)
+                    .Include(c => c.GenderDetail)
+                    .Include(c => c.StatusDetail);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
             //from x in _ctx.EmployeeDefs
-            return _ctx.EmployeeDefs
-                .Include(c => c.DepartmentId)
-                .Include(v => v.ValidationDetailId)
-                .Include(c=>c.GenderDetail);
         }
 
         public IQueryable<EmployeePassport> GetEmployeePassports(int id)
@@ -78,16 +88,49 @@ namespace MTCHRMS.DC
         {
             try
             {
-                var dep = new DepartmentRepository(_ctx);
-                var department = dep.GetDepartment(employee.PostedTo);
-                employee.DepartmentId = department;
 
-                var validation = new ValidationRepository(_ctx);
-                var valid = validation.GetValidationDetail(employee.NationalityId);
-                employee.ValidationDetailId = valid;
+                //var dep = new DepartmentRepository(_ctx);
+                //var department = dep.GetDepartment(employee.PostedTo);
+                //employee.DepartmentId = department;
+
+                //var validation = new ValidationRepository(_ctx);
+                //var valid = validation.GetValidationDetail(employee.NationalityId);
+                //_ctx.ValidationDetails.Attach(valid);
+                //employee.ValidationDetailId = valid;
+
+                //if (employee.EmployeeGenderId.HasValue)
+                //{
+                //    var validation1 = new ValidationRepository(_ctx);
+                //    var gender = validation1.GetValidationDetail(employee.EmployeeGenderId.Value);
+                //    _ctx.ValidationDetails.Attach(gender);
+                //    employee.GenderDetail = gender;
+                //}
+
+                //if (employee.StatusId.HasValue)
+                //{
+                //    var statusValidation = new ValidationRepository(_ctx);
+                //    var status = statusValidation.GetValidationDetail(employee.StatusId.Value);
+                //    _ctx.ValidationDetails.Attach(status);
+                //    employee.StatusDetail = status;
+                //}
+
+                //_ctx.Entry(employee.GenderDetail).State = EntityState.Modified;
+                //_ctx.Entry(employee.ValidationDetailId).State = EntityState.Modified;
+                //_ctx.Entry(employee.StatusDetail).State = EntityState.Modified;
+
+                //_ctx.EmployeeDefs.Attach(employee);
+                //employee.Id = GetEmployee(employee.Id).Id;
+
+                var employeeFetch = GetEmployee(employee.Id);
+                var attachedEmployee = _ctx.Entry(employeeFetch);
+                attachedEmployee.CurrentValues.SetValues(employee);
+
+                //employeeFetch = employee;
 
                 //_ctx.EmployeeDefs.Attach(_ctx.EmployeeDefs.Single(r => r.Id == employee.Id));
-                _ctx.Entry(employee).State = EntityState.Modified;
+                //_ctx.EmployeeDefs.Attach(employee);
+                
+                //_ctx.Entry(employee).State = EntityState.Modified;
                 return true;
 
             }
@@ -124,6 +167,8 @@ namespace MTCHRMS.DC
                     .Include(k => k.EmployeeKin)
                     .Include(q => q.EmployeeQualifications.Select(g=> g.QualificationLevel))
                     .Include(d => d.DepartmentId)
+                    .Include(d=>d.GenderDetail)
+                    .Include(d=>d.StatusDetail)
                     .Include(v => v.ValidationDetailId);
 
             }

@@ -216,7 +216,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="GENDER"></span> :</label>
                                         <div class="controls">
-                                            <select id="cGender" name="cGender" ng-model="employee[0].genderId" ng-options="gender.id as gender.nameEn for gender in genders"></select>
+                                            <select id="cGender" name="cGender" ng-model="employee[0].employeeGenderId" ng-options="gender.id as gender.nameEn for gender in genders"></select>
                                         </div>
                                     </div>
 
@@ -236,7 +236,7 @@
                                 <i class="icon-save"></i>
                                 <span translate="UPDATE"></span>
                             </button>
-                            <a id="cmdCancel" class="btn btn-inverse" href="/HRMSPortal/employee/detail/{{employee[0].id}}">
+                            <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/employee/detail/{{employee[0].id}}">
                                 <i class="icon-undo"></i>
                                 <span translate="CANCEL"></span>
                             </a>

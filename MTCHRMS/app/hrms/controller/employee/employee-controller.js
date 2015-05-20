@@ -353,7 +353,7 @@ hrmsModule.controller('EmployeeController',
                     // success case
                     console.log("save - Successfully !");
                     appRepository.showAddSuccessGritterNotification();
-                    $location.url('/HRMSPortal/employee/detail/' + resultEmployeeDef.id);
+                    $location.url('/" + $scope.mainPortal + "/employee/detail/' + resultEmployeeDef.id);
                 }, function(response) {
                     // failure case
                     console.log("save - Error !");
@@ -401,7 +401,8 @@ hrmsModule.controller('EmployeeController',
                     // success case
                     appRepository.showUpdateSuccessGritterNotification();
                     console.log("edit - Successfully !");
-                    $location.url('/HRMSPortal/employee/detail/' + employeeDef.id);
+                    console.log('/' + $scope.mainPortal + '/employee/detail/' + employeeDef.id);
+                    $location.url('/' + $scope.mainPortal + '/employee/detail/' + employeeDef.id);
                 }, function(response) {
                     // failure case
                     console.log("edit - Error !");
