@@ -90,6 +90,16 @@ namespace MTCHRMS.EntityFramework.HRMS
         [Column(TypeName = "image")]
         public byte[] EmpPicture { get; set; }
 
+        //---- search purpose fields ---- start
+
+        [NotMapped]
+        public DateTime JoiningStartDate { get; set; }
+
+        [NotMapped]
+        public DateTime JoiningEndDate { get; set; }
+
+        //---- search purpose fields ---- end
+
         public virtual Department DepartmentId { get; set; }
 
         public virtual ValidationDetail ValidationDetailId { get; set; }

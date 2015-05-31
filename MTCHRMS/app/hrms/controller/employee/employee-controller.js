@@ -12,6 +12,117 @@ hrmsModule.controller('EmployeeController',
 
         $scope.isBusy = false;
 
+        //'#joinDateRange').daterangepicker();
+        //$('#joiningDate span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
+
+        $('#joiningDate').daterangepicker({
+            format: 'DD/MM/YYYY',
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment(),
+            minDate: '01/01/2010',
+            maxDate: moment(),
+            //dateLimit: { days: 60 },
+            showDropdowns: true,
+            showWeekNumbers: true,
+            timePicker: false,
+            timePickerIncrement: 1,
+            timePicker12Hour: true,
+            ranges: {
+
+                'Today': [moment(), moment()],
+                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                'Last Year': [moment().subtract(1, 'year').startOf('year'), moment().subtract(1, 'year').endOf('year')]
+            },
+            opens: 'left',
+            drops: 'down',
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-primary',
+            cancelClass: 'btn-default',
+            separator: ' to ',
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Clear',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom',
+                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                firstDay: 1
+            }
+        }, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+            $scope.dateJoin.startDate = start.toISOString();
+            $scope.dateJoin.endDate = end.toISOString();
+            $('#joiningDate span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        });
+
+        $('#joiningDate').on('cancel.daterangepicker', function (ev, picker) {
+            //do something, like clearing an input
+            //console.log(start.toISOString(), end.toISOString(), label);
+            $('#joiningDate  span').html('');
+        });
+
+        $('#birthDate').daterangepicker({
+            format: 'DD/MM/YYYY',
+            startDate: moment().subtract(29, 'days'),
+            endDate: moment(),
+            minDate: '01/01/1950',
+            maxDate: moment().subtract(20, 'year'),
+            //dateLimit: { days: 60 },
+            showDropdowns: true,
+            showWeekNumbers: true,
+            timePicker: false,
+            timePickerIncrement: 1,
+            timePicker12Hour: true,
+            ranges: {
+                '50 or more': [moment().subtract(80, 'year'), moment().subtract(50, 'year')],
+                '40 to 50 Age': [moment().subtract(50, 'year'), moment().subtract(40, 'year')],
+                '30 to 40 Age': [moment().subtract(40, 'year'), moment().subtract(30, 'year')],
+                '20 to 30 Age': [moment().subtract(30, 'year'), moment().subtract(20, 'year')],
+            },
+            opens: 'left',
+            drops: 'down',
+            buttonClasses: ['btn', 'btn-sm'],
+            applyClass: 'btn-primary',
+            cancelClass: 'btn-default',
+            separator: ' to ',
+            locale: {
+                applyLabel: 'Apply',
+                cancelLabel: 'Clear',
+                fromLabel: 'From',
+                toLabel: 'To',
+                customRangeLabel: 'Custom',
+                daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+                monthNames: ['Jan', 'Feb', 'March', 'April', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                firstDay: 1
+            }
+        }, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+            $scope.dateAge.startDate = start.toISOString();
+            $scope.dateAge.endDate = end.toISOString();
+            $('#birthDate span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+        });
+
+        $('#birthDate').on('cancel.daterangepicker', function (ev, picker) {
+            //do something, like clearing an input
+            //console.log(start.toISOString(), end.toISOString(), label);
+            $('#birthDate  span').html('');
+        });
+
+        $scope.dateJoin = {
+            startDate: null,
+            endDate: null
+        };
+
+        $scope.dateAge = {
+            startDate: null,
+            endDate: null
+        };
+
         $scope.daysDiff = function (start) {
             return moment(start).diff(moment(new Date()), 'day');
         };
@@ -499,6 +610,37 @@ hrmsModule.controller('EmployeeController',
                         $scope.isBusy = false;
                     });
             
+        };
+
+        $scope.employeeSearch = function (employeeDef) {
+            $scope.errors = [];
+
+            console.log("employee", employeeDef);
+            console.log("age ", $scope.dateAge.startDate, $scope.dateAge.endDate);
+            console.log("join ", $scope.dateJoin.startDate, $scope.dateJoin.endDate);
+
+            //employeeRepository.addEmployee(employeeDef).$promise.then(
+            //    function () {
+            //        // success case
+            //        appRepository.showAddSuccessGritterNotification();
+
+            //        $scope.employeeForm.$setPristine();
+            //        $scope.resetForm();
+            //        //$scope.employee = clearDept;
+            //        console.log("saveAddNew - Successfully !");
+
+            //    }, function (response) {
+            //        // failure case
+            //        $scope.errors = response.data;
+            //        console.log("saveAddNew - Error !");
+            //        appRepository.showErrorGritterNotification();
+            //    }
+            //);
+        };
+
+        $scope.clearSearch = function (employeeDef) {
+            $scope.errors = [];
+
         };
 
     }

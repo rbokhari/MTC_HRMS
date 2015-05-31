@@ -21,6 +21,10 @@
         <button data-dismiss="alert" class="close">×</button>
         <span translate="HRMS_WELCOME_MESSAGE"></span>
     </div>
+    
+    <div class="alert alert-danger" ng-show="authentication.isINVAdmin || authentication.isINVUser">
+        <i class="icon-exclamation-sign"></i>&nbsp;  You are not authorized for this HRMS Module.
+    </div>
 
     <div class="row-fluid">
         <div class="span12">
@@ -125,11 +129,13 @@
                 <hr />
             </div>
             
-            <hr />
-            <departments ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser"></departments>
+            <departments ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
+                <hr />
+            </departments>
             
-            <hr/>
-            <nationalities ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser"></nationalities>
+            <nationalities ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
+                <hr />
+            </nationalities>
         </div>
     </div>
 </div>

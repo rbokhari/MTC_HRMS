@@ -231,6 +231,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />
     <Content Include="app\inventory\controller\dashboard\dashboard-constroller.js" />
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />
@@ -286,7 +287,14 @@
       <DependentUpon>animate.css</DependentUpon>
     </Content>
     <Content Include="Content\bootstrap-datepicker\css\datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker\css\daterangepicker-bs2.css" />
+    <Content Include="Content\bootstrap-datepicker\css\daterangepicker-bs3.css" />
     <Content Include="Content\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="Content\bootstrap-datepicker\js\daterangepicker.js" />
+    <Content Include="Content\bootstrap-daterangepicker\date.js" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.css" />
+    <Content Include="Content\bootstrap-daterangepicker\daterangepicker.js" />
+    <Content Include="Content\bootstrap-daterangepicker\examples.html" />
     <Content Include="Content\bootstrap-responsive-rtl.min.css" />
     <Content Include="Content\bootstrap-responsive.css" />
     <Content Include="Content\bootstrap-responsive.min.css" />
@@ -306,6 +314,7 @@
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.js" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js" />
+    <Content Include="Content\bootstrap.3.3.4.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\style-common.css">
@@ -890,6 +899,10 @@
     <Content Include="lock.html" />
     <Content Include="index.html" />
     <Content Include="login.html" />
+    <Content Include="Scripts\angular-daterange\angular-daterangepicker.js" />
+    <Content Include="Scripts\angular-daterange\angular-daterangepicker.min.js">
+      <DependentUpon>angular-daterangepicker.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\angular-file-upload-html5-shim.js" />
     <Content Include="Scripts\angular-file-upload-html5-shim.min.js" />
     <Content Include="Scripts\angular-file-upload-shim.js" />
@@ -948,6 +961,7 @@
     <Content Include="Content\css\style-common.css.map">
       <DependentUpon>style-common.css</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap-daterangepicker\README.md" />
     <None Include="Content\Site.less" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -1175,6 +1189,9 @@
     <Content Include="Scripts\angular-toggle\css\default\angular-toggle-switch.less" />
     <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.min.js.map">
       <DependentUpon>angular-toggle-switch.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular-daterange\angular-daterangepicker.min.js.map">
+      <DependentUpon>angular-daterangepicker.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery.gritter.js" />

@@ -48,7 +48,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="cCountry">Country</label>
                                 <div class="controls">
-                                    <select id="cCountry" name="cCountry" ng-model="manufacturer.countryId" ng-options="country.id as country.nameEn for country in countries" required></select>
+                                    <select id="cCountry" name="cCountry" ng-model="manufacturer.countryId" ng-options="country.id as country.nameAr for country in countries" required></select>
                                     <div ng-if="isLoadCountry" class="help-inline"><img src="/Content/img/loader.gif" /></div>
                                     <div class="help-inline" ng-show="frm.cCountry.$error.required && frm.cCountry.$dirty">Mandatory field missing !</div>
                                 </div>

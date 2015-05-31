@@ -19,7 +19,9 @@ namespace MTCHRMS.DC
 
         public IQueryable<EntityFramework.General.ValidationDetail> GetValidationDetails(int id)
         {
-            return _ctx.ValidationDetails.Where(r => r.ValidationId == id);
+            return _ctx.ValidationDetails
+                        .Where(r => r.ValidationId == id)
+                        .OrderBy(c=>c.NameEn);
         }
 
         public EntityFramework.General.ValidationDetail GetValidationDetail(int vId)
