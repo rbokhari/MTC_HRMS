@@ -12,7 +12,7 @@ accModule.controller('AppController',
 
         $scope.currentDateNow = new Date();
         $translate.use('en_US');
-
+       
         //$scope.translate = function () {
         //    translationService.getTranslation($scope, $scope.selectedLanguage);
         //};

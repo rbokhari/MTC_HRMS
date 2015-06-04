@@ -627,6 +627,89 @@ namespace MTCHRMS.DC
             }
         }
 
+
+
+        public async Task<List<EmployeeDef>> GetEmployeeSearch(EmployeeDef employee)
+        {
+            try
+            {
+                var emp = _ctx.EmployeeDefs
+                    .Include(c => c.DepartmentId);
+
+                if (employee.Condition == 0)
+                {
+                    emp = emp
+                        .Where(c => c.EmployeeCode.ToLower().Contains(employee.EmployeeCode.ToLower()) ||
+                                    c.EmployeeName.ToLower().Contains(employee.EmployeeName.ToLower()) ||
+                                    c.PostedTo == employee.PostedTo || c.NationalityId == employee.NationalityId ||
+                                    c.EmployeeGenderId == employee.EmployeeGenderId || c.StatusId == employee.StatusId ||
+                                    (c.Appointment >= employee.JoiningStartDate && c.Appointment <= employee.JoiningEndDate) ||
+                                    (c.DateOfBirth >= employee.AgeStartDate && c.DateOfBirth <= employee.AgeEndDate));
+
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(employee.EmployeeCode))
+                    {
+                        emp = emp.Where(c => c.EmployeeCode.ToLower().Contains(employee.EmployeeCode.ToLower()));
+                        //emp = emp.Where(c => c.EmployeeCode == employee.EmployeeCode);
+                    }
+
+                    if (!string.IsNullOrEmpty(employee.EmployeeName))
+                    {
+                        emp = emp.Where(c => c.EmployeeName.ToLower().Contains(employee.EmployeeName.ToLower()));
+                    }
+
+                    if (employee.PostedTo !=0)
+                    {
+                        emp = emp.Where(c => c.PostedTo == employee.PostedTo);
+                    }
+
+                    if (employee.NationalityId !=0)
+                    {
+                        emp = emp.Where(c => c.NationalityId == employee.NationalityId);
+                    }
+
+                    if (employee.EmployeeGenderId != 0)
+                    {
+                        emp = emp.Where(c => c.EmployeeGenderId == employee.EmployeeGenderId);
+                    }
+
+                    if (employee.StatusId != 0)
+                    {
+                        emp = emp.Where(c => c.StatusId == employee.StatusId);
+                    }
+
+
+                    if (employee.JoiningStartDate != null)
+                    {
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.Appointment >= employee.JoiningStartDate &&
+                                    c.Appointment <= employee.JoiningEndDate);
+                    }
+
+                    if (employee.AgeStartDate != null)
+                    {
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.DateOfBirth >= employee.AgeStartDate &&
+                                    c.DateOfBirth <= employee.AgeEndDate);
+                    }
+
+                }
+
+                return await emp.ToListAsync();
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return null;
+            }
+
+        }
     }
 }
 

@@ -38,7 +38,7 @@
                         <div class="details">
                             <div class="numbers" data-ng-hide="employees.length"><img alt="" data-ng-src="/Content/img/loader.gif" /></div>
                             <div class="numbers" data-ng-show="employees.length" data-ng-bind="employees.length"></div>
-                            <div class="title"><span translate="NEW_STAFF"></span></div>
+                            <div class="title"><a ng-href="/{{mainPortal}}/employee/" style="color:#000000;"><span translate="NEW_STAFF"></span></a></div>
                         </div>
                         <div class="progress progress-info">
                             <div ng-style="{'width':10}" class="bar"></div>
@@ -128,14 +128,22 @@
                 </div>
                 <hr />
             </div>
-            
-            <departments ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
-                <hr />
-            </departments>
-            
-            <nationalities ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
-                <hr />
-            </nationalities>
         </div>
+        <div class="row-fluid">
+            <div class="span6">
+                <departments ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
+                    
+                </departments>
+                    
+            </div>
+            <div class="span6">
+                <nationalities ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser">
+                    
+                </nationalities>
+                    
+            </div>
+        </div>
+        <hr />
+            
     </div>
 </div>

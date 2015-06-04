@@ -115,6 +115,17 @@ namespace MTCHRMS.Controllers
             return employees;
         }
 
+        [Route("api/employee/GetEmployeeSearch")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetEmployeeSearch([FromUri]EmployeeDef employee)
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeeSearch(employee);
+        }
+
+
         [System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get(int id)
         {

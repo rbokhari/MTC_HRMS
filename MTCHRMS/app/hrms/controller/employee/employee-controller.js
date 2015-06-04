@@ -10,6 +10,17 @@ hrmsModule.controller('EmployeeController',
 
         console.log("employee controller");
 
+        $scope.dateJoin = {
+            startDate: null,
+            endDate: null
+        };
+
+        $scope.dateAge = {
+            startDate: null,
+            endDate: null
+        };
+
+
         $scope.isBusy = false;
 
         //'#joinDateRange').daterangepicker();
@@ -113,15 +124,6 @@ hrmsModule.controller('EmployeeController',
             $('#birthDate  span').html('');
         });
 
-        $scope.dateJoin = {
-            startDate: null,
-            endDate: null
-        };
-
-        $scope.dateAge = {
-            startDate: null,
-            endDate: null
-        };
 
         $scope.daysDiff = function (start) {
             return moment(start).diff(moment(new Date()), 'day');
@@ -420,13 +422,17 @@ hrmsModule.controller('EmployeeController',
         };
         // Modal service end -------------------
 
-        $scope.employees = employeeRepository.getAllEmployees();
-        $scope.employees.$promise.then(function() {
-                //alert("success");
-            }, function() {
-                //alert("error");
-            })
-            .then(function () { $scope.isBusy = true; });
+        $scope.loadEmployees = function () {
+            $scope.isBusy = false;
+            $scope.employees = employeeRepository.getAllEmployees();
+            $scope.employees.$promise.then(function() {
+                    //alert("success");
+                }, function() {
+                    //alert("error");
+                })
+                .then(function () { $scope.isBusy = true; });
+        };
+
 
         // Call employee hub service
         EmployeeStream.on('addNewEmployee', function (empId, userId) {
@@ -439,6 +445,14 @@ hrmsModule.controller('EmployeeController',
         });
 
         $scope.departments = departmentRepository.getAllDepartment();
+        $scope.departments.$promise.then(function () {
+            console.log("Department reach");
+            console.log("department id ", $scope.employee.postedTo);
+            
+        }, function() {
+            
+        });
+
         $scope.nationalities = validationRepository.getNationalities; //validationRepository.getAllDetailsByValidationId(2);
         $scope.countries = validationRepository.getCountries; //validationRepository.getAllDetailsByValidationId(3);
         $scope.maritals = validationRepository.getMaritalStatus;  //validationRepository.getAllDetailsByValidationId(4);
@@ -612,36 +626,86 @@ hrmsModule.controller('EmployeeController',
             
         };
 
-        $scope.employeeSearch = function (employeeDef) {
+        $scope.employee = {};
+
+        $scope.clearSearch = function () {
             $scope.errors = [];
 
-            console.log("employee", employeeDef);
-            console.log("age ", $scope.dateAge.startDate, $scope.dateAge.endDate);
-            console.log("join ", $scope.dateJoin.startDate, $scope.dateJoin.endDate);
+            $scope.employee.employeeCode = "";
+            $scope.employee.employeeName = "";
+            $scope.employee.postedTo = 0;
+            $scope.employee.statusId = 0;
+            $scope.employee.employeeGenderId = 0;
+            $scope.employee.condition = 0;
+            $scope.employee.nationalityId = 0;
 
-            //employeeRepository.addEmployee(employeeDef).$promise.then(
-            //    function () {
-            //        // success case
-            //        appRepository.showAddSuccessGritterNotification();
+            $scope.dateAge.startDate = null;
+            $scope.dateAge.endDate = null;
 
-            //        $scope.employeeForm.$setPristine();
-            //        $scope.resetForm();
-            //        //$scope.employee = clearDept;
-            //        console.log("saveAddNew - Successfully !");
+            $scope.dateJoin.startDate = null;
+            $scope.dateJoin.endDate = null;
 
-            //    }, function (response) {
-            //        // failure case
-            //        $scope.errors = response.data;
-            //        console.log("saveAddNew - Error !");
-            //        appRepository.showErrorGritterNotification();
-            //    }
-            //);
+            $('#birthDate span').html('');
+            $('#joiningDate span').html('');
+
         };
 
-        $scope.clearSearch = function (employeeDef) {
+        $scope.clearSearch();
+
+        //console.log($routeParams);
+
+        if ($routeParams.param01 != undefined) {
+            $scope.clearSearch();
+            $scope.employee.postedTo = $routeParams.param01;
+            getSearchData($scope.employee);
+            console.log("first param reach");
+            
+        }
+
+        if ($routeParams.param02 != undefined) {
+            $scope.clearSearch();
+            $scope.employee.nationalityId = $routeParams.param02;
+            getSearchData($scope.employee);
+            console.log("second param reach");
+            
+        }
+
+        $scope.employeeSearch = function (employee) {
             $scope.errors = [];
+            $scope.isBusy = true;
+
+            if ($scope.dateJoin.startDate != null) {
+                employee.joiningStartDate = $scope.dateJoin.startDate;
+                employee.joiningEndDate = $scope.dateJoin.endDate;
+            }
+
+            if ($scope.dateAge.startDate != null) {
+                employee.AgeStartDate = $scope.dateAge.startDate;
+                employee.AgeEndDate = $scope.dateAge.endDate;
+            }
+
+            getSearchData(employee);
 
         };
+
+        function getSearchData(employee) {
+            $scope.empSearchResults = employeeRepository.getEmployeesSearchList(employee);
+            $scope.empSearchResults
+                .$promise
+                .then(function (response) {
+                    console.log(response);
+
+                }, function (error) {
+
+                })
+                .then(function () {
+                    $scope.isBusy = false;
+                });
+        }
+        
+
+
 
     }
 ]);
+

@@ -104,7 +104,9 @@
     "EMPLOYEE_NO": "Employee No",
     "EMPLOYEE_NAME": "Employee Name",
     "DESIGNATION": "Designation",
-    "EMPLOYEE": "Employee"
+    "EMPLOYEE": "Employee",
+    "SEARCH_CRITERIA": "Search Criteria",
+    "SEARCH_RESULT": "Search Results"
 
 
 }

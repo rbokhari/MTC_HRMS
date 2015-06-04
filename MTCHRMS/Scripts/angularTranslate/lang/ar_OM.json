@@ -104,5 +104,7 @@
     "EMPLOYEE_NO": "رقم الموظف",
     "EMPLOYEE_NAME": "أسم الموظف",
     "DESIGNATION": "المسمى الوظيفي",
-    "EMPLOYEE": "الموظف"
+    "EMPLOYEE": "الموظف",
+    "SEARCH_CRITERIA": "بحث متقدم",
+    "SEARCH_RESULT": "نتيجة البحث"
 }

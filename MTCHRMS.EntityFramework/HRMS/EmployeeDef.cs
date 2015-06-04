@@ -98,6 +98,15 @@ namespace MTCHRMS.EntityFramework.HRMS
         [NotMapped]
         public DateTime JoiningEndDate { get; set; }
 
+        [NotMapped]
+        public DateTime AgeStartDate { get; set; }
+
+        [NotMapped]
+        public DateTime AgeEndDate { get; set; }
+
+        [NotMapped]
+        public int Condition { get; set; }
+
         //---- search purpose fields ---- end
 
         public virtual Department DepartmentId { get; set; }

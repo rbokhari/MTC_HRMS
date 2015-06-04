@@ -44,6 +44,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/GetAppraisalList').query();
     };
 
+    var _getEmployeesSearchList = function (employee) {
+        return $resource('/api/employee/GetEmployeeSearch').query(employee);
+    };
+
 
     var _addEmployee = function (employeeDef) {
         return $resource('/api/employee').save(employeeDef);
@@ -119,6 +123,7 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         getEmployeesProbationExpiry: _getEmployeesProbationExpiry,
         getEmployeesContactNoList: _getEmployeesContactNoList,
         getEmployeesAppraisalList: _getEmployeesAppraisalList,
+        getEmployeesSearchList:_getEmployeesSearchList,
         addEmployee: _addEmployee,
         editEmployee: _editEmployee,
         addEmployeePassport: _addEmployeePassport,
