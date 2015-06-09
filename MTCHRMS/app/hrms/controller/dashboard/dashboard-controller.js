@@ -3,10 +3,11 @@
 'use strict';
 hrmsModule.controller('DashboardController',
 [
-    '$scope', 'appRepository', 'departmentRepository', 'employeeRepository', 'validationRepository', '$location', '$routeParams', '$translate', 
-    function ($scope, appRepository, departmentRepository, employeeRepository, validationRepository, $location, $routeParams, $translate) {
+    '$scope', 'appRepository', 'departmentRepository', 'employeeRepository', 'validationRepository', '$location', '$routeParams', '$translate', 'appRoles',
+    function ($scope, appRepository, departmentRepository, employeeRepository, validationRepository, $location, $routeParams, $translate, appRoles) {
 
         console.log("dashboard controller");
+        $scope.appRoles = appRoles;
 
         if ($location.path().indexOf('/HRMSPortalAr') == 0) {
             $scope.lang = "ar_OM";

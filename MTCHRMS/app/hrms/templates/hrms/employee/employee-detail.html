@@ -39,7 +39,7 @@
             <form name="staffForm" novalidate>
                 <div class="widget widget-tabs">
                     <div class="widget-title">
-                        <h4><i class="icon-user"></i>Profile</h4>
+                        <h4><i class="icon-user"></i>Profile</h4> 
                     </div>
 
                     <div class="widget-body">
@@ -56,7 +56,7 @@
                             <div class="tab-pane" id="tab1" ng-show="isTabSelected(1)">
                                 <div class="span2">
                                     <div class="text-center profile-pic polaroid">
-                                        <p>{{ employee[0].employeeName | limitTo:25 }}</p>
+                                        <p ng-show="mainPortal=='HRMSPortal'">{{ employee[0].employeeName | limitTo:25 }} </p><p ng-show="mainPortal=='HRMSPortalAr'">{{ employee[0].employeeNameAr | limitTo:25 }} </p>
                                         <img data-img-loading-value="{{employee[0].empPicture}}" data-img-loading-size="profile" alt="" />
                                         <!--<img src="/Content/img/profile-pic.jpg" ng-show="!employee[0].empPicture" style="height: 220px; width: 220px;"
 
@@ -76,7 +76,7 @@
 
                                 </div>
                                 <div class="span7">
-                                    <h4>{{ employee[0].employeeName }} - {{ employee[0].rank }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
+                                    <h4>{{ mainPortal=='HRMSPortal' ? employee[0].employeeName : employee[0].employeeNameAr }} - {{ employee[0].rank }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
                                     <table class="table">
                                         <tbody>
                                             <tr>

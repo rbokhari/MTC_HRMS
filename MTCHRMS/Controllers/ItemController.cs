@@ -52,6 +52,17 @@ namespace MTCHRMS.Controllers
             return item;
         }
 
+        [Route("api/item/GetItemSearch")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<Item>> GetItemSearch([FromUri]Item item)
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetItemSearch(item);
+        }
+
+
         [Route("api/item/")]
         [HttpPost]
         [Authorize]

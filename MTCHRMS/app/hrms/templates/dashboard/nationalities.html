@@ -1,16 +1,18 @@
-﻿<div class="row-fluid">
+﻿<div class="span12">
     <h4><span translate="ALL_NATIONALITIES"></span></h4>
 
     <div class="progress progress-striped active" ng-show="isBusy">
         <div style="width: 100%;" class="bar"></div>
     </div>
-    <a class="icon-btn span2 red fade-in" href="#" ng-repeat="nationality in nationalities" ng-show="filtered1.length>0">
-        <img alt="" ng-src="/Content/img/flag/{{nationality.id}}.png" />
-        <div>{{ nationality.nameEn}}</div>
+    <div class="icon-btn span3 red fade-in" ng-repeat="nationality in nationalities" ng-show="filtered1.length>0">
+        <a ng-href="{{mainPortal}}/employee/search?param02={{nationality.id}}">
+            <img alt="" ng-src="/Content/img/flag/{{nationality.id}}.png" />
+            <div>{{ nationality.nameEn}}</div>
 
-        <div ng-repeat="emp1 in filtered1 = (employees | filter:{nationalityId:nationality.id}:true)">
-            <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
-            <span class="badge badge-info">{{ filtered1.length }}</span>
-        </div>
-    </a>
+            <div ng-repeat="emp1 in filtered1 = (employees | filter:{nationalityId:nationality.id}:true)">
+                <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
+                <span class="badge badge-info">{{ filtered1.length }}</span>
+            </div>
+        </a>
+    </div>
 </div>

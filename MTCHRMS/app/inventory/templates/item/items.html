@@ -21,6 +21,105 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
+    <div class="row-fluid" data-ng-init="loadDefinition()">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-search"></i>  <span translate="SEARCH_CRITERIA"></span></h4>
+                    <span class="tools">
+                        <a class="icon-chevron-down" href="javascript:;"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <form name="staffForm" novalidate>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <label for="tCode" class="control-label">Item Code :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tCode" name="tCode" ng-model="item.itemCode" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Item Type :</label>
+                                        <div class="controls">
+                                            <select id="cPostedTo" name="cPostedTo" ng-model="item.typeId">
+                                                <option value="0"></option>
+                                                <option ng-selected="department.id==item.typeId" ng-repeat="itemType in itemTypes" ng-value="itemType.id">{{itemType.nameEn}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" data-ng-init="loadSupplier()">
+                                        <label for="cSupplier" class="control-label">Supplier :</label>
+                                        <div class="controls">
+                                            <select id="cSupplier" name="cSupplier" ng-model="item.supplierId">
+                                                <option value="0"></option>
+                                                <option ng-repeat="supplier in suppliers" ng-value="supplier.supplierId">{{supplier.supplierName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="cCondition" class="control-label"><span translate="CONDITION"></span> :</label>
+                                        <div class="controls">
+                                            <select id="cCondition" name="cCondition" ng-model="item.condition">
+                                                <option value="0" ng-selected="item.condition==0">OR</option>
+                                                <option value="1" ng-selected="item.condition==1">AND</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <label for="tCode" class="control-label">Item Name :</label>
+                                        <div class="controls">
+                                            <input type="text" id="tCode" name="tCode" ng-model="item.itemName" />
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="cCategory" class="control-label">Item Category :</label>
+                                        <div class="controls">
+                                            <select id="cCategory" name="cCategory" ng-model="item.categoryId">
+                                                <option value="0"></option>
+                                                <option ng-selected="itemCategory.id==item.categoryId" ng-repeat="itemCategory in itemCategories" ng-value="itemCategorie.id">{{itemCategory.nameEn}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" data-ng-init="loadManufacturer()">
+                                        <label for="cManufacturer" class="control-label">Manufacturer :</label>
+                                        <div class="controls">
+                                            <select id="cManufacturer" name="cManufacturer" ng-model="item.manufacturerId">
+                                                <option value="0"></option>
+                                                <option ng-repeat="manufacturer in manufacturers" ng-value="status.id">{{manufacturer.manufacturerName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <div class="controls">
+                                            <button type="button" id="cmdSearch" class="btn btn-success" ng-click="itemSearch(item)">
+                                                <i class="icon-search"></i>
+                                                <span translate="SEARCH"></span>
+                                            </button>
+                                            <button type="reset" id="cmdClear" class="btn btn-default" ng-click="clearSearch()">
+                                                <i class="icon-refresh"></i>
+                                                <span translate="CLEAR"></span>
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="row-fluid">
         <div class="span12">
             <div class="widget">

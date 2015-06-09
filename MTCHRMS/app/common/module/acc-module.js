@@ -8,10 +8,12 @@
 
     .constant("appRoles", {
         "ADMIN": "1",
-        "HRMS_ADMIN": "2",
-        "HRMS_USER": "3",
+        "HRMS_ADMIN_EXPATRIATE": "2",
+        "HRMS_USER_EXPATRIATE": "3",
         "INV_ADMIN": "4",
-        "INV_USER":"5"
+        "INV_USER":"5",
+        "HRMS_ADMIN_LOCAL": "6",
+        "HRMS_USER_LOCAL": "7"
     })
 
     .constant("validations", {

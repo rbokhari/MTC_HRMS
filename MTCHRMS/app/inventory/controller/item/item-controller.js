@@ -5,8 +5,11 @@
 'use strict';
 invModule.controller('ItemController',
 [
-    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository','appRepository', 'locationRepository','departmentRepository', 'ModalService',
-    function ($scope, $location, $routeParams, itemRepository, validationRepository, appRepository, locationRepository, departmentRepository, ModalService) {
+    '$scope', '$location', '$routeParams', 'itemRepository', 'validationRepository', 'appRepository',
+        'locationRepository', 'departmentRepository', 'supplierRepository', 'manufacturerRepository', 'ModalService',
+
+    function ($scope, $location, $routeParams, itemRepository, validationRepository, appRepository,
+        locationRepository, departmentRepository, supplierRepository, manufacturerRepository, ModalService) {
 
         console.log("item controller");
 
@@ -31,7 +34,40 @@ invModule.controller('ItemController',
             $scope.itemTechnicians = validationRepository.getItemTechnicians;
             $scope.storeLocations = locationRepository.getAllLocations();
             $scope.departments = departmentRepository.getAllDepartment();
-            console.log($scope.storeLocations);
+            //console.log($scope.storeLocations);
+        };
+
+        $scope.loadSupplier = function() {
+            $scope.suppliers = supplierRepository.getAllSuppliers();
+
+            $scope.suppliers.$promise.then(function (response) {
+                //alert("success");
+                //console.log(response);
+            }, function () {
+                //alert("error");
+            })
+                .then(function () {
+
+                })
+                .then(function () { $scope.isBusy = false; });
+        };
+
+        $scope.loadManufacturer = function () {
+            $scope.isBusy = true;
+            $scope.manufacturers = manufacturerRepository.getAllManufacturers();
+
+            $scope.manufacturers.$promise.then(function (response) {
+                //alert("success");
+                //console.log(response);
+            }, function () {
+                //alert("error");
+            })
+                .then(function () {
+
+                })
+                .then(function () { $scope.isBusy = false; });
+
+            //console.log($scope.manufacturers);
         };
 
         $scope.loadItems = function() {
@@ -358,6 +394,64 @@ invModule.controller('ItemController',
                         appRepository.showErrorGritterNotification();
                     });
             }
+        };
+
+
+        $scope.item = {};
+
+        $scope.clearSearch = function () {
+            $scope.errors = [];
+
+            $scope.item.itemCode = "";
+            $scope.item.itemName = "";
+            $scope.item.typeId = 0;
+            $scope.item.categoryId = 0;
+            $scope.item.supplierId = 0;
+            $scope.item.condition = 0;
+            $scope.item.manufacturerId = 0;
+
+        };
+
+        $scope.clearSearch();
+
+        //console.log($routeParams);
+        function getSearchData(item) {
+            $scope.itemSearchResults = itemRepository.getItemSearchList(item);
+            $scope.itemSearchResults
+                .$promise
+                .then(function (response) {
+                    console.log(response);
+
+                }, function (error) {
+
+                })
+                .then(function () {
+                    $scope.isBusy = false;
+                });
+        }
+
+        if ($routeParams.param01 != undefined) {
+            $scope.clearSearch();
+            $scope.item.typeId = $routeParams.param01;
+            getSearchData($scope.item);
+            console.log("first param reach");
+
+        }
+
+        if ($routeParams.param02 != undefined) {
+            $scope.clearSearch();
+            $scope.item.categoryId = $routeParams.param02;
+            getSearchData($scope.item);
+            console.log("second param reach");
+
+        }
+
+        $scope.itemSearch = function (item) {
+            $scope.errors = [];
+            $scope.isBusy = true;
+
+            getSearchData(item);
+
         };
 
     }

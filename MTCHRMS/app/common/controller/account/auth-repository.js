@@ -137,9 +137,12 @@ accModule.factory('authRepository', [
 
                                         _authentication.isHRMSModule = _authentication.moduleId == appModules.HRMS_Module;
                                         _authentication.isINVModule = _authentication.moduleId == appModules.INV_Module;
+
                                         _authentication.isSystemAdmin = _authentication.roleId == appRoles.ADMIN;
-                                        _authentication.isHRMSAdmin = _authentication.roleId == appRoles.HRMS_ADMIN;
-                                        _authentication.isHRMSUser = _authentication.roleId == appRoles.HRMS_USER;
+
+                                        _authentication.isHRMSAdmin = _authentication.roleId == appRoles.HRMS_ADMIN_EXPATRIATE || _authentication.roleId == appRoles.HRMS_ADMIN_LOCAL;
+                                        _authentication.isHRMSUser = _authentication.roleId == appRoles.HRMS_USER_EXPATRIATE || _authentication.roleId == appRoles.HRMS_USER_LOCAL;
+
                                         _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
                                         _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
 

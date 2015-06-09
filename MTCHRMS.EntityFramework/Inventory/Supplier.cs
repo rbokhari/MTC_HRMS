@@ -43,6 +43,9 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public ICollection<SupplierContract> SupplierContracts { get; set; }
 
+
+        //public ICollection<ItemSupplier> ItemSuppliers { get; set; }
+
         public virtual ValidationDetail CountryDetail { get; set; }
 
     }

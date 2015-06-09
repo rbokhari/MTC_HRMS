@@ -17,6 +17,8 @@ using MTCHRMS.EntityFramework.HRMS;
 using MTCHRMS.Hubs;
 using Newtonsoft.Json;
 using Microsoft.AspNet.SignalR.Hubs;
+using MTCHRMS.App_Start;
+using Ninject;
 
 namespace MTCHRMS.Controllers
 {
@@ -37,9 +39,24 @@ namespace MTCHRMS.Controllers
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
-            var employees = _repo.GetEmployees();
 
-            return employees;
+            if (Request.Headers.Contains("userId"))
+            {
+                var employees = _repo.GetEmployees(GetRoleIdByUserId());
+                return employees;
+            }
+            return null;
+        }
+
+        private Int32 GetRoleIdByUserId()
+        {
+            using (AccountController account = new AccountController(NinjectConfig.CreateKernel().Get<IAccountRepository>()))
+            {
+                var user = account.GetUserDetail(Convert.ToInt32(Request.Headers.GetValues("userId").First()));
+
+                return user == null ? 0 : user.RoleId;
+            }
+            
         }
 
         [Route("api/employee/GetPassportExpiryList")]
@@ -110,17 +127,28 @@ namespace MTCHRMS.Controllers
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
-            var employees = _repo.GetEmployees().Where(c=>c.Id == id);
+            var employees = _repo.GetEmployees(GetRoleIdByUserId()).Where(c => c.Id == id);
 
             return employees;
         }
+
+        [Route("api/employee/GetEmployeeSearch")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetEmployeeSearch([FromUri]EmployeeDef employee)
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeeSearch(employee, GetRoleIdByUserId());
+        }
+
 
         [System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get(int id)
         {
             //System.Threading.Thread.Sleep(4000);
             //IDepartmentsRepository _repo = new DepartmentRepository();
-            var employee = _repo.GetEmployeeDetail(id);
+            var employee = _repo.GetEmployeeDetail(id, GetRoleIdByUserId());
 
             if (employee == null)
             {
@@ -182,7 +210,7 @@ namespace MTCHRMS.Controllers
                     }
                     newEmployee.ModifiedOn = DateTime.Now;
 
-                    if (_repo.UpdateEmployee(newEmployee) && _repo.Save())
+                    if (_repo.UpdateEmployee(newEmployee, GetRoleIdByUserId()) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
                         //return new HttpResponseMessage(HttpStatusCode.OK);
@@ -241,7 +269,7 @@ namespace MTCHRMS.Controllers
             var memstream = new MemoryStream();
 
             _file.InputStream.CopyTo(memstream);
-            var employee = _repo.GetEmployee(paramData);
+            var employee = _repo.GetEmployee(paramData, GetRoleIdByUserId());
             employee.EmpPicture = memstream.ToArray();
 
             if (_repo.UpdateEmployeeImage(ref employee) && _repo.Save())
@@ -371,7 +399,7 @@ namespace MTCHRMS.Controllers
                     }
                     newPassport.ModifiedOn = DateTime.Now;
 
-                    if (_repo.UpdateEmployeePassport(newPassport) && _repo.Save())
+                    if (_repo.UpdateEmployeePassport(newPassport, GetRoleIdByUserId()) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newPassport);
                         //return new HttpResponseMessage(HttpStatusCode.OK);
@@ -433,7 +461,7 @@ namespace MTCHRMS.Controllers
                     }
                     newVisa.ModifiedOn = DateTime.UtcNow;
 
-                    if (_repo.UpdateEmployeeVisa(newVisa) && _repo.Save())
+                    if (_repo.UpdateEmployeeVisa(newVisa, GetRoleIdByUserId()) && _repo.Save())
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newVisa);
                         //return new HttpResponseMessage(HttpStatusCode.OK);

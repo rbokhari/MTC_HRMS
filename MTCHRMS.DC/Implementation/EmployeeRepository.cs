@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using MTCHRMS.EntityFramework.General;
 using MTCHRMS.EntityFramework.HRMS;
 using System.Data.Entity;
+using MTC.GlobalVariables;
 
 namespace MTCHRMS.DC
 {
@@ -21,22 +22,52 @@ namespace MTCHRMS.DC
             _ctx = ctx;
         }
 
-        public IQueryable<EmployeeDef> GetEmployees()
+        public IQueryable<EmployeeDef> GetEmployees(int roleId)
         {
             try
             {
-                return _ctx.EmployeeDefs
-                    .Include(c => c.DepartmentId)
-                    .Include(v => v.ValidationDetailId)
-                    .Include(c => c.GenderDetail)
-                    .Include(c => c.StatusDetail);
+                switch ((ApplicationPreferences.Account_Roles)roleId)
+                {
+                    case ApplicationPreferences.Account_Roles.ADMIN:
+                        return _ctx.EmployeeDefs
+                            .Include(c => c.DepartmentId)
+                            .Include(v => v.ValidationDetailId)
+                            .Include(c => c.GenderDetail)
+                            .Include(c => c.StatusDetail);
 
+                        break;
+
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
+
+                        return _ctx.EmployeeDefs
+                            .Where(c => c.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI)
+                            .Include(c => c.DepartmentId)
+                            .Include(v => v.ValidationDetailId)
+                            .Include(c => c.GenderDetail)
+                            .Include(c => c.StatusDetail);
+
+                        break;
+
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
+
+                        return _ctx.EmployeeDefs
+                            .Where(c => c.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI)
+                            .Include(c => c.DepartmentId)
+                            .Include(v => v.ValidationDetailId)
+                            .Include(c => c.GenderDetail)
+                            .Include(c => c.StatusDetail);
+
+                        break;
+                }
+
+                return null;
             }
             catch (Exception)
             {
                 return null;
             }
-            //from x in _ctx.EmployeeDefs
         }
 
         public IQueryable<EmployeePassport> GetEmployeePassports(int id)
@@ -48,9 +79,31 @@ namespace MTCHRMS.DC
         {
             return _ctx.EmployeeVisas.Where(r => r.EmployeeDefId == id);
         }
-        public EmployeeDef GetEmployee(int id)
+        public EmployeeDef GetEmployee(int id, int roleId)
         {
-            return _ctx.EmployeeDefs.Single(r => r.Id == id);
+            switch ((ApplicationPreferences.Account_Roles) roleId)
+            {
+                case ApplicationPreferences.Account_Roles.ADMIN:
+                    return _ctx.EmployeeDefs.Single(r => r.Id == id);
+
+                    break;
+
+                case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
+                case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
+
+                    return _ctx.EmployeeDefs.Single(r => r.Id == id && r.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                    break;
+
+                case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
+                case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
+
+                    return _ctx.EmployeeDefs.Single(r => r.Id == id && r.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                    break;
+            }
+
+            return null;
         }
 
         public bool Save()
@@ -84,7 +137,7 @@ namespace MTCHRMS.DC
             
         }
 
-        public bool UpdateEmployee(EmployeeDef employee)
+        public bool UpdateEmployee(EmployeeDef employee, int roleId)
         {
             try
             {
@@ -121,7 +174,7 @@ namespace MTCHRMS.DC
                 //_ctx.EmployeeDefs.Attach(employee);
                 //employee.Id = GetEmployee(employee.Id).Id;
 
-                var employeeFetch = GetEmployee(employee.Id);
+                var employeeFetch = GetEmployee(employee.Id, roleId);
                 var attachedEmployee = _ctx.Entry(employeeFetch);
                 attachedEmployee.CurrentValues.SetValues(employee);
 
@@ -143,33 +196,46 @@ namespace MTCHRMS.DC
         }
 
 
-        public IQueryable<EmployeeDef> GetEmployeeDetail(int id)
+        public IQueryable<EmployeeDef> GetEmployeeDetail(int id, int roleId)
         {
             try
             {
-                //return _ctx.EmployeeDefs.Where(r => r.Id == id)
-                //    .Include(c => c.Childrens.Select(g => g.ChildGenderDetail))
-                //    .Include("EmployeePassports")
-                //    .Include("EmployeeVisas")
-                //    .Include("PreviousEmployments")
-                //    .Include("EmployeeMarital")
-                //    .Include("EmployeeKin")
-                //    .Include("EmployeeQualifications")
-                //    .Include("DepartmentId")
-                //    .Include("ValidationDetailId");
-
-                return _ctx.EmployeeDefs.Where(r => r.Id == id)
+                var emp = _ctx.EmployeeDefs.Where(r => r.Id == id)
                     .Include(c => c.Childrens.Select(g => g.ChildGenderDetail))
                     .Include(p => p.EmployeePassports)
                     .Include(v => v.EmployeeVisas)
                     .Include(e => e.PreviousEmployments)
                     .Include(m => m.EmployeeMarital)
                     .Include(k => k.EmployeeKin)
-                    .Include(q => q.EmployeeQualifications.Select(g=> g.QualificationLevel))
+                    .Include(q => q.EmployeeQualifications.Select(g => g.QualificationLevel))
                     .Include(d => d.DepartmentId)
-                    .Include(d=>d.GenderDetail)
-                    .Include(d=>d.StatusDetail)
+                    .Include(d => d.GenderDetail)
+                    .Include(d => d.StatusDetail)
                     .Include(v => v.ValidationDetailId);
+
+                switch ((ApplicationPreferences.Account_Roles)roleId)
+                {
+                    case ApplicationPreferences.Account_Roles.ADMIN:
+                        //emp = emp.Where(r=>r.NationalityId);
+
+                        break;
+
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
+
+                        emp = emp.Where(r => r.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                        break;
+
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
+
+                        emp = emp.Where(r => r.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                        break;
+                }
+
+                return emp;
 
             }
             catch (Exception)
@@ -194,11 +260,11 @@ namespace MTCHRMS.DC
             
         }
 
-        public bool UpdateEmployeePassport(EmployeePassport updatePasssport)
+        public bool UpdateEmployeePassport(EmployeePassport updatePasssport, int roleId)
         {
             try
             {
-                updatePasssport.EmployeeDefId = GetEmployee(updatePasssport.EmployeeDefId).Id;
+                updatePasssport.EmployeeDefId = GetEmployee(updatePasssport.EmployeeDefId,roleId).Id;
 
                 _ctx.Entry(updatePasssport).State = EntityState.Modified;
                 return true;
@@ -241,11 +307,11 @@ namespace MTCHRMS.DC
             }
         }
 
-        public bool UpdateEmployeeVisa(EmployeeVisa updateVisa)
+        public bool UpdateEmployeeVisa(EmployeeVisa updateVisa, int roleId)
         {
             try
             {
-                updateVisa.EmployeeDefId = GetEmployee(updateVisa.EmployeeDefId).Id;
+                updateVisa.EmployeeDefId = GetEmployee(updateVisa.EmployeeDefId, roleId).Id;
 
                 _ctx.Entry(updateVisa).State = EntityState.Modified;
                 return true;
@@ -514,7 +580,9 @@ namespace MTCHRMS.DC
                     .Include(c=>c.EmployeePassports)
                     .Include(c=>c.DepartmentId)
                     .Include(c=>c.ValidationDetailId)
-                    .Where(d => d.EmployeePassports.Any(e => e.StatusId == 1 && (DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) >= -30 && DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) <= 30)))
+                    .Where(d => d.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI && 
+                        d.EmployeePassports.Any(e => e.StatusId != (Int32)ApplicationPreferences.Validation_Details.EMPLOYEE_STATUS_RETIRED && 
+                            (DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) >= -30 && DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) <= 30)))
                     .ToListAsync();
             }
             catch (Exception)
@@ -532,7 +600,9 @@ namespace MTCHRMS.DC
                     .Include(c => c.EmployeeVisas)
                     .Include(c=>c.DepartmentId)
                     .Include(c => c.ValidationDetailId)
-                    .Where(d => d.EmployeeVisas.Any(e=>e.StatusId == 1 && (DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) >= -30 && DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) <= 30)))
+                    .Where(d => d.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI &&
+                        d.EmployeeVisas.Any(e => e.StatusId != (Int32)ApplicationPreferences.Validation_Details.EMPLOYEE_STATUS_RETIRED && 
+                            (DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) >= -30 && DbFunctions.DiffDays(DateTime.Now, e.ExpiryDate) <= 30)))
                     .ToListAsync();
 
                 return results;
@@ -549,7 +619,8 @@ namespace MTCHRMS.DC
             try
             {
                 return await _ctx.EmployeeDefs
-                    .Where(d => DbFunctions.DiffDays(DateTime.Now, d.ServiceEndDate) <= 120)   // 4 months
+                    .Where(d => d.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI && 
+                        DbFunctions.DiffDays(DateTime.Now, d.ServiceEndDate) <= 120)   // 4 months
                     .Include(e => e.DepartmentId)
                     .Include(e => e.ValidationDetailId).ToListAsync();
 
@@ -566,7 +637,8 @@ namespace MTCHRMS.DC
             try
             {
                 return await _ctx.EmployeeDefs
-                    .Where(d=>DbFunctions.DiffDays(d.Appointment, DateTime.Now) >=150 && DbFunctions.DiffDays(d.Appointment, DateTime.Now) <=180)
+                    .Where(d => d.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI && 
+                        DbFunctions.DiffDays(d.Appointment, DateTime.Now) >= 150 && DbFunctions.DiffDays(d.Appointment, DateTime.Now) <= 180)
                     .Include(e => e.DepartmentId)
                     .Include(e => e.ValidationDetailId).ToListAsync();
 
@@ -583,7 +655,8 @@ namespace MTCHRMS.DC
             try
             {
                 return await _ctx.EmployeeDefs
-                    .Where(d => DbFunctions.DiffDays(d.Appointment, DateTime.Now) % 365 > 325 )
+                    .Where(d => d.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI && 
+                        DbFunctions.DiffDays(d.Appointment, DateTime.Now) % 365 > 325)
                     .Include(e => e.DepartmentId)
                     .Include(e => e.ValidationDetailId).ToListAsync();
 
@@ -595,6 +668,7 @@ namespace MTCHRMS.DC
             }
             
         }
+
 
         public IQueryable GetEmployeesContactNo()
         {
@@ -627,6 +701,115 @@ namespace MTCHRMS.DC
             }
         }
 
+
+
+        public async Task<List<EmployeeDef>> GetEmployeeSearch(EmployeeDef employee, int roleId)
+        {
+            try
+            {
+                var emp = _ctx.EmployeeDefs
+                    .Include(c => c.DepartmentId);
+
+                switch ((ApplicationPreferences.Account_Roles)roleId)
+                {
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
+
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.NationalityId ==
+                                    (Int32) ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                        break;
+                    case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
+                    case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.NationalityId !=
+                                    (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+
+                        break;
+
+
+                }
+
+
+                if (employee.Condition == 0)
+                {
+                    emp = emp
+                        .Where(c => c.EmployeeCode.ToLower().Contains(employee.EmployeeCode.ToLower()) ||
+                                    c.EmployeeName.ToLower().Contains(employee.EmployeeName.ToLower()) ||
+                                    c.PostedTo == employee.PostedTo || c.NationalityId == employee.NationalityId ||
+                                    c.EmployeeGenderId == employee.EmployeeGenderId || c.StatusId == employee.StatusId ||
+                                    (c.Appointment >= employee.JoiningStartDate && c.Appointment <= employee.JoiningEndDate) ||
+                                    (c.DateOfBirth >= employee.AgeStartDate && c.DateOfBirth <= employee.AgeEndDate));
+
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(employee.EmployeeCode))
+                    {
+                        emp = emp.Where(c => c.EmployeeCode.ToLower().Contains(employee.EmployeeCode.ToLower()));
+                        //emp = emp.Where(c => c.EmployeeCode == employee.EmployeeCode);
+                    }
+
+                    if (!string.IsNullOrEmpty(employee.EmployeeName))
+                    {
+                        emp = emp.Where(c => c.EmployeeName.ToLower().Contains(employee.EmployeeName.ToLower()));
+                    }
+
+                    if (employee.PostedTo !=0)
+                    {
+                        emp = emp.Where(c => c.PostedTo == employee.PostedTo);
+                    }
+
+                    if (employee.NationalityId !=0)
+                    {
+                        emp = emp.Where(c => c.NationalityId == employee.NationalityId);
+                    }
+
+                    if (employee.EmployeeGenderId != 0)
+                    {
+                        emp = emp.Where(c => c.EmployeeGenderId == employee.EmployeeGenderId);
+                    }
+
+                    if (employee.StatusId != 0)
+                    {
+                        emp = emp.Where(c => c.StatusId == employee.StatusId);
+                    }
+
+
+                    if (employee.JoiningStartDate != null)
+                    {
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.Appointment >= employee.JoiningStartDate &&
+                                    c.Appointment <= employee.JoiningEndDate);
+                    }
+
+                    if (employee.AgeStartDate != null)
+                    {
+                        emp =
+                            emp.Where(
+                                c =>
+                                    c.DateOfBirth >= employee.AgeStartDate &&
+                                    c.DateOfBirth <= employee.AgeEndDate);
+                    }
+
+                }
+
+                return await emp.ToListAsync();
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return null;
+            }
+
+        }
     }
 }
 

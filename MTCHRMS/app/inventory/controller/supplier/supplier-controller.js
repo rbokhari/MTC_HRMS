@@ -31,7 +31,7 @@ invModule.controller('SupplierController',
                 })
                 .then(function () { $scope.isBusy = false; });
 
-            console.log($scope.suppliers);
+            //console.log($scope.suppliers);
         };
 
         

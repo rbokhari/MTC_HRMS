@@ -413,6 +413,29 @@ namespace MTCHRMS.DC
 
         }
 
+
+
+        public Task<List<Item>> GetItemSearch(Item item)
+        {
+            try
+            {
+                var items = _ctx.Items
+                    .Include(c => c.TypeDetail)
+                    .Include(d => d.CategoryDetail)
+                    .Include(e => e.StoreLocation)
+                    .Include(f => f.TechnicianType);
+
+                if (item.TypeId != 0)
+                {
+                    items = items.Where(c => c.TypeId == item.TypeId);
+                }
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
     }
 }
 

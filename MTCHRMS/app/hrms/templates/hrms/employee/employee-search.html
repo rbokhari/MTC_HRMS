@@ -12,11 +12,6 @@
                 </li>
                 <li><a href="/{{mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
                 <li><a href="#"><span translate="SEARCH"></span></a><span class="divider-last">&nbsp;</span></li>
-                <li class="pull-right search-wrap">
-                    <div class="search-input-area">
-                        <i class="icon-search"></i>
-                    </div>
-                </li>
             </ul>
         </div>
     </div>
@@ -31,36 +26,42 @@
                 <div class="widget-title">
                     <h4><i class="icon-search"></i>  <span translate="SEARCH_CRITERIA"></span></h4>
                     <span class="tools">
-                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a class="icon-chevron-down" href="javascript:;"></a>
                     </span>
                 </div>
                 <div class="widget-body">
-                    <div class="row-fluid">
+                    <div class="row-fluid" >
                         <form name="staffForm" novalidate>
                             <div class="span6">
                                 <div class="form-horizontal">
                                     <div class="control-group">
                                         <label for="tCode" class="control-label"><span translate="EMPLOYEE_NO"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tCode" name="tCode" ng-model="employee.employeeCode" required />
+                                            <input type="text" id="tCode" name="tCode" ng-model="employee.employeeCode" />
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="DEPARTMENT"></span> :</label>
                                         <div class="controls">
-                                            <select id="cPostedTo" name="cPostedTo" ng-model="employee.postedTo" ng-options="department.id as department.departmentName for department in departments" required></select>
+                                            <select id="cPostedTo" name="cPostedTo" ng-model="employee.postedTo" >
+                                                <option value="0"></option>
+                                                <option ng-selected="department.id==employee.postedTo" ng-repeat="department in departments" ng-value="department.id">{{department.departmentName}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="STATUS"></span> :</label>
                                         <div class="controls">
-                                            <select id="cNationality" name="cStatus" ng-model="employee.statusId" ng-options="status.id as status.nameEn for status in employeeStatus"></select>
+                                            <select id="cNationality" name="cStatus" ng-model="employee.statusId">
+                                                <option value="0"></option>
+                                                <option ng-repeat="status in employeeStatus" ng-value="status.id">{{status.nameEn}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="GENDER"></span> :</label>
                                         <div class="controls">
-                                            <select id="cGender" name="cGender" ng-model="employee.genderId" ng-options="gender.id as gender.nameEn for gender in genders"></select>
+                                            <select id="cGender" name="cGender" ng-model="employee.employeeGenderId" ng-options="gender.id as gender.nameEn for gender in genders"></select>
                                         </div>
                                     </div>
 
@@ -68,8 +69,8 @@
                                         <label class="control-label"><span translate="CONDITION"></span> :</label>
                                         <div class="controls">
                                             <select id="cNationality" name="cStatus" ng-model="employee.condition">
-                                                <option value="0" selected="selected">OR</option>
-                                                <option value="1">AND</option>
+                                                <option value="0" ng-selected="employee.condition==0">OR</option>
+                                                <option value="1" ng-selected="employee.condition==1">AND</option>
                                             </select>
                                         </div>
                                     </div>
@@ -81,20 +82,23 @@
                                     <div class="control-group">
                                         <label for="tCode" class="control-label"><span translate="EMPLOYEE_NAME"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tCode" name="tCode" ng-model="employee.employeeName" required />
+                                            <input type="text" id="tCode" name="tCode" ng-model="employee.employeeName" />
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="NATIONALITY"></span> :</label>
                                         <div class="controls">
-                                            <select id="cNationality" name="cNationality" ng-model="employee.nationalityId" ng-options="nationality.id as nationality.nameEn for nationality in nationalities" required></select>
+                                            <select id="cNationality" name="cNationality" ng-model="employee.nationalityId" >
+                                                <option value="0"></option>
+                                                <option ng-selected="nationality.id==employee.nationalityId" ng-repeat="nationality in nationalities" ng-value="nationality.id">{{nationality.nameEn}}</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="JOINING_DATE"></span> :</label>
                                         <div class="controls">
-                                            <!--<input type="text" id="joinDateRange" name="tRank" ng-model="employee[0].rank" required />-->
-                                            <div id="joiningDate" class="pull-left"  style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; min-width: 200px;">
+                                            <!--<input type="text" id="joinDateRange" name="tRank" ng-model="employee[0].rank"  />-->
+                                            <div id="joiningDate" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; min-width: 200px;">
                                                 <i class="icon icon-calendar"></i>
                                                 <span></span> &nbsp;
                                             </div>
@@ -103,7 +107,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                         <div class="controls">
-                                            <!--<input type="text" id="joinDateRange" name="tRank" ng-model="employee[0].rank" required />-->
+                                            <!--<input type="text" id="joinDateRange" name="tRank" ng-model="employee[0].rank"  />-->
                                             <div id="birthDate" class="pull-left" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; min-width: 200px;">
                                                 <i class="icon icon-calendar"></i>
                                                 <span></span> &nbsp;
@@ -112,11 +116,11 @@
                                     </div>
                                     <div class="control-group">
                                         <div class="controls">
-                                            <button type="button" id="cmdSave" class="btn btn-success" ng-click="employeeSearch(employee)">
+                                            <button type="button" id="cmdSearch" class="btn btn-success" ng-click="employeeSearch(employee)">
                                                 <i class="icon-search"></i>
                                                 <span translate="SEARCH"></span>
                                             </button>
-                                            <button type="reset" id="cmdClear" class="btn btn-default" ng-click="clearSearch(employee)">
+                                            <button type="reset" id="cmdClear" class="btn btn-default" ng-click="clearSearch()">
                                                 <i class="icon-refresh"></i>
                                                 <span translate="CLEAR"></span>
                                             </button>
@@ -139,9 +143,7 @@
                     <div class="widget-title">
                         <h4><i class="icon-filter"></i>  <span translate="SEARCH_RESULT"></span></h4>
                         <span class="tools">
-                            <a href="" ng-click="loadProbation()" class="icon-refresh"></a>
                             <a href="" ng-click=""><i class="icon-print"></i></a>
-
                             <a href="javascript:;" class="icon-chevron-down"></a>
                         </span>
                     </div>
@@ -172,35 +174,35 @@
                                             <th class="hidden-phone"><span translate="DEPARTMENT"></span></th>
                                             <th class="hidden-phone"><span translate="NATIONALITY"></span></th>
                                             <th><span translate="JOINING_DATE"></span></th>
-                                            <th><span translate="DAYS"></span></th>
+                                            <th><span translate="BIRTH_DATE"></span></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-show="isProbationBusy">
+                                        <tr ng-show="isBusy">
                                             <td colspan="7">
                                                 <div class="progress progress-striped active">
                                                     <div style="width: 100%;" class="bar"></div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="probation in probations | filter:search | itemsPerPage: recordPage">
-                                            <td style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{probation.id}}">{{ probation.employeeCode}}</a></td>
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="emp in empSearchResults | filter:search | itemsPerPage: recordPage">
+                                            <td style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeCode}}</a></td>
                                             <td style="vertical-align: middle;">
-                                                <img class="circular" alt="" data-img-loading-value="{{probation.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
-                                                <a style="vertical-align: middle;" ng-href="/{{mainPortal}}/employee/detail/{{probation.id}}">{{ probation.employeeName }}</a>
+                                                <img class="circular" alt="" data-img-loading-value="{{emp.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+                                                <a style="vertical-align: middle;" ng-href="/{{mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeName }}</a>
                                             </td>
-                                            <td class="hidden-phone" style="vertical-align: middle;">{{probation.departmentId.departmentName}}</td>
-                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{probation.nationalityId}}.png" /> &nbsp;<!--{{probation.validationDetailId.nameEn}}--></td>
-                                            <td style="vertical-align: middle;"><label data-ng-class="(daysDiff(visa.employeeVisas[0].appointment) > 0) ? 'label label-warning' : 'label label-important'" class="label"> {{probation.appointment | date: 'longDate'}}</label></td>
-                                            <td style="vertical-align: middle;">{{daysDiffMoment(probation.appointment)}}</td>
+                                            <td class="hidden-phone" style="vertical-align: middle;">{{emp.departmentId.departmentName}}</td>
+                                            <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{emp.nationalityId}}.png" /> &nbsp;<!--{{probation.validationDetailId.nameEn}}--></td>
+                                            <td style="vertical-align: middle;">{{emp.appointment | date:'dd MMM yyyy'}}</td>
+                                            <td style="vertical-align: middle;">{{emp.dateOfBirth | date:'dd MMM yyyy'}}</td>
 
 
                                         </tr>
                                     </tbody>
                                 </table>
-
+                                
                                 <div style="height:40px;">
-                                    <span class="pull-left bottom" ng-show="departments.length>0">
+                                    <span class="pull-left bottom" ng-show="empSearchResults.length>0">
                                         Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
                                     </span>
                                     <span class="pull-right">
