@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('SupplierController',
 [
-    '$scope', '$location', '$routeParams','supplierRepository','appRepository','validationRepository','ModalService',
-    function ($scope, $location, $routeParams, supplierRepository, appRepository, validationRepository, ModalService) {
+    '$scope', '$location', '$routeParams', 'supplierRepository', 'appRepository', 'validationRepository', 'itemRepository', 'ModalService',
+    function ($scope, $location, $routeParams, supplierRepository, appRepository, validationRepository, itemRepository, ModalService) {
 
         console.log("supplier dashboard controller");
         //$scope.myname = "yahoo";
@@ -34,7 +34,35 @@ invModule.controller('SupplierController',
             //console.log($scope.suppliers);
         };
 
-        
+        $scope.loadItemsSupplier = function () {
+            $scope.isBusy = true;
+            $scope.items = itemRepository.getAllItems();
+
+            $scope.items.$promise.then(function () {
+                //alert("success");
+                //console.log(countItems(1));
+            }, function () {
+                //alert("error");
+            })
+                .then(function () {
+
+                })
+                .then(function () { $scope.isBusy = false; });
+        };
+
+        $scope.countItemsSupplier = function (id) {
+            //alert("hello " + id);
+            console.log("call countItemsSupplier");
+            var countSupplier = 0;
+            angular.forEach($scope.items, function (item) {
+                angular.forEach(item.itemSuppliers, function (supp) {
+                    if (supp.supplierId === id) {
+                        countSupplier++;
+                    }
+                });
+            });
+            return countSupplier;
+        };
 
         $scope.save = function (supplier) {
 

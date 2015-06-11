@@ -416,8 +416,8 @@ invModule.controller('ItemController',
 
         //console.log($routeParams);
         function getSearchData(item) {
-            $scope.itemSearchResults = itemRepository.getItemSearchList(item);
-            $scope.itemSearchResults
+            $scope.items = itemRepository.getItemSearchList(item);
+            $scope.items
                 .$promise
                 .then(function (response) {
                     console.log(response);
@@ -430,12 +430,13 @@ invModule.controller('ItemController',
                 });
         }
 
+        //console.log(Object.keys($routeParams).length);
+
         if ($routeParams.param01 != undefined) {
             $scope.clearSearch();
             $scope.item.typeId = $routeParams.param01;
             getSearchData($scope.item);
             console.log("first param reach");
-
         }
 
         if ($routeParams.param02 != undefined) {
@@ -443,16 +444,48 @@ invModule.controller('ItemController',
             $scope.item.categoryId = $routeParams.param02;
             getSearchData($scope.item);
             console.log("second param reach");
-
         }
+
+        if ($routeParams.param03 != undefined) {
+            $scope.clearSearch();
+            $scope.item.storeId = $routeParams.param03;
+            getSearchData($scope.item);
+            console.log("third param reach");
+        }
+
+        if ($routeParams.param04 != undefined) {
+            $scope.clearSearch();
+            $scope.item.departmentId = $routeParams.param04;
+            getSearchData($scope.item);
+            console.log("fourth param reach");
+        }
+
+        if ($routeParams.param05 != undefined) {
+            $scope.clearSearch();
+            $scope.item.supplierId = $routeParams.param05;
+            getSearchData($scope.item);
+            console.log("fourth param reach");
+        }
+
+
+        if ($routeParams.param06 != undefined) {
+            $scope.clearSearch();
+            $scope.item.manufacturerId = $routeParams.param06;
+            getSearchData($scope.item);
+            console.log("fourth param reach");
+        }
+
 
         $scope.itemSearch = function (item) {
             $scope.errors = [];
             $scope.isBusy = true;
 
             getSearchData(item);
-
         };
+
+        if (Object.keys($routeParams).length === 0) {
+            $scope.loadItems();
+        }
 
     }
 ]);

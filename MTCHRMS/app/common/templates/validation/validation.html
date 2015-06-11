@@ -56,6 +56,7 @@
                                 <th>Name</th>
                                 <th>Notes</th>
                                 <th>Status</th>
+                                <th>Items</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -76,8 +77,10 @@
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ validation.description }}</td>
                                 <td>
-                                    <label ng-class="{'label label-info': validation.isActive, 'label label-inverse': validation.isActive==0}">
-                                        <ng-pluralize count="validation.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                                    <label>
+                                        <!--<ng-pluralize count="validation.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>-->
+                                        <i ng-show="validation.isActive==1" class="icon-check"></i>
+                                        <i ng-show="validation.isActive==0" class="icon-check-empty"></i>
                                     </label>
                                 </td>
                             </tr>

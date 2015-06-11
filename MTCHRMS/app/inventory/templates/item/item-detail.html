@@ -68,6 +68,18 @@
                                 <table class="table">
                                     <tbody>
                                         <tr>
+                                            <td class="span2">NSN :</td>
+                                            <td>
+                                                {{ item[0].natoNo}}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="span2">Serial No :</td>
+                                            <td>
+                                                {{ item[0].serialNo}}
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td class="span2">Item Type :</td>
                                             <td>
                                                 {{ item[0].typeDetail.nameEn}}
@@ -174,7 +186,7 @@
                                     </ul>
 
                                 </div>
-                                <div ng-show="item[0].itemYears.length">
+                                <div ng-show="item[0].itemManufacturers.length">
                                     <h4 class="alert alert-warning"><i class="icon-hand-right"></i>&nbsp;Manufacturers</h4>
                                     <ul class="icons col-lg-push-0">
                                         <li ng-repeat="man in item[0].itemManufacturers">

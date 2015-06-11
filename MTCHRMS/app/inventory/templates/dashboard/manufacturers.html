@@ -1,17 +1,16 @@
-﻿<div class="row-fluid">
-    <h4>All Manufacturers</h4>
+﻿    <h4><i class="icon-certificate"></i>&nbsp; Manufacturers</h4>
 
     <div class="progress progress-striped active" ng-show="isBusy">
         <div style="width: 100%;" class="bar"></div>
     </div>
-    <div class="icon-btn span2 red fade-in" ng-repeat="manufacturer in manufacturers">
-        <a href="#">
-            <i class="icon-user"></i>
-            <div>{{ manufacturer.manufacturerName}}</div>
+    <div class="icon-btn span3 red fade-in" ng-repeat="manufacturer in manufacturers" ng-show="filtered.length>0">
+        <a ng-href="INVPortal/item/list?param06={{manufacturer.manufacturerId}}" title="{{manufacturer.manufacturerName}}">
+            <i class="icon-certificate"></i>
+            <div>{{ manufacturer.manufacturerName | limitTo:20}} {{manufacturer.manufacturerName.length > 20 ? '...' : ''}}</div>
 
-            <!--<div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id}:true)">
-                <span class="badge badge-important">{{ filtered.length }}</span>
-            </div>-->
+            <div ng-repeat="item in filtered = (itemManufacturers | filter:{manufacturerId:manufacturer.manufacturerId}:true)">
+                <span class="badge badge-warning">{{ filtered.length }}</span>
+            </div>
+
         </a>
     </div>
-</div>

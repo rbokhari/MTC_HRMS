@@ -50,38 +50,47 @@
                             <span>search</span> : <input type="text" ng-model="search" />
                         </span>
                     </div>
-                    <table class="table table-striped table-bordered table-advance table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Notes</th>
-                                    <th>Country</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-show="isBusy">
-                                    <td colspan="4">
-                                        <div class="progress progress-striped active">
-                                            <div style="width: 100%;" class="bar"></div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr ng-if="authentication.isSystemAdmin || authentication.isINVUser || authentication.isINVAdmin" dir-paginate="manufacturer in manufacturers | filter:search | itemsPerPage: recordPage">
-                                    <td ng-if="authentication.isINVAdmin">
-                                        <a ng-href="/INVPortal/definition/manufacturer/edit/{{ manufacturer.manufacturerId}}"> {{ manufacturer.manufacturerName }} </a>
-                                    </td>
-                                    <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{manufacturer.manufacturerName }}</td>
-                                    <td>{{ manufacturer.notes }}</td>
-                                    <td>{{ manufacturer.countryDetail.nameEn }}</td>
-                                    <td>
-                                        <label ng-class="{'label label-info': manufacturer.statusId, 'label label-inverse': manufacturer.statusId==0}">
-                                            <ng-pluralize count="manufacturer.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
-                                        </label>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <table class="table table-striped table-bordered table-advance table-hover" data-ng-init="loadItemsManufacturer()">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Notes</th>
+                                <th>Country</th>
+                                <th>Status</th>
+                                <th>Items</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="isBusy">
+                                <td colspan="5">
+                                    <div class="progress progress-striped active">
+                                        <div style="width: 100%;" class="bar"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="authentication.isSystemAdmin || authentication.isINVUser || authentication.isINVAdmin" dir-paginate="manufacturer in manufacturers | filter:search | itemsPerPage: recordPage">
+                                <td ng-if="authentication.isINVAdmin">
+                                    <a ng-href="/INVPortal/definition/manufacturer/edit/{{ manufacturer.manufacturerId}}"> {{ manufacturer.manufacturerName }} </a>
+                                </td>
+                                <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{manufacturer.manufacturerName }}</td>
+                                <td>{{ manufacturer.notes | limitTo:30}} {{manufacturer.notes.length > 30 ? '...' : ''}}</td>
+                                <td>{{ manufacturer.countryDetail.nameEn }}</td>
+                                <td>
+                                    <!--<label ng-class="{'label label-info': manufacturer.statusId, 'label label-inverse': manufacturer.statusId==0}">
+                        <ng-pluralize count="manufacturer.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                    </label>-->
+                                    <i ng-show="manufacturer.statusId==1" class="icon-check"></i>
+                                    <i ng-show="manufacturer.statusId==0" class="icon-check-empty"></i>
+
+                                </td>
+                                <td>
+                                    <a ng-href="/INVPortal/item/list?param06={{manufacturer.manufacturerId}}">
+                                        <span class="badge badge-info" ng-bind="countItemsManufacturer(manufacturer.manufacturerId)"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div style="height:40px;">
                         <span class="bottom pull-left" ng-show="departments.length>0">
                             <span translate="DISPLAYING"></span>&nbsp;{{ range.lower }} - {{ range.upper }} <span translate="OF"></span> {{ range.total }}

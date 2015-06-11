@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('ManufacturerController',
 [
-    '$scope', '$location', '$routeParams','manufacturerRepository','appRepository','validationRepository',
-    function ($scope, $location, $routeParams, manufacturerRepository, appRepository, validationRepository) {
+    '$scope', '$location', '$routeParams','manufacturerRepository','appRepository','validationRepository','itemRepository',
+    function ($scope, $location, $routeParams, manufacturerRepository, appRepository, validationRepository, itemRepository) {
 
         console.log("manufacturer dashboard controller");
         //$scope.myname = "yahoo";
@@ -39,7 +39,35 @@ invModule.controller('ManufacturerController',
             //console.log($scope.manufacturers);
         };
 
-        
+        $scope.loadItemsManufacturer = function () {
+            $scope.isBusy = true;
+            $scope.items = itemRepository.getAllItems();
+
+            $scope.items.$promise.then(function () {
+                //alert("success");
+                //console.log(countItems(1));
+            }, function () {
+                //alert("error");
+            })
+                .then(function () {
+
+                })
+                .then(function () { $scope.isBusy = false; });
+        };
+
+        $scope.countItemsManufacturer = function (id) {
+            //alert("hello " + id);
+            console.log("call countItemsManufacturer");
+            var countManufacturer = 0;
+            angular.forEach($scope.items, function (item) {
+                angular.forEach(item.itemManufacturers, function (manu) {
+                    if (manu.manufacturerId === id) {
+                        countManufacturer++;
+                    }
+                });
+            });
+            return countManufacturer;
+        };
 
         $scope.save = function (manufacturer) {
             

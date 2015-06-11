@@ -39,8 +39,20 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtName">Item Name</label>
                                 <div class="controls">
-                                    <input type="text" id="txtName" ng-model="item[0].itemName" class="input-xlarge" required />
+                                    <input type="text" id="txtName" ng-model="item[0].itemName" class="input-xlarge" required/>
                                     <div class="help-inline" ng-show="frm.txtName.$error.required && frm.txtName.$dirty">Please enter name !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tNatoNo">NSN </label>
+                                <div class="controls">
+                                    <input type="text" id="tNatoNo" ng-model="item[0].natoNo" class="input-xlarge" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tSerialNo">Serial No</label>
+                                <div class="controls">
+                                    <input type="text" id="tSerialNo" ng-model="item[0].serialNo" class="input-xlarge" />
                                 </div>
                             </div>
                             <div class="control-group">

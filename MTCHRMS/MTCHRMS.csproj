@@ -231,7 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />
-    <Content Include="app\inventory\controller\dashboard\dashboard-constroller.js" />
+    <Content Include="app\inventory\controller\dashboard\dashboard-controller.js" />
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />
     <Content Include="app\inventory\controller\item\item-repository.js" />
@@ -261,6 +261,10 @@
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
+    <Content Include="app\inventory\templates\dashboard\departments.html" />
+    <Content Include="app\inventory\templates\dashboard\itemlocations.html" />
+    <Content Include="app\inventory\templates\dashboard\itemcategories.html" />
+    <Content Include="app\inventory\templates\dashboard\itemtypes.html" />
     <Content Include="app\inventory\templates\dashboard\manufacturers.html" />
     <Content Include="app\inventory\templates\dashboard\suppliers.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />

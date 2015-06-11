@@ -415,7 +415,7 @@ namespace MTCHRMS.DC
 
 
 
-        public Task<List<Item>> GetItemSearch(Item item)
+        public async Task<List<Item>> GetItemSearch(Item item)
         {
             try
             {
@@ -423,18 +423,95 @@ namespace MTCHRMS.DC
                     .Include(c => c.TypeDetail)
                     .Include(d => d.CategoryDetail)
                     .Include(e => e.StoreLocation)
-                    .Include(f => f.TechnicianType);
+                    .Include(f => f.TechnicianType)
+                    .Include(f=>f.ItemDepartments);
 
-                if (item.TypeId != 0)
+
+
+                if (item.Condition == 0)
                 {
-                    items = items.Where(c => c.TypeId == item.TypeId);
+                    items = items
+                        .Where(c =>
+                            c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()) ||
+                            c.ItemName.ToLower().Contains(item.ItemName.ToLower()) ||
+                            c.TypeId == item.TypeId ||
+                            c.CategoryId == item.CategoryId ||
+                            c.StoreId == item.StoreId ||
+                            c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId) ||
+                            c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId) ||
+                            c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
+
+                }
+                else
+                {
+                    if (!string.IsNullOrEmpty(item.ItemCode))
+                    {
+                        items = items.Where(c => c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()));
+                    }
+
+                    if (!string.IsNullOrEmpty(item.ItemName))
+                    {
+                        items = items.Where(c => c.ItemName.ToLower().Contains(item.ItemName.ToLower()));
+                    }
+
+                    if (item.TypeId != 0)
+                    {
+                        items = items.Where(c => c.TypeId == item.TypeId);
+                    }
+
+                    if (item.CategoryId != 0)
+                    {
+                        items = items.Where(c => c.CategoryId == item.CategoryId);
+                    }
+
+                    if (item.StoreId != 0)
+                    {
+                        items = items.Where(c => c.StoreId == item.StoreId);
+                    }
+
+                    if (item.DepartmentId != 0)
+                    {
+                        items = items.Where(c => c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId));
+                    }
+
+                    if (item.SupplierId != 0)
+                    {
+                        items = items.Where(c => c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId));
+                    }
+
+                    if (item.ManufacturerId != 0)
+                    {
+                        items = items.Where(c => c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
+                    }
                 }
 
+                return await items.ToListAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return null;
+                throw ex;
             }
+        }
+
+
+        public IQueryable<ItemDepartment> GetItemDepartments()
+        {
+            return _ctx.ItemDepartments;
+        }
+
+        public IQueryable<ItemYear> GetItemYears()
+        {
+            return _ctx.ItemYears;
+        }
+
+        public IQueryable<ItemSupplier> GetItemSuppliers()
+        {
+            return _ctx.ItemSuppliers;
+        }
+
+        public IQueryable<ItemManufacturer> GetItemManufactuers()
+        {
+            return _ctx.ItemManufacturers;
         }
     }
 }

@@ -21,8 +21,8 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid" data-ng-init="loadDefinition()">
-        <div class="span12">
+    <div class="row-fluid">
+        <div class="span12" data-ng-init="loadDefinition()">
             <div class="widget">
                 <div class="widget-title">
                     <h4><i class="icon-search"></i>  <span translate="SEARCH_CRITERIA"></span></h4>
@@ -46,7 +46,16 @@
                                         <div class="controls">
                                             <select id="cPostedTo" name="cPostedTo" ng-model="item.typeId">
                                                 <option value="0"></option>
-                                                <option ng-selected="department.id==item.typeId" ng-repeat="itemType in itemTypes" ng-value="itemType.id">{{itemType.nameEn}}</option>
+                                                <option ng-selected="itemType.id==item.typeId" ng-repeat="itemType in itemTypes" ng-value="itemType.id">{{itemType.nameEn}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="cDepartment" class="control-label">Department :</label>
+                                        <div class="controls">
+                                            <select id="cDepartment" name="cDepartment" ng-model="item.departmentId">
+                                                <option value="0"></option>
+                                                <option ng-selected="department.id==item.departmentId" ng-repeat="department in departments" ng-value="department.id">{{department.departmentName}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -55,7 +64,7 @@
                                         <div class="controls">
                                             <select id="cSupplier" name="cSupplier" ng-model="item.supplierId">
                                                 <option value="0"></option>
-                                                <option ng-repeat="supplier in suppliers" ng-value="supplier.supplierId">{{supplier.supplierName}}</option>
+                                                <option ng-selected="supplier.supplierId==item.supplierId" ng-repeat="supplier in suppliers" ng-value="supplier.supplierId">{{supplier.supplierName}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -88,12 +97,21 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="control-group">
+                                        <label for="cStore" class="control-label">Store Location :</label>
+                                        <div class="controls">
+                                            <select id="cStore" name="cStore" ng-model="item.storeId">
+                                                <option value="0"></option>
+                                                <option ng-selected="location.storeId==item.storeId" ng-repeat="location in storeLocations" ng-value="location.storeId">{{location.storeName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="control-group" data-ng-init="loadManufacturer()">
                                         <label for="cManufacturer" class="control-label">Manufacturer :</label>
                                         <div class="controls">
                                             <select id="cManufacturer" name="cManufacturer" ng-model="item.manufacturerId">
                                                 <option value="0"></option>
-                                                <option ng-repeat="manufacturer in manufacturers" ng-value="status.id">{{manufacturer.manufacturerName}}</option>
+                                                <option ng-selected="manufacturer.manufacturerId==item.manufacturerId" ng-repeat="manufacturer in manufacturers" ng-value="manufacturer.manufacturerId">{{manufacturer.manufacturerName}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -107,7 +125,6 @@
                                                 <i class="icon-refresh"></i>
                                                 <span translate="CLEAR"></span>
                                             </button>
-
                                         </div>
                                     </div>
                                 </div>
@@ -131,7 +148,7 @@
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
                 </div>
-                <div class="widget-body" ng-init="loadItems()">
+                <div class="widget-body">
                     <div class="form-horizontal">
                         <div class="control-group pull-left">
                             <label class="control-label">
@@ -155,6 +172,7 @@
                                 <th>Sr. #</th>
                                 <th>Code</th>
                                 <th>Name</th>
+                                <th>NSN / Serial</th>
                                 <th>Type</th>
                                 <th>Category</th>
                                 <th>Store</th>
@@ -179,7 +197,13 @@
                                     <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemName }} </a>
+                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}" title="{{item.itemName}}"> {{ item.itemName | limitTo:20}} {{item.itemName.length > 20 ? '...' : ''}}</a>
+                                </td>
+                                <td>
+                                    <div>
+                                        {{item.natoNo}} <br/>
+                                        {{item.serialNo}}
+                                    </div> 
                                 </td>
                                 <td style="vertical-align: middle;">{{item.typeDetail.nameEn}}</td>
                                 <td style="vertical-align: middle;">{{item.categoryDetail.nameEn}}</td>

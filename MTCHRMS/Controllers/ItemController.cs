@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -51,6 +52,43 @@ namespace MTCHRMS.Controllers
             }
             return item;
         }
+
+        [Route("api/item/ItemDepartments")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<ItemDepartment>> GetItemDepartments()
+        {
+            var departments = _repo.GetItemDepartments();
+            return await departments.ToListAsync();
+        }
+
+        [Route("api/item/ItemSuppliers")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<ItemSupplier>> GetItemSuppliers()
+        {
+            var suppliers = _repo.GetItemSuppliers();
+            return await suppliers.ToListAsync();
+        }
+
+        [Route("api/item/ItemYears")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<ItemYear>> GetItemYears()
+        {
+            var years = _repo.GetItemYears();
+            return await years.ToListAsync();
+        }
+
+        [Route("api/item/ItemManufacturers")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<ItemManufacturer>> GetItemManufacturers()
+        {
+            var manufacturers = _repo.GetItemManufactuers();
+            return await manufacturers.ToListAsync();
+        }
+
 
         [Route("api/item/GetItemSearch")]
         [HttpGet]

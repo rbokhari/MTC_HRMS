@@ -9,7 +9,23 @@ invModule.factory('itemRepository', [
         var _getAllItems = function() {
             return $resource('/api/item').query(); // can use get() instead of query(), but using query() because it except to return back array of objects
         };
-        
+
+        var _getAllItemSuppliers = function () {
+            return $resource('/api/item/ItemSuppliers').query();
+        };
+
+        var _getAllItemManufactuers = function () {
+            return $resource('/api/item/ItemManufacturers').query();
+        };
+
+        var _getAllItemYears = function () {
+            return $resource('/api/item/ItemYears').query();
+        };
+
+        var _getAllItemDepartments = function () {
+            return $resource('/api/item/ItemDepartments').query();
+        };
+
         var _getItemById = function(id) {
             return $resource('/api/item/GetSingleItem/?id=' + id).query();
         };
@@ -77,6 +93,10 @@ invModule.factory('itemRepository', [
 
         return {
             getAllItems: _getAllItems,
+            getAllItemSuppliers: _getAllItemSuppliers,
+            getAllItemManufactuers: _getAllItemManufactuers,
+            getAllItemYears: _getAllItemYears,
+            getAllItemDepartments: _getAllItemDepartments,
             getItemById: _getItemById,
             addItem: _addItem,
             editItem: _editItem,

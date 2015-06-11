@@ -44,6 +44,18 @@
                                 </div>
                             </div>
                             <div class="control-group">
+                                <label class="control-label" for="tNatoNo">NSN </label>
+                                <div class="controls">
+                                    <input type="text" id="tNatoNo" ng-model="item.natoNo" class="input-xlarge" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tSerialNo">Serial No</label>
+                                <div class="controls">
+                                    <input type="text" id="tSerialNo" ng-model="item.serialNo" class="input-xlarge" />
+                                </div>
+                            </div>
+                            <div class="control-group">
                                 <label class="control-label" for="cType">Item Type</label>
                                 <div class="controls">
                                     <select id="cType" name="cType" ng-model="item.typeId" ng-options="type.id as type.nameEn for type in itemTypes"></select>

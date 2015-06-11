@@ -27,6 +27,10 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string ItemName { get; set; }
 
+        public string NatoNo { get; set; }
+
+        public string SerialNo { get; set; }
+
         [ForeignKey("TypeDetail")]
         public int TypeId { get; set; }
 
@@ -58,6 +62,18 @@ namespace MTCHRMS.EntityFramework.Inventory
         [Column(TypeName = "image")]
         public byte[] ItemPicture { get; set; }
 
+        [NotMapped]
+        public int Condition { get; set; }
+
+        [NotMapped]
+        public int DepartmentId { get; set; }
+
+        [NotMapped]
+        public int SupplierId { get; set; }
+
+        [NotMapped]
+        public int ManufacturerId { get; set; }
+
 
         public virtual ValidationDetail TypeDetail { get; set; }
 
@@ -66,6 +82,8 @@ namespace MTCHRMS.EntityFramework.Inventory
         public virtual ValidationDetail TechnicianType { get; set; }
 
         public virtual StoreLocation StoreLocation { get; set; }
+
+        public virtual ItemProvision ItemProvision { get; set; }
 
         public virtual ICollection<ItemDepartment> ItemDepartments { get; set; }
 
@@ -139,6 +157,25 @@ namespace MTCHRMS.EntityFramework.Inventory
         public string Notes { get; set; }
 
         public virtual Manufacturer ManufacturerDetail { get; set; }
+    }
+    [Table("IV_ItemProvision")]
+    public class ItemProvision : TableStrutcture
+    {
+        [Key]
+        public int ItemProvisionId { get; set; }
+
+        public int ItemId { get; set; }
+
+        public int IsCalculable { get; set; }
+
+        public int MinimumStockLevel { get; set; }
+
+        public int MaximumStockLevel { get; set; }
+
+        public int MinimumOrderLevel { get; set; }
+
+        public int MaximumOrderLevel { get; set; }
+
     }
 
 }

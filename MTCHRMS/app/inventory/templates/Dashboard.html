@@ -31,7 +31,7 @@
                             <i class="icon-key"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="items.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <img data-ng-hide="items.length" alt="" data-ng-src="/Content/img/loader.gif"/>
                             <strong data-ng-show="items.length">{{items.length}}</strong> <h4><a href="/INVPortal/item/list"> Items</a></h4>
                         </p>
                     </div>
@@ -42,7 +42,7 @@
                             <i class="icon-user"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="suppliers.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <img data-ng-hide="suppliers.length" alt="" data-ng-src="/Content/img/loader.gif"/>
                             <strong data-ng-show="suppliers.length">{{suppliers.length}}</strong> <h4><a href="/INVPortal/definition/supplier/list">Suppliers</a></h4>
                         </p>
                     </div>
@@ -53,7 +53,7 @@
                             <i class="icon-list-ol"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="manufacturers.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <img data-ng-hide="manufacturers.length" alt="" data-ng-src="/Content/img/loader.gif"/>
                             <strong data-ng-show="manufacturers.length">{{manufacturers.length}}</strong> <h4><a href="/INVPortal/definition/manufacturer">Manufacturers</a></h4>
                         </p>
                     </div>
@@ -64,20 +64,45 @@
                             <i class="icon-list-ol"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="locations.length" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <img data-ng-hide="locations.length" alt="" data-ng-src="/Content/img/loader.gif"/>
                             <strong data-ng-show="locations.length">{{locations.length}}</strong> <h4><a href="/INVPortal/definition/store/list">Store</a></h4>
                         </p>
                     </div>
                 </div>
-            </div>
 
+            </div>
+            <hr/>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <itemtype ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemtype>
+                </div>
+                <div class="span6">
+                    <itemcategory ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemcategory>
+                </div>
+            </div>
             <hr />
-            
-            <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
-            
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <locations ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></locations>
+                </div>
+                <div class="span6">
+                    <departments ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></departments>
+                </div>
+            </div>
             <hr />
-            
-            <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
+                </div>
+                <div class="span6">
+                    <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
+                </div>
+            </div>
+            <hr />
+
         </div>
     </div>
 </div>

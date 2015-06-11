@@ -1,11 +1,11 @@
 ﻿/// <reference path="../../module/inv-module.js" />
 /// <reference path="supplier-repository.js" />
 
-'use strict';
+//'use strict';
 invModule.controller('LocationController',
 [
-    '$scope', '$location', '$routeParams','locationRepository',
-    function ($scope, $location, $routeParams, locationRepository) {
+    '$scope', '$location', '$routeParams','locationRepository', 'itemRepository',
+    function ($scope, $location, $routeParams, locationRepository, itemRepository) {
 
         console.log("location dashboard controller");
         //$scope.myname = "yahoo";
@@ -16,15 +16,43 @@ invModule.controller('LocationController',
             $scope.isBusy = true;
             $scope.locations = locationRepository.getAllLocations();
 
-            $scope.locations.$promise.then(function () {
-                    //alert("success");
-                }, function() {
+            $scope.locations
+                .$promise
+                .then(function (response) {
+
+                }, function(error) {
                     //alert("error");
                 })
                 .then(function() {
 
                 })
                 .then(function() { $scope.isBusy = false; });
+        };
+
+        $scope.loadItemsLocation = function () {
+            $scope.isBusy = true;
+            $scope.items = itemRepository.getAllItems();
+
+            $scope.items.$promise.then(function () {
+                //alert("success");
+                    //console.log(countItems(1));
+                }, function () {
+                //alert("error");
+            })
+                .then(function () {
+
+                })
+                .then(function () { $scope.isBusy = false; });
+        };
+
+        $scope.countItems = function (id) {
+            var countlocation = 0;
+            angular.forEach($scope.items, function(item) {
+                if (item.storeId === id) {
+                    countlocation++;
+                }
+            });
+            return countlocation;
         };
 
         $scope.save = function (location) {
