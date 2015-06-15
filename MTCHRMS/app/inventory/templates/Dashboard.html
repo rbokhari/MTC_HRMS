@@ -17,9 +17,13 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="alert alert-danger">
+    <div class="alert alert-info">
         <button data-dismiss="alert" class="close">×</button>
         Welcome to the <strong>MTC Inventory System</strong>!
+    </div>
+
+    <div class="alert alert-danger" ng-show="authentication.isHRMSAdmin || authentication.isHRMSUser">
+        <i class="icon-exclamation-sign"></i>&nbsp;  You are not authorized for this Module.
     </div>
 
     <div class="row-fluid">
