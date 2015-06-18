@@ -11,7 +11,7 @@ invModule.factory('manufacturerRepository', ['$resource', '$http', function ($re
     };
 
     var _getManufacturerById = function (id) {
-        return $resource('/api/manufacturer/' + id).get();
+        return $resource('/api/manufacturer/' + id).query();
     };
 
     var _addManufacturer = function (manufacturer) {
@@ -22,12 +22,23 @@ invModule.factory('manufacturerRepository', ['$resource', '$http', function ($re
         return $http.put('/api/manufacturer/' + manufacturer.manufacturerId, manufacturer);
     };
 
+    var _addManufacturerContact = function (manufacturerContact) {
+        return $resource('/api/manufacturer/' + manufacturerContact.manufacturerId + '/PostManufacturerContact').save(manufacturerContact);
+    };
+
+    var _addManufacturerContract = function (manufacturerContract) {
+        console.log(manufacturerContract);
+        return $resource('/api/manufacturer/' + manufacturerContract.manufacturerId + '/PostManufacturerContract').save(manufacturerContract);
+    };
+
 
     return {
         getAllManufacturers: _getAllManufacturers,
         getManufacturerById: _getManufacturerById,
         addManufacturer: _addManufacturer,
-        editManufacturer: _editManufacturer
+        editManufacturer: _editManufacturer,
+        addManufacturerContact: _addManufacturerContact,
+        addManufacturerContract: _addManufacturerContract
     };
 
 }]);

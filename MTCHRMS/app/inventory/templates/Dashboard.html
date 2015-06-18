@@ -1,5 +1,5 @@
 ﻿
-<div class="container-fluid" data-ng-init="loadDasboard()">
+<div class="container-fluid">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
@@ -35,8 +35,8 @@
                             <i class="icon-key"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="items.length" alt="" data-ng-src="/Content/img/loader.gif"/>
-                            <strong data-ng-show="items.length">{{items.length}}</strong> <h4><a href="/INVPortal/item/list"> Items</a></h4>
+                            <img data-ng-hide="items.$resolved" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="items.$resolved">{{items.length}}</strong> <h4><a href="/INVPortal/item/list"> Items</a></h4>
                         </p>
                     </div>
                 </div>
@@ -46,36 +46,36 @@
                             <i class="icon-user"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="suppliers.length" alt="" data-ng-src="/Content/img/loader.gif"/>
-                            <strong data-ng-show="suppliers.length">{{suppliers.length}}</strong> <h4><a href="/INVPortal/definition/supplier/list">Suppliers</a></h4>
+                            <img data-ng-hide="suppliers.$resolved" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="suppliers.$resolved">{{suppliers.length}}</strong> <h4><a href="/INVPortal/definition/supplier/list">Suppliers</a></h4>
                         </p>
                     </div>
                 </div>
                 <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
                     <div class="circle-wrap">
                         <div class="stats-circle red-color">
-                            <i class="icon-list-ol"></i>
+                            <i class="icon-certificate"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="manufacturers.length" alt="" data-ng-src="/Content/img/loader.gif"/>
-                            <strong data-ng-show="manufacturers.length">{{manufacturers.length}}</strong> <h4><a href="/INVPortal/definition/manufacturer">Manufacturers</a></h4>
+                            <img data-ng-hide="manufacturers.$resolved" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="manufacturers.$resolved">{{manufacturers.length}}</strong> <h4><a href="/INVPortal/definition/manufacturer">Manufacturers</a></h4>
                         </p>
                     </div>
                 </div>
                 <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
                     <div class="circle-wrap">
                         <div class="stats-circle purple-color">
-                            <i class="icon-list-ol"></i>
+                            <i class="icon-building"></i>
                         </div>
                         <p>
-                            <img data-ng-hide="locations.length" alt="" data-ng-src="/Content/img/loader.gif"/>
-                            <strong data-ng-show="locations.length">{{locations.length}}</strong> <h4><a href="/INVPortal/definition/store/list">Store</a></h4>
+                            <img data-ng-hide="locations.$resolved" alt="" data-ng-src="/Content/img/loader.gif" />
+                            <strong data-ng-show="locations.$resolved">{{locations.length}}</strong> <h4><a href="/INVPortal/definition/store/list">Store</a></h4>
                         </p>
                     </div>
                 </div>
 
             </div>
-            <hr/>
+            <hr />
 
             <div class="row-fluid">
                 <div class="span6">
@@ -105,7 +105,9 @@
                     <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
                 </div>
             </div>
-            <hr />
+            <hr/>
+
+            <div data-ng-init="loadDasboard()"></div>
 
         </div>
     </div>

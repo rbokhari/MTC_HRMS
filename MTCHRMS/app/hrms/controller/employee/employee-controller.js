@@ -488,7 +488,8 @@ hrmsModule.controller('EmployeeController',
         
         $scope.save = function(employeeDef) {
             $scope.errors = [];
-
+            console.log(employeeDef);
+            alert(employeeDef);
             employeeRepository.addEmployee(employeeDef)
                 .$promise
                 .then(
@@ -496,12 +497,13 @@ hrmsModule.controller('EmployeeController',
                     // success case
                     console.log("save - Successfully !");
                     appRepository.showAddSuccessGritterNotification();
-                    $location.url('/" + $scope.mainPortal + "/employee/detail/' + resultEmployeeDef.id);
-                }, function(response) {
+                    console.log('/' + $scope.mainPortal + '/employee/detail/' + resultEmployeeDef.id);
+                    $location.url('/' + $scope.mainPortal + '/employee/detail/' + resultEmployeeDef.id);
+                }, function(error) {
                     // failure case
                     console.log("save - Error !");
                     appRepository.showErrorGritterNotification();
-                    $scope.errors = response.data;
+                    $scope.errors = error.data;
                 }
             );
         };

@@ -1,8 +1,8 @@
 ﻿
 <h4><i class="icon-building"></i>&nbsp; Store Locations</h4>
 
-<div class="progress progress-striped active" ng-show="isBusy">
-    <div style="width: 100%;" class="bar"></div>
+<div data-ng-hide="locations.$resolved">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
 </div>
 <div class="icon-btn span3 red fade-in" ng-repeat="location in locations" ng-show="filtered.length>0">
     <a ng-href="INVPortal/item/list?param03={{location.storeId}}" title="{{location.storeName}}">

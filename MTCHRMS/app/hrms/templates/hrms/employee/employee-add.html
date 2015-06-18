@@ -131,7 +131,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="JOINING_DATE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" data-date-format="dd/mm/yyyy" ng-model="employeeDef.appointment" datepicker required />
+                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" ng-model="employeeDef.appointment" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tAppintmentDate.$error.required && staffForm.tAppintmentDate.$dirty">*</div>
                                         </div>
                                     </div>
@@ -187,21 +187,21 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOB" name="tDOB" ng-model="employeeDef.dateOfBirth" datepicker required />
+                                            <input type="text" id="tDOB" name="tDOB" ng-model="employeeDef.dateOfBirth" datepicker required /> <!--data-date-format="dd/mm/yyyy"--> 
                                             <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label"><span translate="Probation_Expire"></span> :</label>
+                                        <label class="control-label"><span translate="PROBATION_EXPIRE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tProbationExpire" name="tProbationExpire" ng-model="employeeDef.probationEndDate" data-date-format="dd/mm/yyyy" datepicker required />
+                                            <input type="text" id="tProbationExpire" name="tProbationExpire" ng-model="employeeDef.probationEndDate" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tProbationExpire.$error.required && staffForm.tProbationExpire.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="CONTRACT_EXPIRE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tContactExpire" name="tContactExpire" ng-model="employeeDef.serviceEndDate" data-date-format="dd/mm/yyyy" datepicker required />
+                                            <input type="text" id="tContactExpire" name="tContactExpire" ng-model="employeeDef.serviceEndDate" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tContactExpire.$error.required && staffForm.tContactExpire.$dirty">*</div>
                                         </div>
                                     </div>

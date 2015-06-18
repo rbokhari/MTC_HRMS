@@ -106,5 +106,10 @@
     "DESIGNATION": "المسمى الوظيفي",
     "EMPLOYEE": "الموظف",
     "SEARCH_CRITERIA": "بحث متقدم",
-    "SEARCH_RESULT": "نتيجة البحث"
+    "SEARCH_RESULT": "نتيجة البحث",
+    "MANPOWER_NO": "رقم القوى العاملة",
+    "IDCARD_NO": "رقم البطاقه الشخصية",
+    "CONDITION": "حالة",
+    "PROBATION_EXPIRE" : "أنتهاء فترة التجربة"
+
 }

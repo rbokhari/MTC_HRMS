@@ -4,8 +4,8 @@
 'use strict';
 invModule.controller('ManufacturerController',
 [
-    '$scope', '$location', '$routeParams','manufacturerRepository','appRepository','validationRepository','itemRepository',
-    function ($scope, $location, $routeParams, manufacturerRepository, appRepository, validationRepository, itemRepository) {
+    '$scope', '$location', '$routeParams','manufacturerRepository','appRepository','validationRepository','itemRepository', 'ModalService',
+    function ($scope, $location, $routeParams, manufacturerRepository, appRepository, validationRepository, itemRepository, ModalService) {
 
         console.log("manufacturer dashboard controller");
         //$scope.myname = "yahoo";
@@ -120,11 +120,92 @@ invModule.controller('ManufacturerController',
 
         //alert($routeParams.id);
         if ($routeParams.id != undefined) {
+            
             $scope.manufacturer = manufacturerRepository.getManufacturerById($routeParams.id);
             $scope.manufacturer.$promise
-                .then(function() { }, function() {})
+                .then(function() {  }, function(error) { console.log(error); })
                 .then(function() { $scope.isBusy = true; });
         }
+
+        $scope.showContact = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/manufacturer/manufacturer-contact.html",
+                controller: "ManufacturerModalController",
+                inputs: {
+                    title: "Add New Contact",
+                    parentId: id,
+                    manufacturerContact: {},
+                    manufacturerContract: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    //employee[0].employeePassports.splice(0, 0, resultEmployeePassport.data);
+                    //console.log("show passport close : " + result.newPassport.id);
+                    $scope.manufacturer[0].manufacturerContactPersons.push(result.resultData);
+                    //$scope.complexResult = "Name: " + result.name + ", age: " + result.age;
+                    //$('.modal').modal('hide');
+                    //modal.element.close();
+                });
+
+            });
+        };
+
+        $scope.editContact = function (contact) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/manufacturer/manufacturer-contact.html",
+                controller: "ManufacturerModalController",
+                inputs: {
+                    title: "Update Contact",
+                    parentId: contact.manufacturerId,
+                    manufacturerContact: contact,
+                    manufacturerContract: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
+
+        $scope.showContract = function (id) {
+            console.log(id);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/manufacturer/manufacturer-contract.html",
+                controller: "ManufacturerModalController",
+                inputs: {
+                    title: "Add New Contract",
+                    parentId: id,
+                    manufacturerContact: {},
+                    manufacturerContract: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.manufacturer[0].manufacturerContracts.push(result.resultData);
+                });
+            });
+        };
+
+        $scope.editContract = function (contract) {
+            //console.log(passport);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/manufacturer/manufacturer-contract.html",
+                controller: "ManufacturerModalController",
+                inputs: {
+                    title: "Update Contract",
+                    parentId: contract.manufacturerId,
+                    manufacturerContact: {},
+                    manufacturerContract: contract,
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+            });
+        };
 
     }
 ]);

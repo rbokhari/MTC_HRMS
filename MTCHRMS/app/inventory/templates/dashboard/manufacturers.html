@@ -1,16 +1,16 @@
 ﻿    <h4><i class="icon-certificate"></i>&nbsp; Manufacturers</h4>
 
-    <div class="progress progress-striped active" ng-show="isBusy">
-        <div style="width: 100%;" class="bar"></div>
-    </div>
+<div data-ng-hide="manufacturers.$resolved">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
+</div>
     <div class="icon-btn span3 red fade-in" ng-repeat="manufacturer in manufacturers" ng-show="filtered.length>0">
-        <a ng-href="INVPortal/item/list?param06={{manufacturer.manufacturerId}}" title="{{manufacturer.manufacturerName}}">
-            <i class="icon-certificate"></i>
-            <div>{{ manufacturer.manufacturerName | limitTo:20}} {{manufacturer.manufacturerName.length > 20 ? '...' : ''}}</div>
+    <a ng-href="INVPortal/item/list?param06={{manufacturer.manufacturerId}}" title="{{manufacturer.manufacturerName}}">
+        <i class="icon-certificate"></i>
+        <div>{{ manufacturer.manufacturerName | limitTo:20}} {{manufacturer.manufacturerName.length > 20 ? '...' : ''}}</div>
 
-            <div ng-repeat="item in filtered = (itemManufacturers | filter:{manufacturerId:manufacturer.manufacturerId}:true)">
-                <span class="badge badge-warning">{{ filtered.length }}</span>
-            </div>
+        <div ng-repeat="item in filtered = (itemManufacturers | filter:{manufacturerId:manufacturer.manufacturerId}:true)">
+            <span class="badge badge-warning">{{ filtered.length }}</span>
+        </div>
 
-        </a>
-    </div>
+    </a>
+</div>

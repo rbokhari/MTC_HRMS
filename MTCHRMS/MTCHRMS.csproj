@@ -238,6 +238,7 @@
     <Content Include="app\inventory\controller\item\item-modal-controller.js" />
     <Content Include="app\inventory\controller\manufacturer\manufacturer-controller.js" />
     <Content Include="app\inventory\controller\manufacturer\manufacturer-repository.js" />
+    <Content Include="app\inventory\controller\manufacturer\manufacturer-modal-controller.js" />
     <Content Include="app\inventory\controller\store\location-controller.js" />
     <Content Include="app\inventory\controller\store\location-repository.js" />
     <Content Include="app\inventory\controller\supplier\supplier-controller.js" />
@@ -275,6 +276,8 @@
     <Content Include="app\inventory\templates\manufacturer\manufacturer-add.html" />
     <Content Include="app\inventory\templates\manufacturer\manufacturer-edit.html" />
     <Content Include="app\inventory\templates\manufacturer\manufacturer.html" />
+    <Content Include="app\inventory\templates\manufacturer\manufacturer-contact.html" />
+    <Content Include="app\inventory\templates\manufacturer\manufacturer-contract.html" />
     <Content Include="app\inventory\templates\store\location-edit.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contract.html" />
     <Content Include="app\inventory\templates\supplier\supplier-contact.html" />

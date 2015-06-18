@@ -126,6 +126,13 @@
             });
 
     $routeProvider
+        .when('/HRMSPortalAr/employee/search', {
+            templateUrl: '/app/hrms/templates/hrms/employee/employee-search.html',
+            controller: 'EmployeeController'
+        });
+
+
+    $routeProvider
         .when('/HRMSPortalAr', {
             templateUrl: '/app/hrms/templates/dashboard.html',
             controller: 'DashboardController'

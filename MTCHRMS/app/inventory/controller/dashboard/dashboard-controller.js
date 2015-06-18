@@ -10,6 +10,8 @@ invModule.controller('DashboardController',
     function ($scope, $location, $window, $routeParams, authRepository, supplierRepository, itemRepository,
         locationRepository, manufacturerRepository, validationRepository, departmentRepository) {
 
+        $scope.isItemType1 = false;
+
         console.log("inventory dashboard controller");
 
         $scope.isActiveNavigation = function (viewLocation) {
@@ -28,6 +30,8 @@ invModule.controller('DashboardController',
             $window.location.href = '/HRMSPortal';
         }
 
+        
+
         $scope.loadDasboard = function () {
 
             $scope.itemSuppliers = itemRepository.getAllItemSuppliers();
@@ -43,9 +47,8 @@ invModule.controller('DashboardController',
             $scope.itemCategories = validationRepository.getItemCategories;
             $scope.departments = departmentRepository.getAllDepartment();
 
-
             //$scope.itemTechnicians = validationRepository.getItemTechnicians;
-            
+
         };
     }
 ]);

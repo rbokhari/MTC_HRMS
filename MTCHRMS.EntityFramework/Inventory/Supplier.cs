@@ -23,7 +23,7 @@ namespace MTCHRMS.EntityFramework.Inventory
         [MaxLength(500)]
         public string SupplierName { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(1000)]
         public string Description { get; set; }
 
         [ForeignKey("CountryDetail")]

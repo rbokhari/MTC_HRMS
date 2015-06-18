@@ -35,7 +35,7 @@ hrmsModule.controller('DepartmentController',
                 function () {
                     appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    $location.url('/HRMSPortal/department');
+                    $location.url('/' + $scope.mainPortal + '/department');
                 }, function(response) {
                     // failure case
                     console.log("save - Error !");
@@ -80,7 +80,7 @@ hrmsModule.controller('DepartmentController',
                     console.log("edit done - Successfully !");
                     appRepository.showUpdateSuccessGritterNotification();
 
-                    $location.url('/HRMSPortal/department');
+                    $location.url('/' + $scope.mainPortal + '/department');
                 }, function(response) {
                     // failure case
                     console.log("edit - Error !");

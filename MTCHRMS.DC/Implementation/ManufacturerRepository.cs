@@ -40,6 +40,23 @@ namespace MTCHRMS.DC
             return _ctx.Manufacturers.Single(r=>r.ManufacturerId == id);
         }
 
+        public IQueryable<Manufacturer> GetManufacturerDetail(int id)
+        {
+            try
+            {
+                return _ctx.Manufacturers.Where(r => r.ManufacturerId == id)
+                    .Include(p => p.ManufacturerContactPersons)
+                    .Include(v => v.ManufacturerContracts);
+
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+
+        }
+
+
         public bool Save()
         {
             try
@@ -84,5 +101,63 @@ namespace MTCHRMS.DC
                 return false;
             }
         }
+
+
+        public bool AddManufacturerContact(ManufacturerContactPerson newContactPerson)
+        {
+            try
+            {
+                _ctx.ManufacturerContactPersons.Add(newContactPerson);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool UpdateManufacturerContact(ManufacturerContactPerson updateContactPerson)
+        {
+            try
+            {
+                updateContactPerson.ManufacturerId = GetManufacturer(updateContactPerson.ManufacturerId).ManufacturerId;
+                _ctx.Entry(updateContactPerson).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool AddManufacturerContract(ManufacturerContract newContract)
+        {
+            try
+            {
+                _ctx.ManufacturerContracts.Add(newContract);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool UpdateManufacturerContract(ManufacturerContract updateContract)
+        {
+            try
+            {
+                updateContract.ManufacturerId = GetManufacturer(updateContract.ManufacturerId).ManufacturerId;
+                _ctx.Entry(updateContract).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }

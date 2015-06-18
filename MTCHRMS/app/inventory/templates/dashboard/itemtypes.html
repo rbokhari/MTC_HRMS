@@ -1,10 +1,13 @@
 ﻿
-<h4><i class="icon-briefcase"></i>&nbsp; Item Types</h4>
+<div><h4><i class="icon-briefcase"></i>&nbsp; Item Class &nbsp;&nbsp;</h4></div>
 
-<div class="progress progress-striped active" ng-show="isBusy">
-    <div style="width: 100%;" class="bar"></div>
+<div data-ng-hide="$last">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
 </div>
-<div class="icon-btn span3 red fade-in" ng-repeat="type in itemTypes" ng-show="filtered.length>0">
+
+<div class="icon-btn span3 red fade-in" ng-repeat="type in itemTypes" data-ng-show="filtered.length>0 || type.$last">
+    <!--ng-show="filtered.length>0"-->
+    {{$last}}
     <a ng-href="/INVPortal/item/list?param01={{type.id}}" title="{{type.nameEn}}">
         <i class="icon-briefcase"></i>
         <div>{{ type.nameEn | limitTo:20}} {{type.nameEn.length > 20 ? '...' : ''}}</div>

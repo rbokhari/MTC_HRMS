@@ -106,7 +106,11 @@
     "DESIGNATION": "Designation",
     "EMPLOYEE": "Employee",
     "SEARCH_CRITERIA": "Search Criteria",
-    "SEARCH_RESULT": "Search Results"
+    "SEARCH_RESULT": "Search Results",
+    "MANPOWER_NO": "Manpower No",
+    "IDCARD_NO": "ID Card No",
+    "CONDITION": "Condition",
+    "PROBATION_EXPIRE" : "Probation Expire"
 
 
 }

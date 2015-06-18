@@ -1,16 +1,16 @@
 ﻿
     <h4><i class="icon-user"></i>&nbsp; Suppliers </h4>
 
-    <div class="progress progress-striped active" ng-show="isBusy">
-        <div style="width: 100%;" class="bar"></div>
-    </div>
+<div data-ng-hide="suppliers.$resolved">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
+</div>
     <div class="icon-btn span3 red fade-in" ng-repeat="supplier in suppliers" ng-show="filtered.length>0">
-        <a ng-href="INVPortal/item/list?param05={{supplier.supplierId}}" title="{{supplier.supplierName}}">
-            <i class="icon-user"></i>
-            <div>{{ supplier.supplierName | limitTo:20}} {{supplier.supplierName.length > 20 ? '...' : ''}}</div>
+    <a ng-href="INVPortal/item/list?param05={{supplier.supplierId}}" title="{{supplier.supplierName}}">
+        <i class="icon-user"></i>
+        <div>{{ supplier.supplierName | limitTo:20}} {{supplier.supplierName.length > 20 ? '...' : ''}}</div>
 
-            <div ng-repeat="item in filtered = (itemSuppliers | filter:{supplierId:supplier.supplierId}:true)">
-                <span class="badge badge-warning">{{ filtered.length }}</span>
-            </div>
-        </a>
-    </div>
+        <div ng-repeat="item in filtered = (itemSuppliers | filter:{supplierId:supplier.supplierId}:true)">
+            <span class="badge badge-warning">{{ filtered.length }}</span>
+        </div>
+    </a>
+</div>

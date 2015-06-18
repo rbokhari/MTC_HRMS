@@ -36,10 +36,10 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        public Manufacturer Get(int id)
+        public IQueryable<Manufacturer> Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
-            var manufacturer = _repo.GetManufacturer(id);
+            var manufacturer = _repo.GetManufacturerDetail(id);
 
             if (manufacturer == null)
             {
@@ -92,6 +92,90 @@ namespace MTCHRMS.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
             return null;
+        }
+
+        [ActionName("PostManufacturerContact")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddManufacturerContact([FromBody] ManufacturerContactPerson newContactPerson)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newContactPerson.ContactPersonId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContactPerson.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContactPerson.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddManufacturerContact(newContactPerson) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContactPerson);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newContactPerson.ContactPersonId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContactPerson.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContactPerson.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateManufacturerContact(newContactPerson) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContactPerson);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostManufacturerContract")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddManufacturerContract([FromBody] ManufacturerContract newContract)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newContract.ContractId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddManufacturerContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newContract.ContractId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateManufacturerContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
 
         private IEnumerable<string> GetErrorMessages()
