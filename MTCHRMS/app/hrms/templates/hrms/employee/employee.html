@@ -55,7 +55,9 @@
                     </div>
                     <div class="span8">
                         <br />
-                        <p><a class="business-card-link" title="{{employee.employeeName}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.employeeName | limitTo:16}} {{employee.employeeName.length > 16 ? '...' : ''}}</a></p>
+                        <p ng-show="mainPortal=='HRMSPortal'"><a class="business-card-link" title="{{employee.employeeName}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.employeeName.length > 1 ? employee.employeeName : employee.employeeNameAr | limitTo:16}} {{employee.employeeName.length > 16 ? '...' : ''}}</a>
+                        </p>
+                        <p ng-show="mainPortal=='HRMSPortalAr'"><a class="business-card-link" title="{{employee.employeeNameAr}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.employeeNameAr.length > 1 ? employee.employeeNameAr : employee.employeeName | limitTo:20}} {{employee.employeeNameAr.length > 20 ? '...' : ''}}</a></p>
                         <i class="icon icon-group" style="color: #fff0f5"></i>&nbsp; {{ employee.departmentId.departmentName | limitTo:18}} {{employee.departmentId.departmentName.length > 18 ? '...' : ''}}<br />
                         <i class="icon icon-cogs" style="color: #fff0f5"></i>&nbsp; <small>{{employee.rank}}</small><br />
                         <i ng-show="employee.phone" class="icon icon-phone" style="color: #fff0f5"></i>&nbsp; <small>{{employee.phone}}</small>

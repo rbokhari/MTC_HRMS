@@ -37,13 +37,6 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="txtName">Item Name</label>
-                                <div class="controls">
-                                    <input type="text" id="txtName" ng-model="item.itemName" class="input-xlarge" required />
-                                    <div class="help-inline" ng-show="frm.txtName.$error.required && frm.txtName.$dirty">Please enter name !</div>
-                                </div>
-                            </div>
-                            <div class="control-group">
                                 <label class="control-label" for="tNatoNo">NSN </label>
                                 <div class="controls">
                                     <input type="text" id="tNatoNo" ng-model="item.natoNo" class="input-xlarge" />
@@ -55,6 +48,14 @@
                                     <input type="text" id="tSerialNo" ng-model="item.serialNo" class="input-xlarge" />
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtName">Item Name</label>
+                                <div class="controls">
+                                    <input type="text" id="txtName" ng-model="item.itemName" class="input-xlarge" required/>
+                                    <div class="help-inline" ng-show="frm.txtName.$error.required && frm.txtName.$dirty">Please enter name !</div>
+                                </div>
+                            </div>
+                            <hr/>
                             <div class="control-group">
                                 <label class="control-label" for="cType">Item Class</label>
                                 <div class="controls">
@@ -68,16 +69,15 @@
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="tUtilization">Utilization</label>
-                                <div class="controls">
-                                    <textarea id="tUtilization" ng-model="item.utilization" class="span12"></textarea>
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="control-group">
                                 <label class="control-label" for="cStore">Store Location</label>
                                 <div class="controls">
                                     <select id="cStore" name="cStore" ng-model="item.storeId" ng-options="location.storeId as location.storeName for location in storeLocations" required></select>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tUtilization">Utilization</label>
+                                <div class="controls">
+                                    <textarea id="tUtilization" ng-model="item.utilization" class="span12"></textarea>
                                 </div>
                             </div>
                             <hr/>

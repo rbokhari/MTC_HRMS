@@ -266,7 +266,7 @@ hrmsModule.controller('EmployeeController',
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-qualification.html",
                 controller: "EmployeeModalController",
                 inputs: {
-                    title: "Add New Qualification",
+                    title: "1", // "Add New Qualification",
                     parentId: id,
                     employeePassport: {},
                     employeeVisa: {},
@@ -291,7 +291,7 @@ hrmsModule.controller('EmployeeController',
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-qualification.html",
                 controller: "EmployeeModalController",
                 inputs: {
-                    title: "Update Qualification",
+                    title: "2", // "Update Qualification",
                     parentId: qualification.employeeDefId,
                     employeePassport: {},
                     employeeVisa: {},
@@ -489,7 +489,6 @@ hrmsModule.controller('EmployeeController',
         $scope.save = function(employeeDef) {
             $scope.errors = [];
             console.log(employeeDef);
-            alert(employeeDef);
             employeeRepository.addEmployee(employeeDef)
                 .$promise
                 .then(

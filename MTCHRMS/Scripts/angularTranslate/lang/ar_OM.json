@@ -110,6 +110,17 @@
     "MANPOWER_NO": "رقم القوى العاملة",
     "IDCARD_NO": "رقم البطاقه الشخصية",
     "CONDITION": "حالة",
-    "PROBATION_EXPIRE" : "أنتهاء فترة التجربة"
+    "PROBATION_EXPIRE": "أنتهاء فترة التجربة",
+    "ADD_NEW_QUALIFICATION": "إضافة جديد الشهادة الدراسية",
+    "EDIT_QUALIFICATION": "تعديل الشهادة الدراسية",
+    "QUALIFICATION_DEGREE": "الشهادة",
+    "UNIVERSITY": "الجامعة / الكلية",
+    "LEVEL": "المستوى التعليمي",
+    "ADD_PREVIOUS_EMPLOYMENT": "إضافة الوظائف التبى شغلتها سابقا",
+    "COUNTRY": "مدينة",
+    "CLOSE": "أغلاق",
+    "DETAIL": "تـفاصيل",
+    "CHILD_NAME": "اسـم الولد / بنت"
+
 
 }

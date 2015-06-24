@@ -57,16 +57,23 @@ namespace MTCHRMS.DC
             return _ctx.SaveChanges() > 0;
         }
 
-        public bool CheckItemDuplicate(int itemId, string itemCode)
+        public Int32 CheckItemDuplicate(Item newItem)
         {
-            if (itemId == 0)
+            Item item;
+            if (newItem.ItemId == 0)
             {
-                return _ctx.Items.Any(r => r.ItemCode.ToLower() == itemCode.ToLower());
+                item = _ctx.Items.SingleOrDefault(r => String.Equals(r.ItemCode.ToLower(), newItem.ItemCode.ToLower()) || String.Equals(r.SerialNo.ToLower(), newItem.SerialNo.ToLower()));
+            }
+            else
+            {
+                item =
+                    _ctx.Items.SingleOrDefault(
+                        r => r.ItemId != newItem.ItemId && (String.Equals(r.ItemCode.ToLower(), newItem.ItemCode.ToLower()) || String.Equals(r.SerialNo.ToLower(), newItem.SerialNo.ToLower())));
             }
 
-            return
-                _ctx.Items.Any(
-                    r => r.ItemId != itemId && r.ItemCode.ToLower() == itemCode.ToLower());
+            if (item != null) return item.ItemId;
+
+            return 0;
         }
 
         public bool AddItem(Item newItem)
@@ -95,6 +102,8 @@ namespace MTCHRMS.DC
 
                 //newItem.ItemDepartments.Add(itemDept);
                 //newItem.ItemDepartments.Add(itemDept1);
+
+                //if (CheckItemDuplicate())
 
 
                 _ctx.Items.Add(newItem);
@@ -513,6 +522,7 @@ namespace MTCHRMS.DC
         {
             return _ctx.ItemManufacturers;
         }
+
     }
 }
 

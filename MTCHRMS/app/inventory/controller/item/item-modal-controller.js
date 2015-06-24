@@ -10,8 +10,6 @@ moduleModal.controller('ItemModalController',
         parentId, resultData, $timeout, $upload, itemDepartment, itemYear, itemSupplier, itemManufacturer,
         departmentRepository, validationRepository, supplierRepository, manufacturerRepository) {
         
-        //$scope.name = null;
-        //$scope.age = null;
         $scope.resultData = {};
         $scope.title = title;
         $scope.parentId = parentId;
@@ -28,19 +26,7 @@ moduleModal.controller('ItemModalController',
         console.log("---------------------");
         console.log($scope.iManufacturers);
 
-        //$scope.loadDepartments = function () {
-        //    alert("loading department");
-        //    $scope.departments = departmentRepository.getAllDepartment();
-        //};
-
-        //$scope.loadYears = function() {
-        //    $scope.itemYears = validationRepository.getItemYears;
-        //};
-        
-        //$scope.loadSuppliers = function() {
-        //    $scope.suppliers = supplierRepository.getAllSuppliers;
-        //};
-        
+       
         $scope.saveItemDepartment = function (parentId, itemDepartment) {
             $scope.errors = [];
             itemDepartment.itemId = parentId;
@@ -49,18 +35,14 @@ moduleModal.controller('ItemModalController',
                 .$promise
                 .then(
                     function (result) {
-                        // success case
                         $scope.resultData = result;
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvDepartment').modal('hide');
                     }, function (error) {
-                        // failure case
                         console.log("item department save - Error !--------");
-                        //console.log(error);
                         if (error.status == 302) {
                             $("#dvduplicate").addClass("error");
-                            //$("#imgError").visibility="visible";
                             appRepository.showDuplicateGritterNotification();
                         } else {
                             appRepository.showErrorGritterNotification();
@@ -68,7 +50,6 @@ moduleModal.controller('ItemModalController',
                         $scope.errors = error.data;
                     }
                 );
-            //.then(function () { $scope.close(); });
         };
 
         $scope.saveItemYear = function (parentId, itemYear) {
@@ -79,17 +60,14 @@ moduleModal.controller('ItemModalController',
                 .$promise
                 .then(
                     function (result) {
-                        // success case
                         $scope.resultData = result;
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvYear').modal('hide');
                     }, function(error) {
-                    // failure case
                     console.log("item year save - Error !");
                     if (error.status == 302) {
                         $("#dvduplicate").addClass("error");
-                        //$("#imgError").visibility="visible";
                         appRepository.showDuplicateGritterNotification();
                     } else {
                         appRepository.showErrorGritterNotification();
@@ -97,7 +75,6 @@ moduleModal.controller('ItemModalController',
                     $scope.errors = error.data;
                 }
             );
-            //.then(function () { $scope.close(); });
         };
 
         $scope.saveItemSupplier = function(parentId, itemSupplier) {
@@ -108,14 +85,12 @@ moduleModal.controller('ItemModalController',
                 .$promise
                 .then(
                     function(result) {
-                        // success case
                         $scope.resultData = result;
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvSupplier').modal('hide');
-                        console.log("close done");
+                        //
                     }, function(error) {
-                        // failure case
                         console.log("item supplier save - Error !");
                         if (error.status == 302) {
                             $("#dvduplicate").addClass("error");
@@ -126,9 +101,7 @@ moduleModal.controller('ItemModalController',
                         $scope.errors = error.data;
                     }
                 );
-            //.then(function () { $scope.close(); });
         };
-
 
         $scope.saveItemManufacturer = function (parentId, itemManufacturer) {
             $scope.errors = [];
@@ -137,18 +110,14 @@ moduleModal.controller('ItemModalController',
                 .$promise
                 .then(
                     function (result) {
-                        // success case
                         $scope.resultData = result;
                         appRepository.showAddSuccessGritterNotification();
                         $scope.close();
                         $('#dvManufacturer').modal('hide');
                     }, function (error) {
-                        // failure case
                         console.log("item manufacturer save - Error !--------");
-                        //console.log(error);
                         if (error.status == 302) {
                             $("#dvduplicate").addClass("error");
-                            //$("#imgError").visibility="visible";
                             appRepository.showDuplicateGritterNotification();
                         } else {
                             appRepository.showErrorGritterNotification();
@@ -156,20 +125,18 @@ moduleModal.controller('ItemModalController',
                         $scope.errors = error.data;
                     }
                 );
-            //.then(function () { $scope.close(); });
         };
 
         $scope.close = function () {
             console.log("close function modal controller :");
             close({
                 resultData: $scope.resultData
-            }, 500); // close, but give 500ms for bootstrap to animate
+            }, 300); // close, but give 500ms for bootstrap to animate
 
         };
 
 
         $scope.upload = [];
-        //$scope.fileUploadObj = { testString1: "Test string 1", testString2: "Test string 2" };
 
         $scope.onFileSelect = function (parentId, $files) {
             //$files: an array of files selected, each file has name, size, and type.

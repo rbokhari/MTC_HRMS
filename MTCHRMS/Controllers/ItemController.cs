@@ -119,7 +119,7 @@ namespace MTCHRMS.Controllers
 
                     newItem.CreatedOn = DateTime.Now;
 
-                    if (_repo.CheckItemDuplicate(newItem.ItemId, newItem.ItemCode))
+                    if (_repo.CheckItemDuplicate(newItem) != 0)
                     {
                         return Request.CreateResponse(HttpStatusCode.Found, newItem);
                     }

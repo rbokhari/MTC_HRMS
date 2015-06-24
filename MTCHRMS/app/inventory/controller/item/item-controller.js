@@ -260,6 +260,7 @@ invModule.controller('ItemController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
+                    $('.modal-backdrop').remove();
                     $scope.item[0].itemYears.push(result.resultData);
                 });
 
@@ -297,13 +298,14 @@ invModule.controller('ItemController',
                 modal.element.modal();
                 modal.close.then(function (result) {
                     $scope.item[0].itemSuppliers.push(result.resultData);
+                    $('.modal-backdrop').remove();
                 });
             });
         };
 
         $scope.deleteSupplier = function (index, supplier) {
             var x;
-            alert(index);
+            
             if (confirm("Are you sure to delete this record ?") == true) {
                 itemRepository.deleteItemSupplier(supplier)
                     .$promise
@@ -334,6 +336,7 @@ invModule.controller('ItemController',
                 modal.element.modal();
                 modal.close.then(function (result) {
                     //console.log(result);
+                    $('.modal-backdrop').remove();
                     $scope.item[0].itemPicture = result.resultData.itemPicture;
                 });
             });
@@ -357,6 +360,7 @@ invModule.controller('ItemController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
+                    $('.modal-backdrop').remove();
                     $scope.item[0].itemManufacturers.push(result.resultData);
                 }); 
             });

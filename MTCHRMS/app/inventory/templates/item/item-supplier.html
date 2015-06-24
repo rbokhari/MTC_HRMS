@@ -1,4 +1,4 @@
-﻿<div id="dvSupplier" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Supplier">
+﻿<div id="dvSupplier" name="dvSupplier" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Supplier">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel1">{{title}}</h3>
@@ -24,7 +24,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button type="submit" id="cmdSave" class="btn btn-primary" type="submit" ng-click="saveItemSupplier(parentId, itemSupplier)" ng-disabled="frm.$invalid">
+        <button type="button" id="cmdSave" class="btn btn-primary" ng-click="saveItemSupplier(parentId, itemSupplier)" ng-disabled="frm.$invalid">
             <i class="icon-save"></i>
             Save
         </button>

@@ -1,27 +1,27 @@
 ﻿<div id="dvPreviousEmployement" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Previous Employment">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel1">Add Previous Employment</h3>
+        <h3 id="myModalLabel1"><span translate="ADD_PREVIOUS_EMPLOYMENT"></span></h3>
     </div>
     <div class="modal-body">
         <form id="frmPreviousCompany" novalidate>
             <div class="form-horizontal">
                 <div class="control-group">
-                    <label for="tPassportNo" class="control-label">Company Name :</label>
+                    <label for="tPassportNo" class="control-label"><span translate="COMPANY_NAME"></span> :</label>
                     <div class="controls">
                         <input type="text" id="tCompanyName" name="tCompanyName" ng-model="employeePreviousEmployment.companyName" required />
                         <div class="help-inline" ng-show="frmPreviousCompany.tCompanyName.$error.required && frmPreviousCompany.tCompanyName.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">Start Date :</label>
+                    <label class="control-label"><span translate="START_DATE"></span> :</label>
                     <div class="controls">
                         <input type="text" id="tStartDate" name="tStartDate" data-date-format="dd/mm/yyyy" datepicker ng-model="employeePreviousEmployment.startDate" required />
                         <div class="help-inline" ng-show="frmPreviousCompany.tStartDate.$error.required && frmPreviousCompany.tStartDate.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
-                    <label class="control-label">End Date :</label>
+                    <label class="control-label"><span translate="END_DATE"></span> :</label>
                     <div class="controls">
                         <input type="text" id="tEndDate" name="tEndDate" data-date-format="dd/mm/yyyy" datepicker ng-model="employeePreviousEmployment.endDate" required />
                         <div class="help-inline" ng-show="frmPreviousCompany.tEndDate.$error.required && frmPreviousCompany.tEndDate.$dirty">*</div>
@@ -31,12 +31,11 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><span translate="CLOSE"></span></button>
         <button type="submit" class="btn btn-primary" ng-click="savePreviousEmployment(parentId, employeePreviousEmployment)" ng-disabled="frmPreviousCompany.$invalid">
             <i class="icon-save"></i>
-            Save
+            <span translate="SAVE"></span>
         </button>
-
     </div>
 
 </div>

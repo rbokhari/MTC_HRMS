@@ -110,7 +110,17 @@
     "MANPOWER_NO": "Manpower No",
     "IDCARD_NO": "ID Card No",
     "CONDITION": "Condition",
-    "PROBATION_EXPIRE" : "Probation Expire"
+    "PROBATION_EXPIRE": "Probation Expire",
+    "ADD_NEW_QUALIFICATION": "Add New Qualification",
+    "EDIT_QUALIFICATION": "Update Qualification",
+    "QUALIFICATION_DEGREE": "Degree",
+    "UNIVERSITY": "University",
+    "LEVEL": "Level",
+    "ADD_PREVIOUS_EMPLOYMENT": "Add Previous Employment",
+    "COUNTRY": "Country",
+    "CLOSE": "Close",
+    "DETAIL": "Detail",
+    "CHILD_NAME": "Child Name"
 
 
 }

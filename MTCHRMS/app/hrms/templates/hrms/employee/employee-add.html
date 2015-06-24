@@ -208,13 +208,15 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="GENDER"></span> :</label>
                                         <div class="controls">
-                                            <select id="cGender" name="cGender" ng-model="employeeDef.genderId" ng-options="gender.id as gender.nameEn for gender in genders" ></select>
+                                            <select id="cGender" name="cGender" ng-if="lang=='en_US'" ng-model="employeeDef.genderId" ng-options="gender.id as gender.nameEn for gender in genders"></select>
+                                            <select id="cGender" name="cGender" ng-if="lang=='ar_OM'" ng-model="employeeDef.genderId" ng-options="gender.id as gender.nameAr for gender in genders"></select>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="STATUS"></span> :</label>
                                         <div class="controls">
-                                            <select id="cNationality" name="cStatus" ng-model="employeeDef.statusId" ng-options="status.id as status.nameEn for status in employeeStatus" required></select>
+                                            <select id="cNationality" name="cStatus" ng-if="lang=='en_US'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameEn for status in employeeStatus" required></select>
+                                            <select id="cNationality" name="cStatus" ng-if="lang=='ar_OM'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameAr for status in employeeStatus" required></select>
                                             <div class="help-inline" ng-show="staffForm.cStatus.$error.required && staffForm.cStatus.$dirty">*</div>
                                         </div>
                                     </div>

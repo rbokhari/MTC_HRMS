@@ -1,14 +1,21 @@
 ﻿
 moduleModal.controller('EmployeeModalController',
 [
-    '$scope', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
+    '$scope', '$location', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
     'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification',
 
-    function ($scope, appRepository, employeeRepository, validationRepository, title, close,
+    function ($scope, $location, appRepository, employeeRepository, validationRepository, title, close,
         parentId, resultData, $timeout, $upload, employeePassport, employeeVisa, employeeQualification) {
 
         //$scope.name = null;
         //$scope.age = null;
+
+        if ($location.path().indexOf('/HRMSPortalAr') == 0) {
+            $scope.lang = "ar_OM";
+        } else {
+            $scope.lang = "en_US";
+        }
+
         $scope.resultData = {};
         $scope.title = title;
         $scope.parentId = parentId;
