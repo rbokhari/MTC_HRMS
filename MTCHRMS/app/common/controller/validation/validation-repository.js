@@ -45,7 +45,8 @@ accModule.factory('validationRepository', ['$resource', '$http', 'validations', 
         getItemCategories: _getAllDetailsByValidationId(validations.ITEM_CATEGORY),
         getItemTechnicians: _getAllDetailsByValidationId(validations.ITEM_TECHNICIAN),
         getItemYears: _getAllDetailsByValidationId(validations.ITEM_YEAR),
-        getEmployeeStatus: _getAllDetailsByValidationId(validations.EMPLOYEE_STATUS)
+        getEmployeeStatus: _getAllDetailsByValidationId(validations.EMPLOYEE_STATUS),
+        getMaintenanceType: _getAllDetailsByValidationId(validations.MAINTENANCE_TYPE)
         
 
     //    get: function() {

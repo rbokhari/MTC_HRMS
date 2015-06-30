@@ -523,6 +523,28 @@ namespace MTCHRMS.DC
             return _ctx.ItemManufacturers;
         }
 
+
+
+        public bool AddItemStock(ItemStockAdd newItemStock)
+        {
+            try
+            {
+                _ctx.ItemStockAdds.Add(newItemStock);
+
+                var item = GetItem(newItemStock.ItemId);
+
+                item.ItemStock += newItemStock.Stock;
+
+                _ctx.Entry(item).State = EntityState.Modified;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
     }
 }
 

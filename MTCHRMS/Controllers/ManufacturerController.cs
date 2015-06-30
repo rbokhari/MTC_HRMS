@@ -24,6 +24,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
+        [Route("api/manufacturer")]
         public Task<IQueryable<Manufacturer>> Get()     
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
@@ -50,6 +51,7 @@ namespace MTCHRMS.Controllers
 
         [Authorize]
         [HttpPost]
+        [Route("api/manufacturer")]
         public HttpResponseMessage Post([FromBody] Manufacturer newManufacturer)
         {
             if (ModelState.IsValid)

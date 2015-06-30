@@ -1,0 +1,161 @@
+﻿
+<div class="container-fluid" data-ng-init="loadItem()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Item <small> Stock Add </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="/INVPortal/item/list">Items List</a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a ng-href="/INVPortal/item/detail/{{item[0].itemId}}">Item Detail</a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Stock Add</a> <span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        <div class="span12">
+            <div class="widget widget-tabs">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>&nbsp;&nbsp;{{ item[0].itemCode }} - {{ item[0].itemName }}</h4>
+                    <span class="tools">
+                        <label class="label label-success">{{item[0].itemStock}}</label>
+                    </span>
+
+                </div>
+                <div class="widget-body">
+                    <div class="form-horizontal">
+                        <form name="frm" novalidate>
+                            <div class="control-group">
+                                <label class="control-label" for="tCode">Computer Code :</label>
+                                <div class="controls">
+                                    <input type="text" id="tCode" ng-model="stock.computerCode" class="input-xlarge" readonly="readonly"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tBillNo">Bill No :</label>
+                                <div class="controls">
+                                    <input type="text" id="tBillNo" ng-model="stock.billNo" class="input-xlarge" required />
+                                    <div class="help-inline" ng-show="frm.tBillNo.$error.required && frm.tBillNo.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tLPONo">LPO No :</label>
+                                <div class="controls">
+                                    <input type="text" id="tLPONo" ng-model="stock.LpoNo" class="input-xlarge" required />
+                                    <div class="help-inline" ng-show="frm.tLPONo.$error.required && frm.tLPONo.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="control-group">
+                                <label class="control-label" for="tOrderDate">Order Date :</label>
+                                <div class="controls">
+                                    <input type="text" id="tOrderDate" ng-model="stock.orderDate" class="input-xlarge" data-date-format="dd/mm/yyyy" datepicker required />
+                                    <div class="help-inline" ng-show="frm.tOrderDate.$error.required && frm.tOrderDate.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="tDeliveryDate">Delivery Date :</label>
+                                <div class="controls">
+                                    <input type="text" id="tDeliveryDate" ng-model="stock.deliveryDate" class="input-xlarge" data-date-format="dd/mm/yyyy" datepicker required />
+                                    <div class="help-inline" ng-show="frm.tDeliveryDate.$error.required && frm.tDeliveryDate.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="control-group">
+                                <label class="control-label" for="tQuantity">Quantity :</label>
+                                <div class="controls">
+                                    <input type="text" id="tQuantity" ng-model="stock.stock" class="input-medium" required />
+                                    <a href="">Add Serial No</a>
+                                    <div class="help-inline" ng-show="frm.tQuantity.$error.required && frm.tQuantity.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="control-group" data-ng-init="loadSupplier()">
+                                <label class="control-label" for="cSupplier">Supplier</label>
+                                <div class="controls">
+                                    <select id="cSupplier" name="cSupplier" ng-model="stock.supplierId" class="input-xxlarge" ng-options="supplier.supplierId as supplier.supplierName for supplier in suppliers" required></select>
+                                    <div class="help-inline" ng-show="frm.cSupplier.$error.required && frm.cSupplier.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+
+                            <hr />
+
+                            <h4>Warranty</h4>
+                            <div class="well">
+                                <div class="control-group">
+                                    <label class="control-label">Warranty</label>
+                                    <div class="controls">
+                                        <toggle-switch html="true" model="stock.isWarranty" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="tWarrantyStart">Start Date :</label>
+                                    <div class="controls">
+                                        <input type="text" id="tWarrantyStart" ng-model="stock.warrantyStart" class="input-xlarge" data-date-format="dd/mm/yyyy" datepicker required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="tWarrantyEnd">End Date :</label>
+                                    <div class="controls">
+                                        <input type="text" id="tWarrantyEnd" ng-model="stock.warrantyEnd" class="input-xlarge" data-date-format="dd/mm/yyyy" datepicker required />
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <h4>Maintenance</h4>
+                            <div class="well" data-ng-init="loadStockAdd()">
+                                <div class="control-group">
+                                    <label class="control-label">Maintenance</label>
+                                    <div class="controls">
+                                        <toggle-switch html="true" model="stock.isMaintenance" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="cOccurance">Occurance :</label>
+                                    <div class="controls">
+                                        <select id="cOccurance" ng-model="stock.maintenanceTypeId" ng-options="maintenance.id as maintenance.nameEn for maintenance in maintenanceTypes" class="input-xlarge"></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="tComments">Notes</label>
+                                <div class="controls">
+                                    <textarea id="tComments" ng-model="stock.notes" class="span12"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions" ng-if="authentication.isINVAdmin">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="saveStock(stock, item[0].itemId)" ng-disabled="frm.$invalid">
+                                    <i class="icon-ok"></i>&nbsp;Save
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/item/detail/{{item[0].itemId}}">
+                                    <i class=" icon-remove"></i>&nbsp; Cancel
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

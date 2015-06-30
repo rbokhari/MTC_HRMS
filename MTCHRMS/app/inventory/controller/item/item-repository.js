@@ -34,6 +34,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item').save(item);
         };
 
+        var _addItemStock = function (stock) {
+            return $resource('/api/item/addItemStock').save(stock);
+        };
+
         var _editItem = function(item) {
             return $http.put('/api/item/' + item.itemId, item);
         };
@@ -100,6 +104,7 @@ invModule.factory('itemRepository', [
             getItemById: _getItemById,
             addItem: _addItem,
             editItem: _editItem,
+            addItemStock:_addItemStock,
             addItemDepartment: _addItemDepartment,
             updateItemDepartment: _updateItemDepartment,
             deleteItemDepartment: _deleteItemDepartment,

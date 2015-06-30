@@ -78,6 +78,7 @@ invModule.controller('ManufacturerController',
                 manufacturer.statusId = 1;
             }
 
+            console.log(manufacturer);
             manufacturerRepository.addManufacturer(manufacturer)
                 .$promise
                 .then(function () {

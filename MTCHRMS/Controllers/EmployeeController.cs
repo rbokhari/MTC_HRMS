@@ -321,7 +321,6 @@ namespace MTCHRMS.Controllers
                     return Convert.ToInt32(unescapedFormData); // JsonConvert.DeserializeObject(unescapedFormData);
                 }
             }
-
             return 0;
         }
 
@@ -403,10 +402,8 @@ namespace MTCHRMS.Controllers
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newPassport);
                         //return new HttpResponseMessage(HttpStatusCode.OK);
-                    }
-                    
+                    }   
                 }
-
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());

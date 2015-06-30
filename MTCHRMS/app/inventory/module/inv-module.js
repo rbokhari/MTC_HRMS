@@ -99,6 +99,11 @@
             controller: 'ItemController'
         });
 
+    $routeProvider
+        .when('/INVPortal/item/detail/addstock/:id', {
+            templateUrl: '/app/inventory/templates/item/item-stock-add.html',
+            controller: 'ItemController'
+        });
 
         $routeProvider
             .otherwise({ redirectTo: '/INVPortal' });

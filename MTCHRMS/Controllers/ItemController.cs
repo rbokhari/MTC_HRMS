@@ -150,6 +150,54 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
+        [Route("api/item/addItemStock")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage PostItemStock([FromBody] ItemStockAdd newStockAdd)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newStockAdd.ItemStockAddId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newStockAdd.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+
+                    newStockAdd.CreatedOn = DateTime.Now;
+
+                    newStockAdd.ComputerCode = "Auto one";
+                    //if (_repo.CheckItemDuplicate(newItem) != 0)
+                    //{
+                    //    return Request.CreateResponse(HttpStatusCode.Found, newItem);
+                    //}
+
+                    if (_repo.AddItemStock(newStockAdd) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newStockAdd);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                //else if (newItem.ItemId != 0)
+                //{
+                //    if (Request.Headers.Contains("userId"))
+                //    {
+                //        newItem.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                //    }
+                //    newItem.ModifiedOn = DateTime.Now;
+
+                //    if (_repo.UpdateItem(newItem) && _repo.Save())
+                //    {
+                //        return Request.CreateResponse(HttpStatusCode.Created, newItem);
+                //        //return new HttpResponseMessage(HttpStatusCode.OK);
+                //    }
+
+                //}
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+            return null;
+        }
+
         [Route("api/item/upload")]
         [HttpPost]
         [Authorize]

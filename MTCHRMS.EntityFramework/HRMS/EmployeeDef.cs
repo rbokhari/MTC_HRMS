@@ -68,14 +68,17 @@ namespace MTCHRMS.EntityFramework.HRMS
         public string PlaceOfBirth { get; set; }
 
         [Required(ErrorMessage = "Please enter Date of birth !")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DateOfBirth { get; set; }
 
         public string Address { get; set; }
 
         public string PermanentAddress { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ServiceEndDate { get; set; }
 
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime ProbationEndDate { get; set; }
 
         [MaxLength(100)]

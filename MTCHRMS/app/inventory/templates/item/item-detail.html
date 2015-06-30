@@ -4,16 +4,17 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Item <small> Add New </small>
+                Item <small> Detail </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
                     <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
-                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                    <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/INVPortal/item/list">Items List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="/INVPortal/item/list">Items List</a><span class="divider">&nbsp;</span></li>
+                <li><a href="#">Item Detail</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -61,10 +62,11 @@
                                     <li style="height: 36px;"><a href="" ng-click="showSupplier(item[0].itemId)"><i class="icon-external-link"></i> Add Supplier</a></li>
                                     <li style="height: 36px;"><a href="" ng-click="showManufacturer(item[0].itemId)"><i class="icon-external-link"></i> Add Manufacturer</a></li>
                                     <li style="height: 36px;"><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-picture"></i> Update Picture</a></li>
+                                    <li style="height: 36px;"><a ng-href="/INVPortal/item/detail/addstock/{{item[0].itemId}}"><i class="icon-barcode"></i> Add Stock</a></li>
                                 </ul>
                             </div>
                             <div class="span7">
-                                <h4>{{ item[0].itemCode }} - <small>{{ item[0].itemName }} </small></h4>
+                                <h4>{{ item[0].itemCode }} - <small>{{ item[0].itemName }} </small> <label class="pull-right label label-success">{{item[0].itemStock}}</label></h4>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -95,12 +97,6 @@
                                             <td class="span2">Store Location :</td>
                                             <td>
                                                 {{ item[0].storeLocation.storeName}}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="span2">Item Stock :</td>
-                                            <td>
-                                                {{ item[0].itemStock}}
                                             </td>
                                         </tr>
                                         <tr>

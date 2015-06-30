@@ -13,7 +13,8 @@
                 <li>
                     <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/INVPortal/items/">Items List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="/INVPortal/items/">Items List</a><span class="divider">&nbsp;</span></li>
+                <li><a href="#">Add New</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -33,7 +34,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtCode">Item Code</label>
                                 <div class="controls">
-                                    <input type="text" id="txtCode" ng-model="item.itemCode" class="input-medium"/>
+                                    <input type="text" id="txtCode" ng-model="item.itemCode" class="input-xlarge"/>
                                 </div>
                             </div>
                             <div class="control-group">
@@ -51,7 +52,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtName">Item Name</label>
                                 <div class="controls">
-                                    <input type="text" id="txtName" ng-model="item.itemName" class="input-xlarge" required/>
+                                    <input type="text" id="txtName" ng-model="item.itemName" class="input-xxlarge" required/>
                                     <div class="help-inline" ng-show="frm.txtName.$error.required && frm.txtName.$dirty">Please enter name !</div>
                                 </div>
                             </div>
@@ -59,19 +60,19 @@
                             <div class="control-group">
                                 <label class="control-label" for="cType">Item Class</label>
                                 <div class="controls">
-                                    <select id="cType" name="cType" ng-model="item.typeId" ng-options="type.id as type.nameEn for type in itemTypes"></select>
+                                    <select id="cType" name="cType" ng-model="item.typeId" ng-options="type.id as type.nameEn for type in itemTypes" class="input-xlarge"></select>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="cCategory">Item Category</label>
                                 <div class="controls">
-                                    <select id="cCategory" name="cCategory" ng-model="item.categoryId" ng-options="category.id as category.nameEn for category in itemCategories" required></select>
+                                    <select id="cCategory" name="cCategory" ng-model="item.categoryId" ng-options="category.id as category.nameEn for category in itemCategories" class="input-xxlarge" required></select>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="cStore">Store Location</label>
                                 <div class="controls">
-                                    <select id="cStore" name="cStore" ng-model="item.storeId" ng-options="location.storeId as location.storeName for location in storeLocations" required></select>
+                                    <select id="cStore" name="cStore" ng-model="item.storeId" ng-options="location.storeId as location.storeName for location in storeLocations" class="input-xxlarge" required></select>
                                 </div>
                             </div>
                             <div class="control-group">

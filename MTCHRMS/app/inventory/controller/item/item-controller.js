@@ -37,18 +37,14 @@ invModule.controller('ItemController',
             //console.log($scope.storeLocations);
         };
 
+        $scope.loadStockAdd = function() {
+            $scope.maintenanceTypes = validationRepository.getMaintenanceType;
+        }
+
         $scope.loadSupplier = function() {
             $scope.suppliers = supplierRepository.getAllSuppliers();
 
-            $scope.suppliers.$promise.then(function (response) {
-                //alert("success");
-                //console.log(response);
-            }, function () {
-                //alert("error");
-            })
-                .then(function () {
-
-                })
+            $scope.suppliers.$promise.then(function (response) {}, function () {})
                 .then(function () { $scope.isBusy = false; });
         };
 
@@ -167,6 +163,44 @@ invModule.controller('ItemController',
             );
         };
 
+        $scope.saveStock = function (stock, itemId) {
+
+            stock.itemId = itemId;
+            if (angular.isUndefined(stock.isWarranty) || stock.isWarranty == 'false' || stock.isWarranty == 0) {
+                stock.isWarranty = 0;
+            } else {
+                stock.isWarranty = 1;
+            }
+
+            if (angular.isUndefined(stock.isMaintenance) || stock.isMaintenance == 'false' || stock.isMaintenance == 0) {
+                stock.isMaintenance = 0;
+            } else {
+                stock.isMaintenance = 1;
+            }
+
+            $scope.errors = [];
+            itemRepository.addItemStock(stock)
+                .$promise
+                .then(
+                function (response) {
+                    appRepository.showAddSuccessGritterNotification();
+                    console.log("save - Successfully !");
+                    $location.url('/INVPortal/item/detail/' + response.itemId);
+                }, function (error) {
+                    // failure case
+                    console.log("save - Error !");
+                    if (error.status == 302) {
+                        appRepository.showDuplicateGritterNotification();
+                    } else {
+                        appRepository.showErrorGritterNotification();
+                    }
+                    console.log(error);
+                    $scope.errors = error.data;
+                }
+            );
+        };
+
+
         //alert($routeParams.id);
         $scope.loadItem = function() {
             if ($routeParams.id != undefined) {
@@ -205,6 +239,7 @@ invModule.controller('ItemController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
+                    $('.modal-backdrop').remove();
                     $scope.item[0].itemDepartments.push(result.resultData);
                 });
             });

@@ -270,6 +270,7 @@
     <Content Include="app\inventory\templates\dashboard\suppliers.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />
     <Content Include="app\inventory\templates\item\item-image.html" />
+    <Content Include="app\inventory\templates\item\item-stock-add.html" />
     <Content Include="app\inventory\templates\item\item-supplier.html" />
     <Content Include="app\inventory\templates\item\item-year.html" />
     <Content Include="app\inventory\templates\item\item-department.html" />

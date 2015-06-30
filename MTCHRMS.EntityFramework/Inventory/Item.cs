@@ -178,4 +178,65 @@ namespace MTCHRMS.EntityFramework.Inventory
 
     }
 
+
+    [Table("IV_ItemStockAdd")]
+    public class ItemStockAdd : TableStrutcture
+    {
+        [Key]
+        public int ItemStockAddId { get; set; }
+
+        public int ItemId { get; set; }
+
+        [StringLength(50)]
+        public string ComputerCode { get; set; }
+
+        [StringLength(100)]
+        public string BillNo { get; set; }
+
+        [StringLength(100)]
+        public string LpoNo { get; set; }
+
+        public DateTime OrderDate { get; set; }
+
+        public DateTime DeliveryDate { get; set; }
+
+        public int Stock { get; set; }
+
+        public int SupplierId { get; set; }
+
+        public int IsWarranty { get; set; }
+
+        public DateTime WarrantyStart { get; set; }
+
+        public DateTime WarrantyEnd { get; set; }
+
+        public int IsMaintenance { get; set; }
+
+        public int MaintenanceTypeId { get; set; }
+
+        [StringLength(500)]
+        public string Notes { get; set; }
+
+
+        public virtual ICollection<ItemStockSerial> ItemStockSerials { get; set; }
+
+    }
+
+    [Table("IV_ItemStockSerial")]
+    public class ItemStockSerial : TableStrutcture
+    {
+        [Key]
+        public int ItemStockSerialId { get; set; }
+
+        public int ItemStockAddId { get; set; }
+
+        public int ItemId { get; set; }
+        
+        [StringLength(250)]
+        public string SerialNo { get; set; }
+
+        public int StatusId { get; set; }
+
+    }
+
 }

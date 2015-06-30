@@ -195,7 +195,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOB" name="tDOB" class="date-picker" ng-model="employee[0].dateOfBirth" datepicker required />
+                                            <input type="text" id="tDOB" name="tDOB" class="date-picker" ng-model="employee[0].dateOfBirth" data-date-format="dd/mm/yyyy" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
                                         </div>
                                     </div>
@@ -209,7 +209,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="CONTRACT_EXPIRE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOE" name="tDOE" class="date-picker" ng-model="employee[0].serviceEndDate" datepicker required />
+                                            <input type="text" id="tDOE" name="tDOE" class="date-picker" ng-model="employee[0].serviceEndDate" data-date-format="dd/mm/yyyy" datepicker required />
                                             <div class="help-inline" ng-show="staffForm.tDOE.$error.required && staffForm.tDOE.$dirty">*</div>
                                         </div>
                                     </div>
