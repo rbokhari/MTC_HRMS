@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DbEntityContext.cs" />
     <Compile Include="Department.cs" />
+    <Compile Include="General\AutoSetting.cs" />
     <Compile Include="General\Validation.cs" />
     <Compile Include="HRMSMigrationConfiguration.cs" />
     <Compile Include="HRMS\EmployeeDef.cs" />
@@ -68,6 +69,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MTC.GlobalVariables\MTC.GlobalVariables.csproj">
+      <Project>{981df8e6-76cf-4f8e-8c94-84adfc3c9306}</Project>
+      <Name>MTC.GlobalVariables</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

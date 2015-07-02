@@ -186,3 +186,4 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
 
 //}]);
 
+ 

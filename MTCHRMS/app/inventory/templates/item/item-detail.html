@@ -333,25 +333,32 @@
                             <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
                             <div class="row-fluid">
                                 <div class="span12">
-                                    <table class="table table-striped table-bordered table-advance table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Notes</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    <div class="widget" ng-repeat="stock in item[0].itemStockAdds">
+                                        <div class="widget-title" style="background-color: slateblue;">
+                                            <h4><i class="icon-time"></i>&nbsp; {{stock.computerCode}} - {{stock.billNo}} - {{stock.deliveryDate | date:'dd MMM yyyy'}}</h4>
+                                        </div>
+                                        <div class="widget-body">
+
+
+                                            <table class="table table-bordered table-advance table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>Serial No</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="serial in stock.itemStockSerials">
+                                                        <td>{{serial.serialNo}}</td>
+                                                        <td><a href=""> <i class="icon-edit"></i></a>&nbsp;<i class="icon-upload"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>

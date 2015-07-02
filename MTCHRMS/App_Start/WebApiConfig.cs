@@ -21,7 +21,7 @@ namespace MTCHRMS
             );
 
             config.Routes.MapHttpRoute(
-                name: "DefaultApiByName",
+                name: "DefaultApiByAction",
                 routeTemplate: "api/{controller}/{id}/{action}"
                 //defaults: new {id = RouteParameter.Optional}
                 );

@@ -5,6 +5,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MTC.GlobalVariables;
+using MTCHRMS.DC.Implementation;
 using MTCHRMS.EntityFramework.Inventory;
 using MTCHRMS.EntityFramework;
 
@@ -43,6 +45,7 @@ namespace MTCHRMS.DC
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
+                .Include(c=>c.ItemStockAdds.Select(i=>i.SupplierDetail).Select(i=>i.ItemStockSerials))
                 .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
 
         }
@@ -529,6 +532,8 @@ namespace MTCHRMS.DC
         {
             try
             {
+                newItemStock.ComputerCode = new MTCRepository(_ctx).SetAutoNumberFormat((int)ApplicationPreferences.ScreenId.Inventory_Stock_Add);
+
                 _ctx.ItemStockAdds.Add(newItemStock);
 
                 var item = GetItem(newItemStock.ItemId);
@@ -537,6 +542,34 @@ namespace MTCHRMS.DC
 
                 _ctx.Entry(item).State = EntityState.Modified;
 
+                if (_ctx.SaveChanges() > 0)
+                {
+                    var stockSerial = new ItemStockSerial()
+                    {
+                        ItemStockAddId = newItemStock.ItemStockAddId,
+                        ItemId = newItemStock.ItemId,
+                        SerialNo = string.Empty,
+                        StatusId = 1,
+                        CreatedBy = newItemStock.CreatedBy,
+                        CreatedOn = DateTime.Now
+                    };
+
+                    //IList<ItemStockSerial> serials = new List<ItemStockSerial>(newItemStock.Stock);
+
+                    for (int i = 0; i < newItemStock.Stock; i++)
+                    {
+                        //stockSerial.StatusId = i;
+                        //serials.Add(stockSerial);
+                        //_ctx.ItemStockSerials.Add(stockSerial);
+                        _ctx.ItemStockSerials.Add(stockSerial);
+                        if (_ctx.SaveChanges() > 0) { }
+                    }
+
+                    //_ctx.ItemStockSerials.AddRange(serials);
+
+                    //return _ctx.SaveChanges() > 0;
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -544,6 +577,12 @@ namespace MTCHRMS.DC
                 // TODO log this error    
                 return false;
             }
+        }
+
+
+        public bool UpdateItemSerial(List<ItemStockSerial> newItemSerials)
+        {
+            throw new NotImplementedException();
         }
     }
 }

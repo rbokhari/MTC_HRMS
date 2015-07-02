@@ -54,7 +54,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
+                                <table class="table table-striped table-bordered table-advance table-hover">
                                     <thead>
                                         <tr>
                                             <th class="hidden-phone"><span translate="CODE"></span></th>
@@ -74,7 +74,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="passport in passports | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="passport in passports | filter:search | itemsPerPage: recordPage">
                                             <td class="hidden-phone" style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{passport.id}}">{{ passport.employeeCode}}</a></td>
                                             <td>
                                                 <img class="circular" alt="" data-img-loading-value="{{passport.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />

@@ -172,7 +172,7 @@ namespace MTCHRMS.Controllers
                     //    return Request.CreateResponse(HttpStatusCode.Found, newItem);
                     //}
 
-                    if (_repo.AddItemStock(newStockAdd) && _repo.Save())
+                    if (_repo.AddItemStock(newStockAdd))
                     {
                         return Request.CreateResponse(HttpStatusCode.Created, newStockAdd);
                         //return new HttpResponseMessage(HttpStatusCode.OK);

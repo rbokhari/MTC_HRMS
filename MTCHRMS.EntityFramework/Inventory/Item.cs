@@ -92,6 +92,8 @@ namespace MTCHRMS.EntityFramework.Inventory
         public virtual ICollection<ItemSupplier> ItemSuppliers { get; set; }
 
         public virtual ICollection<ItemManufacturer> ItemManufacturers { get; set; }
+
+        public virtual ICollection<ItemStockAdd> ItemStockAdds { get; set; }
     }
 
     [Table("IV_ItemDepartment")]
@@ -202,6 +204,7 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public int Stock { get; set; }
 
+        [ForeignKey("SupplierDetail")]
         public int SupplierId { get; set; }
 
         public int IsWarranty { get; set; }
@@ -217,6 +220,7 @@ namespace MTCHRMS.EntityFramework.Inventory
         [StringLength(500)]
         public string Notes { get; set; }
 
+        public virtual Supplier SupplierDetail { get; set; }
 
         public virtual ICollection<ItemStockSerial> ItemStockSerials { get; set; }
 
@@ -234,6 +238,8 @@ namespace MTCHRMS.EntityFramework.Inventory
         
         [StringLength(250)]
         public string SerialNo { get; set; }
+
+        public int BarcodePrintCount { get; set; }
 
         public int StatusId { get; set; }
 
