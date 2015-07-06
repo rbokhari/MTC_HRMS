@@ -435,6 +435,47 @@ invModule.controller('ItemController',
             }
         };
 
+        $scope.editSingleSerial = function (serialid) {
+            console.log(serialid);
+            $('#tr' + serialid).addClass('info');
+            $('#tEditSerial' + serialid).removeAttr("disabled");
+            $('#tEditSerial' + serialid).focus();
+            $('#cEdit' + serialid).hide();
+            $('#cPrintBarcode' + serialid).hide();
+            $('#cSave' + serialid).show();
+            $('#cUndo' + serialid).show();
+        };
+
+        $scope.undoSingleSerial = function (serialid) {
+            console.log(serialid);
+            $('#tr' + serialid).removeClass('info', 1000, 'fade');
+            $('#tEditSerial' + serialid).attr('disabled', 'disabled');
+            $('#cEdit' + serialid).show();
+            $('#cPrintBarcode' + serialid).show();
+            $('#cSave' + serialid).hide();
+            $('#cUndo' + serialid).hide();
+        };
+
+        $scope.saveSingleSerial = function (serial) {
+            console.log(serial);
+
+            itemRepository.updateItemSerial(serial)
+                .$promise
+                .then(function() {
+                    appRepository.showUpdateSuccessGritterNotification();
+                    $('#tr' + serial.itemStockSerialId).removeClass('info', 1000, 'fade');
+                    $('#tEditSerial' + serial.itemStockSerialId).attr('disabled', 'disabled');
+                    $('#cEdit' + serial.itemStockSerialId).show();
+                    $('#cPrintBarcode' + serial.itemStockSerialId).show();
+                    $('#cSave' + serial.itemStockSerialId).hide();
+                    $('#cUndo' + serial.itemStockSerialId).hide();
+
+                    //$('#tEditSerial' + serial.itemStockSerialId).hide();
+                }, function() {
+                    appRepository.showErrorGritterNotification();
+                });
+        };
+
 
         $scope.item = {};
 

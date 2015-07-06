@@ -38,6 +38,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/addItemStock').save(stock);
         };
 
+        var _updateItemSerial = function(serial) {
+            return $resource('/api/item/updateItemStockSerial').save(serial);
+        };
+
         var _editItem = function(item) {
             return $http.put('/api/item/' + item.itemId, item);
         };
@@ -104,7 +108,8 @@ invModule.factory('itemRepository', [
             getItemById: _getItemById,
             addItem: _addItem,
             editItem: _editItem,
-            addItemStock:_addItemStock,
+            addItemStock: _addItemStock,
+            updateItemSerial:_updateItemSerial,
             addItemDepartment: _addItemDepartment,
             updateItemDepartment: _updateItemDepartment,
             deleteItemDepartment: _deleteItemDepartment,

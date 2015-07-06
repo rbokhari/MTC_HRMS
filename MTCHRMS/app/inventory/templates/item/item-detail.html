@@ -330,30 +330,38 @@
                         </div>
                         <div class="tab-pane" id="dvHistory" ng-show="isTabSelected(5)">
                             <i class="icon-time"></i>  <strong>History</strong>
-                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
+                            
                             <div class="row-fluid">
                                 <div class="span12">
                                     <div class="widget" ng-repeat="stock in item[0].itemStockAdds">
-                                        <div class="widget-title" style="background-color: slateblue;">
+                                        <div class="widget-title" style="background-color: darkgray; border-color: darkgray;">
                                             <h4><i class="icon-time"></i>&nbsp; {{stock.computerCode}} - {{stock.billNo}} - {{stock.deliveryDate | date:'dd MMM yyyy'}}</h4>
                                         </div>
-                                        <div class="widget-body">
+                                        <div class="widget-body" style="border-color: darkgray;">
 
-
-                                            <table class="table table-bordered table-advance table-hover">
-                                                <thead>
-                                                <tr>
-                                                    <th>Serial No</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr ng-repeat="serial in stock.itemStockSerials">
-                                                        <td>{{serial.serialNo}}</td>
-                                                        <td><a href=""> <i class="icon-edit"></i></a>&nbsp;<i class="icon-upload"></i></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                            <div class="col-md-6">
+                                                <table class="table table-bordered table-advance table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-md-8">Serial No</th>
+                                                            <th class="col-md-4">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="serial in stock.itemStockSerials" id="tr{{serial.itemStockSerialId}}">
+                                                            <td class="col-md-8">
+                                                                <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
+                                                            </td>
+                                                            <td class="col-md-4">
+                                                                <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
+                                                                <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="printSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-print"></i></a>
+                                                                <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
+                                                                <a style="text-decoration: none;" class="hide" href="" id="cUndo{{serial.itemStockSerialId}}" ng-click="undoSingleSerial(serial.itemStockSerialId)"><i class="icon-2x icon-undo"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
 

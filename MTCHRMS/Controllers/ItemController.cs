@@ -198,6 +198,33 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
+        [Route("api/item/updateItemStockSerial")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage PostItemStockSerial([FromBody] ItemStockSerial updateStockSerial)
+        {
+            if (ModelState.IsValid)
+            {
+                if (updateStockSerial.ItemStockSerialId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        updateStockSerial.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+
+                    updateStockSerial.ModifiedOn = DateTime.Now;
+
+
+                    if (_repo.UpdateItemSerial(updateStockSerial) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, updateStockSerial);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+            return null;
+        }
+
         [Route("api/item/upload")]
         [HttpPost]
         [Authorize]

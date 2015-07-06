@@ -45,7 +45,8 @@ namespace MTCHRMS.DC
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
-                .Include(c=>c.ItemStockAdds.Select(i=>i.SupplierDetail).Select(i=>i.ItemStockSerials))
+                .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials))
+                .Include(c => c.ItemStockAdds.Select(i => i.SupplierDetail))
                 .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
 
         }
@@ -57,7 +58,7 @@ namespace MTCHRMS.DC
 
         public bool Save()
         {
-            return _ctx.SaveChanges() > 0;
+           return _ctx.SaveChanges() > 0;
         }
 
         public Int32 CheckItemDuplicate(Item newItem)
@@ -580,10 +581,32 @@ namespace MTCHRMS.DC
         }
 
 
-        public bool UpdateItemSerial(List<ItemStockSerial> newItemSerials)
+        public bool UpdateItemSerial(ItemStockSerial newItemSerials)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _ctx.Entry(newItemSerials).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
+
+        public bool UpdateItemSerials(List<ItemStockSerial> newItemSerials)
+        {
+            try
+            {
+                _ctx.Entry(newItemSerials).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
 
