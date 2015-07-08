@@ -38,6 +38,15 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/addItemStock').save(stock);
         };
 
+        var _getAllSerialsByItemId = function (id) {
+            return $resource('/api/item/getItemSerial/' + id).query(); // can use get() instead of query(), but using query() because it except to return back array of objects
+        };
+
+        var _getAllSerialsByStockAddId = function (id) {
+            return $resource('/api/item/getItemSerialStock/' + id).query(); // can use get() instead of query(), but using query() because it except to return back array of objects
+        };
+
+
         var _updateItemSerial = function(serial) {
             return $resource('/api/item/updateItemStockSerial').save(serial);
         };
@@ -98,6 +107,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/GetItemSearch').query(item);
         };
 
+        var _addItemStockSerials = function (itemStockSerials) {
+            return $resource('/api/item/addItemStockSerials/').save(itemStockSerials);
+        };
+
 
         return {
             getAllItems: _getAllItems,
@@ -109,7 +122,9 @@ invModule.factory('itemRepository', [
             addItem: _addItem,
             editItem: _editItem,
             addItemStock: _addItemStock,
-            updateItemSerial:_updateItemSerial,
+            updateItemSerial: _updateItemSerial,
+            getAllSerialsByItemId: _getAllSerialsByItemId,
+            getAllSerialsByStockAddId:_getAllSerialsByStockAddId,
             addItemDepartment: _addItemDepartment,
             updateItemDepartment: _updateItemDepartment,
             deleteItemDepartment: _deleteItemDepartment,
@@ -122,7 +137,8 @@ invModule.factory('itemRepository', [
             addItemManufacturer: _addItemManufacturer,
             updateItemManufacturer: _updateItemManufacturer,
             deleteItemManufacturer: _deleteItemManufacturer,
-            getItemSearchList: _getItemSearchList
+            getItemSearchList: _getItemSearchList,
+            addItemStockSerials: _addItemStockSerials
         };
 
     }

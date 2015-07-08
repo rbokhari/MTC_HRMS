@@ -241,7 +241,11 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public int BarcodePrintCount { get; set; }
 
+        [ForeignKey("ItemStockStatusDetail")]
         public int StatusId { get; set; }
+
+
+        public virtual ValidationDetail ItemStockStatusDetail { get; set; }
 
     }
 

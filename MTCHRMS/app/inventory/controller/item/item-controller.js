@@ -185,7 +185,10 @@ invModule.controller('ItemController',
                 function (response) {
                     appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    $location.url('/INVPortal/item/detail/' + response.itemId);
+                    console.log(response);
+                    console.log(response.itemId + ":::" + response.itemStockAddId);
+                    $scope.showSerialConfirmModal(response.itemId, response.itemStockAddId);
+                    //$location.url('/INVPortal/item/detail/' + response.itemId);
                 }, function (error) {
                     // failure case
                     console.log("save - Error !");
@@ -199,6 +202,7 @@ invModule.controller('ItemController',
                 }
             );
         };
+
 
 
         //alert($routeParams.id);
@@ -218,6 +222,56 @@ invModule.controller('ItemController',
                     $scope.isBusy = false;
                 });
             }
+        };
+
+
+        // Serial Modal Start ----
+
+        $scope.showSerialConfirmModal = function (id, stockId) {
+            //console.log(id + ":" + serialCount);
+            ModalService.showModal({
+                templateUrl: "/app/common/templates/modal/confirm-modal.html",
+                controller: "ItemSerialModalController",
+                inputs: {
+                    title: "Add Serial",
+                    messagebody: "Would you like to add Serial Numbers now ?",
+                    parentId: stockId,
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $('.modal-backdrop').remove();
+                    if (result.resultData === 1) {
+                        $scope.showSerial(id, stockId);
+                    } else {
+                        $location.url('/INVPortal/item/detail/' + id);
+                    }
+                    console.log(result.resultData);
+                    //$scope.item[0].itemDepartments.push(result.resultData);
+                });
+            });
+        };
+
+        $scope.showSerial = function (itemId,id) {
+            //console.log(id + ":" + serialCount);
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-serial.html",
+                controller: "ItemSerialModalController",
+                inputs: {
+                    title: "Add Serial",
+                    parentId: id,
+                    messagebody:'',
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $('.modal-backdrop').remove();
+                    //$scope.item[0].itemDepartments.push(result.resultData);
+                    $location.url('/INVPortal/item/detail/' + itemId);
+                });
+            });
         };
 
 

@@ -171,3 +171,4 @@
 /// <reference path="angular-daterange/angular-daterangepicker.js" />
 /// <reference path="../app/inventory/controller/dashboard/dashboard-controller.js" />
 /// <reference path="../app/inventory/controller/manufacturer/manufacturer-modal-controller.js" />
+/// <reference path="../app/inventory/controller/item/item-serial-modal-controller.js" />

@@ -342,23 +342,31 @@
                                             <div class="col-md-6">
                                                 <table class="table table-bordered table-advance table-hover">
                                                     <thead>
-                                                        <tr>
-                                                            <th class="col-md-8">Serial No</th>
-                                                            <th class="col-md-4">Action</th>
-                                                        </tr>
+                                                    <tr>
+                                                        <th class="span1">Sn</th>
+                                                        <th class="span4">Serial No</th>
+                                                        <th class="span4">Status</th>
+                                                        <th class="span3">Action</th>
+                                                    </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr ng-repeat="serial in stock.itemStockSerials" id="tr{{serial.itemStockSerialId}}">
-                                                            <td class="col-md-8">
-                                                                <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
-                                                            </td>
-                                                            <td class="col-md-4">
-                                                                <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
-                                                                <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="printSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-print"></i></a>
-                                                                <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
-                                                                <a style="text-decoration: none;" class="hide" href="" id="cUndo{{serial.itemStockSerialId}}" ng-click="undoSingleSerial(serial.itemStockSerialId)"><i class="icon-2x icon-undo"></i></a>
-                                                            </td>
-                                                        </tr>
+                                                    <tr ng-repeat="serial in stock.itemStockSerials" id="tr{{serial.itemStockSerialId}}">
+                                                        <td style="vertical-align: middle !important;">
+                                                            {{$index+1}}
+                                                        </td>
+                                                        <td style="vertical-align: middle !important;">
+                                                            <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
+                                                        </td>
+                                                        <td style="vertical-align: middle !important;">
+                                                            <label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label>
+                                                        </td>
+                                                        <td style="vertical-align: middle !important;">
+                                                            <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
+                                                            <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="printSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-print"></i></a>
+                                                            <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
+                                                            <a style="text-decoration: none;" class="hide" href="" id="cUndo{{serial.itemStockSerialId}}" ng-click="undoSingleSerial(serial.itemStockSerialId)"><i class="icon-2x icon-undo"></i></a>
+                                                        </td>
+                                                    </tr>
                                                     </tbody>
                                                 </table>
                                             </div>

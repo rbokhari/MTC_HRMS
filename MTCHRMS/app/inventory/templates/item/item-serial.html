@@ -1,0 +1,32 @@
+﻿<div id="dvStockSerial" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Add Serials">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body" data-ng-init="loadSerials()">
+        <form id="frm" novalidate>
+            <div class="form-inline">
+                <div class="control-group">
+                    <label class="control-label">Serials :</label>
+                    <div class="controls">
+                        <!--<span ng-repeat="n in range(1,totalSerial)">
+                            <input type="text" ng-model="serialNo[n]" style="margin-left: 10pt; margin-bottom: 5pt;" />
+                        </span>-->
+
+                        <span ng-repeat="serial in itemSerials">
+                            <input type="text" ng-model="serial.serialNo" style="margin-left: 10pt; margin-bottom: 5pt;" />
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="saveItemSerials(parentId, itemSerials)" ng-disabled="frm.$invalid">
+            <i class="icon-save"></i>
+            Save
+        </button>
+
+    </div>
+</div>

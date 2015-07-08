@@ -198,6 +198,62 @@ namespace MTCHRMS.Controllers
             return null;
         }
 
+
+        [Route("api/item/addItemStockSerials")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage PostItemStockSerials([FromBody] List<ItemStockSerial> newItemSerials)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newItemSerials.Capacity > 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        foreach (var itemSerial in newItemSerials)
+                        {
+                            itemSerial.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                            itemSerial.CreatedOn = DateTime.Now;
+                        }
+                    }
+
+                    //if (_repo.CheckItemDuplicate(newItem) != 0)
+                    //{
+                      //  return Request.CreateResponse(HttpStatusCode.Found, newItem);
+                    //}
+
+                    if (_repo.AddItemStockSerials(newItemSerials) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+            return null;
+        }
+
+        [Route("api/item/getItemSerial/{id}")]
+        [HttpGet]
+        [Authorize]
+        public Task<IQueryable<ItemStockSerial>> GetItemSerials(int id)
+        {
+            var items = _repo.GetItemStockSerialsByItemId(id);
+
+            return items;
+        }
+
+        [Route("api/item/getItemSerialStock/{id}")]
+        [HttpGet]
+        [Authorize]
+        public Task<IQueryable<ItemStockSerial>> GetItemSerialsStock(int id)
+        {
+            var items = _repo.GetItemStockSerialsByStockAddId(id);
+
+            return items;
+        }
+
         [Route("api/item/updateItemStockSerial")]
         [HttpPost]
         [Authorize]

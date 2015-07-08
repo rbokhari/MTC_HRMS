@@ -27,7 +27,8 @@
         "ITEM_TECHNICIAN": "9",
         "ITEM_YEAR": "10",
         "EMPLOYEE_STATUS": "11",
-        "MAINTENANCE_TYPE": "12"
+        "MAINTENANCE_TYPE": "12",
+        "ITEM_STOCK_STATUS": "13"
 
     })
 

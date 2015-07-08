@@ -45,7 +45,7 @@ namespace MTCHRMS.DC
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
-                .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials))
+                .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials.Select(j=>j.ItemStockStatusDetail)))
                 .Include(c => c.ItemStockAdds.Select(i => i.SupplierDetail))
                 .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
 
@@ -141,7 +141,10 @@ namespace MTCHRMS.DC
             try
             {
                 //_ctx.Departments.Attach(_ctx.Departments.Single(r => r.Id == department.Id));
-                _ctx.Entry(updateItem).State = EntityState.Modified;
+                var itemFetch = GetItem(updateItem.ItemId);
+                var attachedItem = _ctx.Entry(itemFetch);
+                attachedItem.CurrentValues.SetValues(updateItem);
+                //_ctx.Entry(updateItem).State = EntityState.Modified;
                 return true;
 
             }
@@ -550,7 +553,7 @@ namespace MTCHRMS.DC
                         ItemStockAddId = newItemStock.ItemStockAddId,
                         ItemId = newItemStock.ItemId,
                         SerialNo = string.Empty,
-                        StatusId = 1,
+                        StatusId = (Int32)ApplicationPreferences.Validation_Details.ITEM_STOCK_STATUS_STORE,
                         CreatedBy = newItemStock.CreatedBy,
                         CreatedOn = DateTime.Now
                     };
@@ -606,6 +609,37 @@ namespace MTCHRMS.DC
                 return false;
             }
         }
+
+
+
+        public async Task<IQueryable<ItemStockSerial>> GetItemStockSerialsByItemId(int itemId)
+        {
+            return await Task.Run(() => _ctx.ItemStockSerials.Where(c => c.ItemId == itemId));
+        }
+
+        public async Task<IQueryable<ItemStockSerial>> GetItemStockSerialsByStockAddId(int stockAddId)
+        {
+            return await Task.Run(() => _ctx.ItemStockSerials.Where(c => c.ItemStockAddId == stockAddId));
+        }
+
+
+        public bool AddItemStockSerials(List<ItemStockSerial> itemStockSerials)
+        {
+            try
+            {
+                foreach (var itemStockSerial in itemStockSerials)
+                {
+                    _ctx.Entry(itemStockSerial).State = EntityState.Modified;
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
 
     }
 }

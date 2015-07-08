@@ -230,10 +230,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\common\templates\modal\confirm-modal.html" />
     <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />
     <Content Include="app\inventory\controller\dashboard\dashboard-controller.js" />
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />
+    <Content Include="app\inventory\controller\item\item-serial-modal-controller.js" />
     <Content Include="app\inventory\controller\item\item-repository.js" />
     <Content Include="app\inventory\controller\item\item-modal-controller.js" />
     <Content Include="app\inventory\controller\manufacturer\manufacturer-controller.js" />
@@ -268,6 +270,7 @@
     <Content Include="app\inventory\templates\dashboard\itemtypes.html" />
     <Content Include="app\inventory\templates\dashboard\manufacturers.html" />
     <Content Include="app\inventory\templates\dashboard\suppliers.html" />
+    <Content Include="app\inventory\templates\item\item-serial.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />
     <Content Include="app\inventory\templates\item\item-image.html" />
     <Content Include="app\inventory\templates\item\item-stock-add.html" />
