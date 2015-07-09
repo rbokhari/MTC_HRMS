@@ -178,21 +178,21 @@ namespace MTCHRMS.Controllers
                         //return new HttpResponseMessage(HttpStatusCode.OK);
                     }
                 }
-                //else if (newItem.ItemId != 0)
-                //{
-                //    if (Request.Headers.Contains("userId"))
-                //    {
-                //        newItem.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
-                //    }
-                //    newItem.ModifiedOn = DateTime.Now;
+                else if (newStockAdd.ItemStockAddId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newStockAdd.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newStockAdd.ModifiedOn = DateTime.Now;
 
-                //    if (_repo.UpdateItem(newItem) && _repo.Save())
-                //    {
-                //        return Request.CreateResponse(HttpStatusCode.Created, newItem);
-                //        //return new HttpResponseMessage(HttpStatusCode.OK);
-                //    }
+                    if (_repo.UpdateItemStock(newStockAdd) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newStockAdd);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
 
-                //}
+                }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
             return null;
@@ -232,6 +232,16 @@ namespace MTCHRMS.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
             return null;
+        }
+
+        [Route("api/item/getItemStock/{id}")]
+        [HttpGet]
+        //[Authorize]
+        public Task<ItemStockAdd> GetItemStock(int id)
+        {
+            var stock = _repo.GetItemStock(id);
+
+            return stock;
         }
 
         [Route("api/item/getItemSerial/{id}")]

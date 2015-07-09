@@ -105,6 +105,12 @@
             controller: 'ItemController'
         });
 
+    $routeProvider
+        .when('/INVPortal/item/detail/updatestock/:id/:stockAddId', {
+            templateUrl: '/app/inventory/templates/item/item-stock-update.html',
+            controller: 'ItemController'
+        });
+
         $routeProvider
             .otherwise({ redirectTo: '/INVPortal' });
 

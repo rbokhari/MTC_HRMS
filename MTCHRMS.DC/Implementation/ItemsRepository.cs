@@ -641,6 +641,30 @@ namespace MTCHRMS.DC
 
 
 
+
+
+        public async Task<ItemStockAdd> GetItemStock(int id)
+        {
+            return await Task.Run(() =>
+                _ctx
+                    .ItemStockAdds
+                    .SingleOrDefaultAsync(c => c.ItemStockAddId == id));
+        }
+
+
+        public bool UpdateItemStock(ItemStockAdd updateItemStock)
+        {
+            try
+            {
+                _ctx.Entry(updateItemStock).State = EntityState.Modified;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }
 

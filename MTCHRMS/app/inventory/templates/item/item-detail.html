@@ -40,7 +40,7 @@
 
                     <div class="tabbable">
                         <ul class="nav nav-tabs">
-                            <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)" data-toggle="tab">History</a></li>
+                            <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)" data-toggle="tab">Serials</a></li>
                             <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)" data-toggle="tab">Attachment</a></li>
                             <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)" data-toggle="tab">Suppliers / Manufacturer</a></li>
                             <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)" data-toggle="tab">Detail</a></li>
@@ -329,13 +329,16 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="dvHistory" ng-show="isTabSelected(5)">
-                            <i class="icon-time"></i>  <strong>History</strong>
+                            <i class="icon-time"></i>  <strong>Serials</strong>
                             
                             <div class="row-fluid">
                                 <div class="span12">
                                     <div class="widget" ng-repeat="stock in item[0].itemStockAdds">
                                         <div class="widget-title" style="background-color: darkgray; border-color: darkgray;">
                                             <h4><i class="icon-time"></i>&nbsp; {{stock.computerCode}} - {{stock.billNo}} - {{stock.deliveryDate | date:'dd MMM yyyy'}}</h4>
+                                            <span class="tools" ng-if="authentication.isINVAdmin">
+                                                <a class="icon-edit" ng-href="/INVPortal/item/detail/updatestock/{{stock.itemId}}/{{stock.itemStockAddId}}"></a>
+                                            </span>
                                         </div>
                                         <div class="widget-body" style="border-color: darkgray;">
 
@@ -346,7 +349,7 @@
                                                         <th class="span1">Sn</th>
                                                         <th class="span4">Serial No</th>
                                                         <th class="span4">Status</th>
-                                                        <th class="span3">Action</th>
+                                                        <th class="span3" ng-if="authentication.isINVAdmin">Action</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
@@ -360,7 +363,7 @@
                                                         <td style="vertical-align: middle !important;">
                                                             <label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label>
                                                         </td>
-                                                        <td style="vertical-align: middle !important;">
+                                                        <td style="vertical-align: middle !important;" ng-if="authentication.isINVAdmin">
                                                             <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
                                                             <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="printSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-print"></i></a>
                                                             <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>

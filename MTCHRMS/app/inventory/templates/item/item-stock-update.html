@@ -40,12 +40,13 @@
 
                 </div>
                 <div class="widget-body">
-                    <div class="form-horizontal">
+                    <div class="form-horizontal" data-ng-init="loadItemStock()">
                         <form name="frm" novalidate>
                             <div class="control-group">
                                 <label class="control-label" for="tCode">Computer Code :</label>
                                 <div class="controls">
-                                    <input type="text" id="tCode" ng-model="stock.computerCode" class="input-xlarge" readonly="readonly"/>
+                                    <input type="text" id="tCode" ng-model="stock.computerCode" class="input-xlarge" readonly="readonly" />
+                                    <input type="hidden" id="tStockAddId" ng-model="stock.itemStockAddId" />
                                 </div>
                             </div>
                             <div class="control-group">
@@ -58,7 +59,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="tLPONo">LPO No :</label>
                                 <div class="controls">
-                                    <input type="text" id="tLPONo" ng-model="stock.LpoNo" class="input-xlarge" required />
+                                    <input type="text" id="tLPONo" ng-model="stock.lpoNo" class="input-xlarge" required />
                                     <div class="help-inline" ng-show="frm.tLPONo.$error.required && frm.tLPONo.$dirty">Please enter !</div>
                                 </div>
                             </div>
@@ -78,11 +79,11 @@
                                     <div class="help-inline" ng-show="frm.tDeliveryDate.$error.required && frm.tDeliveryDate.$dirty">Please enter !</div>
                                 </div>
                             </div>
-                            <hr/>
+                            <hr />
                             <div class="control-group">
                                 <label class="control-label" for="tQuantity">Quantity :</label>
                                 <div class="controls">
-                                    <input type="text" id="tQuantity" ng-model="stock.stock" class="input-medium" required/>
+                                    <input type="text" id="tQuantity" ng-model="stock.stock" class="input-medium" required readonly="readonly" />
                                     <div class="help-inline" ng-show="frm.tQuantity.$error.required && frm.tQuantity.$dirty">Please enter !</div>
                                 </div>
                             </div>
@@ -145,7 +146,7 @@
 
                             <div class="form-actions" ng-if="authentication.isINVAdmin">
                                 <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="saveStock(stock, item[0].itemId)" ng-disabled="frm.$invalid">
-                                    <i class="icon-ok"></i>&nbsp;Save
+                                    <i class="icon-ok"></i>&nbsp;Update
                                 </button>
                                 <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/item/detail/{{item[0].itemId}}">
                                     <i class=" icon-remove"></i>&nbsp; Cancel

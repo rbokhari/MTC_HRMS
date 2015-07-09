@@ -38,6 +38,11 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/addItemStock').save(stock);
         };
 
+        var _getItemStock = function (id) {
+            return $resource('/api/item/getItemStock/' + id).get();
+        };
+
+
         var _getAllSerialsByItemId = function (id) {
             return $resource('/api/item/getItemSerial/' + id).query(); // can use get() instead of query(), but using query() because it except to return back array of objects
         };
@@ -122,6 +127,7 @@ invModule.factory('itemRepository', [
             addItem: _addItem,
             editItem: _editItem,
             addItemStock: _addItemStock,
+            getItemStock:_getItemStock,
             updateItemSerial: _updateItemSerial,
             getAllSerialsByItemId: _getAllSerialsByItemId,
             getAllSerialsByStockAddId:_getAllSerialsByStockAddId,

@@ -185,10 +185,11 @@ invModule.controller('ItemController',
                 function (response) {
                     appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
-                    console.log(response);
-                    console.log(response.itemId + ":::" + response.itemStockAddId);
-                    $scope.showSerialConfirmModal(response.itemId, response.itemStockAddId);
-                    //$location.url('/INVPortal/item/detail/' + response.itemId);
+                    if (response.modifiedBy == null) {
+                        $scope.showSerialConfirmModal(response.itemId, response.itemStockAddId);
+                    } else {
+                        $location.url('/INVPortal/item/detail/' + response.itemId);
+                    }
                 }, function (error) {
                     // failure case
                     console.log("save - Error !");
@@ -203,6 +204,24 @@ invModule.controller('ItemController',
             );
         };
 
+        $scope.loadItemStock = function () {
+            console.log($routeParams.id + ": " + $routeParams.stockAddId);
+            if ($routeParams.stockAddId != undefined) {
+                $scope.isBusy = true;
+                $scope.stock = itemRepository.getItemStock($routeParams.stockAddId);
+                $scope.stock.$promise.then(function () {
+                    //alert("success");
+                }, function () {
+                    //alert("error");
+                })
+                .then(function () {
+
+                })
+                .then(function () {
+                    $scope.isBusy = false;
+                });
+            }
+        };
 
 
         //alert($routeParams.id);

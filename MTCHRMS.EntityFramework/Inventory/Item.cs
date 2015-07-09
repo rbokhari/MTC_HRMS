@@ -209,9 +209,9 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public int IsWarranty { get; set; }
 
-        public DateTime WarrantyStart { get; set; }
+        public DateTime? WarrantyStart { get; set; }
 
-        public DateTime WarrantyEnd { get; set; }
+        public DateTime? WarrantyEnd { get; set; }
 
         public int IsMaintenance { get; set; }
 

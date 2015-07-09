@@ -273,6 +273,7 @@
     <Content Include="app\inventory\templates\item\item-serial.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />
     <Content Include="app\inventory\templates\item\item-image.html" />
+    <Content Include="app\inventory\templates\item\item-stock-update.html" />
     <Content Include="app\inventory\templates\item\item-stock-add.html" />
     <Content Include="app\inventory\templates\item\item-supplier.html" />
     <Content Include="app\inventory\templates\item\item-year.html" />
