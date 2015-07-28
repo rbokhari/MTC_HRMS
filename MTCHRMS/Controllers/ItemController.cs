@@ -71,6 +71,16 @@ namespace MTCHRMS.Controllers
             return await suppliers.ToListAsync();
         }
 
+        [Route("api/item/{id}/Suppliers")]
+        [HttpGet]
+        [Authorize]
+        public async Task<List<Supplier>> GetSuppliersByItemId()
+        {
+            var suppliers = await _repo.GetSuppliersByItemId(5);
+            return await suppliers.ToListAsync();
+        }
+
+
         [Route("api/item/ItemYears")]
         [HttpGet]
         [Authorize]

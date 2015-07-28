@@ -187,24 +187,34 @@ namespace MTCHRMS.EntityFramework.Inventory
         [Key]
         public int ItemStockAddId { get; set; }
 
+        [Required]
         public int ItemId { get; set; }
 
         [StringLength(50)]
         public string ComputerCode { get; set; }
 
         [StringLength(100)]
+        [Required]
         public string BillNo { get; set; }
 
         [StringLength(100)]
+        [Required]
         public string LpoNo { get; set; }
 
+        [Required]
         public DateTime OrderDate { get; set; }
 
+        [Required]
         public DateTime DeliveryDate { get; set; }
 
+        [Required]
+        public int OrderStock { get; set; }
+
+        [Required]
         public int Stock { get; set; }
 
         [ForeignKey("SupplierDetail")]
+        [Required]
         public int SupplierId { get; set; }
 
         public int IsWarranty { get; set; }

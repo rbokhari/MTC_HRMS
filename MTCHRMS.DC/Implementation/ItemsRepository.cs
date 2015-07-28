@@ -665,6 +665,17 @@ namespace MTCHRMS.DC
                 return false;
             }
         }
+
+
+        public async Task<IQueryable<Supplier>> GetSuppliersByItemId(int id)
+        {
+            return await Task.Run(() => 
+                _ctx.ItemSuppliers
+                .Where(c => c.ItemId == id)
+                .Include(c => c.SupplierDetail)
+                .Select(x => x.SupplierDetail)
+                .OrderBy(x => x.SupplierName));
+        }
     }
 }
 

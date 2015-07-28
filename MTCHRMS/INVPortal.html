@@ -33,6 +33,10 @@
 </head>
 <!-- BEGIN BODY -->
 <body class="fixed-top" data-ng-controller="AppController">
+    <div class="submit-progress hidden">
+        <label><i class="icon icon-2x icon-spinner icon-spin"></i> Please wait while processing ....</label>
+    </div>
+
     <!-- BEGIN HEADER -->
     <div id="header" class="navbar navbar-inverse navbar-fixed-top" data-ng-init="getAuthenticationData()">
         <!-- BEGIN TOP NAVIGATION BAR -->
@@ -52,6 +56,7 @@
             <div data-ng-view class="view-slide-in"></div>
             <!-- END PAGE CONTAINER-->
         </div>
+
         <!-- END PAGE -->
     </div>
     <!-- END CONTAINER -->

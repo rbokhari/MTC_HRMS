@@ -48,6 +48,13 @@ invModule.controller('ItemController',
                 .then(function () { $scope.isBusy = false; });
         };
 
+        $scope.loadItemSupplier = function (id) {
+            $scope.itemSuppliers = itemRepository.getAllSuppliersByItemId(id);
+
+            $scope.itemSuppliers.$promise.then(function (response) { }, function () { })
+                .then(function () { $scope.isBusy = false; });
+        };
+
         $scope.loadManufacturer = function () {
             $scope.isBusy = true;
             $scope.manufacturers = manufacturerRepository.getAllManufacturers();
@@ -70,7 +77,9 @@ invModule.controller('ItemController',
             $scope.isBusy = true;
             $scope.items = itemRepository.getAllItems();
 
-            $scope.items.$promise.then(function() {
+            $scope.items
+                .$promise
+                .then(function () {
                     //alert("success");
                 }, function() {
                     //alert("error");
@@ -164,6 +173,8 @@ invModule.controller('ItemController',
         };
 
         $scope.saveStock = function (stock, itemId) {
+            var ctrl = $('#cmdSave');
+            appRepository.showPageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Saving...');
 
             stock.itemId = itemId;
             if (angular.isUndefined(stock.isWarranty) || stock.isWarranty == 'false' || stock.isWarranty == 0) {
@@ -183,6 +194,7 @@ invModule.controller('ItemController',
                 .$promise
                 .then(
                 function (response) {
+                    appRepository.hidePageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Save');
                     appRepository.showAddSuccessGritterNotification();
                     console.log("save - Successfully !");
                     if (response.modifiedBy == null) {
@@ -192,6 +204,7 @@ invModule.controller('ItemController',
                     }
                 }, function (error) {
                     // failure case
+                    appRepository.hidePageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Save');
                     console.log("save - Error !");
                     if (error.status == 302) {
                         appRepository.showDuplicateGritterNotification();
@@ -200,8 +213,11 @@ invModule.controller('ItemController',
                     }
                     console.log(error);
                     $scope.errors = error.data;
-                }
-            );
+                })
+                .then(function() {
+                
+            });
+            
         };
 
         $scope.loadItemStock = function () {

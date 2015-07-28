@@ -14,6 +14,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/ItemSuppliers').query();
         };
 
+        var _getAllSuppliersByItemId = function (id) {
+            return $resource('/api/item/' + id + '/Suppliers/').query();
+        };
+
         var _getAllItemManufactuers = function () {
             return $resource('/api/item/ItemManufacturers').query();
         };
@@ -120,6 +124,7 @@ invModule.factory('itemRepository', [
         return {
             getAllItems: _getAllItems,
             getAllItemSuppliers: _getAllItemSuppliers,
+            getAllSuppliersByItemId:_getAllSuppliersByItemId,
             getAllItemManufactuers: _getAllItemManufactuers,
             getAllItemYears: _getAllItemYears,
             getAllItemDepartments: _getAllItemDepartments,

@@ -44,6 +44,8 @@ moduleModal.controller('ItemSerialModalController',
 
 
         $scope.saveItemSerials = function (parentId, itemSerials) {
+            var ctrl = $("#cmdSaveSerial");
+            appRepository.setControlDisabled(ctrl);
             $scope.errors = [];
             //itemDepartment.itemId = parentId;
 
@@ -56,8 +58,11 @@ moduleModal.controller('ItemSerialModalController',
                     $('#dvStockSerial').modal('hide');
                 }, function(error) {
                     console.log("error", error);
+                    
                 })
-                .then(function() {});
+                .then(function() {
+                 appRepository.setControlEnabled(ctrl);
+            });
 
             //console.log(itemSerials);
         };
