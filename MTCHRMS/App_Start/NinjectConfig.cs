@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MTCHRMS.DC;
+using MTCHRMS.DC.Implementation;
+using MTCHRMS.DC.Interface;
 using MTCHRMS.EntityFramework;
 using MTCHRMS.EntityFramework.Inventory;
 using Ninject;
@@ -18,6 +20,7 @@ namespace MTCHRMS.App_Start
             //kernel.Bind<IProductsRepository>().To<ProductRepository>();
             kernel.Bind<DbEntityContext>().To<DbEntityContext>();
             kernel.Bind<IDepartmentsRepository>().To<DepartmentRepository>();
+            kernel.Bind<IStoragePathRepository>().To<StoragePathRepository>();
             kernel.Bind<IEmployeesRepository>().To<EmployeeRepository>();
             kernel.Bind<IValidationRepository>().To<ValidationRepository>();
             kernel.Bind<IAccountRepository>().To<AccountRepository>();

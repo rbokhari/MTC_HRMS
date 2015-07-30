@@ -94,6 +94,8 @@ namespace MTCHRMS.EntityFramework.Inventory
         public virtual ICollection<ItemManufacturer> ItemManufacturers { get; set; }
 
         public virtual ICollection<ItemStockAdd> ItemStockAdds { get; set; }
+
+        public virtual  ICollection<ItemAttachment> ItemAttachments { get; set; } 
     }
 
     [Table("IV_ItemDepartment")]
@@ -257,6 +259,27 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public virtual ValidationDetail ItemStockStatusDetail { get; set; }
 
+    }
+
+    [Table("IV_ItemAttachment")]
+    public class ItemAttachment : TableStrutcture
+    {
+        [Key]
+        public int AttachmentId { get; set; }
+
+        public int ItemId { get; set; }
+
+        [ForeignKey("StoragePath")]
+        public int StorageId { get; set; }
+
+        public String FileName { get; set; }
+
+        public String FileType { get; set; }
+
+        public string FileIcon { get; set; }
+
+
+        public virtual StoragePath StoragePath { get; set; }
     }
 
 }

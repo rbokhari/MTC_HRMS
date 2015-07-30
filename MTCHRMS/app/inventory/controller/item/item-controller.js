@@ -512,7 +512,7 @@ invModule.controller('ItemController',
         $scope.deleteManufacturer = function (index, manufacturer) {
             var x;
             console.log(manufacturer);
-            if (confirm("Are you sure to delete this record ?") == true) {
+            if (confirm("Are you sure to delete this record ?") === true) {
                 itemRepository.deleteItemManufacturer(manufacturer)
                     .$promise
                     .then(function () {
@@ -523,6 +523,29 @@ invModule.controller('ItemController',
                     });
             }
         };
+
+        $scope.showAttachment = function (id) {
+            ModalService.showModal({
+                templateUrl: "/app/inventory/templates/item/item-attachment.html",
+                controller: "ItemModalController",
+                inputs: {
+                    title: "Add Attachment",
+                    parentId: id,
+                    itemDepartment: {},
+                    itemYear: {},
+                    itemSupplier: {},
+                    itemManufacturer: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    $scope.item[0].itemAttachments.push(result.resultData);
+                    $('.modal-backdrop').remove();
+                });
+            });
+        };
+
 
         $scope.editSingleSerial = function (serialid) {
             console.log(serialid);

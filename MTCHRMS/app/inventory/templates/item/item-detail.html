@@ -304,30 +304,33 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="dvAttachment" ng-show="isTabSelected(4)">
-                            <i class="icon-paper-clip"></i>  <strong>Attachment</strong>
-                            <span class="pull-right"><a href="" ng-click=""><i class="icon-external-link"></i> Add Attachment</a></span>
-                            <div class="row-fluid">
-                                <div class="span12">
-                                    <table class="table table-striped table-bordered table-advance table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Notes</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div class="tab-pane" id="dvAttachment" ng-show="isTabSelected(4)">
+                        <i class="icon-paper-clip"></i> <strong>Attachment</strong>
+                        <span class="pull-right"><a href="" ng-click="showAttachment(item[0].itemId)"><i class="icon-external-link"></i> Add Attachment</a></span>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <table class="table table-striped table-bordered table-advance table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Created On</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="attachment in item[0].itemAttachments">
+                                        <td>{{attachment.fileName}}</td>
+                                        <td>{{attachment.createdOn | date: 'dd MMM yyyy'}}</td>
+                                        <td>
+                                            <a ng-href="{{attachment.storagePath.fullPath + attachment.fileName}}" download><i class="icon icon-cloud-download"></i></a>&nbsp;
+                                            <a href="#"><i class="icon icon-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                    </div>
                         <div class="tab-pane" id="dvHistory" ng-show="isTabSelected(5)">
                             <i class="icon-time"></i>  <strong>Serials</strong>
                             

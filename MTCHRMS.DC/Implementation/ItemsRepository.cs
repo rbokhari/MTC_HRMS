@@ -45,6 +45,7 @@ namespace MTCHRMS.DC
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
+                .Include(c=>c.ItemAttachments)
                 .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials.Select(j=>j.ItemStockStatusDetail)))
                 .Include(c => c.ItemStockAdds.Select(i => i.SupplierDetail))
                 .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
@@ -250,6 +251,49 @@ namespace MTCHRMS.DC
                 // TODO log this error    
                 return false;
             }
+        }
+
+        public async Task<ItemAttachment> GetAttachment(int attachmentId)
+        {
+            return await _ctx.ItemAttachments.SingleOrDefaultAsync(c => c.AttachmentId == attachmentId);
+        }
+
+
+        public bool AddItemAttachment(ref ItemAttachment newItemAttachment)
+        {
+            try
+            {
+                newItemAttachment.StorageId =
+                    _ctx.StoragePaths.SingleOrDefault(
+                        c => c.ModuleId == (Int32) ApplicationPreferences.Modules.INVENTORY).StorageId;
+
+                _ctx.ItemAttachments.Add(newItemAttachment);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
+
+        }
+
+
+        public bool DeleteItemAttachment(int id)
+        {
+            try
+            {
+                var attachment = _ctx.ItemAttachments.Single(i => i.AttachmentId == id);
+
+                _ctx.ItemAttachments.Remove(attachment);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+
         }
 
         public IQueryable<ItemDepartment> GetItemDepartment(int itemDepartmentId)

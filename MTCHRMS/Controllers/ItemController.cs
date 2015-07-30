@@ -314,7 +314,7 @@ namespace MTCHRMS.Controllers
                     this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
                 }
                 HttpPostedFile _file = HttpContext.Current.Request.Files[0];
-
+                
                 var provider = GetMultipartProvider();
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
 
@@ -355,6 +355,49 @@ namespace MTCHRMS.Controllers
             }
         }
 
+        [Route("api/item/attachment")]
+        [HttpPost]
+        [Authorize]
+        public async Task<HttpResponseMessage> UploadAttachment()
+        {
+            try
+            {
+
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
+                }
+                HttpPostedFile _file = HttpContext.Current.Request.Files[0];
+                var provider = GetMultipartProvider();
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+                int paramData = GetFormData<int>(result);
+
+                ItemAttachment attachment = new ItemAttachment()
+                {
+                    ItemId = paramData,
+                    FileName = Path.GetFileName(_file.FileName),
+                    FileType =  Path.GetExtension(_file.FileName),
+                    FileIcon =  "1",
+                    CreatedBy = 1,
+                    CreatedOn =  DateTime.Now
+                    
+                };
+
+                if (_repo.AddItemAttachment(ref attachment) && _repo.Save())
+                {
+                    attachment = await _repo.GetAttachment(attachment.AttachmentId);
+
+                    _file.SaveAs(Path.Combine(attachment.StoragePath.FullPath, attachment.AttachmentId + Path.GetExtension(_file.FileName)));
+                    return Request.CreateResponse(HttpStatusCode.Created, attachment);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+            catch (Exception exception)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+        }
         private MultipartFormDataStreamProvider GetMultipartProvider()
         {
             var uploadFolder = "~/App_Data/Tmp/FileUploads"; // you could put this to web.config

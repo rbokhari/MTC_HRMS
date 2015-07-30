@@ -53,6 +53,7 @@
     <Compile Include="DbEntityContext.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="General\AutoSetting.cs" />
+    <Compile Include="General\StoragePath.cs" />
     <Compile Include="General\Validation.cs" />
     <Compile Include="HRMSMigrationConfiguration.cs" />
     <Compile Include="HRMS\EmployeeDef.cs" />

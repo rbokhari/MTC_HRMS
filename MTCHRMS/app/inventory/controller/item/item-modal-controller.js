@@ -169,6 +169,36 @@ moduleModal.controller('ItemModalController',
             }
         };
 
+        $scope.onAttachmentUpload = function (parentId, $files) {
+            //$files: an array of files selected, each file has name, size, and type.
+            console.log("file attachment");
+            for (var i = 0; i < $files.length; i++) {
+                var $file = $files[i];
+                (function (index) {
+                    $scope.upload[index] = $upload.upload({
+                        url: "/api/item/attachment", // webapi url
+                        method: "POST",
+                        data: { parentId1: parentId },
+                        file: $file
+                    }).progress(function (evt) {
+                        // get upload percentage
+                        console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total));
+                    }).success(function (data, status, headers, config) {
+                        // file is uploaded successfully
+                        $scope.resultData = data;
+                        appRepository.showUpdateSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvItemAttachment').modal('hide');
+                        //$scope.employee[0].empPicture = data.empPicture;
+                        console.log(data);
+                    }).error(function (data, status, headers, config) {
+                        // file failed to upload
+                        appRepository.showErrorGritterNotification();
+                        console.log(data);
+                    });
+                })(i);
+            }
+        };
         $scope.abortUpload = function (index) {
             $scope.upload[index].abort();
         };
