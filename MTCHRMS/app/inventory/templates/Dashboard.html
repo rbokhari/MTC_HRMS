@@ -79,30 +79,30 @@
 
             <div class="row-fluid">
                 <div class="span6">
-                    <itemtype ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemtype>
+                    <itemcategory ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemcategory>
                 </div>
                 <div class="span6">
-                    <itemcategory ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemcategory>
+                    <itemtype ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemtype>
                 </div>
             </div>
             <hr />
 
             <div class="row-fluid">
-                <div class="span6">
-                    <locations ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></locations>
-                </div>
                 <div class="span6">
                     <departments ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></departments>
                 </div>
+                <div class="span6">
+                    <locations ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></locations>
+                </div>
             </div>
             <hr />
 
             <div class="row-fluid">
                 <div class="span6">
-                    <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
+                    <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
                 </div>
                 <div class="span6">
-                    <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
+                    <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
                 </div>
             </div>
             <hr/>

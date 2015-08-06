@@ -361,14 +361,16 @@
                                                             {{$index+1}}
                                                         </td>
                                                         <td style="vertical-align: middle !important;">
-                                                            <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
+                                                            <span id="sSerial{{serial.itemStockSerialId}}">
+                                                                <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
+                                                            </span>
                                                         </td>
                                                         <td style="vertical-align: middle !important;">
                                                             <label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label>
                                                         </td>
                                                         <td style="vertical-align: middle !important;" ng-if="authentication.isINVAdmin">
                                                             <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
-                                                            <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="printSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-print"></i></a>
+                                                            <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="getBarcodeFile(serial.serialNo)" > <i class="icon-2x icon-print"></i>111</a>
                                                             <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
                                                             <a style="text-decoration: none;" class="hide" href="" id="cUndo{{serial.itemStockSerialId}}" ng-click="undoSingleSerial(serial.itemStockSerialId)"><i class="icon-2x icon-undo"></i></a>
                                                         </td>

@@ -588,6 +588,17 @@ invModule.controller('ItemController',
                 });
         };
 
+        $scope.getBarcodeFile = function (serial) {
+            console.log("getBarcodeFile :" + serial);
+
+            itemRepository.getBarcodeFile(serial);
+            //item
+            //    .$promise
+            //    .then(function () {
+            //        console.log("file download completed");
+            //    });
+        }
+
 
         $scope.item = {};
 

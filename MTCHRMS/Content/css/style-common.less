@@ -102,6 +102,26 @@
   letter-spacing: 1px;
 }
 
+@media screen {
+    #printSection {
+        display: none;
+    }
+}
+
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+}
+
 /*.business-card .background-stripes .stripe {
   position: absolute;
   -webkit-transform: rotate(-45deg);

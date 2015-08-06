@@ -249,6 +249,7 @@
     <Content Include="app\inventory\controller\supplier\supplier-repository.js" />
     <Content Include="app\common\controller\validation\validation-controller.js" />
     <Content Include="app\common\controller\validation\validation-repository.js" />
+    <Content Include="app\inventory\directive\barcode-print.js" />
     <Content Include="app\inventory\directive\dashboard.js" />
     <Content Include="app\inventory\directive\navbar-main.js" />
     <Content Include="app\common\controller\account\account-repository.js" />
@@ -271,6 +272,7 @@
     <Content Include="app\inventory\templates\dashboard\itemtypes.html" />
     <Content Include="app\inventory\templates\dashboard\manufacturers.html" />
     <Content Include="app\inventory\templates\dashboard\suppliers.html" />
+    <Content Include="app\inventory\templates\distribution\distribution-add.html" />
     <Content Include="app\inventory\templates\item\item-attachment.html" />
     <Content Include="app\inventory\templates\item\item-serial.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />

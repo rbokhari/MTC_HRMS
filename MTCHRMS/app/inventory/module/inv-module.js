@@ -111,6 +111,12 @@
             controller: 'ItemController'
         });
 
+    $routeProvider
+        .when('/INVPortal/distribution/add', {
+            templateUrl: '/app/inventory/templates/distribution/distribution-add.html',
+            controller: 'ItemController'
+        });
+
         $routeProvider
             .otherwise({ redirectTo: '/INVPortal' });
 

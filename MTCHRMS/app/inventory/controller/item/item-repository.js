@@ -120,6 +120,9 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/addItemStockSerials/').save(itemStockSerials);
         };
 
+        var _getBarcodeFile = function (serialno) {
+            return $resource('/api/item/BarcodeData/' + serialno).save();
+        };
 
         return {
             getAllItems: _getAllItems,
@@ -149,7 +152,8 @@ invModule.factory('itemRepository', [
             updateItemManufacturer: _updateItemManufacturer,
             deleteItemManufacturer: _deleteItemManufacturer,
             getItemSearchList: _getItemSearchList,
-            addItemStockSerials: _addItemStockSerials
+            addItemStockSerials: _addItemStockSerials,
+            getBarcodeFile: _getBarcodeFile
         };
 
     }

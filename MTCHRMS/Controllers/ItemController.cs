@@ -10,6 +10,8 @@ using MTCHRMS.DC;
 using MTCHRMS.EntityFramework.Inventory;
 using System.Web;
 using System.IO;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace MTCHRMS.Controllers
 {
@@ -731,6 +733,59 @@ namespace MTCHRMS.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
+
+        [Route("api/item/BarcodeData/{serialno}")]
+        [HttpPost]
+        public HttpResponseMessage getBarcodeData(string serialno)
+        {
+            try
+            {
+                var _str = new StringBuilder("START" + Environment.NewLine);
+                _str.Append(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2^MD10^JUS^LRN^CI0^XZ" + Environment.NewLine);
+                _str.Append("^XA" + Environment.NewLine);
+                _str.Append(@"^MMT" + Environment.NewLine);
+                _str.Append(@"^LL0300" + Environment.NewLine);
+                _str.Append(@"^PW1050" + Environment.NewLine);
+                _str.Append(@"^LS0" + Environment.NewLine);
+                _str.Append(@"^BY3,3,84^FT60,148^BCN,,N,N" + Environment.NewLine);
+                _str.Append(string.Format(@"^FD>;{0}^FS", serialno) + Environment.NewLine);
+                _str.Append(@"^FT129,52^A0N,22,43^FH\^FDMTC-INV^FS" + Environment.NewLine);
+                _str.Append(string.Format(@"^FT108,183^A0N,33,33^FH\^FD{0}^FS", serialno) + Environment.NewLine);
+                _str.Append(@"^PQ1,0,1,Y^XZ" + Environment.NewLine);
+                _str.Append(@"END" + Environment.NewLine);
+
+
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new StringContent(_str.ToString());
+
+                //using (var ms = new MemoryStream())
+                //{
+                //    using (var sw = new StreamWriter(ms, Encoding.Unicode))
+                //    {
+
+                //        sw.WriteLine("dirty world.");
+                //        sw.WriteLine(serialNo);
+                //        //result.Content = new StreamContent(sw);
+                //        result.Content = ms.ToArray;
+                //    }
+
+                //    //do somthing with ms
+                //}
+
+
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+
+                result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+
+        }
+
 
         private IEnumerable<string> GetErrorMessages()
         {
