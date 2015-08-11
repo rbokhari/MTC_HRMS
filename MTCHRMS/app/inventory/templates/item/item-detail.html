@@ -333,13 +333,14 @@
                     </div>
                         <div class="tab-pane" id="dvHistory" ng-show="isTabSelected(5)">
                             <i class="icon-time"></i>  <strong>Serials</strong>
-                            
+                            <span class="pull-right"><a href="" ng-click="getBarcodeFileByItem(item[0].itemId)"><i class="icon-barcode"></i> Print Barcodes</a></span>
                             <div class="row-fluid">
                                 <div class="span12">
                                     <div class="widget" ng-repeat="stock in item[0].itemStockAdds">
                                         <div class="widget-title" style="background-color: darkgray; border-color: darkgray;">
                                             <h4><i class="icon-time"></i>&nbsp; {{stock.computerCode}} - {{stock.billNo}} - {{stock.deliveryDate | date:'dd MMM yyyy'}}</h4>
                                             <span class="tools" ng-if="authentication.isINVAdmin">
+                                                <a class="icon-barcode" href="" ng-click="getBarcodeFileByStockId(stock.itemStockAddId)"></a>
                                                 <a class="icon-edit" ng-href="/INVPortal/item/detail/updatestock/{{stock.itemId}}/{{stock.itemStockAddId}}"></a>
                                             </span>
                                         </div>
@@ -370,7 +371,7 @@
                                                         </td>
                                                         <td style="vertical-align: middle !important;" ng-if="authentication.isINVAdmin">
                                                             <a style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
-                                                            <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="getBarcodeFile(serial.serialNo)" > <i class="icon-2x icon-print"></i>111</a>
+                                                            <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="getBarcodeFile(serial.serialNo)" > <i class="icon-2x icon-barcode"></i></a>
                                                             <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
                                                             <a style="text-decoration: none;" class="hide" href="" id="cUndo{{serial.itemStockSerialId}}" ng-click="undoSingleSerial(serial.itemStockSerialId)"><i class="icon-2x icon-undo"></i></a>
                                                         </td>

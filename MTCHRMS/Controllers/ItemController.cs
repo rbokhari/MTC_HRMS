@@ -76,9 +76,9 @@ namespace MTCHRMS.Controllers
         [Route("api/item/{id}/Suppliers")]
         [HttpGet]
         [Authorize]
-        public async Task<List<Supplier>> GetSuppliersByItemId()
+        public async Task<List<Supplier>> GetSuppliersByItemId(int id)
         {
-            var suppliers = await _repo.GetSuppliersByItemId(5);
+            var suppliers = await _repo.GetSuppliersByItemId(id);
             return await suppliers.ToListAsync();
         }
 
@@ -258,7 +258,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/item/getItemSerial/{id}")]
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         public Task<IQueryable<ItemStockSerial>> GetItemSerials(int id)
         {
             var items = _repo.GetItemStockSerialsByItemId(id);
@@ -735,12 +735,13 @@ namespace MTCHRMS.Controllers
         }
 
         [Route("api/item/BarcodeData/{serialno}")]
-        [HttpPost]
-        public HttpResponseMessage getBarcodeData(string serialno)
+        [HttpGet]
+        public HttpResponseMessage GetBarcodeData(string serialno)
         {
             try
             {
                 var _str = new StringBuilder("START" + Environment.NewLine);
+
                 _str.Append(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2^MD10^JUS^LRN^CI0^XZ" + Environment.NewLine);
                 _str.Append("^XA" + Environment.NewLine);
                 _str.Append(@"^MMT" + Environment.NewLine);
@@ -752,26 +753,11 @@ namespace MTCHRMS.Controllers
                 _str.Append(@"^FT129,52^A0N,22,43^FH\^FDMTC-INV^FS" + Environment.NewLine);
                 _str.Append(string.Format(@"^FT108,183^A0N,33,33^FH\^FD{0}^FS", serialno) + Environment.NewLine);
                 _str.Append(@"^PQ1,0,1,Y^XZ" + Environment.NewLine);
-                _str.Append(@"END" + Environment.NewLine);
 
+                _str.Append(@"END" + Environment.NewLine);
 
                 HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
                 result.Content = new StringContent(_str.ToString());
-
-                //using (var ms = new MemoryStream())
-                //{
-                //    using (var sw = new StreamWriter(ms, Encoding.Unicode))
-                //    {
-
-                //        sw.WriteLine("dirty world.");
-                //        sw.WriteLine(serialNo);
-                //        //result.Content = new StreamContent(sw);
-                //        result.Content = ms.ToArray;
-                //    }
-
-                //    //do somthing with ms
-                //}
-
 
                 result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
@@ -786,6 +772,96 @@ namespace MTCHRMS.Controllers
 
         }
 
+
+        [Route("api/item/BarcodeDataItemId/{itemId}")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetBarcodeDataByItemId(int itemId)
+        {
+            try
+            {
+                var _str = new StringBuilder("START" + Environment.NewLine);
+
+                var serials = await _repo.GetItemStockSerialsByItemId(itemId);
+
+                foreach (var ser in serials)
+                {
+                    if (ser.SerialNo.Length > 0)
+                    {
+                        _str.Append(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2^MD10^JUS^LRN^CI0^XZ" + Environment.NewLine);
+                        _str.Append("^XA" + Environment.NewLine);
+                        _str.Append(@"^MMT" + Environment.NewLine);
+                        _str.Append(@"^LL0300" + Environment.NewLine);
+                        _str.Append(@"^PW1050" + Environment.NewLine);
+                        _str.Append(@"^LS0" + Environment.NewLine);
+                        _str.Append(@"^BY3,3,84^FT60,148^BCN,,N,N" + Environment.NewLine);
+                        _str.Append(string.Format(@"^FD>;{0}^FS", ser.SerialNo) + Environment.NewLine);
+                        _str.Append(@"^FT129,52^A0N,22,43^FH\^FDMTC-INV^FS" + Environment.NewLine);
+                        _str.Append(string.Format(@"^FT108,183^A0N,33,33^FH\^FD{0}^FS", ser.SerialNo) + Environment.NewLine);
+                        _str.Append(@"^PQ1,0,1,Y^XZ" + Environment.NewLine);
+                    }
+                }
+
+                _str.Append(@"END" + Environment.NewLine);
+
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new StringContent(_str.ToString());
+
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+
+                result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
+
+        [Route("api/item/BarcodeDataStockId/{stockId}")]
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetBarcodeDataByStockId(int stockId)
+        {
+            try
+            {
+                var _str = new StringBuilder("START" + Environment.NewLine);
+
+                var serials = await _repo.GetItemStockSerialsByStockAddId(stockId);
+
+                foreach (var ser in serials)
+                {
+                    if (ser.SerialNo.Length > 0)
+                    {
+                        _str.Append(@"^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2^MD10^JUS^LRN^CI0^XZ" + Environment.NewLine);
+                        _str.Append("^XA" + Environment.NewLine);
+                        _str.Append(@"^MMT" + Environment.NewLine);
+                        _str.Append(@"^LL0300" + Environment.NewLine);
+                        _str.Append(@"^PW1050" + Environment.NewLine);
+                        _str.Append(@"^LS0" + Environment.NewLine);
+                        _str.Append(@"^BY3,3,84^FT60,148^BCN,,N,N" + Environment.NewLine);
+                        _str.Append(string.Format(@"^FD>;{0}^FS", ser.SerialNo) + Environment.NewLine);
+                        _str.Append(@"^FT129,52^A0N,22,43^FH\^FDMTC-INV^FS" + Environment.NewLine);
+                        _str.Append(string.Format(@"^FT108,183^A0N,33,33^FH\^FD{0}^FS", ser.SerialNo) + Environment.NewLine);
+                        _str.Append(@"^PQ1,0,1,Y^XZ" + Environment.NewLine);
+                    }
+                }
+
+                _str.Append(@"END" + Environment.NewLine);
+
+                HttpResponseMessage result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new StringContent(_str.ToString());
+
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+
+                result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.InternalServerError);
+            }
+        }
 
         private IEnumerable<string> GetErrorMessages()
         {

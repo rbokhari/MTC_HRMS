@@ -9,10 +9,6 @@
                 <div class="control-group">
                     <label class="control-label">Serials :</label>
                     <div class="controls">
-                        <!--<span ng-repeat="n in range(1,totalSerial)">
-                            <input type="text" ng-model="serialNo[n]" style="margin-left: 10pt; margin-bottom: 5pt;" />
-                        </span>-->
-
                         <span ng-repeat="serial in itemSerials">
                             <input type="text" ng-model="serial.serialNo" style="margin-left: 10pt; margin-bottom: 5pt;" />
                         </span>
@@ -23,9 +19,13 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-        <button type="submit" id="cmdSaveSerial" class="btn btn-primary" ng-click="saveItemSerials(parentId, itemSerials)" ng-disabled="frm.$invalid">
+        <button type="submit" id="cmdSaveSerial" class="btn btn-primary" ng-click="saveItemSerials(parentId, itemSerials, false)" ng-disabled="frm.$invalid">
             <i class="icon-save"></i>
             Save
+        </button>
+        <button type="submit" id="cmdSaveSerialPrint" class="btn btn-info" ng-click="saveItemSerials(parentId, itemSerials, true)" ng-disabled="frm.$invalid">
+            <i class="icon-barcode"></i>
+            Save & Print Barcode
         </button>
 
     </div>

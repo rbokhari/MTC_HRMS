@@ -1,36 +1,49 @@
 ﻿
 
-moduleModal.controller('ItemSerialModalController',
+moduleModal.controller('ItemLookupModalController',
 [
     '$scope', '$location', 'appRepository', 'itemRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', 'messagebody',
+    'parentId','resultData', '$timeout', 
     function($scope, $location, appRepository, itemRepository, title, close,
-        parentId, resultData, $timeout, messagebody) {
+        parentId, resultData, $timeout) {
 
         $scope.resultData = {};
         $scope.title = title;
-        $scope.messagebody = messagebody;
         $scope.parentId = parentId;
+        //$scope.pitems = pItems;
+        
+        //console.log("ItemLookupModalController " + $scope.pitems);
 
-        $scope.itemSerials = itemRepository.getAllSerialsByStockAddId($scope.parentId);
-        $scope.itemSerials
+        $scope.pitems = itemRepository.getAllItems();
+
+        $scope.pitems
             .$promise
-            .then(function() {}, function() {});
+            .then(function () {
+                //alert("success");
+            }, function () {
+                //alert("error");
+            })
+            .then(function () {
 
-        $scope.range = function (min, max, step) {
-            step = step || 1;
-            var input = [];
-            for (var i = min; i <= max; i += step) input.push(i);
+            });
 
-            return input;
-        };
+        $scope.refreshItems = function() {
+            $scope.pitems = itemRepository.getAllItems();
 
+            $scope.pitems
+                .$promise
+                .then(function () {
+                    //alert("success");
+                }, function () {
+                    //alert("error");
+                })
+                .then(function () {
 
+                });
+        }
 
-        $scope.confirmClick = function () {
-
-            $scope.resultData = 1;
-            
+        $scope.selectItem = function (item) {
+            $scope.resultData = item;
             $scope.close();
             $('#confirmModal').modal('hide');
         }
@@ -70,10 +83,8 @@ moduleModal.controller('ItemSerialModalController',
                 .then(function() {
                  appRepository.setControlEnabled(ctrl);
             });
-
             //console.log(itemSerials);
         };
-
 
         $scope.close = function () {
             console.log("close function modal controller :");
@@ -82,7 +93,6 @@ moduleModal.controller('ItemSerialModalController',
             }, 300); // close, but give 500ms for bootstrap to animate
 
         };
-
 
     }
 ]);

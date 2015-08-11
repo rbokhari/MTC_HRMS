@@ -114,7 +114,7 @@
     $routeProvider
         .when('/INVPortal/distribution/add', {
             templateUrl: '/app/inventory/templates/distribution/distribution-add.html',
-            controller: 'ItemController'
+            controller: 'ItemDistributionController'
         });
 
         $routeProvider

@@ -48,10 +48,10 @@ invModule.controller('ItemController',
                 .then(function () { $scope.isBusy = false; });
         };
 
-        $scope.loadItemSupplier = function (id) {
-            $scope.itemSuppliers = itemRepository.getAllSuppliersByItemId(id);
+        $scope.loadItemSupplier = function () {
+            $scope.itemSuppliers = itemRepository.getAllSuppliersByItemId($routeParams.id);
 
-            $scope.itemSuppliers.$promise.then(function (response) { }, function () { })
+            $scope.itemSuppliers.$promise.then(function (response) { console.log(response.length); }, function () { })
                 .then(function () { $scope.isBusy = false; });
         };
 
@@ -216,7 +216,7 @@ invModule.controller('ItemController',
                 })
                 .then(function() {
                 
-            });
+                });
             
         };
 
@@ -283,7 +283,6 @@ invModule.controller('ItemController',
                         $location.url('/INVPortal/item/detail/' + id);
                     }
                     console.log(result.resultData);
-                    //$scope.item[0].itemDepartments.push(result.resultData);
                 });
             });
         };
@@ -436,8 +435,8 @@ invModule.controller('ItemController',
                     .then(function () {
                         appRepository.showDeleteGritterNotification();
                         //$scope.item[0].itemSuppliers.pop(supplier);
-                    $scope.item[0].itemSuppliers.splice(index, 1);
-                }, function (error) {
+                        $scope.item[0].itemSuppliers.splice(index, 1);
+                    }, function (error) {
                         appRepository.showErrorGritterNotification();
                     });
             }
@@ -569,8 +568,6 @@ invModule.controller('ItemController',
         };
 
         $scope.saveSingleSerial = function (serial) {
-            console.log(serial);
-
             itemRepository.updateItemSerial(serial)
                 .$promise
                 .then(function() {
@@ -588,17 +585,27 @@ invModule.controller('ItemController',
                 });
         };
 
+        var address = $location.protocol() + "://" + location.host;
         $scope.getBarcodeFile = function (serial) {
-            console.log("getBarcodeFile :" + serial);
+            console.log(location.host);
+            console.log("getBarcodeFile :" + location.host + "/api/item/BarcodeData/" + serial);
+            if (serial.length > 0) {
+                location.href = address + "/api/item/BarcodeData/" + serial;
+            };
+        };
 
-            itemRepository.getBarcodeFile(serial);
-            //item
-            //    .$promise
-            //    .then(function () {
-            //        console.log("file download completed");
-            //    });
-        }
+        $scope.getBarcodeFileByItem = function (itemId) {
+            if (itemId !== 0) {
+                location.href = address + "/api/item/BarcodeDataItemId/" + itemId;
+            };
+        };
 
+        $scope.getBarcodeFileByStockId = function (stockId) {
+            console.log(stockId);
+            if (stockId !== 0) {
+                location.href = address + "/api/item/BarcodeDataStockId/" + stockId;
+            };
+        };
 
         $scope.item = {};
 

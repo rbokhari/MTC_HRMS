@@ -1,0 +1,56 @@
+﻿<div id="dvItemLookup" class="modal fade hide center" style="width:50%; height:70%;  margin-right:-50px !important;" role="dialog" aria-hidden="true" aria-labelledby="Add Item">
+    <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <button type="button" class="close" aria-hidden="true" ng-click="refreshItems()"><i class="icon icon-refresh"></i></button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group pull-left">
+            <div class="controls">
+                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
+                    <option value="10" selected="selected">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <span class="pull-right">
+            search : <input type="text" ng-model="search" />
+        </span>
+        
+        <table class="table table-striped table-bordered table-advance table-hover">
+            <thead>
+            <tr>
+                <td>SN</td>
+                <td>Item Code</td>
+                <td>Name</td>
+                <td>Action</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-if="!pitems.$resolved">
+                <td colspan="4">Loading....</td>
+            </tr>
+            <tr ng-if="pitems.$resolved" dir-paginate="item in pitems | filter:search | itemsPerPage: recordPage">
+                <td>{{$index+1}}</td>
+                <td><img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px"/>{{item.itemCode}}</td>
+                <td>{{item.itemName}}</td>
+                <td><a href="" ng-click="selectItem(item)">select</a></td>
+            </tr>
+            </tbody>
+        </table>
+        <div ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" style="height:40px;">
+            <span class="pull-left bottom" ng-show="items.length>0">
+                Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+            </span>
+            <span class="pull-right">
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+            </span>
+
+        </div>   
+    </div>
+    <!--<div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>-->
+</div>
