@@ -305,15 +305,13 @@ hrmsModule.controller('EmployeeController',
 
         $scope.deleteQualification = function (qualification) {
             var x;
-            if (confirm("Are you sure to delete this record ?") == true) {
+            if (confirm("Are you sure to delete this record ?") === true) {
                 employeeRepository.deleteEmployeeQualification(qualification)
                     .$promise
                     .then(function () {
                         console.log($scope.employee[0].employeeQualifications);
                         appRepository.showDeleteGritterNotification();
-                        console.log(qualification);
                         $scope.employee[0].employeeQualifications.pop(qualification);
-                        console.log($scope.employee[0].employeeQualifications);
                     }, function (error) {
                         appRepository.showErrorGritterNotification();
                     });
@@ -371,13 +369,7 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //console.log(result);
-                    //var childGenderDetail = { 'nameEn': 'Male111' };
-
-                    //result.push(childGenderDetail);
-                    //console.log(result);
                     $scope.employee[0].childrens.push(result.resultData);
-                    //$scope.employee[0].childrens[2].childGenderDetail.push({ 'nameEn': 'Male' });
                 });
 
             });
@@ -462,17 +454,6 @@ hrmsModule.controller('EmployeeController',
 
         if ($routeParams.id != undefined) {
             $scope.isBusy = false;
-            //$scope.employee = employeeRepository.getEmployeeDetailById($routeParams.id);
-            //$scope.employee.$promise
-            //    .then(function (response) {
-            //        console.log("employee receives");
-            //        console.log("employee", response);
-            //    }, function() {})
-            //    .then(function () {
-            //    alert($scope.employee.length);
-            //     $scope.isBusy = true;
-            //});
-
             employeeRepository.getEmployeeDetailById($routeParams.id)
                 .$promise
                 .then(function (response) {
@@ -481,8 +462,6 @@ hrmsModule.controller('EmployeeController',
                 .then(function () {
                     $scope.isBusy = true;
                 });
-
-
             //console.log($scope.employee);
         }
         

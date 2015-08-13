@@ -658,7 +658,7 @@ namespace MTCHRMS.DC
 
         public async Task<IQueryable<ItemStockSerial>> GetItemStockSerialsByItemId(int itemId)
         {
-            return await Task.Run(() => _ctx.ItemStockSerials.Where(c => c.ItemId == itemId));
+            return await Task.Run(() => _ctx.ItemStockSerials.Where(c => c.ItemId == itemId).Include(c => c.ItemStockStatusDetail));
         }
 
         public async Task<IQueryable<ItemStockSerial>> GetItemStockSerialsByStockAddId(int stockAddId)

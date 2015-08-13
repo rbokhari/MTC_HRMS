@@ -142,6 +142,15 @@ namespace MTCHRMS.Controllers
             return await _repo.GetEmployeeSearch(employee, GetRoleIdByUserId());
         }
 
+        [Route("api/employee/GetEmployeeByDepartmentId/{id}")]
+        [HttpGet]
+        [System.Web.Http.Authorize]
+        public async Task<List<EmployeeDef>> GetEmployeeByDepartmentId(int id)
+        {
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            //System.Threading.Thread.Sleep(1000);
+            return await _repo.GetEmployeeByDepartmentId(id);
+        }
 
         [System.Web.Http.Authorize]
         public IQueryable<EmployeeDef> Get(int id)

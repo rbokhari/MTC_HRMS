@@ -701,6 +701,17 @@ namespace MTCHRMS.DC
             }
         }
 
+        public async Task<List<EmployeeDef>> GetEmployeeByDepartmentId(int departmentId)
+        {
+            try
+            {
+                return await _ctx.EmployeeDefs.Where(c => c.PostedTo == departmentId).Include(c => c.DepartmentId).ToListAsync();
+            }
+            catch (Exception)
+            {
+                return null ;
+            }
+        }
 
 
         public async Task<List<EmployeeDef>> GetEmployeeSearch(EmployeeDef employee, int roleId)

@@ -3,22 +3,22 @@
 'use strict';
 invModule.controller('ItemDistributionController',
 [
-    '$scope', '$location', '$routeParams', 'itemRepository', 'ModalService',
+    '$scope', '$location', '$routeParams',
+    'authRepository', 'itemRepository', 'departmentRepository', 'employeeRepository', 'ModalService',
 
-    function ($scope, $location, $routeParams, itemRepository, ModalService) {
+    function ($scope, $location, $routeParams,
+        authRepository, itemRepository, departmentRepository, employeeRepository, ModalService) {
 
-        //$scope.items = itemRepository.getAllItems();
+        $scope.departments = departmentRepository.getAllDepartment();
 
-        //$scope.items
-        //    .$promise
-        //    .then(function () {
-        //        console.log("items", $scope.items);
-        //    }, function () {
-        //        //alert("error");
-        //    })
-        //    .then(function () {
+        $scope.auth = authRepository.authentication;
+        console.log($scope.auth);
 
-        //    });
+        $scope.loadEmployee = function(id) {
+            $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
+        }
+
+        $scope.selectedItemSerials = [];
 
         $scope.showItemLookup = function () {
             ModalService.showModal({
@@ -26,17 +26,48 @@ invModule.controller('ItemDistributionController',
                 controller: "ItemLookupModalController",
                 inputs: {
                     title: "Select Item",
-                    parentId: 1,
+                    parentId: -1,   // to load item values
                     resultData: {}
                 }
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
                     $('.modal-backdrop').remove();
-                    console.log(result.resultData);
+                    var itemData = result.resultData;
+                    ModalService.showModal({
+                        templateUrl: "/app/inventory/templates/distribution/item-serial-lookup.html",
+                        controller: "ItemLookupModalController",
+                        inputs: {
+                            title: "Select Item : " + result.resultData.itemCode + ", " + result.resultData.itemName,
+                            parentId: result.resultData.itemId,    // to load selected item serials
+                            resultData: {}
+                        }
+                    }).then(function (modal) {
+                        modal.element.modal();
+                        modal.close.then(function (result) {
+                            $('.modal-backdrop').remove();
+
+                            angular.forEach(result.resultData, function (value, key) {
+                                $scope.selectedItemSerials.push({
+                                    itemId: value["itemId"],
+                                    itemImage: itemData.itemPicture,
+                                    itemCode: itemData.itemCode,
+                                    itemName: itemData.itemName,
+                                    itemStock: itemData.stockinHand,
+                                    serial: value["serialNo"]
+                                });
+                            });
+
+                        });
+                    });
                 });
             });
         };
+
+
+        $scope.removeItemDistribution = function(item) {
+            $scope.selectedItemSerials.splice($scope.selectedItemSerials.indexOf(item),1);
+        }
 
 
     }

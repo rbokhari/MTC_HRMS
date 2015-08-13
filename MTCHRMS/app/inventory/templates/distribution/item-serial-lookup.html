@@ -1,0 +1,56 @@
+﻿<div id="dvItemSerialLookup" class="modal fade hide center" role="dialog" aria-hidden="true" aria-labelledby="Add Item">
+    <div class="modal-header">
+        <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <button type="button" class="close" aria-hidden="true" ng-click="refreshItems()"><i class="icon icon-refresh"></i></button>
+        <h3 id="myModalLabel1">{{title}}</h3>
+    </div>
+    <div class="modal-body">
+        <div class="control-group pull-left">
+            <div class="controls">
+                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
+                    <option value="10" selected="selected">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <span class="pull-right">
+            search : <input type="text" ng-model="search" />
+        </span>
+
+        <table class="table table-striped table-bordered table-advance table-hover">
+            <thead>
+                <tr>
+                    <td>SN</td>
+                    <td>Serial No</td>
+                    <td>Status</td>
+                    <td>Select</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="!itemSerials.$resolved">
+                    <td colspan="4">Loading....</td>
+                </tr>
+                <tr ng-if="itemSerials.$resolved" dir-paginate="serial in itemSerials | filter: {statusId : 5108} | filter:search | itemsPerPage: recordPage">
+                    <td>{{$index+1}}</td>
+                    <td>{{serial.serialNo}}</td>
+                    <td><label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label></td>
+                    <td><input ng-model="serial.isSelected" type="checkbox"/></td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="height:40px;">
+            <span class="pull-left bottom" ng-show="itemSerials.length>0">
+                Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+            </span>
+            <span class="pull-right">
+                <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+            </span>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" ng-click="selectSerials(itemSerials)">Apply</button>
+    </div>
+</div>
