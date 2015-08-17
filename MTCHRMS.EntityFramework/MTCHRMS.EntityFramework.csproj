@@ -59,6 +59,7 @@
     <Compile Include="HRMS\EmployeeDef.cs" />
     <Compile Include="Inventory\Item.cs" />
     <Compile Include="Inventory\ItemAttachment.cs" />
+    <Compile Include="Inventory\ItemDistribution.cs" />
     <Compile Include="Inventory\ItemStockAdd.cs" />
     <Compile Include="Inventory\ItemStockSerial.cs" />
     <Compile Include="Inventory\Manufacturer.cs" />

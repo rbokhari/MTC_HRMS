@@ -863,6 +863,14 @@ namespace MTCHRMS.Controllers
             }
         }
 
+        [Route("api/item/addDistribution/")]
+        public async Task<HttpResponseMessage> SetDistribution(Distribution distribution)
+        {
+
+            return  Request.CreateResponse(HttpStatusCode.OK, distribution);
+        }
+
+
         private IEnumerable<string> GetErrorMessages()
         {
             return ModelState.Values.SelectMany(x => x.Errors.Select(e => e.ErrorMessage));

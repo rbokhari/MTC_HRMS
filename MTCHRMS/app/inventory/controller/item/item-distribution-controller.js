@@ -18,7 +18,11 @@ invModule.controller('ItemDistributionController',
             $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
         }
 
-        $scope.selectedItemSerials = [];
+        //$scope.selectedItemSerials = [];
+
+        $scope.distribution = {
+            distributionItems:[]
+        };
 
         $scope.showItemLookup = function () {
             ModalService.showModal({
@@ -47,23 +51,42 @@ invModule.controller('ItemDistributionController',
                         modal.close.then(function (result) {
                             $('.modal-backdrop').remove();
 
-                            angular.forEach(result.resultData, function (value, key) {
-                                $scope.selectedItemSerials.push({
-                                    itemId: value["itemId"],
-                                    itemImage: itemData.itemPicture,
-                                    itemCode: itemData.itemCode,
-                                    itemName: itemData.itemName,
-                                    itemStock: itemData.stockinHand,
-                                    serial: value["serialNo"]
+                            if (result.resultData === "back") {
+                                console.log("back");
+                                $scope.showItemLookup();
+                                return;
+                            }
+                            else {
+                                angular.forEach(result.resultData, function (value, key) {
+                                    $scope.distribution.distributionItems.push({
+                                        itemId: value["itemId"],
+                                        distributionId:0,
+                                        ItemStockSerialId : 0,
+                                        itemImage: itemData.itemPicture,
+                                        itemCode: itemData.itemCode,
+                                        itemName: itemData.itemName,
+                                        stockInHand: itemData.stockinHand,
+                                        serial: value["serialNo"]
+                                    });
                                 });
-                            });
-
+                            }
                         });
                     });
                 });
             });
         };
 
+
+        $scope.saveDistribution = function (distribution) {
+
+            itemRepository.addItemDistribution(distribution)
+                .$promise
+                .then(function (result) {
+                    console.log(result);
+                }, function () {
+                
+            });
+        };
 
         $scope.removeItemDistribution = function(item) {
             $scope.selectedItemSerials.splice($scope.selectedItemSerials.indexOf(item),1);

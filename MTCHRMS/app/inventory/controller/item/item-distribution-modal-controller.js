@@ -71,6 +71,12 @@ moduleModal.controller('ItemLookupModalController',
             $('#dvItemSerialLookup').modal('hide');
         }
 
+        $scope.goBack = function () {
+            $scope.resultData = "back";
+            $scope.close();
+            $('#dvItemSerialLookup').modal('hide');
+        };
+
         $scope.cancelClick = function () {
             $scope.resultData = 0;
 

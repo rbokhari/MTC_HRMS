@@ -120,6 +120,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/addItemStockSerials/').save(itemStockSerials);
         };
 
+        var _addItemDistribution = function(distribution) {
+            return $resource('/api/item/addDistribution/').save(distribution);
+        }
+
         return {
             getAllItems: _getAllItems,
             getAllItemSuppliers: _getAllItemSuppliers,
@@ -148,7 +152,8 @@ invModule.factory('itemRepository', [
             updateItemManufacturer: _updateItemManufacturer,
             deleteItemManufacturer: _deleteItemManufacturer,
             getItemSearchList: _getItemSearchList,
-            addItemStockSerials: _addItemStockSerials
+            addItemStockSerials: _addItemStockSerials,
+            addItemDistribution: _addItemDistribution
         };
 
     }
