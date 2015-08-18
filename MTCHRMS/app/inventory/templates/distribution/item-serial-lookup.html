@@ -30,7 +30,11 @@
             </thead>
             <tbody>
                 <tr ng-if="!itemSerials.$resolved">
-                    <td colspan="4">Loading....</td>
+                    <td colspan="4">
+                        <div class="progress progress-striped active">
+                            <div style="width: 100%;" class="bar"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr ng-if="itemSerials.$resolved" dir-paginate="serial in itemSerials | filter: {statusId : 5108} | filter:search | itemsPerPage: recordPage">
                     <td>{{$index+1}}</td>

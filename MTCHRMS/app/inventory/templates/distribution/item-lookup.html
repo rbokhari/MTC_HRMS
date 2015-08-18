@@ -1,4 +1,4 @@
-﻿<div id="dvItemLookup" class="modal fade hide center" style="width:50%; height:70%;  margin-right:-50px !important;" role="dialog" aria-hidden="true" aria-labelledby="Add Item">
+﻿<div id="dvItemLookup" class="modal fade hide center" role="dialog" aria-hidden="true" aria-labelledby="Add Item">
     <div class="modal-header">
         <!--<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>-->
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -30,7 +30,11 @@
             </thead>
             <tbody>
             <tr ng-if="!pitems.$resolved">
-                <td colspan="4">Loading....</td>
+                <td colspan="4">
+                    <div class="progress progress-striped active">
+                        <div style="width: 100%;" class="bar"></div>
+                    </div>
+                </td>
             </tr>
             <tr ng-if="pitems.$resolved" dir-paginate="item in pitems | filter:search | itemsPerPage: recordPage">
                 <td>{{$index+1}}</td>

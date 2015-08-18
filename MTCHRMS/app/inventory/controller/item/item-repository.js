@@ -121,7 +121,7 @@ invModule.factory('itemRepository', [
         };
 
         var _addItemDistribution = function(distribution) {
-            return $resource('/api/item/addDistribution/').save(distribution);
+            return $resource('/api/distribution/add/').save(distribution);
         }
 
         return {

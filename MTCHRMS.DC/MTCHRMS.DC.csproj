@@ -52,10 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\AccountRepository.cs" />
+    <Compile Include="Implementation\DistributionRepository.cs" />
     <Compile Include="Implementation\ManufacturerRepository.cs" />
     <Compile Include="Implementation\ItemsRepository.cs" />
     <Compile Include="Implementation\MTCRepository.cs" />
     <Compile Include="Implementation\StoragePathRepository.cs" />
+    <Compile Include="Interface\IDistributionRepository.cs" />
     <Compile Include="Interface\IManufacturerRepository.cs" />
     <Compile Include="Interface\IItemsRepository.cs" />
     <Compile Include="Implementation\StoreLocationRepository.cs" />

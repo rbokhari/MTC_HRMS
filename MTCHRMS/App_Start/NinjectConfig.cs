@@ -29,6 +29,8 @@ namespace MTCHRMS.App_Start
             kernel.Bind<IItemsRepository>().To<ItemsRepository>();
             kernel.Bind<IManufacturersRepository>().To<ManufactuerRepository>();
 
+            kernel.Bind<IDistributionRepository>().To<DistributionRepository>();
+
             return kernel;
         }
     }

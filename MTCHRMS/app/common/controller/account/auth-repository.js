@@ -11,6 +11,7 @@ accModule.factory('authRepository', [
             employeeId: 0,
             userName: "",
             fullName: "",
+            designation: "",
             departmentName: "",
             departmentId: 0,
             empPicture: "",
@@ -124,6 +125,7 @@ accModule.factory('authRepository', [
                         _authentication.empPicture = response.empPicture;
                         _authentication.email = response.email;
                         _authentication.phone = response.phone;
+                        _authentication.designation = response.designation;
 
                         accountRepository.getUserById(response.id)
                             .$promise

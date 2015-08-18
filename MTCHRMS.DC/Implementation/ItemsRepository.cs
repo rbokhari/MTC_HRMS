@@ -654,7 +654,10 @@ namespace MTCHRMS.DC
             }
         }
 
-
+        public ItemStockSerial GetItemStockSerialsBySerialId(int serialId)
+        {
+            return _ctx.ItemStockSerials.SingleOrDefault(c => c.ItemStockSerialId == serialId);
+        }
 
         public async Task<IQueryable<ItemStockSerial>> GetItemStockSerialsByItemId(int itemId)
         {

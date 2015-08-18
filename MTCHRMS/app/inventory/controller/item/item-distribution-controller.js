@@ -4,15 +4,14 @@
 invModule.controller('ItemDistributionController',
 [
     '$scope', '$location', '$routeParams',
-    'authRepository', 'itemRepository', 'departmentRepository', 'employeeRepository', 'ModalService',
+    'authRepository', 'itemRepository', 'appRepository', 'departmentRepository', 'employeeRepository', 'ModalService',
 
     function ($scope, $location, $routeParams,
-        authRepository, itemRepository, departmentRepository, employeeRepository, ModalService) {
+        authRepository, itemRepository, appRepository, departmentRepository, employeeRepository, ModalService) {
 
         $scope.departments = departmentRepository.getAllDepartment();
 
         $scope.auth = authRepository.authentication;
-        console.log($scope.auth);
 
         $scope.loadEmployee = function(id) {
             $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
@@ -21,6 +20,9 @@ invModule.controller('ItemDistributionController',
         //$scope.selectedItemSerials = [];
 
         $scope.distribution = {
+            authorizedByName: $scope.auth.fullName,
+            authorizedBy: $scope.auth.employeeId,
+            authorizedDesignation: $scope.auth.designation,
             distributionItems:[]
         };
 
@@ -58,15 +60,18 @@ invModule.controller('ItemDistributionController',
                             }
                             else {
                                 angular.forEach(result.resultData, function (value, key) {
+                                    console.log("value", value);
                                     $scope.distribution.distributionItems.push({
                                         itemId: value["itemId"],
                                         distributionId:0,
-                                        ItemStockSerialId : 0,
+                                        itemStockSerialId: value["itemStockSerialId"],
                                         itemImage: itemData.itemPicture,
                                         itemCode: itemData.itemCode,
                                         itemName: itemData.itemName,
                                         stockInHand: itemData.stockinHand,
-                                        serial: value["serialNo"]
+                                        serialNo: value["serialNo"],
+                                        createdBy: 5,
+                                        createdOn: new Date()
                                     });
                                 });
                             }
@@ -82,9 +87,12 @@ invModule.controller('ItemDistributionController',
             itemRepository.addItemDistribution(distribution)
                 .$promise
                 .then(function (result) {
-                    console.log(result);
-                }, function () {
-                
+                    
+                    appRepository.showAddSuccessGritterNotification();
+                    $location.url('/INVPortal');
+
+                }, function (error) {
+                    appRepository.showErrorGritterNotification();
             });
         };
 

@@ -33,9 +33,8 @@ namespace MTCHRMS.DC
                             .Include(c => c.DepartmentId)
                             .Include(v => v.ValidationDetailId)
                             .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail);
-
-                        break;
+                            .Include(c => c.StatusDetail)
+                            .OrderBy(c=>c.EmployeeName);
 
                     case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
                     case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
@@ -45,9 +44,8 @@ namespace MTCHRMS.DC
                             .Include(c => c.DepartmentId)
                             .Include(v => v.ValidationDetailId)
                             .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail);
-
-                        break;
+                            .Include(c => c.StatusDetail)
+                            .OrderBy(c => c.EmployeeName); 
 
                     case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
                     case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
@@ -57,9 +55,8 @@ namespace MTCHRMS.DC
                             .Include(c => c.DepartmentId)
                             .Include(v => v.ValidationDetailId)
                             .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail);
-
-                        break;
+                            .Include(c => c.StatusDetail)
+                            .OrderBy(c => c.EmployeeName); 
                 }
 
                 return null;
@@ -705,7 +702,11 @@ namespace MTCHRMS.DC
         {
             try
             {
-                return await _ctx.EmployeeDefs.Where(c => c.PostedTo == departmentId).Include(c => c.DepartmentId).ToListAsync();
+                return await _ctx.EmployeeDefs
+                            .Where(c => c.PostedTo == departmentId)
+                            .Include(c => c.DepartmentId)
+                            .OrderBy(c => c.EmployeeName)
+                            .ToListAsync();
             }
             catch (Exception)
             {

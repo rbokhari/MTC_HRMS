@@ -683,7 +683,6 @@ namespace MTCHRMS.Controllers
                         return Request.CreateResponse(HttpStatusCode.Found, newItemManufacturer);
                     }
 
-
                     if (_repo.AddItemManufacturer(newItemManufacturer) && _repo.Save())
                     {
                         newItemManufacturer = _repo.GetItemManufactuer(newItemManufacturer.ItemManufacturerId).FirstOrDefault();
@@ -862,14 +861,6 @@ namespace MTCHRMS.Controllers
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
         }
-
-        [Route("api/item/addDistribution/")]
-        public async Task<HttpResponseMessage> SetDistribution(Distribution distribution)
-        {
-
-            return  Request.CreateResponse(HttpStatusCode.OK, distribution);
-        }
-
 
         private IEnumerable<string> GetErrorMessages()
         {
