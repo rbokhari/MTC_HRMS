@@ -28,11 +28,12 @@ namespace MTCHRMS.DC
                     .Include(c => c.TypeDetail)
                     .Include(d => d.CategoryDetail)
                     .Include(e => e.StoreLocation)
-                    .Include(f => f.TechnicianType)
-                    .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
-                    .Include(h => h.ItemYears.Select(j => j.YearDetail))
-                    .Include(j=>j.ItemManufacturers.Select(x=>x.ManufacturerDetail))
-                    .Include(q=>q.ItemSuppliers.Select(i=>i.SupplierDetail)));
+                    //.Include(f => f.TechnicianType)
+                    //.Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
+                    //.Include(h => h.ItemYears.Select(j => j.YearDetail))
+                    //.Include(j=>j.ItemManufacturers.Select(x=>x.ManufacturerDetail))
+                    //.Include(q=>q.ItemSuppliers.Select(i=>i.SupplierDetail))
+                    );
         }
 
         public IQueryable<Item> GetItemDetail(int id)

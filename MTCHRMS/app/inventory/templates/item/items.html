@@ -180,7 +180,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-show="isBusy">
+                            <tr ng-show="!items.$resolved">
                                 <td colspan="8">
                                     <div class="progress progress-striped active">
                                         <div style="width: 100%;" class="bar"></div>
