@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using MTCHRMS.DC.Interface;
 using MTCHRMS.EntityFramework.Inventory;
+using MTC.Models.Inventory;
 
 namespace MTCHRMS.Controllers
 {
@@ -17,6 +18,14 @@ namespace MTCHRMS.Controllers
         public DistributionController(IDistributionRepository repo)
         {
             _repo = repo;
+        }
+
+        [Route("api/distribution/{id}")]
+        public async Task<HttpResponseMessage> GetDistribution(int id)
+        {
+            var dist = await _repo.GetDistribution(id);
+
+            return Request.CreateResponse(HttpStatusCode.OK, dist);
         }
         
         [Route("api/distribution/add/")]

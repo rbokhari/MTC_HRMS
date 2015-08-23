@@ -276,6 +276,7 @@
     <Content Include="app\inventory\templates\dashboard\manufacturers.html" />
     <Content Include="app\inventory\templates\dashboard\suppliers.html" />
     <Content Include="app\inventory\templates\distribution\distribution-add.html" />
+    <Content Include="app\inventory\templates\distribution\distribution-view.html" />
     <Content Include="app\inventory\templates\distribution\item-lookup.html" />
     <Content Include="app\inventory\templates\distribution\item-serial-lookup.html" />
     <Content Include="app\inventory\templates\item\item-attachment.html" />
@@ -1328,6 +1329,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MTC.Models\MTC.Models.csproj">
+      <Project>{cbc7148c-d91e-4289-8f27-717218f40644}</Project>
+      <Name>MTC.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MTCHRMS.DC\MTCHRMS.DC.csproj">
       <Project>{ec47b751-4ace-4a8b-907d-69a4ab048a59}</Project>
       <Name>MTCHRMS.DC</Name>

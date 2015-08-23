@@ -30,6 +30,7 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public virtual ValidationDetail ItemStockStatusDetail { get; set; }
 
+        public virtual DistributionItem DistributionItem { get; set; }
     }
 
 }

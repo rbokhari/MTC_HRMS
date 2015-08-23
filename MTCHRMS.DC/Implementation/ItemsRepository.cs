@@ -48,6 +48,7 @@ namespace MTCHRMS.DC
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
                 .Include(c=>c.ItemAttachments)
                 .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials.Select(j=>j.ItemStockStatusDetail)))
+                .Include(c => c.ItemStockAdds.Select(i => i.ItemStockSerials.Select(j => j.DistributionItem)))
                 .Include(c => c.ItemStockAdds.Select(i => i.SupplierDetail))
                 .Include(j => j.ItemManufacturers.Select(x => x.ManufacturerDetail).Select(o=>o.CountryDetail));
 

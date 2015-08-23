@@ -117,6 +117,12 @@
             controller: 'ItemDistributionController'
         });
 
+    $routeProvider
+        .when('/INVPortal/item/detail/:id/distribution/:serialId', {
+            templateUrl: '/app/inventory/templates/distribution/distribution-view.html',
+            controller: 'ItemDistributionController'
+        });
+
         $routeProvider
             .otherwise({ redirectTo: '/INVPortal' });
 

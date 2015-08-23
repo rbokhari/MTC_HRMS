@@ -1,0 +1,55 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Item <small> Distribution New </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/INVPortal/item/list">Items List</a><span class="divider">&nbsp;</span></li>
+                <li><a href="#">Item Detail</a><span class="divider">&nbsp;</span></li>
+                <li><a href="#">Item Distribution</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid ">
+        
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>&nbsp;&nbsp;Item Distribution View</h4>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <h4 class="title grey">...</h4>
+                            <div class="clearfix">
+                                <div class="text-center profile-pic polaroid">
+                                    <p>{{ item[0].itemName | limitTo:25}}</p>
+                                    <!--<img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px"/>-->
+                                    <img data-img-loading-value="{{item[0].itemPicture}}" data-img-loading-size="item" alt="" style="height: 220px; width: 220px;" width="220px" height="220px" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span9">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

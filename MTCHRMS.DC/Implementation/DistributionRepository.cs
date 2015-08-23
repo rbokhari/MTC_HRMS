@@ -8,6 +8,7 @@ using MTC.GlobalVariables;
 using MTCHRMS.DC.Interface;
 using MTCHRMS.EntityFramework.Inventory;
 using MTCHRMS.EntityFramework;
+using MTC.Models.Inventory;
 
 namespace MTCHRMS.DC.Implementation
 {
@@ -21,14 +22,37 @@ namespace MTCHRMS.DC.Implementation
         }
 
 
-        public async Task<IQueryable<Distribution>> GetDistributions()
+        public async Task<IQueryable<ItemDistributionSerialModel>> GetDistributions()
         {
-            return await Task.Run(() => _ctx.Distributions);
+            return await Task.Run(() => 
+                _ctx.Items
+                    
+                    .Select(x=> new ItemDistributionSerialModel
+                    {
+                        ItemId = x.ItemId,
+                        ItemCode = x.ItemCode,
+                        ItemName = x.ItemName,
+                        ItemPicture = x.ItemPicture
+                    })
+                );
         }
 
-        public async Task<Distribution> GetDistribution(int id)
+        public async Task<ItemDistributionSerialModel> GetDistribution(int id)
         {
-            return await Task.Run(()=> _ctx.Distributions.Single(r => r.DistributionId == id));
+            return await Task.Run(() =>
+                _ctx.DistributionItems
+                    .Include(c=>c.ItemDetail)
+                    
+                    .Where(c=>c.ItemStockSerialId == id)
+                    .Select(x => new ItemDistributionSerialModel
+                    {
+                        ItemId = x.ItemId,
+                        ItemCode = x.ItemDetail.ItemCode,
+                        ItemName = x.ItemDetail.ItemName,
+                        ItemPicture = x.ItemDetail.ItemPicture,
+                        StockSerialNo = ""
+                    }).FirstOrDefaultAsync()
+                );
         }
 
         public bool Save()

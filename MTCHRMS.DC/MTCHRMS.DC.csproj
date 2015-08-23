@@ -80,6 +80,10 @@
       <Project>{981df8e6-76cf-4f8e-8c94-84adfc3c9306}</Project>
       <Name>MTC.GlobalVariables</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MTC.Models\MTC.Models.csproj">
+      <Project>{cbc7148c-d91e-4289-8f27-717218f40644}</Project>
+      <Name>MTC.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MTCHRMS.EntityFramework\MTCHRMS.EntityFramework.csproj">
       <Project>{86e41ea9-27fc-48e1-acc6-1a8902e1199c}</Project>
       <Name>MTCHRMS.EntityFramework</Name>

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MTC.Models.Inventory;
 using MTCHRMS.EntityFramework.Inventory;
 
 namespace MTCHRMS.DC.Interface
 {
     public interface IDistributionRepository
     {
-        Task<IQueryable<Distribution>> GetDistributions();
+        Task<IQueryable<ItemDistributionSerialModel>> GetDistributions();
 
-        Task<Distribution> GetDistribution(int id);
+        Task<ItemDistributionSerialModel> GetDistribution(int id);
+
+
 
         bool Save();
 

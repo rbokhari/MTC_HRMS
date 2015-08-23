@@ -44,16 +44,26 @@ namespace MTCHRMS.EntityFramework.Inventory
         [Key]
         public int DistributionItemId { get; set; }
 
-
         public int DistributionId { get; set; }
 
+        [ForeignKey("ItemDetail")]
         public int ItemId { get; set; }
 
+        //[ForeignKey("SerialDetail")]
         public int ItemStockSerialId { get; set; }
 
         public int StockInHand { get; set; }
 
+        [ForeignKey("LocationDetail")]
+        public int? LocationId { get; set; }
+
         public int StatusId { get; set; }
+
+        public virtual StoreLocation LocationDetail { get; set; }
+
+        public virtual Item ItemDetail { get; set; }
+
+        //public virtual ItemStockSerial SerialDetail { get; set; }
     }
 
 }

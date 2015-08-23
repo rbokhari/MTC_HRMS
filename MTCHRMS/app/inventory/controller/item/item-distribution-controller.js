@@ -4,21 +4,23 @@
 invModule.controller('ItemDistributionController',
 [
     '$scope', '$location', '$routeParams',
-    'authRepository', 'itemRepository', 'appRepository', 'departmentRepository', 'employeeRepository', 'ModalService',
+    'authRepository', 'locationRepository', 'itemRepository', 'appRepository', 'departmentRepository', 'employeeRepository', 'ModalService',
 
     function ($scope, $location, $routeParams,
-        authRepository, itemRepository, appRepository, departmentRepository, employeeRepository, ModalService) {
-
-        $scope.departments = departmentRepository.getAllDepartment();
-
-        $scope.auth = authRepository.authentication;
+        authRepository, locationRepository, itemRepository, appRepository, departmentRepository, employeeRepository, ModalService) {
 
         $scope.loadEmployee = function(id) {
             $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
         }
 
-        //$scope.selectedItemSerials = [];
+        $scope.loadDistributionAdd = function () {
+            $scope.auth = authRepository.authentication;
+            $scope.departments = departmentRepository.getAllDepartment();
+            $scope.storeLocations = locationRepository.getAllLocations();
+        };
 
+        //$scope.selectedItemSerials = [];
+        
         $scope.distribution = {
             authorizedByName: $scope.auth.fullName,
             authorizedBy: $scope.auth.employeeId,
@@ -70,7 +72,7 @@ invModule.controller('ItemDistributionController',
                                         itemName: itemData.itemName,
                                         stockInHand: itemData.stockinHand,
                                         serialNo: value["serialNo"],
-                                        createdBy: 5,
+                                        createdBy: $scope.auth.employeeId,
                                         createdOn: new Date()
                                     });
                                 });
@@ -97,9 +99,16 @@ invModule.controller('ItemDistributionController',
         };
 
         $scope.removeItemDistribution = function(item) {
-            $scope.selectedItemSerials.splice($scope.selectedItemSerials.indexOf(item),1);
+            $scope.distribution.distributionItems.splice($scope.distribution.distributionItems.indexOf(item), 1);
         }
 
+
+        ///////////////////////////////////////////////////////
+        /// ---   Item Distribution View ------------
+
+        $scope.loadDistributionView = function () {
+
+        };
 
     }
 ]);
