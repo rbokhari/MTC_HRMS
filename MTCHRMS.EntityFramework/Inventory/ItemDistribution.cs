@@ -19,8 +19,10 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public DateTime DistributionDate { get; set; }
 
+        [ForeignKey("DepartmentDetail")]
         public int DepartmentId { get; set; }
 
+        [ForeignKey("EmployeeDetail")]
         public int EmployeeId { get; set; }
 
         public int AuthorizedBy { get; set; }
@@ -28,13 +30,16 @@ namespace MTCHRMS.EntityFramework.Inventory
         [MaxLength(250)]
         public String AuthorizedDesignation { get; set; }
 
-
         [MaxLength(500)]
         public String Notes { get; set; }
 
         public int StatusId { get; set; }
 
         public virtual ICollection<DistributionItem> DistributionItems { get; set; }
+
+        public virtual Department DepartmentDetail { get; set; }
+
+        public virtual HRMS.EmployeeDef EmployeeDetail { get; set; }
     }
 
 
@@ -46,7 +51,7 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public int DistributionId { get; set; }
 
-        [ForeignKey("ItemDetail")]
+        //[ForeignKey("ItemDetail")]
         public int ItemId { get; set; }
 
         //[ForeignKey("SerialDetail")]

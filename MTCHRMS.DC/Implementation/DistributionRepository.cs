@@ -39,18 +39,30 @@ namespace MTCHRMS.DC.Implementation
 
         public async Task<ItemDistributionSerialModel> GetDistribution(int id)
         {
+            var stockAdd = await _ctx.ItemStockAdds
+                    .FirstOrDefaultAsync(g => g.ItemStockAddId == _ctx.ItemStockSerials.FirstOrDefault(h => h.ItemStockSerialId == id).ItemStockAddId);
+
+            var stockSerial = await _ctx.ItemStockSerials
+                    .Include(a=>a.ItemStockStatusDetail).FirstOrDefaultAsync(g => g.ItemStockSerialId == id);
+
             return await Task.Run(() =>
-                _ctx.DistributionItems
-                    .Include(c=>c.ItemDetail)
-                    
-                    .Where(c=>c.ItemStockSerialId == id)
+                _ctx.Distributions
+                    .Include(c => c.DistributionItems.Select(d => d.ItemDetail))
+                    .Include(c => c.DistributionItems.Select(e => e.LocationDetail))
+                    .Where(c => c.DistributionItems.Any(f=>f.ItemStockSerialId == id))
                     .Select(x => new ItemDistributionSerialModel
                     {
-                        ItemId = x.ItemId,
-                        ItemCode = x.ItemDetail.ItemCode,
-                        ItemName = x.ItemDetail.ItemName,
-                        ItemPicture = x.ItemDetail.ItemPicture,
-                        StockSerialNo = ""
+                        ItemId = x.DistributionItems.FirstOrDefault().ItemId,
+                        ItemCode = x.DistributionItems.FirstOrDefault().ItemDetail.ItemCode,
+                        ItemName = x.DistributionItems.FirstOrDefault().ItemDetail.ItemName,
+                        StockComputerCode = stockAdd.ComputerCode,
+                        StockReceiptNo = stockAdd.BillNo,
+                        DeliveryDate = stockAdd.DeliveryDate,
+                        WarrantyStateDAte = stockAdd.WarrantyStart,
+                        WarrantyEndDate = stockAdd.WarrantyEnd,
+                        Status =  stockSerial.ItemStockStatusDetail.NameEn,
+                        StockSerialNo = stockSerial.SerialNo,
+                        ItemPicture = x.DistributionItems.FirstOrDefault().ItemDetail.ItemPicture
                     }).FirstOrDefaultAsync()
                 );
         }
