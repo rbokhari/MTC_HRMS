@@ -124,6 +124,14 @@ invModule.factory('itemRepository', [
             return $resource('/api/distribution/add/').save(distribution);
         }
 
+        var _getItemDistribution = function (id) {      // ItemStockSerialId
+            return $resource('/api/distribution/' + id);
+        };
+
+        var _getItemDistributionHierarchy = function (id) {      // ItemStockSerialId
+            return $resource('/api/distributionHierarchy/' + id);
+        };
+
         return {
             getAllItems: _getAllItems,
             getAllItemSuppliers: _getAllItemSuppliers,
@@ -153,7 +161,9 @@ invModule.factory('itemRepository', [
             deleteItemManufacturer: _deleteItemManufacturer,
             getItemSearchList: _getItemSearchList,
             addItemStockSerials: _addItemStockSerials,
-            addItemDistribution: _addItemDistribution
+            addItemDistribution: _addItemDistribution,
+            getItemDistribution: _getItemDistribution,
+            getItemDistributionHierarchy: _getItemDistributionHierarchy
         };
 
     }

@@ -26,7 +26,6 @@ namespace MTCHRMS.DC.Implementation
         {
             return await Task.Run(() => 
                 _ctx.Items
-                    
                     .Select(x=> new ItemDistributionSerialModel
                     {
                         ItemId = x.ItemId,
@@ -39,32 +38,53 @@ namespace MTCHRMS.DC.Implementation
 
         public async Task<ItemDistributionSerialModel> GetDistribution(int id)
         {
-            var stockAdd = await _ctx.ItemStockAdds
-                    .FirstOrDefaultAsync(g => g.ItemStockAddId == _ctx.ItemStockSerials.FirstOrDefault(h => h.ItemStockSerialId == id).ItemStockAddId);
+            var stockAdd = await _ctx.ItemStockSerials
+                    .SingleOrDefaultAsync(h => h.ItemStockSerialId == id);
 
-            var stockSerial = await _ctx.ItemStockSerials
-                    .Include(a=>a.ItemStockStatusDetail).FirstOrDefaultAsync(g => g.ItemStockSerialId == id);
+            var item = await _ctx.Items.FirstOrDefaultAsync(c => c.ItemId == stockAdd.ItemId);
 
             return await Task.Run(() =>
-                _ctx.Distributions
-                    .Include(c => c.DistributionItems.Select(d => d.ItemDetail))
-                    .Include(c => c.DistributionItems.Select(e => e.LocationDetail))
-                    .Where(c => c.DistributionItems.Any(f=>f.ItemStockSerialId == id))
+                _ctx.ItemStockAdds
+                    //.Include(c => c.DistributionItems.Select(d => d.ItemDetail))
+                    //.Include(c => c.DistributionItems.Select(e => e.LocationDetail))
+                    //.SingleOrDefault(c => c.ItemStockSerialId == id)
+                    .Where(c=>c.ItemStockSerials.Any(b=>b.ItemStockSerialId == id))
                     .Select(x => new ItemDistributionSerialModel
                     {
-                        ItemId = x.DistributionItems.FirstOrDefault().ItemId,
-                        ItemCode = x.DistributionItems.FirstOrDefault().ItemDetail.ItemCode,
-                        ItemName = x.DistributionItems.FirstOrDefault().ItemDetail.ItemName,
-                        StockComputerCode = stockAdd.ComputerCode,
-                        StockReceiptNo = stockAdd.BillNo,
-                        DeliveryDate = stockAdd.DeliveryDate,
-                        WarrantyStateDAte = stockAdd.WarrantyStart,
-                        WarrantyEndDate = stockAdd.WarrantyEnd,
-                        Status =  stockSerial.ItemStockStatusDetail.NameEn,
-                        StockSerialNo = stockSerial.SerialNo,
-                        ItemPicture = x.DistributionItems.FirstOrDefault().ItemDetail.ItemPicture
-                    }).FirstOrDefaultAsync()
+                        ItemId = x.ItemStockSerials.FirstOrDefault().ItemId,
+                        ItemCode = item.ItemCode, // x.ItemStockSerials.FirstOrDefault().item //x.DistributionItems.FirstOrDefault().ItemDetail.ItemCode,
+                        ItemName = item.ItemName,
+                        StockComputerCode = x.ComputerCode,
+                        StockReceiptNo = x.BillNo,
+                        DeliveryDate = x.DeliveryDate,
+                        WarrantyStateDate = x.WarrantyStart,
+                        WarrantyEndDate = x.WarrantyEnd,
+                        Status = x.ItemStockSerials.FirstOrDefault().ItemStockStatusDetail.NameEn, //  stockSerial.ItemStockStatusDetail.NameEn,
+                        StockSerialNo = x.ItemStockSerials.FirstOrDefault().SerialNo,
+                        ItemPicture = item.ItemPicture
+                    }).FirstOrDefault()
                 );
+        }
+
+        public async Task<List<ItemDistributionSerialDetailModel>> GetDistributionHierarchy(int id)
+        {
+            return await Task.Run(()=>
+            
+                _ctx.Distributions
+                    .Where(c=>c.DistributionItems.Any(b=>b.ItemStockSerialId == id))
+                    .Select(x=> new ItemDistributionSerialDetailModel
+                    {
+                        SerialDetailId = x.DistributionId,
+                        DepartmentId = x.DepartmentId,
+                        DepartmentName = x.DepartmentDetail.DepartmentName,
+                        EmployeeId = x.EmployeeId,
+                        EmployeeName = x.EmployeeDetail.EmployeeName,
+                        EmployeePicture = x.EmployeeDetail.EmpPicture,
+                        AssignedDate = x.DistributionDate,
+                        LocationId = x.DistributionItems.FirstOrDefault().LocationId,
+                        LocationName = x.DistributionItems.FirstOrDefault().LocationDetail.StoreName
+                    }).ToListAsync<ItemDistributionSerialDetailModel>()
+            );
         }
 
         public bool Save()

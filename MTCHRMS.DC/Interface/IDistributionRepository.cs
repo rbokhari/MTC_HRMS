@@ -14,7 +14,7 @@ namespace MTCHRMS.DC.Interface
 
         Task<ItemDistributionSerialModel> GetDistribution(int id);
 
-
+        Task<List<ItemDistributionSerialDetailModel>> GetDistributionHierarchy(int id);
 
         bool Save();
 

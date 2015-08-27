@@ -17,16 +17,68 @@ invModule.controller('ItemDistributionController',
             $scope.auth = authRepository.authentication;
             $scope.departments = departmentRepository.getAllDepartment();
             $scope.storeLocations = locationRepository.getAllLocations();
+
+            $scope.distribution = {
+                authorizedByName: $scope.auth.fullName,
+                authorizedBy: $scope.auth.employeeId,
+                authorizedDesignation: $scope.auth.designation,
+                distributionItems:[]
+            };
+        };
+
+        $scope.itemDetailHierarchy = [];
+
+        $scope.loadItemDistribution = function loadItemDistribution() {
+            
+            itemRepository.getItemDistribution($routeParams.serialId)
+                .get().$promise
+                .then(function (data) {
+                    $scope.itemDetail = data;
+                    var start = {
+                        serialDetailId: -101,
+                        departmentId: 1,
+                        departmentName: 1,
+                        employeeId: 1,
+                        employeeName: "Warranty Start Date",
+                        assignedDate: data.warrantyStateDate,
+                        contentClass: "start"
+                    };
+                    $scope.itemDetailHierarchy.push(start);
+                    itemRepository.getItemDistributionHierarchy($routeParams.serialId)
+                        .query().$promise
+                        .then(function (response) {
+                            angular.forEach(response, function (key) {
+                                key.contentClass = "assign";
+                                $scope.itemDetailHierarchy.push(key);
+                            });
+                        }, function (error) {
+                            console.log(error);
+                        })
+                        .then(function () {  //finally block
+                            var expiry = {
+                                serialDetailId: -102,
+                                departmentId: 1,
+                                departmentName: 1,
+                                employeeId: 1,
+                                employeeName: "Warranty End Date",
+                                assignedDate: data.warrantyEndDate,
+                                contentClass: "end"
+                            };
+                            $scope.itemDetailHierarchy.push(expiry);
+                            console.log($scope.itemDetailHierarchy);
+                        });
+
+                }, function (err) {
+                    console.log("error", err);
+                });
+
+            
+
         };
 
         //$scope.selectedItemSerials = [];
         
-        $scope.distribution = {
-            authorizedByName: $scope.auth.fullName,
-            authorizedBy: $scope.auth.employeeId,
-            authorizedDesignation: $scope.auth.designation,
-            distributionItems:[]
-        };
+
 
         $scope.showItemLookup = function () {
             ModalService.showModal({
@@ -110,5 +162,34 @@ invModule.controller('ItemDistributionController',
 
         };
 
+
+        var timelineBlocks = $('.cd-timeline-block'),
+		offset = 0.8;
+
+        //hide timeline blocks which are outside the viewport
+        
+        function hideBlocks(blocks, offset) {
+            blocks.each(function () {
+                ($(this).offset().top > $(window).scrollTop() + $(window).height() * offset) && $(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+            });
+        }
+
+        function showBlocks(blocks, offset) {
+            blocks.each(function () {
+                ($(this).offset().top <= $(window).scrollTop() + $(window).height() * offset && $(this).find('.cd-timeline-img').hasClass('is-hidden')) && $(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+            });
+        }
+
+        //on scolling, show/animate timeline blocks when enter the viewport
+        $(window).on('scroll', function () {
+            
+            (!window.requestAnimationFrame)
+                ? setTimeout(function () { showBlocks(timelineBlocks, offset); }, 100)
+                : window.requestAnimationFrame(function () { showBlocks(timelineBlocks, offset); });
+        });
+
+
+
+        hideBlocks(timelineBlocks, offset);
     }
 ]);

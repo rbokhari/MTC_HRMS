@@ -27,7 +27,6 @@ namespace MTCHRMS.EntityFramework.Inventory
         [ForeignKey("ItemStockStatusDetail")]
         public int StatusId { get; set; }
 
-
         public virtual ValidationDetail ItemStockStatusDetail { get; set; }
 
         public virtual DistributionItem DistributionItem { get; set; }

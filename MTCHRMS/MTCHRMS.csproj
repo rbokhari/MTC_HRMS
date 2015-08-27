@@ -784,6 +784,10 @@
     <Content Include="Content\fancybox\jquery.fancybox.css" />
     <Content Include="Content\fancybox\jquery.fancybox.js" />
     <Content Include="Content\fancybox\jquery.fancybox.pack.js" />
+    <Content Include="Content\timeline\css\reset.css" />
+    <Content Include="Content\timeline\css\style.css" />
+    <Content Include="Content\timeline\js\main.js" />
+    <Content Include="Content\timeline\js\modernizr.js" />
     <Content Include="Content\uniform\css\uniform.default.css" />
     <Content Include="Content\uniform\demo\demo.html" />
     <Content Include="Content\uniform\images\bg-input-focus.png" />

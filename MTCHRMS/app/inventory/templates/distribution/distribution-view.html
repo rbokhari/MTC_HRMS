@@ -1,5 +1,5 @@
 ﻿
-<div class="container-fluid">
+<div class="container-fluid" data-ng-init="loadItemDistribution()">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
@@ -14,8 +14,8 @@
                     <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
                 </li>
                 <li><a href="/INVPortal/item/list">Items List</a><span class="divider">&nbsp;</span></li>
-                <li><a href="#">Item Detail</a><span class="divider">&nbsp;</span></li>
-                <li><a href="#">Item Distribution</a><span class="divider-last">&nbsp;</span></li>
+                <li><a ng-href="/INVPortal/item/detail/{{itemDetail.itemId}}">Item Detail</a><span class="divider">&nbsp;</span></li>
+                <li><a href="">Item Distribution</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -23,7 +23,7 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid ">
+    <div class="row-fluid">
         
         <div class="span12">
             <div class="widget">
@@ -33,17 +33,49 @@
                 <div class="widget-body">
                     <div class="row-fluid">
                         <div class="span2">
-                            <h4 class="title grey">...</h4>
+                            <h4 class="title grey">Item Detail</h4>
                             <div class="clearfix">
                                 <div class="text-center profile-pic polaroid">
-                                    <p>{{ item[0].itemName | limitTo:25}}</p>
+                                    <p>{{ itemDetail.itemName | limitTo:25}}</p>
                                     <!--<img alt="" src="/Content/img/{{item[0].itemId}}.png" style="height: 220px; width:220px;" width="220px" height="220px"/>-->
-                                    <img data-img-loading-value="{{item[0].itemPicture}}" data-img-loading-size="item" alt="" style="height: 220px; width: 220px;" width="220px" height="220px" />
+                                    <img data-img-loading-value="{{itemDetail.itemPicture}}" data-img-loading-size="item" alt="" style="height: 220px; width: 220px;" width="220" height="220"/>
                                 </div>
+                                <br/>
+                                <ul class="unstyled">
+                                    <li style="height: 36px;"><label class="label">Item Code</label>&nbsp;{{itemDetail.itemCode}}</li>
+                                    <li style="height: 36px;"><label class="label">Serial No</label>&nbsp;{{itemDetail.stockSerialNo}}</li>
+                                    <li style="height: 36px;"><label class="label">Computer Code</label>&nbsp;{{itemDetail.stockComputerCode}}</li>
+                                    <li style="height: 36px;"><label class="label">Receipt No</label>&nbsp;{{itemDetail.stockReceiptNo}}</li>
+                                    <li style="height: 36px;"><label class="label">Status</label>&nbsp;{{itemDetail.status}}</li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="span9">
-                            
+
+                        <div class="span8 offset1">
+                            <h4 class="title grey">Distribution Timeline</h4>
+
+                            <section id="cd-timeline" class="cd-container">
+
+                                <div class="cd-timeline-block" ng-repeat="hierarchy in itemDetailHierarchy | orderBy:'assignedDate'">
+                                    <div class="cd-timeline-img bounce-in" ng-class="{'cd-start':hierarchy.serialDetailId===-101, 'cd-end':hierarchy.serialDetailId===-102, 'cd-assign':hierarchy.serialDetailId!==-101}">
+                                        <img ng-if="hierarchy.serialDetailId>0" alt="" data-img-loading-value="{{hierarchy.empPicture}}" data-img-loading-size="mini"/>
+                                    </div> <!-- cd-timeline-img -->
+
+                                    <div class="cd-timeline-content bounce-in" ng-class="{'start':hierarchy.serialDetailId===-101, 'end':hierarchy.serialDetailId===-102, 'assign':hierarchy.serialDetailId>0}">
+                                        <h2 class="bounce-in"><i ng-if="hierarchy.serialDetailId>0" class="icon icon-user"></i>&nbsp; {{hierarchy.employeeName}}
+                                        </h2>
+                                        <p ng-if="hierarchy.serialDetailId>0"><i ng-if="hierarchy.serialDetailId!==-101" class="icon icon-group"></i>&nbsp; {{hierarchy.departmentName}}
+                                        </p>
+                                        <p ng-if="hierarchy.serialDetailId>0"><i ng-if="hierarchy.serialDetailId>0" class="icon icon-building"></i>&nbsp;{{hierarchy.locationName}}
+                                        </p>
+                                        <!--<a ng-if="hierarchy.serialDetailId!==-101" href="#0" class="cd-read-more">Read more</a>-->
+                                        <span class="cd-date">{{hierarchy.assignedDate | date:'longDate' }}</span>
+                                    </div> <!-- cd-timeline-content -->
+
+                                </div> <!-- cd-timeline-block -->
+
+                            </section>
+
                         </div>
                     </div>
                 </div>

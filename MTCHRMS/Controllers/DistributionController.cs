@@ -27,7 +27,15 @@ namespace MTCHRMS.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, dist);
         }
-        
+
+        [Route("api/distributionHierarchy/{id}")]
+        public async Task<HttpResponseMessage> GetDistributionHierarchy(int id)
+        {
+            var dist = await _repo.GetDistributionHierarchy(id);
+
+            return Request.CreateResponse(HttpStatusCode.OK, dist);
+        }
+
         [Route("api/distribution/add/")]
         public async Task<HttpResponseMessage> SetDistribution(Distribution distribution)
         {

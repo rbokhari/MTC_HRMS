@@ -371,7 +371,7 @@
                                         <label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label>
                                     </td>
                                     <td style="vertical-align: middle !important;" ng-if="authentication.isINVAdmin">
-                                        <a style="text-decoration: none;" href="" id="cHistory{{serial.itemStockSerialId}}" ng-click="loaditemSerialHistory(serial)"><i class="icon-2x icon-time"></i></a>
+                                        <a style="text-decoration: none;" ng-href="/INVPortal/item/detail/{{item[0].itemId}}/distribution/{{serial.itemStockSerialId}}" id="cHistory{{serial.itemStockSerialId}}"><i class="icon-2x icon-time"></i></a>
                                         <a style="text-decoration: none;" href="" id="cPrintBarcode{{serial.itemStockSerialId}}" ng-click="getBarcodeFile(serial.serialNo)"> <i class="icon-2x icon-barcode"></i></a>
                                         <a ng-if="serial.statusId===5108" style="text-decoration: none;" href="" id="cEdit{{serial.itemStockSerialId}}" ng-click="editSingleSerial(serial.itemStockSerialId)"> <i class="icon-2x icon-edit"></i></a>
                                         <a style="text-decoration: none;" class="hide" href="" id="cSave{{serial.itemStockSerialId}}" ng-click="saveSingleSerial(serial)"><i class="icon-2x icon-save"></i></a>
