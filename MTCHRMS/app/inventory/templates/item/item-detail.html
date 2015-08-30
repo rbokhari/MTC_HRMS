@@ -58,11 +58,11 @@
             <h5 ng-if="authentication.isINVAdmin" class="alert alert-warning"><i class="icon-th-list"></i>&nbsp;Actions</h5>
             <ul class="nav nav-stacked" ng-if="authentication.isINVAdmin">
                 <li style="height: 36px;"><a ng-href="/INVPortal/item/edit/{{item[0].itemId}}"><i class="icon-save"></i> Update</a></li>
+                <li style="height: 36px;"><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-picture"></i> Update Picture</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showDepartment(item[0].itemId)"><i class="icon-group"></i> Add Department</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showYear(item[0].itemId)"><i class="icon-calendar"></i> Add Year</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showSupplier(item[0].itemId)"><i class="icon-external-link"></i> Add Supplier</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showManufacturer(item[0].itemId)"><i class="icon-external-link"></i> Add Manufacturer</a></li>
-                <li style="height: 36px;"><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-picture"></i> Update Picture</a></li>
                 <li style="height: 36px;"><a ng-href="/INVPortal/item/detail/addstock/{{item[0].itemId}}"><i class="icon-barcode"></i> Add Stock</a></li>
             </ul>
         </div>

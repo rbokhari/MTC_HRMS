@@ -124,7 +124,7 @@ invModule.controller('ItemController',
                 }, function(error) {
                     // failure case
                     console.log("save - Error !");
-                    if (error.status == 302) {
+                    if (error.status === 302) {
                         appRepository.showDuplicateGritterNotification();
                     } else {
                         appRepository.showErrorGritterNotification();
@@ -206,7 +206,7 @@ invModule.controller('ItemController',
                     // failure case
                     appRepository.hidePageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Save');
                     console.log("save - Error !");
-                    if (error.status == 302) {
+                    if (error.status === 302) {
                         appRepository.showDuplicateGritterNotification();
                     } else {
                         appRepository.showErrorGritterNotification();
@@ -429,7 +429,7 @@ invModule.controller('ItemController',
         $scope.deleteSupplier = function (index, supplier) {
             var x;
             
-            if (confirm("Are you sure to delete this record ?") == true) {
+            if (confirm("Are you sure to delete this record ?") === true) {
                 itemRepository.deleteItemSupplier(supplier)
                     .$promise
                     .then(function () {

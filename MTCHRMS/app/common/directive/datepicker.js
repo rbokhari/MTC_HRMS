@@ -30,9 +30,13 @@
                     //alert(event.date.getDate());
                     //ngModel.$setViewValue(event.date);
                     //if ()
+                    //$(this).datepicker('hide');
                     ngModel.$setViewValue((event.date.getMonth() + 1) + '/' + (event.date.getDate()) + '/' + event.date.getFullYear());//This will update the model property bound to your ng-model whenever the datepicker's date changes.
+                    
                     //ngModel.$setViewValue((event.date.getDate()) + '/' + (event.date.getMonth() + 1) + '/' + event.date.getFullYear());//This will update the model property bound to your ng-model whenever the datepicker's date changes.
                 });
+
+                $(this).datepicker('hide');     // auto close after date selected
             });
         }
     };

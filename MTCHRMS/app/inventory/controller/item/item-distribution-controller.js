@@ -180,6 +180,10 @@ invModule.controller('ItemDistributionController',
             });
         }
 
+        $scope.gotoDetail = function () {
+            $location.url('/INVPortal/item/detail/' + $routeParams.id);
+        }
+
         //on scolling, show/animate timeline blocks when enter the viewport
         $(window).on('scroll', function () {
             
