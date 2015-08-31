@@ -12,6 +12,7 @@ using System.Web;
 using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
+using MTC.Models.Inventory;
 
 namespace MTCHRMS.Controllers
 {
@@ -109,7 +110,8 @@ namespace MTCHRMS.Controllers
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
-            return await _repo.GetItemSearch(item);
+            var items = await _repo.GetItemSearch(item);
+            return items;
         }
 
 
@@ -248,7 +250,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/item/getItemStock/{id}")]
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public Task<ItemStockAdd> GetItemStock(int id)
         {
             var stock = _repo.GetItemStock(id);
@@ -258,7 +260,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/item/getItemSerial/{id}")]
         [HttpGet]
-        //[Authorize]
+        [Authorize]
         public Task<IQueryable<ItemStockSerial>> GetItemSerials(int id)
         {
             var items = _repo.GetItemStockSerialsByItemId(id);
@@ -860,6 +862,15 @@ namespace MTCHRMS.Controllers
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
+        }
+
+        [Route("api/item/ItemUsers")]
+        [HttpGet]
+        [Authorize]
+        public async Task<IQueryable<ItemUsersModel>> GetItemUsers()
+        {
+            var users = await _repo.GetInventoryUser();
+            return users;
         }
 
         private IEnumerable<string> GetErrorMessages()

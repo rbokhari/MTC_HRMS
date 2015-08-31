@@ -21,6 +21,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Route("api/distribution/{id}")]
+        [Authorize]
         public async Task<HttpResponseMessage> GetDistribution(int id)
         {
             var dist = await _repo.GetDistribution(id);
@@ -29,6 +30,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Route("api/distributionHierarchy/{id}")]
+        [Authorize]
         public async Task<HttpResponseMessage> GetDistributionHierarchy(int id)
         {
             var dist = await _repo.GetDistributionHierarchy(id);
@@ -36,7 +38,17 @@ namespace MTCHRMS.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, dist);
         }
 
+        [Route("api/distributionSerial/{id}")]
+        [Authorize]
+        public async Task<HttpResponseMessage> GetDistributionBySerial(string id)
+        {
+            var dist = await _repo.GetDistributionBySerial(id);
+
+            return Request.CreateResponse(HttpStatusCode.OK, dist);
+        }
+
         [Route("api/distribution/add/")]
+        [Authorize]
         public async Task<HttpResponseMessage> SetDistribution(Distribution distribution)
         {
             var dist = new Distribution

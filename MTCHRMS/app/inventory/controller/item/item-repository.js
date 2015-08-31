@@ -132,6 +132,14 @@ invModule.factory('itemRepository', [
             return $resource('/api/distributionHierarchy/' + id);
         };
 
+        var _getItemUsers = function () {
+            return $resource('/api/item/ItemUsers').query();
+        };
+
+        var _getItemBySerialNo = function (id) {
+            return $resource('/api/distributionSerial/' + id);
+        };
+
         return {
             getAllItems: _getAllItems,
             getAllItemSuppliers: _getAllItemSuppliers,
@@ -163,7 +171,9 @@ invModule.factory('itemRepository', [
             addItemStockSerials: _addItemStockSerials,
             addItemDistribution: _addItemDistribution,
             getItemDistribution: _getItemDistribution,
-            getItemDistributionHierarchy: _getItemDistributionHierarchy
+            getItemDistributionHierarchy: _getItemDistributionHierarchy,
+            getItemUsers: _getItemUsers,
+            getItemBySerialNo: _getItemBySerialNo
         };
 
     }

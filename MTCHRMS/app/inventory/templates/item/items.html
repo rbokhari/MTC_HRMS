@@ -115,6 +115,15 @@
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="control-group" data-ng-init="loadUsers()">
+                                        <label for="cUsers" class="control-label">Users :</label>
+                                        <div class="controls">
+                                            <select id="cUsers" name="cUsers" ng-model="item.createdBy">
+                                                <option value="0"></option>
+                                                <option ng-repeat="user in itemUsers" ng-value="user.userId">{{user.fullName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                     <div class="control-group">
                                         <div class="controls">
                                             <button type="button" id="cmdSearch" class="btn btn-success" ng-click="itemSearch(item)">

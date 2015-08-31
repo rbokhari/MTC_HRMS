@@ -35,6 +35,7 @@ invModule.controller('ItemController',
             $scope.storeLocations = locationRepository.getAllLocations();
             $scope.departments = departmentRepository.getAllDepartment();
             //console.log($scope.storeLocations);
+
         };
 
         $scope.loadStockAdd = function() {
@@ -71,6 +72,12 @@ invModule.controller('ItemController',
                 .then(function () { $scope.isBusy = false; });
 
             //console.log($scope.manufacturers);
+        };
+
+        $scope.loadUsers = function () {
+            $scope.itemUsers = itemRepository.getItemUsers();
+
+            //$scope.itemUsers.then(function (response) { }, function (err) { });
         };
 
         $scope.loadItems = function() {
@@ -619,7 +626,9 @@ invModule.controller('ItemController',
             $scope.item.supplierId = 0;
             $scope.item.condition = 0;
             $scope.item.manufacturerId = 0;
+            $scope.item.createdBy = 0;
 
+            console.log($scope.item);
         };
 
         $scope.clearSearch();

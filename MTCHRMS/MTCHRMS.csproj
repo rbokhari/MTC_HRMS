@@ -279,6 +279,7 @@
     <Content Include="app\inventory\templates\distribution\distribution-view.html" />
     <Content Include="app\inventory\templates\distribution\item-lookup.html" />
     <Content Include="app\inventory\templates\distribution\item-serial-lookup.html" />
+    <Content Include="app\inventory\templates\distribution\item-serial-search.html" />
     <Content Include="app\inventory\templates\item\item-attachment.html" />
     <Content Include="app\inventory\templates\item\item-serial.html" />
     <Content Include="app\inventory\templates\item\item-manufacturer.html" />

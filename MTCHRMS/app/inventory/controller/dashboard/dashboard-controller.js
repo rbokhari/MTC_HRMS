@@ -30,7 +30,29 @@ invModule.controller('DashboardController',
             $window.location.href = '/HRMSPortal';
         }
 
-        
+        $scope.serialItem = "";
+        $scope.getItemBySerial = function (event) {
+            console.log(event.which);
+            if ($scope.serialItem !== "" && (event.which === 13 || event.which===1 )) {
+                itemRepository.getItemBySerialNo($scope.serialItem).query()
+                    .$promise
+                    .then(function (response) {
+
+                        console.log(response);
+                        console.log(response[0].itemId);
+                        if (response.length===1) {
+                            $location.url('/INVPortal/item/detail/' + response[0].itemId + '/distribution/' + response[0].stockSerialId);
+                        }
+                        else {
+                            $location.url('/INVPortal/distribution/serials/' + $scope.serialItem);
+                        }
+
+                    }, function (err) {
+
+                    });
+            }
+        };
+
 
         $scope.loadDasboard = function () {
 

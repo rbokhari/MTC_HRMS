@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MTC.GlobalVariables;
+using MTC.Models.Inventory;
 using MTCHRMS.DC.Implementation;
 using MTCHRMS.EntityFramework.Inventory;
 using MTCHRMS.EntityFramework;
@@ -489,61 +490,75 @@ namespace MTCHRMS.DC
                     .Include(f=>f.ItemDepartments);
 
 
-
-                if (item.Condition == 0)
+                if (string.IsNullOrEmpty(item.ItemCode) && string.IsNullOrEmpty(item.ItemName) && item.TypeId == 0 && item.CategoryId == 0 && item.StoreId == 0 && item.DepartmentId == 0 && item.SupplierId == 0 &&
+                        item.ManufacturerId == 0 && item.CreatedBy == 0)
                 {
-                    items = items
-                        .Where(c =>
-                            c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()) ||
-                            c.ItemName.ToLower().Contains(item.ItemName.ToLower()) ||
-                            c.TypeId == item.TypeId ||
-                            c.CategoryId == item.CategoryId ||
-                            c.StoreId == item.StoreId ||
-                            c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId) ||
-                            c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId) ||
-                            c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
 
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(item.ItemCode))
-                    {
-                        items = items.Where(c => c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()));
-                    }
 
-                    if (!string.IsNullOrEmpty(item.ItemName))
+                    if (item.Condition == 0)
                     {
-                        items = items.Where(c => c.ItemName.ToLower().Contains(item.ItemName.ToLower()));
-                    }
+                        items = items
+                            .Where(c =>
+                                c.CreatedBy == item.CreatedBy ||
+                                c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()) ||
+                                c.ItemName.ToLower().Contains(item.ItemName.ToLower()) ||
+                                c.TypeId == item.TypeId ||
+                                c.CategoryId == item.CategoryId ||
+                                c.StoreId == item.StoreId ||
+                                c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId) ||
+                                c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId) ||
+                                c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
 
-                    if (item.TypeId != 0)
-                    {
-                        items = items.Where(c => c.TypeId == item.TypeId);
                     }
-
-                    if (item.CategoryId != 0)
+                    else
                     {
-                        items = items.Where(c => c.CategoryId == item.CategoryId);
-                    }
+                        if (!string.IsNullOrEmpty(item.ItemCode))
+                        {
+                            items = items.Where(c => c.ItemCode.ToLower().Contains(item.ItemCode.ToLower()));
+                        }
 
-                    if (item.StoreId != 0)
-                    {
-                        items = items.Where(c => c.StoreId == item.StoreId);
-                    }
+                        if (!string.IsNullOrEmpty(item.ItemName))
+                        {
+                            items = items.Where(c => c.ItemName.ToLower().Contains(item.ItemName.ToLower()));
+                        }
 
-                    if (item.DepartmentId != 0)
-                    {
-                        items = items.Where(c => c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId));
-                    }
+                        if (item.TypeId != 0)
+                        {
+                            items = items.Where(c => c.TypeId == item.TypeId);
+                        }
 
-                    if (item.SupplierId != 0)
-                    {
-                        items = items.Where(c => c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId));
-                    }
+                        if (item.CategoryId != 0)
+                        {
+                            items = items.Where(c => c.CategoryId == item.CategoryId);
+                        }
 
-                    if (item.ManufacturerId != 0)
-                    {
-                        items = items.Where(c => c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
+                        if (item.StoreId != 0)
+                        {
+                            items = items.Where(c => c.StoreId == item.StoreId);
+                        }
+
+                        if (item.DepartmentId != 0)
+                        {
+                            items = items.Where(c => c.ItemDepartments.Any(b => b.DepartmentId == item.DepartmentId));
+                        }
+
+                        if (item.SupplierId != 0)
+                        {
+                            items = items.Where(c => c.ItemSuppliers.Any(b => b.SupplierId == item.SupplierId));
+                        }
+
+                        if (item.ManufacturerId != 0)
+                        {
+                            items = items.Where(c => c.ItemManufacturers.Any(b => b.ManufacturerId == item.ManufacturerId));
+                        }
+
+                        if (item.CreatedBy != 0)
+                        {
+                            items = items.Where(c => c.CreatedBy == item.CreatedBy);
+                        }
                     }
                 }
 
@@ -724,6 +739,26 @@ namespace MTCHRMS.DC
                 .Include(c => c.SupplierDetail)
                 .Select(x => x.SupplierDetail)
                 .OrderBy(x => x.SupplierName));
+        }
+
+        public async Task<IQueryable<ItemUsersModel>> GetInventoryUser()
+        {
+            return await Task.Run(() =>
+                _ctx.Items
+                //.Select(a=>a.CreatedBy).Distinct().ToList()
+                .Join(_ctx.EmployeeDefs, 
+                        a=>a.CreatedBy,
+                        b=>b.Id,
+                        (c, b)=> new ItemUsersModel
+                        {
+                            UserId = b.Id,
+                            UserName = b.UserName,
+                            FullName = b.EmployeeName, 
+                            DepartmentId = b.PostedTo,
+                            DepartmentName = b.DepartmentId.DepartmentName,
+                            DesignationName = b.Designation
+                        }).Distinct()
+                );
         }
     }
 }

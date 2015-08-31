@@ -83,21 +83,16 @@ namespace MTCHRMS.DC
                 case ApplicationPreferences.Account_Roles.ADMIN:
                     return _ctx.EmployeeDefs.Single(r => r.Id == id);
 
-                    break;
-
                 case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
                 case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
 
                     return _ctx.EmployeeDefs.Single(r => r.Id == id && r.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
-
-                    break;
 
                 case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
                 case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
 
                     return _ctx.EmployeeDefs.Single(r => r.Id == id && r.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
 
-                    break;
             }
 
             return null;

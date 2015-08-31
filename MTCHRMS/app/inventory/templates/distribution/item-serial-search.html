@@ -1,0 +1,104 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                Item's Serial No / Barcode <small> Listing </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    <a href="#">Inventory</a> <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="#">Item Serials</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid" data-ng-init="getItemBySerial()">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i>Item Serials Listing</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="form-horizontal">
+                        <div class="control-group pull-left">
+                            <label class="control-label">
+                                Record Per Page:
+                            </label>
+                            <div class="controls">
+                                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                        </div>
+                        <span class="pull-right">
+                            search : <input type="text" ng-model="search" />
+                        </span>
+                    </div>
+                    <table class="table table-striped table-bordered table-advance table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sr. #</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>NSN / Part</th>
+                                <th>Serial No</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="!itemSerials.$resolved">
+                                <td colspan="6">
+                                    <div class="progress progress-striped active">
+                                        <div style="width: 100%;" class="bar"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" dir-paginate="item in itemSerials | filter:search | itemsPerPage: recordPage">
+                                <td>{{$index + 1}}</td>
+                                <td>
+                                    <div class="zoom">
+                                        <img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px" />
+                                        <div class="zoom-icon"></div>
+                                    </div>
+                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
+                                </td>
+                                <td style="vertical-align: middle;">
+                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}" title="{{item.itemName}}"> {{ item.itemName | limitTo:20}} {{item.itemName.length > 20 ? '...' : ''}}</a>
+                                </td>
+                                <td>{{item.stockComputerCode}}</td>
+                                <td><label class="label label-success"> {{item.stockSerialNo}}</label></td>
+                                <td>
+                                    <a style="text-decoration: none;" ng-href="/INVPortal/item/detail/{{item.itemId}}/distribution/{{item.stockSerialId}}"><i class="icon-2x icon-time"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" style="height:40px;">
+                        <span class="pull-left bottom" ng-show="itemSerials.length>0">
+                            Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
+                        </span>
+                        <span class="pull-right">
+                            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/Scripts/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+                        </span>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

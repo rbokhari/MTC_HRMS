@@ -13,8 +13,8 @@
                 <li><a href="#">Dashboard</a><span class="divider-last">&nbsp;</span></li>
                 <li class="pull-right search-wrap">
                     <div class="search-input-area">
-                        <input id=" " class="search-query" type="text" placeholder="serial no / barcode">
-                        <i class="icon-search"></i>
+                        <input id=" " class="search-query" ng-keypress="getItemBySerial($event)" ng-model="serialItem" type="text" placeholder="serial no / barcode">
+                        <i class="icon-search" ng-click="getItemBySerial($event)"></i>
                     </div>
                 </li>
 

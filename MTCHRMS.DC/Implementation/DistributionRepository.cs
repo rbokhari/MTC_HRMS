@@ -135,6 +135,32 @@ namespace MTCHRMS.DC.Implementation
                 return false;
             }
         }
+
+        public async Task<IQueryable<ItemDistributionSerialModel>> GetDistributionBySerial(string serialNo)
+        {
+            return await Task.Run(() =>
+
+                _ctx.ItemStockSerials
+                    .Where(g=>g.SerialNo.Contains(serialNo))
+                    .Join(_ctx.Items, 
+                        c=>c.ItemId, 
+                        e=>e.ItemId, 
+                        (c, e)=> new ItemDistributionSerialModel
+                    {
+                        ItemId = c.ItemId,
+                        StockSerialId = c.ItemStockSerialId,
+                        StockAddId = c.ItemStockAddId,
+                        ItemCode = e.ItemCode,
+                        ItemName = e.ItemName,
+                        StockSerialNo = c.SerialNo,
+                        StockComputerCode = e.NatoNo,
+                        ItemPicture = e.ItemPicture
+                        
+                        
+                    })
+                    
+            );
+        }
     }
 
 

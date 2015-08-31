@@ -163,6 +163,7 @@ invModule.controller('ItemDistributionController',
         };
 
 
+
         var timelineBlocks = $('.cd-timeline-block'),
 		offset = 0.8;
 
@@ -184,15 +185,30 @@ invModule.controller('ItemDistributionController',
             $location.url('/INVPortal/item/detail/' + $routeParams.id);
         }
 
-        //on scolling, show/animate timeline blocks when enter the viewport
-        $(window).on('scroll', function () {
+
+        $scope.getItemBySerial = function () {
             
-            (!window.requestAnimationFrame)
-                ? setTimeout(function () { showBlocks(timelineBlocks, offset); }, 100)
-                : window.requestAnimationFrame(function () { showBlocks(timelineBlocks, offset); });
-        });
+            if ($routeParams.id !== "") {
+                itemRepository.getItemBySerialNo($routeParams.id).query()
+                    .$promise
+                    .then(function (response) {
+
+                        $scope.itemSerials = response;
+
+                    }, function (err) {
+                        console.log(err);
+                    });
+            }
+        };
 
 
+        //on scolling, show/animate timeline blocks when enter the viewport
+        //$(window).on('scroll', function () {
+            
+        //    (!window.requestAnimationFrame)
+        //        ? setTimeout(function () { showBlocks(timelineBlocks, offset); }, 100)
+        //        : window.requestAnimationFrame(function () { showBlocks(timelineBlocks, offset); });
+        //});
 
         hideBlocks(timelineBlocks, offset);
     }

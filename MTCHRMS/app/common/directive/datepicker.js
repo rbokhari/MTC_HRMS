@@ -36,7 +36,7 @@
                     //ngModel.$setViewValue((event.date.getDate()) + '/' + (event.date.getMonth() + 1) + '/' + event.date.getFullYear());//This will update the model property bound to your ng-model whenever the datepicker's date changes.
                 });
 
-                $(this).datepicker('hide');     // auto close after date selected
+                $(this).datepicker('hide', 'bounce-in');     // auto close after date selected
             });
         }
     };
