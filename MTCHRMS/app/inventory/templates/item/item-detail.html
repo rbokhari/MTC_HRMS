@@ -60,7 +60,7 @@
                 <li style="height: 36px;"><a ng-href="/INVPortal/item/edit/{{item[0].itemId}}"><i class="icon-save"></i> Update</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showImageForm(item[0].itemId)"><i class="icon-picture"></i> Update Picture</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showDepartment(item[0].itemId)"><i class="icon-group"></i> Add Department</a></li>
-                <li style="height: 36px;"><a href="" ng-click="showYear(item[0].itemId)"><i class="icon-calendar"></i> Add Year</a></li>
+                <!--<li style="height: 36px;"><a href="" ng-click="showYear(item[0].itemId)"><i class="icon-calendar"></i> Add Year</a></li>-->
                 <li style="height: 36px;"><a href="" ng-click="showSupplier(item[0].itemId)"><i class="icon-external-link"></i> Add Supplier</a></li>
                 <li style="height: 36px;"><a href="" ng-click="showManufacturer(item[0].itemId)"><i class="icon-external-link"></i> Add Manufacturer</a></li>
                 <li style="height: 36px;"><a ng-href="/INVPortal/item/detail/addstock/{{item[0].itemId}}"><i class="icon-barcode"></i> Add Stock</a></li>
@@ -223,10 +223,10 @@
             </div>
         </div>
         <br/><br/>
-        <i class="icon-hand-right"></i> <strong>Year base Requirement</strong>
+        <!--<i class="icon-hand-right"></i> <strong>Year base Requirement</strong>
         <span class="pull-right">
-                                    <a ng-if="authentication.isINVAdmin" href="" ng-click="showYear(item[0].itemId)"><i class="icon-external-link"></i> Add Year</a>
-                                </span>
+            <a ng-if="authentication.isINVAdmin" href="" ng-click="showYear(item[0].itemId)"><i class="icon-external-link"></i> Add Year</a>
+        </span>
         <div class="row-fluid">
             <div class="span12">
                 <table class="table table-striped table-bordered table-advance table-hover">
@@ -248,7 +248,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div>-->
     </div>
     <div class="tab-pane" id="dvSupplier" ng-show="isTabSelected(3)">
         <i class="icon-hand-right"></i> <strong>Supplier</strong>

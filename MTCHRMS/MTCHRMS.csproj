@@ -254,6 +254,7 @@
     <Content Include="app\common\controller\validation\validation-repository.js" />
     <Content Include="app\inventory\directive\barcode-print.js" />
     <Content Include="app\inventory\directive\dashboard.js" />
+    <Content Include="app\inventory\directive\item-picture.js" />
     <Content Include="app\inventory\directive\navbar-main.js" />
     <Content Include="app\common\controller\account\account-repository.js" />
     <Content Include="app\common\controller\account\auth-repository.js" />

@@ -68,11 +68,25 @@ namespace MTCHRMS.DC.Implementation
 
         public async Task<List<ItemDistributionSerialDetailModel>> GetDistributionHierarchy(int id)
         {
-            return await Task.Run(()=>
-            
-                _ctx.Distributions
-                    .Where(c=>c.DistributionItems.Any(b=>b.ItemStockSerialId == id))
-                    .Select(x=> new ItemDistributionSerialDetailModel
+            var distribution = new List<ItemDistributionSerialDetailModel>();
+
+            var itemDist = await GetDistribution(id);
+
+            distribution.Add(new ItemDistributionSerialDetailModel
+            {
+                SerialDetailId = -101,
+                DepartmentId = 1,
+                DepartmentName = "1",
+                EmployeeId= 1,
+                EmployeeName= "Warranty Start Date",
+                AssignedDate = itemDist.WarrantyStateDate ?? new DateTime(),
+                ContentClass = "start"
+
+            });
+
+            distribution.AddRange(await _ctx.Distributions
+                    .Where(c => c.DistributionItems.Any(b => b.ItemStockSerialId == id))
+                    .Select(x => new ItemDistributionSerialDetailModel
                     {
                         SerialDetailId = x.DistributionId,
                         DepartmentId = x.DepartmentId,
@@ -82,9 +96,24 @@ namespace MTCHRMS.DC.Implementation
                         EmployeePicture = x.EmployeeDetail.EmpPicture,
                         AssignedDate = x.DistributionDate,
                         LocationId = x.DistributionItems.FirstOrDefault().LocationId,
-                        LocationName = x.DistributionItems.FirstOrDefault().LocationDetail.StoreName
-                    }).ToListAsync<ItemDistributionSerialDetailModel>()
-            );
+                        LocationName = x.DistributionItems.FirstOrDefault().LocationDetail.StoreName,
+                        ContentClass = "assign"
+                    }).ToListAsync<ItemDistributionSerialDetailModel>());
+
+
+            distribution.Add(new ItemDistributionSerialDetailModel
+            {
+                SerialDetailId = -102,
+                DepartmentId = 1,
+                DepartmentName = "1",
+                EmployeeId = 1,
+                EmployeeName = "Warranty End Date",
+                AssignedDate = itemDist.WarrantyEndDate ?? new DateTime(),
+                ContentClass = "end"
+
+            });
+
+            return await Task.Run(()=> distribution );
         }
 
         public bool Save()

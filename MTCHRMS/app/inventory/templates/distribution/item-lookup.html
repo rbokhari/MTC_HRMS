@@ -8,10 +8,10 @@
     <div class="modal-body">
         <div class="control-group pull-left">
             <div class="controls">
-                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
-                    <option value="10" selected="selected">10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
+                <select ng-model="recordPage" ng-init="recordPage=20" class="input-small m-wrap">
+                    <option value="20" selected="selected">20</option>
+                    <option value="25">25</option>
+                    <option value="30">30</option>
                 </select>
             </div>
         </div>
@@ -38,14 +38,16 @@
             </tr>
             <tr ng-if="pitems.$resolved" dir-paginate="item in pitems | filter:search | itemsPerPage: recordPage">
                 <td>{{$index+1}}</td>
-                <td><img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px"/>{{item.itemCode}}</td>
-                <td>{{item.itemName}}</td>
+                <td>
+                    <!--<img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px"/>-->{{item.code}}
+                </td>
+                <td>{{item.name}}</td>
                 <td><a href="" ng-click="selectItem(item)">select</a></td>
             </tr>
             </tbody>
         </table>
-        <div ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" style="height:40px;">
-            <span class="pull-left bottom" ng-show="items.length>0">
+        <div style="height:40px;">
+            <span class="pull-left bottom" ng-show="pitems.length>0">
                 Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}
             </span>
             <span class="pull-right">

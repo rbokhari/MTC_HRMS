@@ -22,6 +22,85 @@ namespace MTCHRMS.DC
             _ctx = ctx;
         }
 
+        public async Task<IQueryable<ItemModel>> GetItemsModel()
+        {
+            return await Task.Run(() =>
+                _ctx.Items
+                    .Include(c => c.TypeDetail)
+                    .Include(d => d.CategoryDetail)
+                    .Include(e => e.StoreLocation)
+                    //.Include(f => f.TechnicianType)
+                    //.Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
+                    //.Include(h => h.ItemYears.Select(j => j.YearDetail))
+                    //.Include(j=>j.ItemManufacturers.Select(x=>x.ManufacturerDetail))
+                    //.Include(q=>q.ItemSuppliers.Select(i=>i.SupplierDetail))
+                    .Select(x=> new ItemModel
+                    {
+                        Id = x.ItemId,
+                        Code = x.ItemCode,
+                        Name = x.ItemName,
+                        PartNo = x.NatoNo,
+                        SerialNo = x.SerialNo,
+                        TypeId = x.TypeId,
+                        Type = x.TypeDetail.NameEn,
+                        CategoryId = x.CategoryId,
+                        Category = x.CategoryDetail.NameEn,
+                        StoreId = x.StoreId,
+                        Store = x.StoreLocation.StoreName,
+                        Stock = x.ItemStock
+                        //Picture = x.ItemPicture
+
+                    })
+                    .OrderByDescending(x=>x.Id)
+                    );
+        }
+
+        public async Task<ItemModel> GetItemModelDetail(int id)
+        {
+            return await Task.Run(() =>
+               _ctx.Items
+                    .Where(c => c.ItemId == id)
+                    
+                   .Include(c => c.TypeDetail)
+                   .Include(d => d.CategoryDetail)
+                   .Include(e => e.StoreLocation)
+                   .Select(x => new ItemModel
+                   {
+                       Id = x.ItemId,
+                       Code = x.ItemCode,
+                       Name = x.ItemName,
+                       PartNo = x.NatoNo,
+                       SerialNo = x.SerialNo,
+                       TypeId = x.TypeId,
+                       Type = x.TypeDetail.NameEn,
+                       CategoryId = x.CategoryId,
+                       Category = x.CategoryDetail.NameEn,
+                       StoreId = x.StoreId,
+                       Store = x.StoreLocation.StoreName,
+                       Stock = x.ItemStock,
+                       Picture = x.ItemPicture
+
+                    })
+                   .FirstOrDefaultAsync()
+                   );
+        }
+
+        public async Task<ItemModel> GetItemPicture(int id)
+        {
+            return await Task.Run(() =>
+               _ctx.Items
+                   .Where(c => c.ItemId == id)
+                   .Select(x => new ItemModel
+                   {
+                       Id = x.ItemId,
+                       Code = x.ItemCode,
+                       Name = x.ItemName,
+                       Picture = x.ItemPicture
+                   })
+                   .FirstOrDefaultAsync()
+                   );
+        }
+
         public async Task<IQueryable<Item>> GetItems()
         {
             return await Task.Run(() =>
@@ -478,7 +557,7 @@ namespace MTCHRMS.DC
 
 
 
-        public async Task<List<Item>> GetItemSearch(Item item)
+        public async Task<List<ItemModel>> GetItemSearch(Item item)
         {
             try
             {
@@ -562,7 +641,21 @@ namespace MTCHRMS.DC
                     }
                 }
 
-                return await items.ToListAsync();
+                return await items.Select(x=> new ItemModel
+                {
+                    Id = x.ItemId,
+                    Code = x.ItemCode,
+                    Name = x.ItemName,
+                    PartNo = x.NatoNo,
+                    SerialNo = x.SerialNo,
+                    TypeId = x.TypeId,
+                    Type = x.TypeDetail.NameEn,
+                    CategoryId = x.CategoryId,
+                    Category = x.CategoryDetail.NameEn,
+                    StoreId = x.StoreId,
+                    Store = x.StoreLocation.StoreName,
+                    Stock = x.ItemStock
+                }).ToListAsync();
             }
             catch (Exception ex)
             {

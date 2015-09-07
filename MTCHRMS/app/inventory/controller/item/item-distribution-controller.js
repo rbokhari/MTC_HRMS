@@ -34,51 +34,17 @@ invModule.controller('ItemDistributionController',
                 .get().$promise
                 .then(function (data) {
                     $scope.itemDetail = data;
-                    var start = {
-                        serialDetailId: -101,
-                        departmentId: 1,
-                        departmentName: 1,
-                        employeeId: 1,
-                        employeeName: "Warranty Start Date",
-                        assignedDate: data.warrantyStateDate,
-                        contentClass: "start"
-                    };
-                    $scope.itemDetailHierarchy.push(start);
                     itemRepository.getItemDistributionHierarchy($routeParams.serialId)
                         .query().$promise
                         .then(function (response) {
-                            angular.forEach(response, function (key) {
-                                key.contentClass = "assign";
-                                $scope.itemDetailHierarchy.push(key);
-                            });
+                            $scope.itemDetailHierarchy = response;
                         }, function (error) {
                             console.log(error);
-                        })
-                        .then(function () {  //finally block
-                            var expiry = {
-                                serialDetailId: -102,
-                                departmentId: 1,
-                                departmentName: 1,
-                                employeeId: 1,
-                                employeeName: "Warranty End Date",
-                                assignedDate: data.warrantyEndDate,
-                                contentClass: "end"
-                            };
-                            $scope.itemDetailHierarchy.push(expiry);
-                            console.log($scope.itemDetailHierarchy);
                         });
-
                 }, function (err) {
                     console.log("error", err);
                 });
-
-            
-
         };
-
-        //$scope.selectedItemSerials = [];
-        
-
 
         $scope.showItemLookup = function () {
             ModalService.showModal({
@@ -135,7 +101,6 @@ invModule.controller('ItemDistributionController',
             });
         };
 
-
         $scope.saveDistribution = function (distribution) {
 
             itemRepository.addItemDistribution(distribution)
@@ -161,8 +126,6 @@ invModule.controller('ItemDistributionController',
         $scope.loadDistributionView = function () {
 
         };
-
-
 
         var timelineBlocks = $('.cd-timeline-block'),
 		offset = 0.8;

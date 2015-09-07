@@ -27,16 +27,30 @@ namespace MTCHRMS.Controllers
             _repo = repo;
         }
 
+        //[Route("api/item/")]
+        //[HttpGet]
+        //[Authorize]
+        //public Task<IQueryable<Item>> Get()
+        //{
+        //    // IQueryable filter data inside sql query and on database side get specified filter results only, 
+        //    //where as IEnumerable get all data from databse and filter it on client side
+
+        //    //System.Threading.Thread.Sleep(1000);
+        //    var items = _repo.GetItems();
+
+        //    return items;
+        //}
+
         [Route("api/item/")]
         [HttpGet]
         [Authorize]
-        public Task<IQueryable<Item>> Get()
+        public Task<IQueryable<ItemModel>> Get()
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
             //where as IEnumerable get all data from databse and filter it on client side
 
             //System.Threading.Thread.Sleep(1000);
-            var items = _repo.GetItems();
+            var items = _repo.GetItemsModel();
 
             return items;
         }
@@ -55,6 +69,21 @@ namespace MTCHRMS.Controllers
             }
             return item;
         }
+
+        [Route("api/item/GetItemPicture/{id}")]
+        [HttpGet]
+        //[Authorize]
+        public async Task<ItemModel> GetItemPicture(int id)
+        {
+            var item = await _repo.GetItemPicture(id);
+
+            if (item == null)
+            {
+                //Request.CreateErrorResponse(HttpStatusCode.inva);
+            }
+            return item;
+        }
+
 
         [Route("api/item/ItemDepartments")]
         [HttpGet]
@@ -106,7 +135,7 @@ namespace MTCHRMS.Controllers
         [Route("api/item/GetItemSearch")]
         [HttpGet]
         [System.Web.Http.Authorize]
-        public async Task<List<Item>> GetItemSearch([FromUri]Item item)
+        public async Task<List<ItemModel>> GetItemSearch([FromUri]Item item)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);

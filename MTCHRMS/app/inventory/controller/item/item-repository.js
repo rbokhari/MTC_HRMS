@@ -10,6 +10,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item').query(); // can use get() instead of query(), but using query() because it except to return back array of objects
         };
 
+        var _getItemPicture = function (id) {
+            return $resource('/api/item/GetItemPicture/' + id).get();
+        };
+
         var _getAllItemSuppliers = function () {
             return $resource('/api/item/ItemSuppliers').query();
         };
@@ -142,6 +146,7 @@ invModule.factory('itemRepository', [
 
         return {
             getAllItems: _getAllItems,
+            getItemPicture: _getItemPicture,
             getAllItemSuppliers: _getAllItemSuppliers,
             getAllSuppliersByItemId:_getAllSuppliersByItemId,
             getAllItemManufactuers: _getAllItemManufactuers,

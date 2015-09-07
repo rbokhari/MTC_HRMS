@@ -45,6 +45,7 @@
 /// <reference path="../app/inventory/controller/supplier/supplier-repository.js" />
 /// <reference path="../app/inventory/directive/barcode-print.js" />
 /// <reference path="../app/inventory/directive/dashboard.js" />
+/// <reference path="../app/inventory/directive/item-picture.js" />
 /// <reference path="../app/inventory/directive/navbar-main.js" />
 /// <reference path="../app/inventory/module/inv-module.js" />
 /// <reference path="../content/bootstrap-datepicker/js/bootstrap-datepicker.js" />

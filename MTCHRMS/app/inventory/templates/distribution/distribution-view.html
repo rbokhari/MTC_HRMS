@@ -532,17 +532,21 @@ Modules - reusable parts of our design
                                 </div>
                                 <br/>
                                 <ul class="unstyled">
-                                    <li style="height: 36px;"><label class="label">Item Code</label>&nbsp;{{itemDetail.itemCode}}</li>
-                                    <li style="height: 36px;"><label class="label">Computer Code</label>&nbsp;{{itemDetail.stockComputerCode}}</li>
-                                    <li style="height: 36px;"><label class="label">Receipt No</label>&nbsp;{{itemDetail.stockReceiptNo}}</li>
+                                    <li style="height: 36px;"><label class="label span6">Item Code</label>&nbsp;{{itemDetail.itemCode}}</li>
+                                    <li style="height: 36px;"><label class="label span6">Computer Code</label>&nbsp;{{itemDetail.stockComputerCode}}</li>
+                                    <li style="height: 36px;"><label class="label span6">Receipt No</label>&nbsp;{{itemDetail.stockReceiptNo}}</li>
                                 </ul>
                             </div>
                         </div>
 
                         <div class="span8 offset1">
-                            <h4 class="title grey">Item Timeline</h4>
+                            <h4 class="title grey">Item Timeline :  [ Status : {{itemDetail.status}} ] - [ Serial No : {{itemDetail.stockSerialNo}} ] </h4>
 
-                            <section id="cd-timeline" class="cd-container">
+                            <div ng-show="itemDetailHierarchy.length === 0" class="progress progress-striped active">
+                                <div style="width: 100%;" class="bar"></div>
+                            </div>
+
+                            <section ng-show="itemDetailHierarchy.length > 0" id="cd-timeline" class="cd-container">
 
                                 <div class="cd-timeline-block" ng-repeat="hierarchy in itemDetailHierarchy | orderBy:'assignedDate'">
                                     <div class="cd-timeline-img bounce-in" ng-class="{'cd-start':hierarchy.serialDetailId===-101, 'cd-end':hierarchy.serialDetailId===-102, 'cd-assign':hierarchy.serialDetailId!==-101}">

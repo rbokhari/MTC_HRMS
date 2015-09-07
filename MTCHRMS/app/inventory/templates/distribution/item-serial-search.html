@@ -54,7 +54,7 @@
                                 <th>Sr. #</th>
                                 <th>Code</th>
                                 <th>Name</th>
-                                <th>NSN / Part</th>
+                                <th>Receipt No</th>
                                 <th>Serial No</th>
                                 <th>Actions</th>
                             </tr>
@@ -77,9 +77,9 @@
                                     <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}" title="{{item.itemName}}"> {{ item.itemName | limitTo:20}} {{item.itemName.length > 20 ? '...' : ''}}</a>
+                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}" title="{{item.itemName}}"> {{ item.itemName | limitTo:30}} {{item.itemName.length > 30 ? '...' : ''}}</a>
                                 </td>
-                                <td>{{item.stockComputerCode}}</td>
+                                <td>{{item.stockReceiptNo}}</td>
                                 <td><label class="label label-success"> {{item.stockSerialNo}}</label></td>
                                 <td>
                                     <a style="text-decoration: none;" ng-href="/INVPortal/item/detail/{{item.itemId}}/distribution/{{item.stockSerialId}}"><i class="icon-2x icon-time"></i></a>

@@ -628,7 +628,6 @@ invModule.controller('ItemController',
             $scope.item.manufacturerId = 0;
             $scope.item.createdBy = 0;
 
-            console.log($scope.item);
         };
 
         $scope.clearSearch();

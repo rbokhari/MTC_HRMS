@@ -50,7 +50,7 @@ moduleModal.controller('ItemLookupModalController',
         }
 
         $scope.selectItem = function(item) {
-            $scope.resultData = { "itemId": item.itemId,"itemPicture": item.itemPicture, "itemCode": item.itemCode, "itemName": item.itemName, "stockinHand": item.itemStock };
+            $scope.resultData = { "itemId": item.id,"itemPicture": item.picture, "itemCode": item.code, "itemName": item.name, "stockinHand": item.stock };
             $scope.close();
             $('#dvItemLookup').modal('hide');
         }

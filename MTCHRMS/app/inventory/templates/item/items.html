@@ -42,7 +42,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Item Type :</label>
+                                        <label class="control-label">Item Class :</label>
                                         <div class="controls">
                                             <select id="cPostedTo" name="cPostedTo" ng-model="item.typeId">
                                                 <option value="0"></option>
@@ -164,10 +164,10 @@
                                 Record Per Page:
                             </label>
                             <div class="controls">
-                                <select ng-model="recordPage" ng-init="recordPage=10" class="input-small m-wrap">
-                                    <option value="10" selected="selected">10</option>
-                                    <option value="15">15</option>
-                                    <option value="20">20</option>
+                                <select ng-model="recordPage" ng-init="recordPage=20" class="input-small m-wrap">
+                                    <option value="20" selected="selected">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
                                 </select>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
-                                <th>Sr. #</th>
+                                <th>SN.</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>NSN / Part</th>
@@ -196,28 +196,26 @@
                                     </div>
                                 </td>
                             </tr>
+                        
                             <tr ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" dir-paginate="item in items | filter:search | itemsPerPage: recordPage">
                                 <td>{{$index + 1}}</td>
                                 <td>
-                                    <div class="zoom">
-                                        <img class="circular" alt="" data-img-loading-value="{{item.itemPicture}}" data-img-loading-size="itemmini" style="height: 48px; width: 48px;" width="48px" height="48px" />
-                                        <div class="zoom-icon"></div>
-                                    </div>
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}"> {{ item.itemCode }} </a>
+                                    <img class="circular" ng-src="/Content/img/item.jpg" alt="" item-picture="{{item.id}}" />
+                                    <a ng-href="/INVPortal/item/detail/{{ item.id}}"> {{ item.code }} </a>
                                 </td>
                                 <td style="vertical-align: middle;">
-                                    <a ng-href="/INVPortal/item/detail/{{ item.itemId}}" title="{{item.itemName}}"> {{ item.itemName | limitTo:20}} {{item.itemName.length > 20 ? '...' : ''}}</a>
+                                    <a ng-href="/INVPortal/item/detail/{{ item.id}}" title="{{item.name}}"> {{ item.name | limitTo:20}} {{item.name.length > 20 ? '...' : ''}}</a>
                                 </td>
                                 <td>
                                     <div>
-                                        {{item.natoNo}} <br/>
+                                        {{item.partNo}} <br />
                                         {{item.serialNo}}
-                                    </div> 
+                                    </div>
                                 </td>
-                                <td style="vertical-align: middle;">{{item.typeDetail.nameEn}}</td>
-                                <td style="vertical-align: middle;">{{item.categoryDetail.nameEn}}</td>
-                                <td style="vertical-align: middle;">{{item.storeLocation.storeName}}</td>
-                                <td style="vertical-align: middle;"><label class="label label-success"> {{ item.itemStock }}</label></td>
+                                <td style="vertical-align: middle;">{{item.type}}</td>
+                                <td style="vertical-align: middle;">{{item.category}}</td>
+                                <td style="vertical-align: middle;">{{item.store}}</td>
+                                <td style="vertical-align: middle;"><label class="label label-success"> {{ item.stock }}</label></td>
                             </tr>
                         </tbody>
                     </table>
