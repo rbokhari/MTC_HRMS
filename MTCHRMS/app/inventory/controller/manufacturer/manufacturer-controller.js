@@ -57,9 +57,10 @@ invModule.controller('ManufacturerController',
 
         $scope.countItemsManufacturer = function (id) {
             //alert("hello " + id);
-            console.log("call countItemsManufacturer");
+            //console.log("call countItemsManufacturer");
             var countManufacturer = 0;
             angular.forEach($scope.items, function (item) {
+                console.log("items", item.itemManufacturers);
                 angular.forEach(item.itemManufacturers, function (manu) {
                     if (manu.manufacturerId === id) {
                         countManufacturer++;
