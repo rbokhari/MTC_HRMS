@@ -1653,6 +1653,29 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     top:0;
 }
 
+.zoom span {
+    font-size:medium;
+    text-align:center;
+    
+    font-weight:bold;
+    padding-top:16px;
+    padding-bottom:16px;
+    padding-right:8px;
+    padding-left:8px;
+
+}
+
+.overlay {
+    display: inline-block;
+    position: relative;
+}
+
+.open-button {
+    position: absolute;    
+    right: 10px;
+    top: 10px;
+}
+
 /* logo page */
 #logo {
     width: 247px;

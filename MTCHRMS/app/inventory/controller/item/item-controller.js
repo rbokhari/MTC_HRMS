@@ -552,6 +552,21 @@ invModule.controller('ItemController',
             });
         };
 
+        $scope.deleteAttachment = function (index, attachment) {
+            var x;
+            console.log(attachment);
+            if (confirm("Are you sure to delete this record ?") === true) {
+                itemRepository.deleteItemAttachment(attachment)
+                    .$promise
+                    .then(function () {
+                        appRepository.showDeleteGritterNotification();
+                        $scope.item[0].itemAttachments.splice(index, 1);
+                    }, function (error) {
+                        appRepository.showErrorGritterNotification();
+                    });
+            }
+        };
+
 
         $scope.editSingleSerial = function (serialid) {
             console.log(serialid);

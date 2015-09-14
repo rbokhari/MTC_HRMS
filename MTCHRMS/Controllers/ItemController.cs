@@ -410,8 +410,9 @@ namespace MTCHRMS.Controllers
                     ItemId = paramData,
                     FileName = Path.GetFileName(_file.FileName),
                     FileType =  Path.GetExtension(_file.FileName),
-                    FileIcon =  "1",
-                    CreatedBy = 1,
+                    FileIcon = Path.GetExtension(_file.FileName).Substring(1),
+                    AttachmentGuid = Guid.NewGuid().ToString(),
+                    CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First()),
                     CreatedOn =  DateTime.Now
                     
                 };
@@ -420,7 +421,8 @@ namespace MTCHRMS.Controllers
                 {
                     attachment = await _repo.GetAttachment(attachment.AttachmentId);
 
-                    _file.SaveAs(Path.Combine(attachment.StoragePath.FullPath, attachment.AttachmentId + Path.GetExtension(_file.FileName)));
+                    //_file.SaveAs(Path.Combine(attachment.StoragePath.FullPath, attachment.AttachmentId + Path.GetExtension(_file.FileName)));
+                    _file.SaveAs(System.Web.Hosting.HostingEnvironment.MapPath("/attachments/inventory/items/" +  attachment.AttachmentGuid + Path.GetExtension(_file.FileName)));
                     return Request.CreateResponse(HttpStatusCode.Created, attachment);
                 }
 
@@ -756,6 +758,25 @@ namespace MTCHRMS.Controllers
                 if (_repo.DeleteItemManufacturer(deleteManufacturer) && _repo.Save())
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, deleteManufacturer);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("DeleteItemAttachment")]
+        [HttpPost]
+        [Authorize]
+        public HttpResponseMessage DeleteItemAttachment([FromBody] ItemAttachment deleteAttachment)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_repo.DeleteItemAttachment(deleteAttachment) && _repo.Save())
+                {
+                    File.Delete(System.Web.Hosting.HostingEnvironment.MapPath("/attachments/inventory/items/" + deleteAttachment.AttachmentGuid + deleteAttachment.FileType));
+                    return Request.CreateResponse(HttpStatusCode.OK, deleteAttachment);
                     //return new HttpResponseMessage(HttpStatusCode.OK);
                 }
 

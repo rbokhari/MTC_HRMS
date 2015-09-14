@@ -126,7 +126,7 @@ namespace MTCHRMS.DC
                 .Include(g => g.ItemDepartments.Select(i => i.DepartmentDetail))
                 .Include(h => h.ItemYears.Select(j => j.YearDetail))
                 .Include(q => q.ItemSuppliers.Select(i => i.SupplierDetail))
-                .Include(c=>c.ItemAttachments)
+                .Include(c => c.ItemAttachments)
                 .Include(c => c.ItemStockAdds.Select(i=>i.ItemStockSerials.Select(j=>j.ItemStockStatusDetail)))
                 .Include(c => c.ItemStockAdds.Select(i => i.ItemStockSerials.Select(j => j.DistributionItem)))
                 .Include(c => c.ItemStockAdds.Select(i => i.SupplierDetail))
@@ -158,9 +158,7 @@ namespace MTCHRMS.DC
                         r => r.ItemId != newItem.ItemId && (String.Equals(r.ItemCode.ToLower(), newItem.ItemCode.ToLower()) || String.Equals(r.SerialNo.ToLower(), newItem.SerialNo.ToLower())));
             }
 
-            if (item != null) return item.ItemId;
-
-            return 0;
+            return item?.ItemId ?? 0;
         }
 
         public bool AddItem(Item newItem)
@@ -338,6 +336,21 @@ namespace MTCHRMS.DC
         public async Task<ItemAttachment> GetAttachment(int attachmentId)
         {
             return await _ctx.ItemAttachments.SingleOrDefaultAsync(c => c.AttachmentId == attachmentId);
+        }
+
+        public bool DeleteItemAttachment(ItemAttachment deleteItemAttachment)
+        {
+            try
+            {
+                var attachment = _ctx.ItemAttachments.Single(i => i.AttachmentId == deleteItemAttachment.AttachmentId);
+                _ctx.ItemAttachments.Remove(attachment);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
         }
 
 

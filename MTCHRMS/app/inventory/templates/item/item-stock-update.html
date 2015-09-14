@@ -80,8 +80,15 @@
                                 </div>
                             </div>
                             <hr />
-                            <div class="control-group">
-                                <label class="control-label" for="tQuantity">Quantity :</label>
+                            <div class="control-group required">
+                                <label class="control-label" for="tQuantity">Order Quantity :</label>
+                                <div class="controls">
+                                    <input type="text" id="tOrderQuantity" ng-model="stock.orderStock" class="input-medium" required readonly="readonly" />
+                                    <div class="help-inline" ng-show="frm.tOrderQuantity.$error.required && frm.tOrderQuantity.$dirty">Please enter !</div>
+                                </div>
+                            </div>
+                            <div class="control-group required">
+                                <label class="control-label" for="tQuantity">Deliver Quantity :</label>
                                 <div class="controls">
                                     <input type="text" id="tQuantity" ng-model="stock.stock" class="input-medium" required readonly="readonly" />
                                     <div class="help-inline" ng-show="frm.tQuantity.$error.required && frm.tQuantity.$dirty">Please enter !</div>

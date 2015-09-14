@@ -3,10 +3,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         <h3 id="myModalLabel1">{{title}}</h3>
     </div>
-    <div class="modal-body" data-ng-init="loadDepartments()">
+    <div class="modal-body">
         <form id="frm" novalidate>
             <div class="form-horizontal">
-                <div id="dvAttachment" runat="server" class="dropzone">
+                <div id="dvAttachment" class="dropzone">
                     <div>
                         <div class="fallback">
                             <input type="file" ng-file-select="onAttachmentUpload(parentId, $files)" />

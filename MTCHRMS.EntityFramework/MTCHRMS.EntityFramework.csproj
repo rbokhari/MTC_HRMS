@@ -57,6 +57,8 @@
     <Compile Include="General\Validation.cs" />
     <Compile Include="HRMSMigrationConfiguration.cs" />
     <Compile Include="HRMS\EmployeeDef.cs" />
+    <Compile Include="HRMS\LeaveDef.cs" />
+    <Compile Include="HRMS\TicketDef.cs" />
     <Compile Include="Inventory\Item.cs" />
     <Compile Include="Inventory\ItemAttachment.cs" />
     <Compile Include="Inventory\ItemDistribution.cs" />

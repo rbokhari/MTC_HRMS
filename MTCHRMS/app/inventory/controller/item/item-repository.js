@@ -116,6 +116,10 @@ invModule.factory('itemRepository', [
             return $resource('/api/item/' + itemManufacturer.itemId + '/DeleteItemManufacturer').save(itemManufacturer);
         };
 
+        var _deleteItemAttachment = function (itemAttachment) {
+            return $resource('/api/item/' + itemAttachment.itemId + '/DeleteItemAttachment').save(itemAttachment);
+        };
+
         var _getItemSearchList = function (item) {
             return $resource('/api/item/GetItemSearch').query(item);
         };
@@ -172,6 +176,7 @@ invModule.factory('itemRepository', [
             addItemManufacturer: _addItemManufacturer,
             updateItemManufacturer: _updateItemManufacturer,
             deleteItemManufacturer: _deleteItemManufacturer,
+            deleteItemAttachment:_deleteItemAttachment,
             getItemSearchList: _getItemSearchList,
             addItemStockSerials: _addItemStockSerials,
             addItemDistribution: _addItemDistribution,

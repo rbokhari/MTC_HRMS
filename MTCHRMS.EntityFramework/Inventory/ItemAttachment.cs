@@ -17,7 +17,7 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public int ItemId { get; set; }
 
-        [ForeignKey("StoragePath")]
+        //[ForeignKey("StoragePath")]
         public int StorageId { get; set; }
 
         public String FileName { get; set; }
@@ -26,8 +26,10 @@ namespace MTCHRMS.EntityFramework.Inventory
 
         public string FileIcon { get; set; }
 
+        public string AttachmentGuid { get; set; }
 
-        public virtual StoragePath StoragePath { get; set; }
+
+        //public virtual StoragePath StoragePath { get; set; }
     }
 
 }
