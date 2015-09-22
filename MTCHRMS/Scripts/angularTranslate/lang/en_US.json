@@ -120,7 +120,9 @@
     "COUNTRY": "Country",
     "CLOSE": "Close",
     "DETAIL": "Detail",
-    "CHILD_NAME": "Child Name"
+  "CHILD_NAME": "Child Name",
+  "LEAVE": "Leave Master",
+  "TICKET":  "Ticket Master"
 
 
 }

@@ -125,18 +125,50 @@
                 controller: 'EmployeeController'
             });
 
-    $routeProvider
-        .when('/HRMSPortal/employee/search', {
-            templateUrl: '/app/hrms/templates/hrms/employee/employee-search.html',
-            controller: 'EmployeeController'
-        });
+        $routeProvider
+            .when('/HRMSPortal/employee/search', {
+                templateUrl: '/app/hrms/templates/hrms/employee/employee-search.html',
+                controller: 'EmployeeController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/ticket', {
+                templateUrl: '/app/hrms/templates/hrms/ticket/ticket.html',
+                controller: 'TicketController'
+            });
+        $routeProvider
+            .when('/HRMSPortal/ticket/add', {
+                templateUrl: '/app/hrms/templates/hrms/ticket/ticket-add.html',
+                controller: 'TicketController'
+            });
+        $routeProvider
+            .when('/HRMSPortal/ticket/edit/:id', {
+                templateUrl: '/app/hrms/templates/hrms/ticket/ticket-edit.html',
+                controller: 'TicketController'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/leave', {
+                templateUrl: '/app/hrms/templates/hrms/leave/leave.html',
+                controller: 'LeaveController'
+            });
+        $routeProvider
+            .when('/HRMSPortal/leave/add', {
+                templateUrl: '/app/hrms/templates/hrms/leave/leave-add.html',
+                controller: 'LeaveController'
+            });
+        $routeProvider
+            .when('/HRMSPortal/leave/edit/:id', {
+                templateUrl: '/app/hrms/templates/hrms/leave/leave-edit.html',
+                controller: 'LeaveController'
+            });
 
 
-    $routeProvider
-        .when('/HRMSPortalAr', {
-            templateUrl: '/app/hrms/templates/dashboard.html',
-            controller: 'DashboardController'
-        });
+        $routeProvider
+            .when('/HRMSPortalAr', {
+                templateUrl: '/app/hrms/templates/dashboard.html',
+                controller: 'DashboardController'
+            });
 
 
         $routeProvider

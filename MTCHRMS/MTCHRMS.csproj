@@ -205,6 +205,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
+    <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\DistributionController.cs" />
     <Compile Include="Controllers\ManufacturerController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -233,7 +235,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\common\templates\modal\confirm-modal.html" />
+    <Content Include="app\hrms\controller\leave\leave-controller.js" />
+    <Content Include="app\hrms\controller\leave\leave-repository.js" />
+    <Content Include="app\hrms\controller\ticket\ticket-controller.js" />
+    <Content Include="app\hrms\controller\ticket\ticket-repository.js" />
     <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />
+    <Content Include="app\hrms\templates\hrms\leave\leave-add.html" />
+    <Content Include="app\hrms\templates\hrms\leave\leave-edit.html" />
+    <Content Include="app\hrms\templates\hrms\leave\leave.html" />
+    <Content Include="app\hrms\templates\hrms\ticket\ticket-add.html" />
+    <Content Include="app\hrms\templates\hrms\ticket\ticket-edit.html" />
+    <Content Include="app\hrms\templates\hrms\ticket\ticket.html" />
     <Content Include="app\inventory\controller\dashboard\dashboard-controller.js" />
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />

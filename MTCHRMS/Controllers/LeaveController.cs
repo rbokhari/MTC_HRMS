@@ -10,59 +10,58 @@ using System.Web.Http;
 using System.Web.UI.WebControls;
 using MTCHRMS.DC;
 using MTCHRMS.EntityFramework;
+using MTCHRMS.DC.Interface.HRMS;
+using MTCHRMS.EntityFramework.HRMS;
 
 namespace MTCHRMS.Controllers
 {
-    public class DepartmentController : ApiController
+    public class LeaveController : ApiController
     {
-        public IDepartmentsRepository _repo;
+        public ILeavesDefRepository _repo;
 
-        public DepartmentController(IDepartmentsRepository pRepository)
+        public LeaveController(ILeavesDefRepository pRepository)
         {
             _repo = pRepository;
         }
 
         [Authorize]
-        public Task<IQueryable<Department>> Get()     
+        public Task<IQueryable<LeaveDef>> Get()     
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
             //where as IEnumerable get all data from databse and filter it on client side
-            
-            //System.Threading.Thread.Sleep(1000);
-            var departments = _repo.GetDepartments();
+            var leaves = _repo.GetLeaves();
 
-            return departments;
+            return leaves;
         }
 
         [Authorize]
-        public Department Get(int id)
+        public LeaveDef Get(int id)
         {
-            //IDepartmentsRepository _repo = new DepartmentRepository();
-            var department = _repo.GetDepartment(id);
+            var leave = _repo.GetLeave(id);
 
-            if (department == null)
+            if (leave == null)
             {
                 //Request.CreateErrorResponse(HttpStatusCode.BadRequest)
             }
-            return department;
+            return leave;
         }
 
         [Authorize]
-        public HttpResponseMessage Post([FromBody] Department newDepartment)
+        public HttpResponseMessage Post([FromBody] LeaveDef newLeave)
         {
             if (ModelState.IsValid)
             {
                 if (Request.Headers.Contains("userId"))
                 {
-                    newDepartment.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    newLeave.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
                 }
 
-                newDepartment.CreatedOn = DateTime.Now;
+                newLeave.CreatedOn = DateTime.Now;
 
-                if (_repo.AddDepartment(newDepartment) && _repo.Save())
+                if (_repo.AddLeave(newLeave) && _repo.Save())
                 {
-                    var response = Request.CreateResponse<Department>(HttpStatusCode.Created, newDepartment);
-                    response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = newDepartment.Id })); // this will generate link
+                    var response = Request.CreateResponse<LeaveDef>(HttpStatusCode.Created, newLeave);
+                    response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = newLeave.LeaveId })); // this will generate link
                     return response;
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
@@ -71,20 +70,20 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        public HttpResponseMessage Put(int id, [FromBody] Department updateDepartment)
+        public HttpResponseMessage Put(int id, [FromBody] LeaveDef updateLeave)
         {
             if (ModelState.IsValid)
             {
                 if (Request.Headers.Contains("userId"))
                 {
-                    updateDepartment.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    updateLeave.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
                 }
 
-                updateDepartment.ModifiedOn = DateTime.Now;
+                updateLeave.ModifiedOn = DateTime.Now;
 
-                if (_repo.UpdateDepartment(updateDepartment) && _repo.Save())
+                if (_repo.UpdateLeave(updateLeave) && _repo.Save())
                 {
-                    return Request.CreateResponse(HttpStatusCode.Created, updateDepartment);
+                    return Request.CreateResponse(HttpStatusCode.Created, updateLeave);
                 }
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }

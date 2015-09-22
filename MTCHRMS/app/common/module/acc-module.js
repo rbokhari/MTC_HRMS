@@ -28,7 +28,10 @@
         "ITEM_YEAR": "10",
         "EMPLOYEE_STATUS": "11",
         "MAINTENANCE_TYPE": "12",
-        "ITEM_STOCK_STATUS": "13"
+        "ITEM_STOCK_STATUS": "13",
+        "LEAVE_TYPE": "14",
+        "LEAVE_SCHEDULE": "15",
+        "TICKET_ELIGIBILITY": "16"
 
     })
 

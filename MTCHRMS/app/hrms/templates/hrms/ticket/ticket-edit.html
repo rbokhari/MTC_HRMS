@@ -1,0 +1,94 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                <span translate="DEPARTMENT"></span>&nbsp;<small> <span translate="EDIT"></span></small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    HRMS <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#"><span translate="EDIT"></span></a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-edit"></i><span translate="EDIT"></span>&nbsp;</h4>
+                    <span class="tools">
+                        <a class="icon-plus-sign" href="/{{mainPortal}}/department/add"></a>
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="frmDepartment" novalidate>
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="txtCode"><span translate="DEPARTMENT"></span>&nbsp;<span translate="CODE"></span></label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
+                                    <input type="hidden" id="hdId" ng-model="department.id" />
+                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span>&nbsp;</div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtName"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span></label>
+                                <div class="controls">
+                                    <input type="text" name="txtName" id="txtName" class="span6" ng-model="department.departmentName" required="required" />
+                                    <div class="help-inline" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtNameAr"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp; (ar)</label>
+                                <div class="controls">
+                                    <input type="text" name="txtNameAr" id="txtNameAr" class="span6" ng-model="department.departmentNameAr" />
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
+                                </div>
+                            </div>
+                            <div class="form-actions" ng-if="authentication.isHRMSAdmin">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="edit(department)" ng-disabled="frmDepartment.$invalid">
+                                    <i class="icon-edit"></i>
+                                    <span translate="UPDATE"></span>
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/department">
+                                    <i class="icon-undo"></i>
+                                    <span translate="CANCEL"></span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+            $('.sidebar-menu > .active').removeClass('active open');
+            $('#liHRMS, #liDepartment').addClass('active open');
+    </script>
+</div>

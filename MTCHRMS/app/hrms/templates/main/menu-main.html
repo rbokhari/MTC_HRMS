@@ -16,13 +16,19 @@
                     <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liDepartment" ng-class="{ active: isActiveNavigation('/HRMSPortal/department')}">
                         <a class="" ng-href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span></a>
                     </li>
+                    <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liLeavesDef" ng-class="{ active: isActiveNavigation('/HRMSPortal/leave')}">
+                        <a class="" ng-href="/{{mainPortal}}/leave"><span translate="LEAVE"></span></a>
+                    </li>
+                    <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liTicketDef" ng-class="{ active: isActiveNavigation('/HRMSPortal/ticket')}">
+                        <a class="" ng-href="/{{mainPortal}}/ticket"><span translate="TICKET"></span></a>
+                    </li>
                     <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liOrgChart" ng-class="{ active: isActiveNavigation('/HRMSPortal/oc')}">
                         <a class="" href="/{{mainPortal}}/oc"><span translate="ORGANIZATION_CHART"></span></a>
                     </li>
                     <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee')}">
                         <a class="" href="/{{mainPortal}}/employee"><span translate="STAFF"></span></a>
                     </li>
-                    <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liStaffRegistration" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee')}">
+                    <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liStaffSearch" ng-class="{ active: isActiveNavigation('/HRMSPortal/search')}">
                         <a class="" href="/{{mainPortal}}/employee/search"><span translate="SEARCH"></span></a>
                     </li>
                     <li ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" id="liStaffListing" ng-class="{ active: isActiveNavigation('/HRMSPortal/employee/listing')}">

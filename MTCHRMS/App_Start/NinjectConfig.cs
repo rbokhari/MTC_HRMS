@@ -6,6 +6,8 @@ using MTCHRMS.DC;
 using MTCHRMS.DC.Implementation;
 using MTCHRMS.DC.Interface;
 using MTCHRMS.EntityFramework;
+using MTCHRMS.DC.Interface.HRMS;
+using MTCHRMS.DC.Implementation.HRMS;
 using MTCHRMS.EntityFramework.Inventory;
 using Ninject;
 
@@ -30,6 +32,9 @@ namespace MTCHRMS.App_Start
             kernel.Bind<IManufacturersRepository>().To<ManufactuerRepository>();
 
             kernel.Bind<IDistributionRepository>().To<DistributionRepository>();
+
+            kernel.Bind<ITicketDefRepository>().To<TicketDefRepository>();
+            kernel.Bind<ILeavesDefRepository>().To<LeaveDefRepository>();
 
             return kernel;
         }

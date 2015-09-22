@@ -15,17 +15,26 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int LeaveId { get; set; }
 
         [MaxLength(25)]
+        [Required]
         public String Code { get; set; }
 
+        [MaxLength(255)]
+        [Required]
+        public String LeaveName { get; set; }
+
+        [Required]
         public int Type { get; set; }  // e.g. Annual leave, emergency leave, sick leave
 
+        [Required]
         public int Total { get; set; }
 
+        [Required]
         public int Schedule { get; set; }   // e.g. Annual Contract, Annual Year
 
         [MaxLength(500)]
         public String Description { get; set; }
 
+        [Required]
         public short IsActive { get; set; }
 
     }

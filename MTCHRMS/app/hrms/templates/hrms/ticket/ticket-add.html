@@ -1,0 +1,97 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                <span translate="TICKET"></span>&nbsp;<small> <span translate="ADD"></span> </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    HRMS <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/{{mainPortal}}/ticket"><span translate="TICKET"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i><span translate="TICKET"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="/{{mainPortal}}/ticket" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="frmTicket" novalidate >
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="txtCode"><span translate="TICKET"></span>&nbsp; <span translate="CODE"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" name="txtCode" ng-model="ticket.code" disabled="disabled"  />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="cSchedule"><span translate="SCHEDULE"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <select name="cSchedule" class="span6" id="cSchedule" ng-model="ticket.schedule" required="required"></select>
+                                    <div class="help-inline red-color" ng-show="frmTicket.cSchedule.$error.required && frmTicket.cSchedule.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="cEligibility"><span translate="ELIGIBILITY"></span></label>
+                                <div class="controls">
+                                    <select name="cSchedule" class="span6" id="cEligibility" ng-model="ticket.eligibility" required="required"></select>
+                                    <div class="help-inline red-color" ng-show="frmTicket.cEligibility.$error.required && frmTicket.cEligibility.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tDesc"><span translate="DESCRIPTION"></span></label>
+                                <div class="controls">
+                                    <textarea id="tDesc" rows="3" class="span6" ng-model="ticket.description"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="checkbox" name="statusId" ng-model="ticket.isActive" ng-true-value="1" ng-false-value="0" />
+                                </div>
+                            </div>
+                            <div class="form-actions" ng-if="authentication.isHRMSAdmin">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(ticket)" ng-disabled="frmTicket.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE"></span>&nbsp;
+                                </button>
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(ticket)" ng-disabled="frmTicket.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/ticket">
+                                    <i class="icon-undo"></i>
+                                    <span translate="CANCEL"></span>&nbsp;
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
