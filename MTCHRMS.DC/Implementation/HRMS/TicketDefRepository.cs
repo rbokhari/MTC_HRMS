@@ -23,7 +23,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
         public async Task<IQueryable<TicketDef>> GetTickets()
         {
             //System.Threading.Thread.Sleep(100);
-            return await Task.Run(() => _ctx.Tickets);
+            return await Task.Run(() => _ctx.Tickets.Include(c=>c.ScheduleDetail).Include(d=>d.EligibilityDetail));
         }
 
         public TicketDef GetTicketDef(int id)

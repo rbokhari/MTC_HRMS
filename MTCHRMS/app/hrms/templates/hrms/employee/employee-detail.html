@@ -45,6 +45,7 @@
                         <div class="tabbable">
                             <!--ng-init="tab=1"  set this in controller as tab=1  -->
                             <ul class="nav nav-tabs">
+                                <li ng-class="{active:isTabSelected(7)}"><a href="" ng-click="setTab(7)"><span translate="LEAVE"></span></a></li>
                                 <li ng-class="{active:isTabSelected(6)}"><a href="" ng-click="setTab(6)"><span translate="KIN_INFORMATION"></span></a></li>
                                 <li ng-class="{active:isTabSelected(5)}"><a href="" ng-click="setTab(5)"><span translate="FAMILY_DETAIL"></span></a></li>
                                 <li ng-class="{active:isTabSelected(4)}"><a href="" ng-click="setTab(4)"><span translate="PREVIOUS_EMPLOYMENT"></span></a></li>
@@ -465,106 +466,169 @@
                                 </form>
                             </div>
                             <div class="tab-pane" id="tab6" ng-show="isTabSelected(6)">
-                                <form id="frmKin" name="frmKin" novalidate>
-                                    <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="NEXT_OF_KIN_DETAIL"></span></strong>
-                                    <hr />
-                                    <div class="row-fluid">
-                                        <div class="span6">
-                                            <div class="form-horizontal">
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="NAME"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName1" />
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="COUNTRY"></span> :</label>
-                                                    <div class="controls">
-                                                        <select id="cCountry1" name="cCountry1" ng-model="employee[0].employeeKin[0].countryId1" ng-options="country.id as country.nameEn for country in countries"></select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
-                                                    <div class="controls">
-                                                        <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address1"></textarea>
-                                                    </div>
+                            <form id="frmKin" name="frmKin" novalidate>
+                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i> <strong><span translate="NEXT_OF_KIN_DETAIL"></span></strong>
+                                <hr/>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="NAME"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName1"/>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="span6">
-                                            <div class="form-horizontal">
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship1" />
-                                                    </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="COUNTRY"></span> :</label>
+                                                <div class="controls">
+                                                    <select id="cCountry1" name="cCountry1" ng-model="employee[0].employeeKin[0].countryId1" ng-options="country.id as country.nameEn for country in countries"></select>
                                                 </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="AIRPORT"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport1" />
-                                                    </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
+                                                <div class="controls">
+                                                    <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address1"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="ADDITIONAL_NEXT_OF_KIN_DETAIL"></span> (if any)</strong>
-                                    <hr />
-                                    <div class="row-fluid">
-                                        <div class="span6">
-                                            <div class="form-horizontal">
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="NAME"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName2" />
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="COUNTRY"></span> :</label>
-                                                    <div class="controls">
-                                                        <select id="cCountry2" name="cCountry2" ng-model="employee[0].employeeKin[0].countryId2" ng-options="country.id as country.nameEn for country in countries"></select>
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
-                                                    <div class="controls">
-                                                        <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address2"></textarea>
-                                                    </div>
+                                    <div class="span6">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship1"/>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="span6">
-                                            <div class="form-horizontal">
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship2" />
-                                                    </div>
-                                                </div>
-                                                <div class="control-group">
-                                                    <label class="control-label"><span translate="AIRPORT"></span> :</label>
-                                                    <div class="controls">
-                                                        <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport2" />
-                                                    </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="AIRPORT"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport1"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                    <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="NOTE"></span></strong>
-                                    <em>(Incase of accident who should be contacted as alternative to or additional to Next of Kin)</em>
-                                    <hr />
-                                    <textarea id="tNote" name="tNode" class="input-xxlarge span12" rows="4" ng-model="employee[0].employeeKin[0].notes"></textarea>
-
-                                    <div class="form-actions" ng-if="authentication.isHRMSAdmin">
-                                        <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeKin(employee[0].id, employee[0].employeeKin[0])" ng-disabled="frmKin.$isvalid">
-                                            <i class="icon-save"></i>
-                                            <span translate="UPDATE"></span>
-                                        </a>
+                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i> <strong><span translate="ADDITIONAL_NEXT_OF_KIN_DETAIL"></span> (if any)</strong>
+                                <hr/>
+                                <div class="row-fluid">
+                                    <div class="span6">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="NAME"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinFullName" name="tKinFullName" ng-model="employee[0].employeeKin[0].fullName2"/>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="COUNTRY"></span> :</label>
+                                                <div class="controls">
+                                                    <select id="cCountry2" name="cCountry2" ng-model="employee[0].employeeKin[0].countryId2" ng-options="country.id as country.nameEn for country in countries"></select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="RESIDENTIAL_ADDRESS"></span> :</label>
+                                                <div class="controls">
+                                                    <textarea id="tKinAddress" name="tKinAddress" ng-model="employee[0].employeeKin[0].address2"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
-                                </form>
+                                    <div class="span6">
+                                        <div class="form-horizontal">
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="RELATIONSHIP"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].relationship2"/>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label"><span translate="AIRPORT"></span> :</label>
+                                                <div class="controls">
+                                                    <input type="text" id="tKinRelationship" name="tKinRelationshiop" ng-model="employee[0].employeeKin[0].airport2"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i> <strong><span translate="NOTE"></span></strong>
+                                <em>(Incase of accident who should be contacted as alternative to or additional to Next of Kin)</em>
+                                <hr/>
+                                <textarea id="tNote" name="tNode" class="input-xxlarge span12" rows="4" ng-model="employee[0].employeeKin[0].notes"></textarea>
+
+                                <div class="form-actions" ng-if="authentication.isHRMSAdmin">
+                                    <a id="cmdSave" class="btn btn-primary" ng-click="saveEmployeeKin(employee[0].id, employee[0].employeeKin[0])" ng-disabled="frmKin.$isvalid">
+                                        <i class="icon-save"></i>
+                                        <span translate="UPDATE"></span>
+                                    </a>
+                                </div>
+                                <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                            </form>
+                        </div>
+
+                            <div id="tab7" class="tab-pane" ng-show="isTabSelected(7)">
+                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="LEAVE_INFORMATION"></span></strong>
+                                <span ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
+                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee[0].id)">
+                                        <i class="icon-external-link"></i> <span translate="Assign_Leave_Category"></span>
+                                    </a>
+                                </span>
+                                <table class="table table-striped table-bordered table-advance">
+                                    <thead>
+                                    <tr>
+                                        <th><span translate="SERIAL_NO"></span>.</th>
+                                        <th><span translate="COMPANY_NAME"></span></th>
+                                        <th><span translate="START_DATE"></span></th>
+                                        <th><span translate="END_DATE"></span></th>
+                                        <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="pemployment in employee[0].previousEmployments">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{pemployment.companyName}}</td>
+                                        <td>{{pemployment.startDate | date:'longDate'}}</td>
+                                        <td>{{pemployment.endDate | date:'longDate' }}</td>
+                                        <td ng-if="authentication.isHRMSAdmin">
+                                            <a href="" ng-click="deletePreviousEmployement(pemployment)"> <i class="icon-trash red"></i></a>
+                                        </td>
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <br/><br/>
+
+                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="TICKET_INFORMATION"></span></strong>
+                                <span ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
+                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee[0].id)">
+                                        <i class="icon-external-link"></i> <span translate="Assign_TICKET_Category"></span>
+                                    </a>
+                                </span>
+                                <table class="table table-striped table-bordered table-advance">
+                                    <thead>
+                                        <tr>
+                                            <th><span translate="SERIAL_NO"></span>.</th>
+                                            <th><span translate="COMPANY_NAME"></span></th>
+                                            <th><span translate="START_DATE"></span></th>
+                                            <th><span translate="END_DATE"></span></th>
+                                            <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="pemployment in employee[0].previousEmployments">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{pemployment.companyName}}</td>
+                                            <td>{{pemployment.startDate | date:'longDate'}}</td>
+                                            <td>{{pemployment.endDate | date:'longDate' }}</td>
+                                            <td ng-if="authentication.isHRMSAdmin">
+                                                <a href="" ng-click="deletePreviousEmployement(pemployment)"> <i class="icon-trash red"></i></a>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

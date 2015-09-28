@@ -1,0 +1,46 @@
+﻿<div id="dvLeaveCategory" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Assign Leave Category">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1"><span translate="ASSIGN_LEAVE_CATEGORY"></span></h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmLeaveCategory" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="cLeaveName" class="control-label"><span translate="LEAVE_NAME"></span> :</label>
+                    <div class="controls">
+                        <select id="cLeaveName" name="cLeaveName" ng-if="lang=='en_US'" ng-model="leaveCategory.id" ng-options="gender.id as gender.nameEn for gender in genders" required></select>
+                        <div class="help-inline" ng-show="frmLeaveCategory.cLeaveName.$error.required && frmLeaveCategory.cLeaveName.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"><span translate="TYPE"></span> :</label>
+                    <div class="controls">
+                        <input type="text" id="tSchedule" name="tSchedule" ng-model="leaveCategory.type"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"><span translate="SCHEDULE"></span> :</label>
+                    <div class="controls">
+                        <input type="text" name="tSchedule" ng-model="leaveCategory.schedule"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"><span translate="TOTAL"></span> :</label>
+                    <div class="controls">
+                        <input type="text" id="tTotal" name="tTotal" ng-model="leaveCategory.total" required/>
+                        <div class="help-inline" ng-show="frmLeaveCategory.tTotal.$error.required && frmLeaveCategory.tTotal.$dirty">*</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><span translate="CLOSE"></span></button>
+        <button type="submit" class="btn btn-primary" ng-click="saveLeaveCategory(parentId, leaveCategory)" ng-disabled="frmLeaveCategory.$invalid">
+            <i class="icon-save"></i>
+            <span translate="SAVE"></span>
+        </button>
+    </div>
+
+</div>

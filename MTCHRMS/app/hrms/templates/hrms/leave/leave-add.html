@@ -4,7 +4,7 @@
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                <span translate="DEPARTMENT"></span>&nbsp;<small> <span translate="ADD"></span> </small>
+                <span translate="LEAVE"></span>&nbsp;<small> <span translate="ADD"></span> </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -13,7 +13,7 @@
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/leave"><span translate="LEAVE"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -24,60 +24,74 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid">
+    <div class="row-fluid" data-ng-init="loadLeaveAdd()">
         <div class="span12">
             <div class="widget">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i><span translate="DEPARTMENT"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
+                    <h4><i class="icon-reorder"></i><span translate="LEAVE"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
                     <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
-                        <a href="javascript:;" class="icon-remove"></a>
+                        <a href="/{{mainPortal}}/leave" class="icon-remove"></a>
                     </span>
                 </div>
                 <div class="widget-body">
-                    <form name="frmDepartment" novalidate >
-
+                    <form name="frmLeave" novalidate >
                         <div class="form-horizontal">
                             <div class="control-group">
-                                <label class="control-label" for="txtCode"><span translate="DEPARTMENT"></span>&nbsp; <span translate="CODE"></span>&nbsp;</label>
+                                <label class="control-label" for="txtName"><span translate="LEAVE"></span>&nbsp; <span translate="NAME"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <input type="text" id="txtCode" name="txtCode" ng-model="department.departmentCode" required="required" />
-                                    <div class="help-inline" ng-show="frmDepartment.txtCode.$error.required && frmDepartment.txtCode.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                    <input type="text" id="txtName" name="txtName" ng-model="leave.leaveName" />
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="txtName"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp;</label>
+                                <label class="control-label" for="cSchedule"><span translate="TYPE"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <input type="text" name="txtName" class="span6" id="txtName" ng-model="department.departmentName" required="required" />
-                                    <div class="help-inline red-color" ng-show="frmDepartment.txtName.$error.required && frmDepartment.txtName.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                    <select name="cSchedule" id="cSchedule" ng-model="leave.typeId" ng-options="type.id as type.nameEn for type in types" required="required"></select>
+                                    <div class="help-inline red-color" ng-show="frmLeave.cSchedule.$error.required && frmLeave.cSchedule.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="txtNameAr"><span translate="DEPARTMENT"></span>&nbsp;<span translate="NAME"></span>&nbsp; (ar)</label>
+                                <label class="control-label" for="cEligibility"><span translate="SCHEDULE"></span></label>
                                 <div class="controls">
-                                    <input type="text" name="txtNameAr" class="span6" id="txtNameAr" ng-model="department.departmentNameAr" />
+                                    <select name="cSchedule" id="cEligibility" ng-model="leave.scheduleId" ng-options="schedule.id as schedule.nameEn for schedule in schedules" required="required"></select>
+                                    <div class="help-inline red-color" ng-show="frmLeave.cEligibility.$error.required && frmLeave.cEligibility.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="tDesc"><span translate="TOTAL"></span></label>
+                                <div class="controls">
+                                    <input type="text" id="tDesc" ng-model="leave.total"/>
+                                    <div class="help-inline red-color" ng-show="frmLeave.cEligibility.$error.required && frmLeave.cEligibility.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
                             <div class="control-group">
-                                <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
+                                <label class="control-label" for="tDesc"><span translate="DESCRIPTION"></span></label>
                                 <div class="controls">
-                                    <input type="checkbox" name="statusId" ng-model="department.statusId" ng-true-value="1" ng-false-value="0" />
+                                    <textarea id="tDesc" rows="3" class="span6" ng-model="leave.description"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label"><span translate="STATUS"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <toggle-switch html="true" model="leave.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                 </div>
                             </div>
                             <div class="form-actions" ng-if="authentication.isHRMSAdmin">
-                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(department)" ng-disabled="frmDepartment.$invalid">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(leave)" ng-disabled="frmLeave.$invalid">
                                     <i class="icon-save"></i>
                                     <span translate="SAVE"></span>&nbsp;
                                 </button>
-                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(department)" ng-disabled="frmDepartment.$invalid">
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(leave)" ng-disabled="frmLeave.$invalid">
                                     <i class="icon-save"></i>
                                     <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
                                 </button>
-                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/department">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/leave">
                                     <i class="icon-undo"></i>
                                     <span translate="CANCEL"></span>&nbsp;
                                 </a>
                             </div>
+
                         </div>
                         <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
                     </form>

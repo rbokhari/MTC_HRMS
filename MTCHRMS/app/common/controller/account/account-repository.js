@@ -25,7 +25,7 @@ accModule.factory('accountRepository', ['$resource', function ($resource) {
     };
 
 
-    return {
+    return { 
         getUserById: _getUserById,
         getUserByUserName:_getUserByUserName,
         getRoleById: _getRoleById,

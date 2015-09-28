@@ -24,7 +24,7 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid">
+    <div class="row-fluid" data-ng-init="loadTicketAdd()">
         <div class="span12">
             <div class="widget">
                 <div class="widget-title">
@@ -39,22 +39,22 @@
 
                         <div class="form-horizontal">
                             <div class="control-group">
-                                <label class="control-label" for="txtCode"><span translate="TICKET"></span>&nbsp; <span translate="CODE"></span>&nbsp;</label>
+                                <label class="control-label" for="txtName"><span translate="TICKET"></span>&nbsp; <span translate="NAME"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <input type="text" id="txtCode" name="txtCode" ng-model="ticket.code" disabled="disabled"  />
+                                    <input type="text" id="txtName" name="txtName" ng-model="ticket.ticketName" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="cSchedule"><span translate="SCHEDULE"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <select name="cSchedule" class="span6" id="cSchedule" ng-model="ticket.schedule" required="required"></select>
+                                    <select name="cSchedule" id="cSchedule" ng-model="ticket.schedule" ng-options="schedule.id as schedule.nameEn for schedule in schedules" required="required"></select>
                                     <div class="help-inline red-color" ng-show="frmTicket.cSchedule.$error.required && frmTicket.cSchedule.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="cEligibility"><span translate="ELIGIBILITY"></span></label>
                                 <div class="controls">
-                                    <select name="cSchedule" class="span6" id="cEligibility" ng-model="ticket.eligibility" required="required"></select>
+                                    <select name="cSchedule" id="cEligibility" ng-model="ticket.eligibility" ng-options="eligibility.id as eligibility.nameEn for eligibility in eligibilities" required="required"></select>
                                     <div class="help-inline red-color" ng-show="frmTicket.cEligibility.$error.required && frmTicket.cEligibility.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
                                 <div class="controls">
-                                    <input type="checkbox" name="statusId" ng-model="ticket.isActive" ng-true-value="1" ng-false-value="0" />
+                                    <toggle-switch html="true" model="ticket.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>" ></toggle-switch>
                                 </div>
                             </div>
                             <div class="form-actions" ng-if="authentication.isHRMSAdmin">

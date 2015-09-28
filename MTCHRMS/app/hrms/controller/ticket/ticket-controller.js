@@ -5,8 +5,8 @@
 
 hrmsModule.controller('TicketController',
 [
-    '$scope', 'appRepository', 'ticketRepository', 'employeeRepository', '$location', '$routeParams',
-    function ($scope, appRepository, ticketRepository, employeeRepository, $location, $routeParams) {
+    '$scope', 'appRepository', 'ticketRepository', 'validationRepository', 'employeeRepository', '$location', '$routeParams',
+    function ($scope, appRepository, ticketRepository, validationRepository, employeeRepository, $location, $routeParams) {
 
         console.log("ticket controller");
         //$scope.myname = "yahoo";
@@ -24,6 +24,12 @@ hrmsModule.controller('TicketController',
                 .then(function() { $scope.isBusy = false; });
         };
 
+        $scope.loadTicketAdd = function () {
+
+            $scope.schedules = validationRepository.getLeaveSchedules;
+            $scope.eligibilities = validationRepository.getTicketEligibilities;
+
+        };
 
         $scope.save = function(ticket) {
             

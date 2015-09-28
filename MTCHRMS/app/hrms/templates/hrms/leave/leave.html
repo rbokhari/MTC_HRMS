@@ -29,7 +29,7 @@
                     <span class="tools">
                         <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{mainPortal}}/leave/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
-                        <a href="javascript:;" class="icon-remove"></a>
+                        <a href="/{{mainPortal}}/" class="icon-remove"></a>
                     </span>
                 </div>
                 <div class="widget-body" ng-init="loadLeave()">
@@ -52,14 +52,15 @@
                     </div>
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
-                            <tr>
-                                <th translate="CODE"></th>
-                                <th translate="TYPE"></th>
-                                <th translate="TOTAL"></th>
-                                <th translate="SCHEDULE"></th>
-                                <th translate="STATUS"></th>
-                                <th translate="EMPLOYEES"></th>
-                            </tr>
+                        <tr>
+                            <th translate="SN"></th>
+                            <th translate="NAME"></th>
+                            <th translate="TYPE"></th>
+                            <th translate="TOTAL"></th>
+                            <th translate="SCHEDULE"></th>
+                            <th translate="STATUS"></th>
+                            <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
+                        </tr>
                         </thead>
                         <tbody>
                             <tr ng-show="isBusy">
@@ -69,34 +70,28 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr dir-paginate="leave in leaves | filter:search | itemsPerPage: recordPage">
-                                <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.code }} </a>
-                                </td>
-                                <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
-                                    {{ leave.departmentCode }}
-                                </td>
-                                <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.type }} </a>
-                                </td>
-                                <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
-                                    {{ leave.departmentName }}
-                                </td>
-                                <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.total }} </a>
-                                </td>
-                                <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
-                                    {{ leave.departmentNameAr }}
-                                </td>
-                                <td>
-                                    <label ng-class="{'label label-info': leave.statusId, 'label label-inverse': department.statusId==0}">
-                                        <ng-pluralize count="department.statusId" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
-                                    </label>
-                                </td>
-                                <td>
-                                    <span class="badge badge-important">{{filtered = (employees  | filter:{postedTo:leave.leaveId}).length}}</span>
-                                </td>
-                            </tr>
+                        <tr dir-paginate="leave in leaves | filter:search | itemsPerPage: recordPage">
+                            <td>{{$index+1}}</td>
+                            <td ng-if="authentication.isHRMSAdmin">
+                                <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.leaveName }} </a>
+                            </td>
+                            <td>
+                                {{ leave.typeDetail.nameEn }}
+                            </td>
+                            <td>{{ leave.total }}</td>
+                            <td>
+                                {{ leave.scheduleDetail.nameEn }}
+                            </td>
+                            <td>
+                                <label ng-class="{'label label-success': leave.isActive, 'label label-inverse': leave.isActive==0}">
+                                    <ng-pluralize count="leave.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
+                                </label>
+                            </td>
+                            <td ng-if="authentication.isHRMSAdmin">
+                                <a href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> <i class="icon-edit"></i></a>
+                                <a href="" ng-click=""> <i class="icon-trash"></i></a>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <div style="height:40px;">

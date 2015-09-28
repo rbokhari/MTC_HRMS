@@ -5,8 +5,8 @@
 
 hrmsModule.controller('LeaveController',
 [
-    '$scope', 'appRepository', 'leaveRepository', 'employeeRepository', '$location', '$routeParams',
-    function ($scope, appRepository, leaveRepository, employeeRepository, $location, $routeParams) {
+    '$scope', 'appRepository', 'leaveRepository', 'validationRepository', 'employeeRepository', '$location', '$routeParams',
+    function ($scope, appRepository, leaveRepository, validationRepository, employeeRepository, $location, $routeParams) {
 
         console.log("leave controller");
         //$scope.myname = "yahoo";
@@ -24,6 +24,12 @@ hrmsModule.controller('LeaveController',
                 .then(function() { $scope.isBusy = false; });
         };
 
+        $scope.loadLeaveAdd = function () {
+
+            $scope.schedules = validationRepository.getLeaveSchedules;
+            $scope.types = validationRepository.getLeaveTypes;
+
+        };
 
         $scope.save = function(leave) {
             
@@ -77,7 +83,7 @@ hrmsModule.controller('LeaveController',
                     console.log("edit done - Successfully !");
                     appRepository.showUpdateSuccessGritterNotification();
 
-                    $location.url('/' + $scope.mainPortal + '/department');
+                    $location.url('/' + $scope.mainPortal + '/leave');
                 }, function(response) {
                     // failure case
                     console.log("edit - Error !");

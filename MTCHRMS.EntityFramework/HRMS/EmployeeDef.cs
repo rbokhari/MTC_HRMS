@@ -280,4 +280,44 @@ namespace MTCHRMS.EntityFramework.HRMS
 
     }
 
+    public class EmployeeLeaveCategory : TableStrutcture
+    {
+        [Key]
+        public int LeaveCategoryId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        [ForeignKey("LeaveDetail")]
+        public int LeaveId { get; set; }
+
+        public int TotalLeaves { get; set; }
+
+        [MaxLength(500)]
+        public String Notes { get; set; }
+
+        public short IsActive { get; set; }
+
+        public virtual LeaveDef LeaveDetail { get; set; }
+
+    }
+
+    public class EmployeeTicketCategory : TableStrutcture
+    {
+        [Key]
+        public int TicketCategoryId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        [ForeignKey("TicketDetail")]
+        public int TicketId { get; set; }
+
+        [MaxLength(500)]
+        public String Notes { get; set; }
+
+        public short IsActive { get; set; }
+
+        public virtual TicketDef TicketDetail { get; set; }
+
+    }
+
 }

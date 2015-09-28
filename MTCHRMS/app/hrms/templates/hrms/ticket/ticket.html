@@ -53,38 +53,40 @@
                     <table class="table table-striped table-bordered table-advance table-hover">
                         <thead>
                             <tr>
-                                <th translate="CODE"></th>
+                                <th translate="SN"></th>
+                                <th translate="NAME"></th>
                                 <th translate="SCHEDULE"></th>
                                 <th translate="ELIGIBILITY"></th>
                                 <th translate="STATUS"></th>
-                                <th translate="EMPLOYEES"></th>
+                                <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-show="isBusy">
-                                <td colspan="5">
+                                <td colspan="6">
                                     <div class="progress progress-striped active">
                                         <div style="width: 100%;" class="bar"></div>
                                     </div>
                                 </td>
                             </tr>
                             <tr dir-paginate="ticket in tickets | filter:search | itemsPerPage: recordPage">
-                                <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{mainPortal}}/ticket/edit/{{ ticket.ticketId}}"> {{ ticket.ticketCode }} </a>
-                                </td>
-                                <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
-                                    {{ ticket.schedule }}
-                                </td>
-                                <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{mainPortal}}/ticket/edit/{{ ticket.ticketId}}"> {{ ticket.eligibility }} </a>
-                                </td>
                                 <td>
-                                    <label ng-class="{'label label-info': ticket.isActive, 'label label-inverse': ticket.isActive==0}">
+                                    {{$index+1}}
+                                </td>
+                                <td ng-if="authentication.isHRMSAdmin">
+                                    <a ng-href="/{{mainPortal}}/ticket/edit/{{ ticket.ticketId}}"> {{ ticket.ticketName }} </a>
+                                </td>
+                                <td ng-if="!authentication.isHRMSAdmin">{{ ticket.ticketName }}</td>
+                                <td>{{ ticket.scheduleDetail.nameEn }}</td>
+                                <td>{{ ticket.eligibilityDetail.nameEn }}</td>
+                                <td>
+                                    <label ng-class="{'label label-success': ticket.isActive, 'label label-inverse': ticket.isActive==0}">
                                         <ng-pluralize count="ticket.isActive" when="{'0':'disabled', '1':'active'}"></ng-pluralize>
                                     </label>
                                 </td>
-                                <td>
-                                    <span class="badge badge-important">{{filtered = (tickets  | filter:{postedTo:ticket.id}).length}}</span>
+                                <td ng-if="authentication.isHRMSAdmin">
+                                    <a href="" ng-click=""> <i class="icon-edit red"></i></a>
+                                    <a href="" ng-click=""> <i class="icon-trash red"></i></a>
                                 </td>
                             </tr>
                         </tbody>

@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MTCHRMS.EntityFramework.General;
 
 namespace MTCHRMS.EntityFramework.HRMS
 {
@@ -15,7 +16,6 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int LeaveId { get; set; }
 
         [MaxLength(25)]
-        [Required]
         public String Code { get; set; }
 
         [MaxLength(255)]
@@ -23,19 +23,25 @@ namespace MTCHRMS.EntityFramework.HRMS
         public String LeaveName { get; set; }
 
         [Required]
-        public int Type { get; set; }  // e.g. Annual leave, emergency leave, sick leave
+        [ForeignKey("TypeDetail")]
+        public int TypeId { get; set; }  // e.g. Annual leave, emergency leave, sick leave
 
         [Required]
         public int Total { get; set; }
 
         [Required]
-        public int Schedule { get; set; }   // e.g. Annual Contract, Annual Year
+        [ForeignKey("ScheduleDetail")]
+        public int ScheduleId { get; set; }   // e.g. Annual Contract, Annual Year
 
         [MaxLength(500)]
         public String Description { get; set; }
 
         [Required]
         public short IsActive { get; set; }
+
+        public virtual ValidationDetail TypeDetail { get; set; }
+
+        public virtual ValidationDetail ScheduleDetail { get; set; }
 
     }
 }

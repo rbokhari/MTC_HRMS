@@ -1,6 +1,6 @@
 ﻿var hrmsModule = angular.module("hrmsModule", 
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
-        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'accModule'])
+        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule'])
     .config(function ($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
 
         console.log('hrms module router call !');

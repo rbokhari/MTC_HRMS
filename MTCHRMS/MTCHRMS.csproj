@@ -240,6 +240,8 @@
     <Content Include="app\hrms\controller\ticket\ticket-controller.js" />
     <Content Include="app\hrms\controller\ticket\ticket-repository.js" />
     <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />
+    <Content Include="app\hrms\templates\hrms\employee\employee-leave-category.html" />
+    <Content Include="app\hrms\templates\hrms\employee\employee-ticket-category.html" />
     <Content Include="app\hrms\templates\hrms\leave\leave-add.html" />
     <Content Include="app\hrms\templates\hrms\leave\leave-edit.html" />
     <Content Include="app\hrms\templates\hrms\leave\leave.html" />
