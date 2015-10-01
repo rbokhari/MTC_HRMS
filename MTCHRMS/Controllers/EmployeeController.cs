@@ -726,6 +726,134 @@ namespace MTCHRMS.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
 
+        [Route("api/employee/GetEmployeeContract/{id}")]
+        [System.Web.Http.Authorize]
+        public async Task<EmployeeContract> GetEmployeeContract(int id)
+        {
+            return await _repo.LoadEmployeeContract(id);
+
+        }
+
+        [ActionName("PostEmployeeContract")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddEmployeeContract([FromBody] EmployeeContract newContract)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newContract.ContractId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeeContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newContract.ContractId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newContract.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newContract.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateEmployeeContract(newContract) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newContract);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostEmployeeLeaveCategory")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddEmployeeLeaveCategory([FromBody] EmployeeLeaveCategory newLeave)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newLeave.LeaveCategoryId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newLeave.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newLeave.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeeLeaveCategory(newLeave) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newLeave);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newLeave.LeaveCategoryId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newLeave.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newLeave.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateEmployeeLeaveCategory(newLeave) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newLeave);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [ActionName("PostEmployeeTicketCategory")]
+        [HttpPost]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddEmployeeTicketCategory([FromBody] EmployeeTicketCategory newTicket)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newTicket.TicketId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newTicket.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newTicket.CreatedOn = DateTime.UtcNow;
+
+                    if (_repo.AddEmployeeTicketCategory(newTicket) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newTicket);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                else if (newTicket.TicketId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newTicket.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newTicket.ModifiedOn = DateTime.Now;
+
+                    if (_repo.UpdateEmployeeTicketCategory(newTicket) && _repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newTicket);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
         private IEnumerable<string> GetErrorMessages()
         {
             return ModelState.Values.SelectMany(x => x.Errors.Select(e => e.ErrorMessage));

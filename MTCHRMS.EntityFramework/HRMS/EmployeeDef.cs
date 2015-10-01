@@ -280,12 +280,34 @@ namespace MTCHRMS.EntityFramework.HRMS
 
     }
 
+    public class EmployeeContract : TableStrutcture
+    {
+        [Key]
+        public int ContractId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        public int EmploymentTypeId { get; set; }     // e.g. permanent, contract
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        [MaxLength(500)]
+        public String Notes { get; set; }
+
+        public short StatusId { get; set; }
+
+    }
+
     public class EmployeeLeaveCategory : TableStrutcture
     {
         [Key]
         public int LeaveCategoryId { get; set; }
 
         public int EmployeeDefId { get; set; }
+
+        public int ContractId { get; set; }
 
         [ForeignKey("LeaveDetail")]
         public int LeaveId { get; set; }
@@ -307,6 +329,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int TicketCategoryId { get; set; }
 
         public int EmployeeDefId { get; set; }
+
+        public int ContractId { get; set; }
 
         [ForeignKey("TicketDetail")]
         public int TicketId { get; set; }

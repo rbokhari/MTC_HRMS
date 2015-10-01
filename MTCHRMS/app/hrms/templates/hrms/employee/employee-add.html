@@ -213,10 +213,10 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label"><span translate="STATUS"></span> :</label>
+                                        <label class="control-label" for="cStatus"><span translate="STATUS"></span> :</label>
                                         <div class="controls">
-                                            <select id="cNationality" name="cStatus" ng-if="lang=='en_US'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameEn for status in employeeStatus" required></select>
-                                            <select id="cNationality" name="cStatus" ng-if="lang=='ar_OM'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameAr for status in employeeStatus" required></select>
+                                            <select id="cStatus" name="cStatus" ng-if="lang=='en_US'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameEn for status in employeeStatus" required></select>
+                                            <select id="cStatus" name="cStatus" ng-if="lang=='ar_OM'" ng-model="employeeDef.statusId" ng-options="status.id as status.nameAr for status in employeeStatus" required></select>
                                             <div class="help-inline" ng-show="staffForm.cStatus.$error.required && staffForm.cStatus.$dirty">*</div>
                                         </div>
                                     </div>

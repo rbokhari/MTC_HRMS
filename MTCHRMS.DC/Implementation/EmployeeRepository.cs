@@ -462,6 +462,103 @@ namespace MTCHRMS.DC
             }
         }
 
+        public bool AddEmployeeContract(EmployeeContract newContract)
+        {
+            try
+            {
+                _ctx.EmployeeContracts.Add(newContract);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool UpdateEmployeeContract(EmployeeContract updateContract)
+        {
+            try
+            {
+                _ctx.Entry(updateContract).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public async Task<EmployeeContract> LoadEmployeeContract(int employeeId)
+        {
+            try
+            {
+                var contract = await _ctx.EmployeeContracts.SingleAsync(c => c.EmployeeDefId == employeeId && c.StatusId == 1);
+                return contract;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public bool AddEmployeeLeaveCategory(EmployeeLeaveCategory newLeaveCategory)
+        {
+            try
+            {
+                _ctx.EmployeeLeaveCategory.Add(newLeaveCategory);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool UpdateEmployeeLeaveCategory(EmployeeLeaveCategory updateLeaveCategory)
+        {
+            try
+            {
+                _ctx.Entry(updateLeaveCategory).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool AddEmployeeTicketCategory(EmployeeTicketCategory newTicketCategory)
+        {
+            try
+            {
+                _ctx.EmployeeTicketCategory.Add(newTicketCategory);
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
+        public bool UpdateEmployeeTicketCategory(EmployeeTicketCategory updateTicketCategory)
+        {
+            try
+            {
+                _ctx.Entry(updateTicketCategory).State = EntityState.Modified;
+                return true;
+            }
+            catch (Exception)
+            {
+                // TODO log this error    
+                return false;
+            }
+        }
+
         public void Dispose()
         {
             _ctx.Dispose();

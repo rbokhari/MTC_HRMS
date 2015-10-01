@@ -2,10 +2,10 @@
 moduleModal.controller('EmployeeModalController',
 [
     '$scope', '$location', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
-    'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification',
+    'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification','validations',
 
     function ($scope, $location, appRepository, employeeRepository, validationRepository, title, close,
-        parentId, resultData, $timeout, $upload, employeePassport, employeeVisa, employeeQualification) {
+        parentId, resultData, $timeout, $upload, employeePassport, employeeVisa, employeeQualification, validations) {
 
         //$scope.name = null;
         //$scope.age = null;
@@ -22,8 +22,11 @@ moduleModal.controller('EmployeeModalController',
         $scope.employeePassport = employeePassport;
         $scope.employeeVisa = employeeVisa;
         $scope.employeeQualification = employeeQualification;
-        $scope.genders = validationRepository.getAllDetailsByValidationId(5);
-        $scope.qualificationLevels = validationRepository.getAllDetailsByValidationId(6);
+
+        $scope.genders = validationRepository.getAllDetailsByValidationId(validations.GENDER);
+        $scope.qualificationLevels = validationRepository.getAllDetailsByValidationId(validations.QUALIFICATION_LEVEL);
+        $scope.employeeStatus = validationRepository.getAllDetailsByValidationId(validations.EMPLOYEE_STATUS);
+        $scope.contracts = employeeRepository.getEmployeeContract($scope.parentId);
 
         $scope.saveEmployeePassport = function(parentId, employeePassport) {
             $scope.errors = [];
@@ -129,6 +132,80 @@ moduleModal.controller('EmployeeModalController',
                     }, function(response) {
                         // failure case
                         console.log("saveEmployeeChild save - Error !");
+                        appRepository.showErrorGritterNotification();
+                        $scope.errors = response.data;
+                    }
+                );
+        };
+
+        $scope.saveEmployeeContract = function (parentId, employeeContract) {
+            $scope.errors = [];
+
+            console.log(employeeContract);
+
+            employeeContract.employeeDefId = parentId;
+            employeeRepository.addEmployeeContract(employeeContract)
+                .$promise
+                .then(
+                    function (resultEmployee) {
+                        // success case
+                        $scope.resultData = resultEmployee;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvContract').modal('hide');
+                    }, function (response) {
+                        // failure case
+                        console.log("saveEmployeeContract save - Error !");
+                        appRepository.showErrorGritterNotification();
+                        $scope.errors = response.data;
+                    }
+                );
+        };
+
+        $scope.loadLeaveCategory = function () {
+            console.log("loading");
+            $scope.contracts = employeeRepository.getEmployeeContract($scope.parentId);
+            console.log("contracts", $scope.contracts);
+        };
+
+        $scope.saveEmployeeLeaveCategory = function (parentId, leaveCategory) {
+            $scope.errors = [];
+
+            leaveCategory.employeeDefId = parentId;
+            employeeRepository.addEmployeeLeaveCategory(leaveCategory)
+                .$promise
+                .then(
+                    function (resultEmployee) {
+                        // success case
+                        $scope.resultData = resultEmployee;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvLeaveCategory').modal('hide');
+                    }, function (response) {
+                        // failure case
+                        console.log("saveEmployeeLeaveCategory save - Error !");
+                        appRepository.showErrorGritterNotification();
+                        $scope.errors = response.data;
+                    }
+                );
+        };
+
+        $scope.saveEmployeeTicketCategory = function (parentId, ticketCategory) {
+            $scope.errors = [];
+
+            ticketCategory.employeeDefId = parentId;
+            employeeRepository.addEmployeeTicketCategory(ticketCategory)
+                .$promise
+                .then(
+                    function (resultEmployee) {
+                        // success case
+                        $scope.resultData = resultEmployee;
+                        appRepository.showAddSuccessGritterNotification();
+                        $scope.close();
+                        $('#dvTicketCategory').modal('hide');
+                    }, function (response) {
+                        // failure case
+                        console.log("saveEmployeeContract save - Error !");
                         appRepository.showErrorGritterNotification();
                         $scope.errors = response.data;
                     }

@@ -1,0 +1,54 @@
+﻿<div id="dvContract" class="modal fade hide" role="dialog" aria-hidden="true" aria-labelledby="Assign Contract">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel1"><span translate="ASSIGN_Contract"></span></h3>
+    </div>
+    <div class="modal-body">
+        <form id="frmContract" novalidate>
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="cTicketName" class="control-label"><span translate="STATUS"></span> :</label>
+                    <div class="controls">
+                        <select id="cTicketName" name="cTicketName" ng-model="contract.employmentTypeId" ng-options="status.id as status.nameEn for status in employeeStatus | filter:{description:1}" required></select>
+                        <div class="help-inline" ng-show="frmContract.cContractType.$error.required && frmContract.cContractType.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"><span translate="START_DATE"></span> :</label>
+                    <div class="controls">
+                        <input type="text" name="tStart" ng-model="contract.startDate" data-date-format="dd/mm/yyyy" datepicker required/>
+                        <div class="help-inline" ng-show="frmContract.tStart.$error.required && frmContract.tStart.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label"><span translate="END_DATE"></span> :</label>
+                    <div class="controls">
+                        <input type="text" id="tEnd" name="tEligibility" ng-model="contract.endDate" data-date-format="dd/mm/yyyy" datepicker required/>
+                        <div class="help-inline" ng-show="frmContract.tEnd.$error.required && frmContract.tEnd.$dirty">*</div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label"><span translate="NOTES"></span> :</label>
+                    <div class="controls">
+                        <textarea type="text" id="tNotes" name="tNotes" rows="3" ng-model="contract.notes"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Status :</label>
+                    <div class="controls">
+                        <input type="checkbox" id="tStatusId" name="tStatusId" ng-true-value="1" ng-false-value="0" ng-model="contract.statusId" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true"><span translate="CLOSE"></span></button>
+        <button type="submit" class="btn btn-primary" ng-click="saveEmployeeContract(parentId, contract)" ng-disabled="frmContract.$invalid">
+            <i class="icon-save"></i>
+            <span translate="SAVE"></span>
+        </button>
+    </div>
+
+</div>

@@ -113,6 +113,22 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/' + employeeKins.employeeDefId + '/PostEmployeeKin').save(employeeKins);
     };
 
+    var _addEmployeeContract = function (employeeContract) {
+        return $resource('/api/employee/' + employeeContract.employeeDefId + '/PostEmployeeContract').save(employeeContract);
+    };
+
+    var _getEmployeeContract = function(id) {
+        return $resource('/api/employee/GetEmployeeContract/' + id).get();
+    }
+
+    var _addEmployeeLeaveCategory = function (employeeLeave) {
+        return $resource('/api/employee/' + employeeLeave.employeeDefId + '/PostEmployeeLeaveCategory').save(employeeLeave);
+    };
+    var _addEmployeeTicketCategory = function (employeeTicket) {
+        return $resource('/api/employee/' + employeeTicket.employeeDefId + '/PostEmployeeTicketCategory').save(employeeTicket);
+    };
+
+
     var _addEmployeeImage = function (employee) {
         return $resource('/api/employee/upload').save(employee);
     };
@@ -144,6 +160,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         addEmployeeChild: _addEmployeeChild,
         deleteEmployeeChild: _deleteEmployeeChild,
         addEmployeeKin: _addEmployeeKin,
+        addEmployeeContract: _addEmployeeContract,
+        getEmployeeContract:_getEmployeeContract,
+        addEmployeeLeaveCategory: _addEmployeeLeaveCategory,
+        addEmployeeTicketCategory:_addEmployeeTicketCategory,
         addEmployeeImage: _addEmployeeImage
         
     };

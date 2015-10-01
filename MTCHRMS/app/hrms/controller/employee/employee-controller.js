@@ -413,6 +413,27 @@ hrmsModule.controller('EmployeeController',
 
         };
 
+        $scope.showAddContract = function (id) {
+            ModalService.showModal({
+                templateUrl: "/app/hrms/templates/hrms/employee/employee-contract-add.html",
+                controller: "EmployeeModalController",
+                inputs: {
+                    title: "",
+                    parentId: id,
+                    employeePassport: {},
+                    employeeVisa: {},
+                    employeeQualification: {},
+                    resultData: {}
+                }
+            }).then(function (modal) {
+                modal.element.modal();
+                modal.close.then(function (result) {
+                    //$scope.employee[0].previousEmployments.push(result.resultData);
+                });
+
+            });
+        };
+
         $scope.showLeaveCategory = function (id) {
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-leave-category.html",
