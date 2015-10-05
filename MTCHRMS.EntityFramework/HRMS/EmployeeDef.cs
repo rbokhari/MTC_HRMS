@@ -127,6 +127,10 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual ICollection<EmployeeChildren> Childrens  { get; set; }
 
         public virtual ICollection<EmployeeKin> EmployeeKin { get; set; }
+
+        public virtual ICollection<EmployeeContract> Contract { get; set; }
+
+
     }
 
     public class EmployeePassport : TableStrutcture
@@ -298,6 +302,9 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public short StatusId { get; set; }
 
+        public virtual ICollection<EmployeeLeaveCategory> LeaveCategory { get; set; }
+
+        public virtual ICollection<EmployeeTicketCategory> TicketCategory { get; set; }
     }
 
     public class EmployeeLeaveCategory : TableStrutcture
@@ -323,6 +330,28 @@ namespace MTCHRMS.EntityFramework.HRMS
 
     }
 
+    public class EmployeeLeaveYear : TableStrutcture
+    {
+        [Key]
+        public int LeaveYearId { get; set; }
+
+        public int LeaveCategoryId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        public int ContractId { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public short LeaveDays { get; set; }
+
+        public short TransferDays { get; set; }
+
+        public short DeductDays { get; set; }
+    }
+
     public class EmployeeTicketCategory : TableStrutcture
     {
         [Key]
@@ -343,5 +372,7 @@ namespace MTCHRMS.EntityFramework.HRMS
         public virtual TicketDef TicketDetail { get; set; }
 
     }
+
+
 
 }

@@ -23,7 +23,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        public Task<IQueryable<Department>> Get()     
+        public Task<IQueryable<Department>> Get()
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
             //where as IEnumerable get all data from databse and filter it on client side

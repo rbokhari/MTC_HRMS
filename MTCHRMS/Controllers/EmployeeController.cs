@@ -727,7 +727,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Route("api/employee/GetEmployeeContract/{id}")]
-        [System.Web.Http.Authorize]
+        //[System.Web.Http.Authorize]
         public async Task<EmployeeContract> GetEmployeeContract(int id)
         {
             return await _repo.LoadEmployeeContract(id);
@@ -821,7 +821,7 @@ namespace MTCHRMS.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (newTicket.TicketId == 0)
+                if (newTicket.TicketCategoryId == 0)
                 {
                     if (Request.Headers.Contains("userId"))
                     {
@@ -835,7 +835,7 @@ namespace MTCHRMS.Controllers
                         //return new HttpResponseMessage(HttpStatusCode.OK);
                     }
                 }
-                else if (newTicket.TicketId != 0)
+                else if (newTicket.TicketCategoryId != 0)
                 {
                     if (Request.Headers.Contains("userId"))
                     {

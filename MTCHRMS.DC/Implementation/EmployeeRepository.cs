@@ -203,7 +203,12 @@ namespace MTCHRMS.DC
                     .Include(d => d.DepartmentId)
                     .Include(d => d.GenderDetail)
                     .Include(d => d.StatusDetail)
-                    .Include(v => v.ValidationDetailId);
+                    .Include(v => v.ValidationDetailId)
+                    .Include(v => v.Contract.Select(b => b.LeaveCategory.Select(c=>c.LeaveDetail.TypeDetail)))
+                    .Include(v => v.Contract.Select(b => b.LeaveCategory.Select(c => c.LeaveDetail.ScheduleDetail)))
+                    .Include(v => v.Contract.Select(b => b.TicketCategory.Select(c => c.TicketDetail.ScheduleDetail)))
+                    .Include(v => v.Contract.Select(b => b.TicketCategory.Select(c => c.TicketDetail.EligibilityDetail)));
+
 
                 switch ((ApplicationPreferences.Account_Roles)roleId)
                 {

@@ -9,29 +9,25 @@
                 <div class="control-group">
                     <label for="cLeaveName" class="control-label"><span translate="CONTRACT"></span> :</label>
                     <div class="controls">
-                        <select id="cLeaveName" name="cLeaveName" ng-if="lang=='en_US'" ng-model="leaveCategory.ContractId" ng-options="contract.contractId as contract.startDate for contract in contracts" required></select>
-                        <div class="help-inline" ng-show="frmLeaveCategory.cLeaveName.$error.required && frmLeaveCategory.cLeaveName.$dirty">*</div>
+                        <label class="label label-success">{{contract.startDate | date:'dd/MM/yyyy'}}</label> ~ <label class="label label-danger inline">{{contract.endDate | date:'dd/MM/yyyy'}}</label>
                     </div>
                 </div>
                 <div class="control-group">
                     <label for="cLeaveName" class="control-label"><span translate="LEAVE_NAME"></span> :</label>
                     <div class="controls">
-                        <select id="cLeaveName" name="cLeaveName" ng-if="lang=='en_US'" ng-model="leaveCategory.ContractId" ng-options="gender.id as gender.nameEn for gender in genders" required></select>
+                        <select id="cLeaveName" name="cLeaveName" ng-model="leaveCategory.leaveId" required ng-change="leaveSelect(leaveCategory.leaveId)">
+                            <option ng-repeat="leave in leaves" ng-value="leave.leaveId">{{leave.leaveName}}</option>
+                        </select>
                         <div class="help-inline" ng-show="frmLeaveCategory.cLeaveName.$error.required && frmLeaveCategory.cLeaveName.$dirty">*</div>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label"><span translate="LEAVE_MASTER"></span> :</label>
-                    <div class="controls">
-                        <input type="text" id="tSchedule" name="tSchedule" ng-model="leaveCategory.leaveId"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="SCHEDULE"></span> :</label>
                     <div class="controls">
-                        <input type="text" name="tSchedule"/>
+                        <input type="text" id="tSchedule" name="tSchedule" disabled="disabled"/>
                     </div>
                 </div>
+                
                 <div class="control-group">
                     <label class="control-label"><span translate="TOTAL_DAYS"></span> :</label>
                     <div class="controls">
@@ -44,7 +40,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true"><span translate="CLOSE"></span></button>
-        <button type="submit" class="btn btn-primary" ng-click="saveEmployeeLeaveCategory(parentId, leaveCategory)" ng-disabled="frmLeaveCategory.$invalid">
+        <button type="submit" class="btn btn-primary" ng-click="saveEmployeeLeaveCategory(parentId, contract.contractId, leaveCategory)" ng-disabled="frmLeaveCategory.$invalid">
             <i class="icon-save"></i>
             <span translate="SAVE"></span>
         </button>

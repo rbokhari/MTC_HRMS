@@ -574,67 +574,97 @@
                                     <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showAddContract(employee[0].id)">
                                         <i class="icon-external-link"></i> <span translate="ASSIGN_CONTRACT"></span>
                                     </a>
-                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee[0].id)">
-                                        <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
-                                    </a>
-                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee[0].id)">
-                                        <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
-                                    </a>
                                 </span>
-                                <table class="table table-striped table-bordered table-advance">
-                                    <thead>
-                                    <tr>
-                                        <th><span translate="SERIAL_NO"></span>.</th>
-                                        <th><span translate="COMPANY_NAME"></span></th>
-                                        <th><span translate="START_DATE"></span></th>
-                                        <th><span translate="END_DATE"></span></th>
-                                        <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr ng-repeat="pemployment in employee[0].previousEmployments">
-                                        <td>{{$index + 1}}</td>
-                                        <td>{{pemployment.companyName}}</td>
-                                        <td>{{pemployment.startDate | date:'longDate'}}</td>
-                                        <td>{{pemployment.endDate | date:'longDate' }}</td>
-                                        <td ng-if="authentication.isHRMSAdmin">
-                                            <a href="" ng-click="deletePreviousEmployement(pemployment)"> <i class="icon-trash red"></i></a>
-                                        </td>
 
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <br/><br/>
+                                <div class="row-fluid">
+                                    <div class="span12">
+                                        <div class="widget" ng-repeat="cont in employee[0].contract">
+                                            <div class="widget-title" style="background-color: darkgray; border-color: darkgray;">
+                                                <h4><i class="icon-time"></i>&nbsp; <span class="label label-success">{{cont.startDate | date:'dd MMM yyyy'}}</span> ~ <span class="label label-important">{{cont.endDate | date:'dd MMM yyyy'}}</span></h4>
+                                                <span class="tools" ng-if="authentication.isHRMSAdmin">
+                                                    <a class="icon-edit" ng-href="/INVPortal/item/detail/updatestock/{{cont.contractId}}/"></a>
+                                                </span>
+                                            </div>
+                                            <div class="widget-body" style="border-color: darkgray;">
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.leaveCategory.length==0" href="" ng-click="showLeaveCategory(employee[0].id)">
+                                                    <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
+                                                </a>
+                                                <table class="table table-bordered table-advance table-hover" ng-if="cont.leaveCategory.length>0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="span1">SN</th>
+                                                            <th class="span3">Leave</th>
+                                                            <th class="span2">Type</th>
+                                                            <th class="span2">Schedule</th>
+                                                            <th class="span2">Days</th>
+                                                            <th class="span2">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="leavecat in cont.leaveCategory" id="tr{{serial.itemStockSerialId}}">
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{$index+1}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{leavecat.leaveDetail.leaveName}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{leavecat.leaveDetail.typeDetail.nameEn}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{leavecat.leaveDetail.scheduleDetail.nameEn}}
+                                                            </td>
+                                                            <td>
+                                                                {{leavecat.totalLeaves}}
+                                                            </td>
+                                                            <td>
+                                                                <a style="text-decoration: none;" ng-href="" id="cHistory{{serial.itemStockSerialId}}"><i class="icon-plus"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <br/><br/>
 
-                                <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="TICKET_INFORMATION"></span></strong>
-                                <span ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
-                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee[0].id)">
-                                        <i class="icon-external-link"></i> <span translate="Assign_TICKET_Category"></span>
-                                    </a>
-                                </span>
-                                <table class="table table-striped table-bordered table-advance">
-                                    <thead>
-                                        <tr>
-                                            <th><span translate="SERIAL_NO"></span>.</th>
-                                            <th><span translate="COMPANY_NAME"></span></th>
-                                            <th><span translate="START_DATE"></span></th>
-                                            <th><span translate="END_DATE"></span></th>
-                                            <th ng-if="authentication.isHRMSAdmin"><span translate="ACTION"></span></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="pemployment in employee[0].previousEmployments">
-                                            <td>{{$index + 1}}</td>
-                                            <td>{{pemployment.companyName}}</td>
-                                            <td>{{pemployment.startDate | date:'longDate'}}</td>
-                                            <td>{{pemployment.endDate | date:'longDate' }}</td>
-                                            <td ng-if="authentication.isHRMSAdmin">
-                                                <a href="" ng-click="deletePreviousEmployement(pemployment)"> <i class="icon-trash red"></i></a>
-                                            </td>
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.ticketCategory.length==0" href="" ng-click="showTicketCategory(employee[0].id)">
+                                                    <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
+                                                </a>
+                                                <table class="table table-bordered table-advance table-hover" ng-if="cont.ticketCategory.length>0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="span1">SN</th>
+                                                            <th class="span4">Ticket</th>
+                                                            <th class="span3">Schedule</th>
+                                                            <th class="span2">Eligibility</th>
+                                                            <th class="span2">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="ticketcat in cont.ticketCategory">
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{$index+1}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{ticketcat.ticketDetail.ticketName}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{ticketcat.ticketDetail.scheduleDetail.nameEn}}
+                                                            </td>
+                                                            <td style="vertical-align: middle !important;">
+                                                                {{ticketcat.ticketDetail.eligibilityDetail.nameEn}}
+                                                            </td>
+                                                            <td>
+                                                                <a style="text-decoration: none;" ng-href="" id="cHistory{{serial.itemStockSerialId}}"><i class="icon-plus"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <br/><br/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                        </tr>
-                                    </tbody>
-                                </table>
+
                             </div>
                         </div>
                     </div>

@@ -7,28 +7,36 @@
         <form id="frmTicketCategory" novalidate>
             <div class="form-horizontal">
                 <div class="control-group">
-                    <label for="cTicketName" class="control-label"><span translate="LEAVE_NAME"></span> :</label>
+                    <label class="control-label"><span translate="CONTRACT"></span> :</label>
                     <div class="controls">
-                        <select id="cTicketName" name="cTicketName" ng-if="lang=='en_US'" ng-model="ticketCategory.id" ng-options="gender.id as gender.nameEn for gender in genders" required></select>
+                        <label class="label label-success">{{contract.startDate | date:'dd/MM/yyyy'}}</label> ~ <label class="label label-danger inline">{{contract.endDate | date:'dd/MM/yyyy'}}</label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="cTicketName" class="control-label"><span translate="TICKET_NAME"></span> :</label>
+                    <div class="controls">
+                        <select id="cTicketName" name="cTicketName" ng-model="ticketCategory.ticketId" required ng-change="ticketSelect(ticketCategory.ticketId)">
+                            <option ng-repeat="ticket in tickets" ng-value="ticket.ticketId">{{ticket.ticketName}}</option>
+                        </select>
                         <div class="help-inline" ng-show="frmTicketCategory.cLeaveName.$error.required && frmTicketCategory.cLeaveName.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="SCHEDULE"></span> :</label>
                     <div class="controls">
-                        <input type="text" name="tSchedule" ng-model="ticketCategory.schedule" />
+                        <input type="text" id="tSchedule" name="tSchedule" disabled="disabled" />
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="ELIGIBILITY"></span> :</label>
                     <div class="controls">
-                        <input type="text" id="tEligibility" name="tEligibility" ng-model="ticketCategory.type" />
+                        <input type="text" id="tEligibility" name="tEligibility" disabled="disabled" />
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="NOTES"></span> :</label>
                     <div class="controls">
-                        <textarea type="text" id="tNotes" name="tNotes" rows="3" ng-model="ticketCategory.Notes" ></textarea>
+                        <textarea type="text" id="tNotes" name="tNotes" rows="3" ng-model="ticketCategory.notes"></textarea>
                     </div>
                 </div>
             </div>
@@ -36,7 +44,7 @@
     </div>
     <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true"><span translate="CLOSE"></span></button>
-        <button type="submit" class="btn btn-primary" ng-click="saveTicketCategory(parentId, ticketCategory)" ng-disabled="frmTicketCategory.$invalid">
+        <button type="submit" class="btn btn-primary" ng-click="saveEmployeeTicketCategory(parentId, contract.contractId, ticketCategory)" ng-disabled="frmTicketCategory.$invalid">
             <i class="icon-save"></i>
             <span translate="SAVE"></span>
         </button>

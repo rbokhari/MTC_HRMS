@@ -1,10 +1,10 @@
 ﻿
 moduleModal.controller('EmployeeModalController',
 [
-    '$scope', '$location', 'appRepository', 'employeeRepository', 'validationRepository', 'title', 'close',
+    '$scope', '$location', 'appRepository', 'employeeRepository', 'validationRepository', 'leaveRepository', 'ticketRepository', 'title', 'close',
     'parentId', 'resultData', '$timeout', '$upload', 'employeePassport', 'employeeVisa', 'employeeQualification','validations',
 
-    function ($scope, $location, appRepository, employeeRepository, validationRepository, title, close,
+    function ($scope, $location, appRepository, employeeRepository, validationRepository, leaveRepository, ticketRepository, title, close,
         parentId, resultData, $timeout, $upload, employeePassport, employeeVisa, employeeQualification, validations) {
 
         //$scope.name = null;
@@ -26,8 +26,32 @@ moduleModal.controller('EmployeeModalController',
         $scope.genders = validationRepository.getAllDetailsByValidationId(validations.GENDER);
         $scope.qualificationLevels = validationRepository.getAllDetailsByValidationId(validations.QUALIFICATION_LEVEL);
         $scope.employeeStatus = validationRepository.getAllDetailsByValidationId(validations.EMPLOYEE_STATUS);
-        $scope.contracts = employeeRepository.getEmployeeContract($scope.parentId);
+        
+        employeeRepository.getEmployeeContract($scope.parentId)
+            .$promise
+            .then(function (response) {
+                $scope.contract = response;
+            }, function (err) {
+                console.log(err);
+            });
 
+        leaveRepository.getAllLeaves()
+            .$promise
+            .then(function (response) {
+                $scope.leaves = response;
+                }, function (err) {
+            
+                });
+
+        ticketRepository.getAllTickets()
+            .$promise
+            .then(function (response) {
+                $scope.tickets = response;
+            }, function (err) {
+
+            });
+
+        //alert("yahoo :" + $scope.parentId);
         $scope.saveEmployeePassport = function(parentId, employeePassport) {
             $scope.errors = [];
             employeePassport.employeeDefId = parentId;
@@ -164,14 +188,40 @@ moduleModal.controller('EmployeeModalController',
 
         $scope.loadLeaveCategory = function () {
             console.log("loading");
-            $scope.contracts = employeeRepository.getEmployeeContract($scope.parentId);
-            console.log("contracts", $scope.contracts);
+
+
         };
 
-        $scope.saveEmployeeLeaveCategory = function (parentId, leaveCategory) {
+        $scope.leaveSelect = function (id) {
+            //alert("hello");
+            console.log(id);
+
+            angular.forEach($scope.leaves, function (val) {
+                console.log(id + ' : ' + val.leaveId);
+                if (id == val.leaveId) {
+                    $('#tSchedule').val(val.scheduleDetail.nameEn);
+                    $scope.leaveCategory.totalLeaves =val.total;
+                }
+            });
+        };
+
+        $scope.ticketSelect = function (id) {
+            angular.forEach($scope.tickets, function (val) {
+                console.log(id + ' : ' + val.ticketId);
+                if (id == val.ticketId) {
+                    $('#tSchedule').val(val.scheduleDetail.nameEn);
+                    $('#tEligibility').val(val.eligibilityDetail.nameEn);
+                }
+            });
+        };
+
+        $scope.saveEmployeeLeaveCategory = function (parentId, contractId, leaveCategory) {
             $scope.errors = [];
 
             leaveCategory.employeeDefId = parentId;
+            leaveCategory.contractId = contractId;
+            leaveCategory.notes = '';
+            leaveCategory.isActive = 1;
             employeeRepository.addEmployeeLeaveCategory(leaveCategory)
                 .$promise
                 .then(
@@ -190,10 +240,15 @@ moduleModal.controller('EmployeeModalController',
                 );
         };
 
-        $scope.saveEmployeeTicketCategory = function (parentId, ticketCategory) {
+        $scope.saveEmployeeTicketCategory = function (parentId, contractId, ticketCategory) {
             $scope.errors = [];
 
             ticketCategory.employeeDefId = parentId;
+            ticketCategory.contractId = contractId;
+            ticketCategory.isActive = 1;
+
+            console.log(ticketCategory);
+
             employeeRepository.addEmployeeTicketCategory(ticketCategory)
                 .$promise
                 .then(
@@ -205,7 +260,7 @@ moduleModal.controller('EmployeeModalController',
                         $('#dvTicketCategory').modal('hide');
                     }, function (response) {
                         // failure case
-                        console.log("saveEmployeeContract save - Error !");
+                        console.log("saveEmployeeTicketCategory save - Error !");
                         appRepository.showErrorGritterNotification();
                         $scope.errors = response.data;
                     }
