@@ -589,45 +589,65 @@
                                                 <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.leaveCategory.length==0" href="" ng-click="showLeaveCategory(employee[0].id)">
                                                     <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
                                                 </a>
-                                                <table class="table table-bordered table-advance table-hover" ng-if="cont.leaveCategory.length>0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th class="span1">SN</th>
-                                                            <th class="span3">Leave</th>
-                                                            <th class="span2">Type</th>
-                                                            <th class="span2">Schedule</th>
-                                                            <th class="span2">Days</th>
-                                                            <th class="span2">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr ng-repeat="leavecat in cont.leaveCategory" id="tr{{serial.itemStockSerialId}}">
-                                                            <td style="vertical-align: middle !important;">
-                                                                {{$index+1}}
-                                                            </td>
-                                                            <td style="vertical-align: middle !important;">
-                                                                {{leavecat.leaveDetail.leaveName}}
-                                                            </td>
-                                                            <td style="vertical-align: middle !important;">
-                                                                {{leavecat.leaveDetail.typeDetail.nameEn}}
-                                                            </td>
-                                                            <td style="vertical-align: middle !important;">
-                                                                {{leavecat.leaveDetail.scheduleDetail.nameEn}}
-                                                            </td>
-                                                            <td>
-                                                                {{leavecat.totalLeaves}}
-                                                            </td>
-                                                            <td>
-                                                                <a style="text-decoration: none;" ng-href="" id="cHistory{{serial.itemStockSerialId}}"><i class="icon-plus"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <div class="alert alert-info" ng-repeat="leavecat in cont.leaveCategory">
+                                                    <div class="row-fluid">
+                                                        <div class="span3">
+                                                            Leave : {{leavecat.leaveDetail.leaveName}}
+                                                        </div>
+                                                        <div class="span3">
+                                                            Type : {{leavecat.leaveDetail.typeDetail.nameEn}}
+                                                        </div>
+                                                        <div class="span3">
+                                                            Schedule : {{leavecat.leaveDetail.scheduleDetail.nameEn}}
+                                                        </div>
+                                                        <div class="span3">
+                                                            Total Days : {{leavecat.totalLeaves}}
+                                                        </div>
+                                                    </div>
+                                                    <table style="background:transparent;" class="table table-bordered table-advance table-hover" ng-if="cont.leaveCategory.length>0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th class="span1">SN</th>
+                                                                <th class="span2">Start</th>
+                                                                <th class="span2">End</th>
+                                                                <th class="span1">Total</th>
+                                                                <th class="span1">Transfer</th>
+                                                                <th class="span1">Deduct</th>
+                                                                <th class="span1">Avail</th>
+                                                                <th class="span1">Remaining</th>
+                                                                <th class="span1">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="year in leavecat.leaveYears" id="tr{{serial.itemStockSerialId}}">
+                                                                <td style="vertical-align: middle !important;">
+                                                                    Year : {{$index +1}}
+                                                                </td>
+                                                                <td style="vertical-align: middle !important;">
+                                                                    {{year.startDate | date:'dd/MM/yyyy'}}
+                                                                </td>
+                                                                <td style="text-align: left !important;">
+                                                                    {{year.endDate | date:'dd/MM/yyyy'}}
+                                                                </td>
+                                                                <td style="vertical-align: middle !important;">
+                                                                    {{year.leaveDays}}
+                                                                </td>
+                                                                <td>{{year.transferDays}}</td>
+                                                                <td>{{year.deductDays}}</td>
+                                                                <td>{{year.availDays}}</td>
+                                                                <td>{{year.leaveDays + year.transferDays - year.deductDays - year.availDays}}</td>
+                                                                <td><a href="" ng-if="year.endDate < datetime">Add Leaves</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                
                                                 <br/><br/>
 
                                                 <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.ticketCategory.length==0" href="" ng-click="showTicketCategory(employee[0].id)">
                                                     <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
                                                 </a>
+                                                
                                                 <table class="table table-bordered table-advance table-hover" ng-if="cont.ticketCategory.length>0">
                                                     <thead>
                                                         <tr>

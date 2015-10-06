@@ -7,23 +7,36 @@
         <form id="frmContract" novalidate>
             <div class="form-horizontal">
                 <div class="control-group">
-                    <label for="cTicketName" class="control-label"><span translate="STATUS"></span> :</label>
+                    <label for="cContractType" class="control-label"><span translate="TYPE"></span> :</label>
                     <div class="controls">
-                        <select id="cTicketName" name="cTicketName" ng-model="contract.employmentTypeId" ng-options="status.id as status.nameEn for status in employeeStatus | filter:{description:1}" required></select>
+                        <select id="cContractType" name="cContractType" ng-model="contract.employmentTypeId" ng-options="status.id as status.nameEn for status in employeeStatus | filter:{description:1}" required></select>
                         <div class="help-inline" ng-show="frmContract.cContractType.$error.required && frmContract.cContractType.$dirty">*</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="cContractYear" class="control-label"><span translate="YEARS"></span> :</label>
+                    <div class="controls">
+                        <select id="cContractYear" name="cContractYear" ng-model="contract.totalYears" required >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <div class="help-inline" ng-show="frmContract.cContractYear.$error.required && frmContract.cContractYear.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="START_DATE"></span> :</label>
                     <div class="controls">
-                        <input type="text" name="tStart" ng-model="contract.startDate" data-date-format="dd/mm/yyyy" datepicker required/>
+                        <input type="text" id="tStart" name="tStart" ng-model="contract.startDate" data-date-format="dd/mm/yyyy" datepicker required/>
                         <div class="help-inline" ng-show="frmContract.tStart.$error.required && frmContract.tStart.$dirty">*</div>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label"><span translate="END_DATE"></span> :</label>
                     <div class="controls">
-                        <input type="text" id="tEnd" name="tEligibility" ng-model="contract.endDate" data-date-format="dd/mm/yyyy" datepicker required/>
+                        <input type="text" id="tEnd" name="tEnd" ng-model="contract.endDate" data-date-format="dd/mm/yyyy" datepicker required/>
                         <div class="help-inline" ng-show="frmContract.tEnd.$error.required && frmContract.tEnd.$dirty">*</div>
                     </div>
                 </div>

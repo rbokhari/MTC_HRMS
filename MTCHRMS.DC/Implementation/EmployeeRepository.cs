@@ -206,6 +206,7 @@ namespace MTCHRMS.DC
                     .Include(v => v.ValidationDetailId)
                     .Include(v => v.Contract.Select(b => b.LeaveCategory.Select(c=>c.LeaveDetail.TypeDetail)))
                     .Include(v => v.Contract.Select(b => b.LeaveCategory.Select(c => c.LeaveDetail.ScheduleDetail)))
+                    .Include(v => v.Contract.Select(b => b.LeaveCategory.Select(c => c.LeaveYears)))
                     .Include(v => v.Contract.Select(b => b.TicketCategory.Select(c => c.TicketDetail.ScheduleDetail)))
                     .Include(v => v.Contract.Select(b => b.TicketCategory.Select(c => c.TicketDetail.EligibilityDetail)));
 
@@ -512,7 +513,30 @@ namespace MTCHRMS.DC
         {
             try
             {
-                _ctx.EmployeeLeaveCategory.Add(newLeaveCategory);
+                _ctx.EmployeeLeaveCategories.Add(newLeaveCategory);
+                _ctx.SaveChanges();
+
+                var contract = _ctx.EmployeeContracts.SingleAsync(c => c.EmployeeDefId == newLeaveCategory.EmployeeDefId && c.StatusId == 1).Result;
+
+
+                for (int i = 0; i < contract.TotalYears; i++)
+                {
+                    var leaveYear = new EmployeeLeaveYear
+                    {
+                        LeaveCategoryId = newLeaveCategory.LeaveCategoryId,
+                        EmployeeDefId = newLeaveCategory.EmployeeDefId,
+                        ContractId = newLeaveCategory.ContractId,
+                        StartDate = contract.StartDate.AddMonths(12 * i),
+                        EndDate = contract.StartDate.AddMonths(12*(i+1)).AddDays(-1),
+                        LeaveDays = newLeaveCategory.TotalLeaves,
+                        TransferDays = 0,
+                        DeductDays = 0,
+                        CreatedBy = newLeaveCategory.CreatedBy,
+                        CreatedOn = newLeaveCategory.CreatedOn
+
+                    };
+                    _ctx.EmployeeLeaveYears.Add(leaveYear);
+                }
                 return true;
             }
             catch (Exception)
@@ -540,7 +564,7 @@ namespace MTCHRMS.DC
         {
             try
             {
-                _ctx.EmployeeTicketCategory.Add(newTicketCategory);
+                _ctx.EmployeeTicketCategories.Add(newTicketCategory);
                 return true;
             }
             catch (Exception)

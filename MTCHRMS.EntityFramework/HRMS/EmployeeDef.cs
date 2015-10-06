@@ -293,6 +293,8 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public int EmploymentTypeId { get; set; }     // e.g. permanent, contract
 
+        public short TotalYears { get; set; }
+
         public DateTime StartDate { get; set; }
 
         public DateTime? EndDate { get; set; }
@@ -319,7 +321,7 @@ namespace MTCHRMS.EntityFramework.HRMS
         [ForeignKey("LeaveDetail")]
         public int LeaveId { get; set; }
 
-        public int TotalLeaves { get; set; }
+        public short TotalLeaves { get; set; }
 
         [MaxLength(500)]
         public String Notes { get; set; }
@@ -327,6 +329,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public short IsActive { get; set; }
 
         public virtual LeaveDef LeaveDetail { get; set; }
+
+        public virtual ICollection<EmployeeLeaveYear> LeaveYears { get; set; }
 
     }
 
