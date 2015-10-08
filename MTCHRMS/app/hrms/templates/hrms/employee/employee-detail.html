@@ -72,7 +72,8 @@
                                         <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_VISA"></span></a></li>
                                         <li><a href="" ng-click="showPreviousEmployement(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PREVIOUS_EMPLOYMENT"></span></a></li>
                                         <li><a href="" ng-click="showChild(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_CHILDREN"></span></a></li>
-                                        <li><a href="" ng-click="showImageForm(employee[0].id)"><i class="icon-camera"></i> <span translate="UPDATE_PICTURE"></span></a></li>
+                                        <li><a href="" ng-click="showImageForm(employee[0].id)"><i class="icon-camera-retro"></i> <span translate="UPDATE_PICTURE"></span></a></li>
+                                        <li><a ng-href="/{{mainPortal}}/employee/leaveticket/{{employee[0].id}}"><i class="icon-plane"></i> <span translate="LEAVES_TICKETS"></span></a></li>
                                     </ul>
 
                                 </div>
@@ -589,19 +590,21 @@
                                                 <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.leaveCategory.length==0" href="" ng-click="showLeaveCategory(employee[0].id)">
                                                     <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
                                                 </a>
-                                                <div class="alert alert-info" ng-repeat="leavecat in cont.leaveCategory">
+                                                <div ng-repeat="leavecat in cont.leaveCategory">
                                                     <div class="row-fluid">
-                                                        <div class="span3">
-                                                            Leave : {{leavecat.leaveDetail.leaveName}}
-                                                        </div>
-                                                        <div class="span3">
-                                                            Type : {{leavecat.leaveDetail.typeDetail.nameEn}}
-                                                        </div>
-                                                        <div class="span3">
-                                                            Schedule : {{leavecat.leaveDetail.scheduleDetail.nameEn}}
-                                                        </div>
-                                                        <div class="span3">
-                                                            Total Days : {{leavecat.totalLeaves}}
+                                                        <div class="alert alert-info" style="height:24px;">
+                                                            <span class="span3" >
+                                                                Leave : {{leavecat.leaveDetail.leaveName}}
+                                                            </span>
+                                                            <span class="span3">
+                                                                Type : {{leavecat.leaveDetail.typeDetail.nameEn}}
+                                                            </span>
+                                                            <span class="span3">
+                                                                Schedule : {{leavecat.leaveDetail.scheduleDetail.nameEn}}
+                                                            </span>
+                                                            <span class="span3">
+                                                                Total Days : {{leavecat.totalLeaves}}
+                                                            </span>
                                                         </div>
                                                     </div>
                                                     <table style="background:transparent;" class="table table-bordered table-advance table-hover" ng-if="cont.leaveCategory.length>0">
@@ -636,7 +639,7 @@
                                                                 <td>{{year.deductDays}}</td>
                                                                 <td>{{year.availDays}}</td>
                                                                 <td>{{year.leaveDays + year.transferDays - year.deductDays - year.availDays}}</td>
-                                                                <td><a href="" ng-if="year.endDate < datetime">Add Leaves</a></td>
+                                                                <td><a href="" ng-if="checkLeavePeriod(year.startDate,year.endDate)" >Add Leaves</a></td>
                                                             </tr>
                                                         </tbody>
                                                     </table>

@@ -72,6 +72,12 @@
                 controller: 'EmployeeController'
             });
         $routeProvider
+            .when('/HRMSPortal/employee/leaveticket/:id', {
+                templateUrl: '/app/hrms/templates/hrms/employee/employee-leaveticket-detail.html',
+                controller: 'EmployeeController'
+            });
+
+        $routeProvider
             .when('/HRMSPortal/oc', {
                 templateUrl: '/app/hrms/templates/hrms/oc/organization-chart.html',
                 controller: 'EmployeeController'

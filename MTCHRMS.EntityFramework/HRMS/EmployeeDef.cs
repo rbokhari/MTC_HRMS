@@ -356,6 +356,49 @@ namespace MTCHRMS.EntityFramework.HRMS
         public short DeductDays { get; set; }
     }
 
+    /// <summary>
+    /// For Employee Leave 
+    /// </summary>
+    public class EmployeeLeave : TableStrutcture
+    {
+        [Key]
+        public int EmployeeLeaveId { get; set; }
+
+        public int LeaveYearId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        public short LeaveDays { get; set; }
+
+        public DateTime LeaveStart { get; set; }
+
+        public DateTime LeaveEnd { get; set; }
+
+        [MaxLength(255)]
+        public String AlternateAddress { get; set; }
+
+        [MaxLength(50)]
+        public String AlternatePhone { get; set; }
+
+        public int AlternateEmployeeId { get; set; }
+
+        public byte IsTicket { get; set; }
+
+        public int? LineMangerId { get; set; }
+
+        public DateTime? LineMangerDate { get; set; }
+
+        public int? DepartmentMangerId { get; set; }
+
+        public DateTime? DepartmentManagerDate { get; set; }
+
+        public int? HREmployeeId { get; set; }
+
+        public DateTime? HREmployeeDate { get; set; }
+
+        public int StatusId { get; set; }
+    }
+
     public class EmployeeTicketCategory : TableStrutcture
     {
         [Key]

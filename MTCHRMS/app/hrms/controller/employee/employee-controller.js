@@ -129,6 +129,14 @@ hrmsModule.controller('EmployeeController',
             return moment(start).diff(moment(new Date()), 'day');
         };
 
+        $scope.checkLeavePeriod = function(date1, date2) {
+            var currentDate = new Date();
+            var firstDate = new Date(date1);
+            var secondDate = new Date(date2);
+
+            return (currentDate >= firstDate && currentDate <= secondDate);
+        }
+
         // bootstrap tab setting property and function for angularjs
         $scope.tab = 1;       // set active tab bydefault
 
