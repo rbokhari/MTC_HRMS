@@ -12,8 +12,16 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/GetSingleEmployee/?id=' + id).query();
     };
 
+    var _getEmployeePicture = function (id) {
+        return $resource('/api/employee/GetEmployeePicture/' + id).get();
+    };
+
     var _getEmployeeDetailById = function (id) {
         return $resource('/api/employee/' + id).query();
+    };
+
+    var _getEmployeeLeaveTicketDetailById = function (id) {
+        return $resource('/api/employee/GetEmployeeLeaveTicketDetail/' + id).get();
     };
 
     var _getEmployeeDetailByUserName = function (userName) {
@@ -135,8 +143,10 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
 
     return {
         getAllEmployees: _getAllEmployees,
-        getSingleEmployee : _getSingleEmployee,
+        getSingleEmployee: _getSingleEmployee,
+        getEmployeePicture:_getEmployeePicture,
         getEmployeeDetailById: _getEmployeeDetailById,
+        getEmployeeLeaveTicketDetailById:_getEmployeeLeaveTicketDetailById,
         getEmployeeDetailByUserName: _getEmployeeDetailByUserName,
         getEmployeesPassportExpiry: _getEmployeesPassportExpiry,
         getEmployeesVisaExpiry: _getEmployeesVisaExpiry,

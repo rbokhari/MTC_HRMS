@@ -1,4 +1,4 @@
-﻿<div class="container-fluid">
+﻿<div class="container-fluid" data-ng-init="loadEmployeeLeaveTicketDetail()">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
@@ -45,44 +45,38 @@
                         <div class="tab-pane" id="tab1" ng-show="isTabSelected(1)">
                             <div class="span2">
                                 <div class="text-center profile-pic polaroid">
-                                    <p ng-show="mainPortal=='HRMSPortal'">{{ employee[0].employeeName.length > 1 ? employee[0].employeeName : employee[0].employeeNameAr | limitTo:25 }} </p>
-                                    <p ng-show="mainPortal=='HRMSPortalAr'">{{ employee[0].employeeNameAr.length > 1 ? employee[0].employeeNameAr : employee[0].employeeName | limitTo:25 }}</p>
-                                    <img data-img-loading-value="{{employee[0].empPicture}}" data-img-loading-size="profile" alt="" />
-                                    <!--<img src="/Content/img/profile-pic.jpg" ng-show="!employee[0].empPicture" style="height: 220px; width: 220px;"
-
-                                             width="220px" height="220px"/>
-                                    <img ng-show="employee[0].empPicture" src="data:image/jpeg;base64,{{employee[0].empPicture}}" style="height: 220px; width:
-
-                                    220px;" width="220px" height="220px" alt="">-->
+                                    <p ng-show="mainPortal=='HRMSPortal'">{{ employee.nameEn.length > 1 ? employee.nameEn : employee.nameAr | limitTo:25 }} </p>
+                                    <p ng-show="mainPortal=='HRMSPortalAr'">{{ employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn | limitTo:25 }}</p>
+                                    <img data-img-loading-value="{{employee.picture}}" data-img-loading-size="profile" alt="" />
                                 </div>
                                 <ul class="nav nav-stacked" ng-if="authentication.isHRMSAdmin">
-                                    <li><a ng-href="/{{mainPortal}}/employee/detail/{{employee[0].id}}"><i class="icon-user"></i> <span translate="VIEW_PROFILE"></span></a></li>
+                                    <li><a ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}"><i class="icon-user"></i> <span translate="VIEW_PROFILE"></span></a></li>
                                     <li><a href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_LEAVE"></span></a></li>
                                     <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_TICKET"></span></a></li>
                                 </ul>
 
                             </div>
                             <div class="span7">
-                                <h4>{{ mainPortal=='HRMSPortal' ? (employee[0].employeeName.length > 1 ? employee[0].employeeName : employee[0].employeeNameAr) : (employee[0].employeeNameAr.length > 1 ? employee[0].employeeNameAr : employee[0].employeeName) }} - {{ employee[0].rank }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
+                                <h4>{{ mainPortal=='HRMSPortal' ? (employee.nameEn.length > 1 ? employee.nameEn : employee.nameAr) : (employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn) }} - {{ employee.rank }} <br /><small>{{ employee.departmentName}} </small></h4>
                                 <table class="table">
                                     <tbody>
                                         <tr>
                                             <td class="span3"><span translate="CODE"></span> :</td>
                                             <td>
-                                                {{ employee[0].employeeCode}}
+                                                {{ employee.code}}
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="span3"><span translate="CONTRACT"></span> :</td>
                                             <td>
-                                                {{ employee[0].parentRegiment}}
+                                                <span class="label label-success">{{employee.currentContractStart | date:'dd MMM yyyy'}}</span> ~ <span class="label label-important">{{employee.currentContractEnd | date:'dd MMM yyyy'}}</span>
                                             </td>
                                         </tr>
 
                                         <tr>
                                             <td class="span3"><span translate="CONTRACT_YEAR"></span> :</td>
                                             <td>
-                                                {{ employee[0].validationDetailId.nameEn}}
+                                                <span class="label label-success">{{employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span class="label label-warning">{{employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
                                             </td>
                                         </tr>
                                         <tr>

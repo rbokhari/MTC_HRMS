@@ -27,6 +27,7 @@
 /// <reference path="../app/hrms/controller/validation-delete/validation-controller.js" />
 /// <reference path="../app/hrms/controller/validation-delete/validation-repository.js" />
 /// <reference path="../app/hrms/directive/dashboard.js" />
+/// <reference path="../app/hrms/directive/employee-picture.js" />
 /// <reference path="../app/hrms/directive/navbar-main.js" />
 /// <reference path="../app/hrms/hubs/employee-hub.js" />
 /// <reference path="../app/hrms/module/hrms-module.js" />

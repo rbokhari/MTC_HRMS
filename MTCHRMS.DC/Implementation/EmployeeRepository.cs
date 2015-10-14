@@ -10,6 +10,7 @@ using MTCHRMS.EntityFramework.General;
 using MTCHRMS.EntityFramework.HRMS;
 using System.Data.Entity;
 using MTC.GlobalVariables;
+using MTC.Models.HRMS;
 
 namespace MTCHRMS.DC
 {
@@ -22,49 +23,127 @@ namespace MTCHRMS.DC
             _ctx = ctx;
         }
 
-        public IQueryable<EmployeeDef> GetEmployees(int roleId)
+        public IQueryable<EmployeeModel> GetEmployees(int roleId)
         {
             try
             {
+                var emp = _ctx.EmployeeDefs
+                            .Include(c => c.DepartmentId)
+                            .Include(v => v.ValidationDetailId)
+                            .Include(c => c.GenderDetail)
+                            .Include(c => c.StatusDetail);
+
                 switch ((ApplicationPreferences.Account_Roles)roleId)
                 {
                     case ApplicationPreferences.Account_Roles.ADMIN:
-                        return _ctx.EmployeeDefs
-                            .Include(c => c.DepartmentId)
-                            .Include(v => v.ValidationDetailId)
-                            .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail)
-                            .OrderBy(c=>c.EmployeeName);
-
+                        break;
                     case ApplicationPreferences.Account_Roles.HRMS_ADMIN_LOCAL:
+                        emp = emp
+                            .Where(c => c.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+                        break;
                     case ApplicationPreferences.Account_Roles.HRMS_USER_LOCAL:
-
-                        return _ctx.EmployeeDefs
-                            .Where(c => c.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI)
-                            .Include(c => c.DepartmentId)
-                            .Include(v => v.ValidationDetailId)
-                            .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail)
-                            .OrderBy(c => c.EmployeeName); 
-
+                        emp = emp
+                            .Where(c => c.NationalityId == (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+                        break;
                     case ApplicationPreferences.Account_Roles.HRMS_ADMIN_EXPATRIATE:
+                        emp = emp
+                           .Where(c => c.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+                        break;
                     case ApplicationPreferences.Account_Roles.HRMS_USER_EXPATRIATE:
 
-                        return _ctx.EmployeeDefs
-                            .Where(c => c.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI)
-                            .Include(c => c.DepartmentId)
-                            .Include(v => v.ValidationDetailId)
-                            .Include(c => c.GenderDetail)
-                            .Include(c => c.StatusDetail)
-                            .OrderBy(c => c.EmployeeName); 
+                        emp = emp
+                            .Where(c => c.NationalityId != (Int32)ApplicationPreferences.Validation_Details.NATIONALITY_OMANI);
+                        break;
                 }
 
-                return null;
+                return emp
+                    .Select(x => new EmployeeModel
+                    {
+                        Id = x.Id,
+                        UserName = x.UserName,
+                        Code = x.EmployeeCode,
+                        NameEn = x.EmployeeName,
+                        NameAr = x.EmployeeNameAr,
+                        Rank = x.Rank,
+                        DepartmentId = x.PostedTo,
+                        DepartmentName = x.DepartmentId.DepartmentName,
+                        DesignationEn = x.Designation,
+                        DesignationAr = x.DesignationAr,
+                        Nationality = x.ValidationDetailId.NameEn
+                    })
+                    .OrderBy(c => c.NameEn);
             }
             catch (Exception)
             {
                 return null;
             }
+        }
+
+        public async Task<EmployeeModel> GetEmployeePicture(int id)
+        {
+            return await Task.Run(() =>
+               _ctx.EmployeeDefs
+                   .Where(c => c.Id == id)
+                   .Select(x => new EmployeeModel
+                   {
+                       Id = x.Id,
+                       Code = x.EmployeeCode,
+                       NameEn = x.EmployeeName,
+                       NameAr = x.EmployeeNameAr,
+                       Picture = x.EmpPicture
+                   })
+                   .FirstOrDefaultAsync()
+                   );
+        }
+
+        public EmployeeModel GetEmployeeLeaveTicketDetail(int id, int roleId)
+        {
+            var contract = _ctx.EmployeeContracts.Where(c => c.EmployeeDefId == id && c.StatusId == 1).OrderByDescending(c=>c.CreatedOn).FirstOrDefault();
+            DateTime? contractEntDate = null;
+            DateTime CurrentContractYearStart = new DateTime(DateTime.Now.Year,1 ,1); ;
+            DateTime CurrentContractYearEnd = new DateTime(DateTime.Now.Year, 12 , 31); ;
+            if (contract != null)
+            {
+                contractEntDate = contract.EndDate.Value;
+
+                if (contract.EmploymentTypeId == (int)ApplicationPreferences.Validation_Details.EMPLOYEE_STATUS_CONTRACTOR)
+                {
+                    var currentYear = _ctx.EmployeeLeaveYears
+                        .FirstOrDefault(c => c.EmployeeDefId == id && c.ContractId == contract.ContractId && 
+                            (c.StartDate >= DateTime.Now && c.EndDate <= DateTime.Now));
+
+                    if (currentYear != null)
+                    {
+                        CurrentContractYearStart = currentYear.StartDate;
+                        CurrentContractYearEnd = currentYear.EndDate;
+                    }   
+                }
+            }
+
+            var employee = _ctx.EmployeeDefs
+                    .Where(c=>c.Id == id)
+                    .Select(x=> new EmployeeModel
+                    {
+                        Id = x.Id,
+                        Code = x.EmployeeCode,
+                        NameEn = x.EmployeeName,
+                        NameAr = x.EmployeeNameAr,
+                        Picture = x.EmpPicture,
+                        Rank = x.Rank,
+                        DepartmentId = x.PostedTo,
+                        DepartmentName = x.DepartmentId.DepartmentName,
+                        DesignationEn = x.Designation,
+                        DesignationAr = x.DesignationAr,
+                        Nationality = x.ValidationDetailId.NameEn,
+                        ContractId = contract.ContractId,
+                        CurrentContractStart = contract.StartDate,
+                        CurrentContractEnd = contractEntDate,
+                        CurrentContractYearStart = CurrentContractYearStart,
+                        CurrentContractYearEnd = CurrentContractYearEnd
+                    })
+                    .FirstOrDefault();
+
+            return employee;
         }
 
         public IQueryable<EmployeePassport> GetEmployeePassports(int id)

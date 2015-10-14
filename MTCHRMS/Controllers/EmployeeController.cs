@@ -17,6 +17,7 @@ using MTCHRMS.EntityFramework.HRMS;
 using MTCHRMS.Hubs;
 using Newtonsoft.Json;
 using Microsoft.AspNet.SignalR.Hubs;
+using MTC.Models.HRMS;
 using MTCHRMS.App_Start;
 using Ninject;
 
@@ -35,7 +36,7 @@ namespace MTCHRMS.Controllers
         [Route("api/employee/")]
         [HttpGet]
         //[System.Web.Http.Authorize]
-        public IQueryable<EmployeeDef> Get()
+        public IQueryable<EmployeeModel> Get()
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
@@ -57,6 +58,20 @@ namespace MTCHRMS.Controllers
                 return user == null ? 0 : user.RoleId;
             }
             
+        }
+
+        [Route("api/employee/GetEmployeePicture/{id}")]
+        [HttpGet]
+        //[Authorize]
+        public async Task<EmployeeModel> GetEmployeePicture(int id)
+        {
+            var item = await _repo.GetEmployeePicture(id);
+
+            if (item == null)
+            {
+                //Request.CreateErrorResponse(HttpStatusCode.inva);
+            }
+            return item;
         }
 
         [Route("api/employee/GetPassportExpiryList")]
@@ -123,7 +138,7 @@ namespace MTCHRMS.Controllers
         [Route("api/employee/GetSingleEmployee")]
         [HttpGet]
         [System.Web.Http.Authorize]
-        public IQueryable<EmployeeDef> GetSingle(int id)
+        public IQueryable<EmployeeModel> GetSingle(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
             //System.Threading.Thread.Sleep(1000);
@@ -158,6 +173,21 @@ namespace MTCHRMS.Controllers
             //System.Threading.Thread.Sleep(4000);
             //IDepartmentsRepository _repo = new DepartmentRepository();
             var employee = _repo.GetEmployeeDetail(id, GetRoleIdByUserId());
+
+            if (employee == null)
+            {
+                //Request.CreateErrorResponse(HttpStatusCode.BadRequest)
+            }
+            return employee;
+        }
+
+        [Route("api/employee/GetEmployeeLeaveTicketDetail/{id}")]
+        //[System.Web.Http.Authorize]
+        public EmployeeModel GetLeaveTicketDetail(int id)
+        {
+            //System.Threading.Thread.Sleep(4000);
+            //IDepartmentsRepository _repo = new DepartmentRepository();
+            var employee = _repo.GetEmployeeLeaveTicketDetail(id, GetRoleIdByUserId());
 
             if (employee == null)
             {

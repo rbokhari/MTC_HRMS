@@ -241,6 +241,7 @@
     <Content Include="app\hrms\controller\leave\leave-repository.js" />
     <Content Include="app\hrms\controller\ticket\ticket-controller.js" />
     <Content Include="app\hrms\controller\ticket\ticket-repository.js" />
+    <Content Include="app\hrms\directive\employee-picture.js" />
     <Content Include="app\hrms\templates\hrms\employee\employee-contract-add.html" />
     <Content Include="app\hrms\templates\hrms\employee\employee-leaveticket-detail.html" />
     <Content Include="app\hrms\templates\hrms\employee\employee-search.html" />

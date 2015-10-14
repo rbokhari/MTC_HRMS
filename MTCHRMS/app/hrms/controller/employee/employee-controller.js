@@ -524,7 +524,7 @@ hrmsModule.controller('EmployeeController',
         $scope.employeeStatus = validationRepository.getEmployeeStatus;
         
 
-        if ($routeParams.id != undefined) {
+        $scope.loadEmployeeDetail = function() {
             $scope.isBusy = false;
             employeeRepository.getEmployeeDetailById($routeParams.id)
                 .$promise
@@ -534,8 +534,23 @@ hrmsModule.controller('EmployeeController',
                 .then(function () {
                     $scope.isBusy = true;
                 });
-            //console.log($scope.employee);
         }
+
+        $scope.loadEmployeeLeaveTicketDetail = function () {
+            $scope.isBusy = false;
+            employeeRepository.getEmployeeLeaveTicketDetailById($routeParams.id)
+                .$promise
+                .then(function (response) {
+                    $scope.employee = response;
+                }, function () { })
+                .then(function () {
+                    $scope.isBusy = true;
+                });
+        }
+
+        //if ($routeParams.id != undefined) {
+        //    //console.log($scope.employee);
+        //}
         
         $scope.save = function(employeeDef) {
             $scope.errors = [];
@@ -547,7 +562,7 @@ hrmsModule.controller('EmployeeController',
                     // success case
                     console.log("save - Successfully !");
                     appRepository.showAddSuccessGritterNotification();
-                    console.log('/' + $scope.mainPortal + '/employee/detail/' + resultEmployeeDef.id);
+                    //console.log('/' + $scope.mainPortal + '/employee/detail/' + resultEmployeeDef.id);
                     $location.url('/' + $scope.mainPortal + '/employee/detail/' + resultEmployeeDef.id);
                 }, function(error) {
                     // failure case

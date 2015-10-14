@@ -51,20 +51,20 @@
             <div class="span3 fade-in business-card" dir-paginate="employee in employees | filter:filterobj | itemsPerPage: 20">
                 <div class="row-fluid">
                     <div class="span4">
-                        <img alt="" data-img-loading-value="{{employee.empPicture}}" data-img-loading-size="profile" style="height: 120px; width: 120px;" width="120px" height="120px" />
+                        <img alt="" employee-picture="{{employee.id}}" data-img-loading-size="profile" style="height: 120px; width: 120px;" width="120px" height="120px" />
                     </div>
                     <div class="span8">
                         <br />
-                        <p ng-show="mainPortal=='HRMSPortal'"><a class="business-card-link" title="{{employee.employeeName}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.employeeName.length > 1 ? employee.employeeName : employee.employeeNameAr | limitTo:16}} {{employee.employeeName.length > 16 ? '...' : ''}}</a>
+                        <p ng-show="mainPortal=='HRMSPortal'"><a class="business-card-link" title="{{employee.name}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.nameEn.length > 1 ? employee.nameEn : employee.nameAr | limitTo:16}} {{employee.nameEn.length > 16 ? '...' : ''}}</a>
                         </p>
-                        <p ng-show="mainPortal=='HRMSPortalAr'"><a class="business-card-link" title="{{employee.employeeNameAr}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.employeeNameAr.length > 1 ? employee.employeeNameAr : employee.employeeName | limitTo:20}} {{employee.employeeNameAr.length > 20 ? '...' : ''}}</a></p>
-                        <i class="icon icon-group" style="color: #fff0f5"></i>&nbsp; {{ employee.departmentId.departmentName | limitTo:18}} {{employee.departmentId.departmentName.length > 18 ? '...' : ''}}<br />
+                        <p ng-show="mainPortal=='HRMSPortalAr'"><a class="business-card-link" title="{{employee.nameAr}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">{{ employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn | limitTo:20}} {{employee.nameAr.length > 20 ? '...' : ''}}</a></p>
+                        <i class="icon icon-group" style="color: #fff0f5"></i>&nbsp; {{ employee.departmentName | limitTo:18}} {{employee.departmentName.length > 18 ? '...' : ''}}<br />
                         <i class="icon icon-cogs" style="color: #fff0f5"></i>&nbsp; <small>{{employee.rank}}</small><br />
                         <i ng-show="employee.phone" class="icon icon-phone" style="color: #fff0f5"></i>&nbsp; <small>{{employee.phone}}</small>
                     </div>
                 </div>
                 <div class="row-fluid bottom center">
-                    <div class="offset6"><i class="icon icon-edit" style="color:#000000"></i> <a class="business-card-link" title="{{employee.employeeName}}" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}">view profile</a></div>
+                    <div class="offset4"> <a title="View Profile" ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}"><i class="icon icon-user" style="color:#000000"></i></a>&nbsp;<a title="View Leaves / Tickets" ng-href="/{{mainPortal}}/employee/leaveticket/{{employee.id}}"><i class="icon icon-plane" style="color:#000000"></i></a></div>
                 </div>
             </div>
             <!--<div id="bcbg" dir-paginate="employee in employees | filter:empSearch | itemsPerPage: 24" data-desktop="span2" data-tablet="span2" class="span3 fade-in">
