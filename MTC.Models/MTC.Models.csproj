@@ -47,6 +47,12 @@
     <Compile Include="Inventory\ItemUsersModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MTCHRMS.EntityFramework\MTCHRMS.EntityFramework.csproj">
+      <Project>{86e41ea9-27fc-48e1-acc6-1a8902e1199c}</Project>
+      <Name>MTCHRMS.EntityFramework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

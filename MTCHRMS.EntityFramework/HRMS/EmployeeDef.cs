@@ -418,8 +418,29 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public virtual TicketDef TicketDetail { get; set; }
 
+        public virtual ICollection<EmployeeTicketYear> TicketsYears { get; set; }
+
     }
 
+    public class EmployeeTicketYear : TableStrutcture
+    {
+        [Key]
+        public int TicketYearId { get; set; }
 
+        public int TicketCategoryId { get; set; }
+
+        public int EmployeeDefId { get; set; }
+
+        public int ContractId { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public short Tickets { get; set; }
+
+        public short Reimbursement { get; set; }
+
+    }
 
 }

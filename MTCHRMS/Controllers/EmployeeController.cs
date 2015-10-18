@@ -183,7 +183,7 @@ namespace MTCHRMS.Controllers
 
         [Route("api/employee/GetEmployeeLeaveTicketDetail/{id}")]
         //[System.Web.Http.Authorize]
-        public EmployeeModel GetLeaveTicketDetail(int id)
+        public EmployeeLeaveTicketModel GetLeaveTicketDetail(int id)
         {
             //System.Threading.Thread.Sleep(4000);
             //IDepartmentsRepository _repo = new DepartmentRepository();

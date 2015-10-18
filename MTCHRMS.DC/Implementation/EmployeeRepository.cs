@@ -96,33 +96,51 @@ namespace MTCHRMS.DC
                    );
         }
 
-        public EmployeeModel GetEmployeeLeaveTicketDetail(int id, int roleId)
+        public EmployeeLeaveTicketModel GetEmployeeLeaveTicketDetail(int id, int roleId)
         {
-            var contract = _ctx.EmployeeContracts.Where(c => c.EmployeeDefId == id && c.StatusId == 1).OrderByDescending(c=>c.CreatedOn).FirstOrDefault();
+            var contract = _ctx.EmployeeContracts
+                .Where(c => c.EmployeeDefId == id && c.StatusId == 1)
+                .Include(d => d.LeaveCategory.Select(a => a.LeaveYears))
+                .Include(d => d.LeaveCategory.Select(a => a.LeaveDetail).Select(f=>f.ScheduleDetail))
+                .Include(d => d.LeaveCategory.Select(a => a.LeaveDetail).Select(f => f.TypeDetail))
+                .Include(e => e.TicketCategory.Select(a => a.TicketsYears))
+                .Include(e => e.TicketCategory.Select(a => a.TicketDetail).Select(f => f.EligibilityDetail))
+                .OrderByDescending(c => c.CreatedOn);
+              
+
+
             DateTime? contractEntDate = null;
-            DateTime CurrentContractYearStart = new DateTime(DateTime.Now.Year,1 ,1); ;
-            DateTime CurrentContractYearEnd = new DateTime(DateTime.Now.Year, 12 , 31); ;
+            DateTime currentContractYearStart = new DateTime(DateTime.Now.Year,1 ,1); 
+            DateTime currentContractYearEnd = new DateTime(DateTime.Now.Year, 12 , 31);
+            short totalDays = 0, transferDays = 0, deductDays = 0;
+            
+
             if (contract != null)
             {
-                contractEntDate = contract.EndDate.Value;
+                contractEntDate = contract.FirstOrDefault().EndDate.Value;
 
-                if (contract.EmploymentTypeId == (int)ApplicationPreferences.Validation_Details.EMPLOYEE_STATUS_CONTRACTOR)
+                if (contract.FirstOrDefault().EmploymentTypeId == (int)ApplicationPreferences.Validation_Details.EMPLOYEE_STATUS_CONTRACTOR)
                 {
                     var currentYear = _ctx.EmployeeLeaveYears
-                        .FirstOrDefault(c => c.EmployeeDefId == id && c.ContractId == contract.ContractId && 
-                            (c.StartDate >= DateTime.Now && c.EndDate <= DateTime.Now));
+                        .FirstOrDefault(c => c.EmployeeDefId == id && c.ContractId == contract.FirstOrDefault().ContractId && 
+                            (DateTime.Now >= c.StartDate && DateTime.Now <= c.EndDate));
 
                     if (currentYear != null)
                     {
-                        CurrentContractYearStart = currentYear.StartDate;
-                        CurrentContractYearEnd = currentYear.EndDate;
+                        currentContractYearStart = currentYear.StartDate;
+                        currentContractYearEnd = currentYear.EndDate;
+                        totalDays = currentYear.LeaveDays;
+                        transferDays = currentYear.TransferDays;
+                        deductDays = currentYear.DeductDays;
+
+                        
                     }   
                 }
             }
 
             var employee = _ctx.EmployeeDefs
                     .Where(c=>c.Id == id)
-                    .Select(x=> new EmployeeModel
+                    .Select(x=> new EmployeeLeaveTicketModel
                     {
                         Id = x.Id,
                         Code = x.EmployeeCode,
@@ -135,11 +153,16 @@ namespace MTCHRMS.DC
                         DesignationEn = x.Designation,
                         DesignationAr = x.DesignationAr,
                         Nationality = x.ValidationDetailId.NameEn,
-                        ContractId = contract.ContractId,
-                        CurrentContractStart = contract.StartDate,
+                        ContractId = contract.FirstOrDefault().ContractId,
+                        CurrentContractStart = contract.FirstOrDefault().StartDate,
                         CurrentContractEnd = contractEntDate,
-                        CurrentContractYearStart = CurrentContractYearStart,
-                        CurrentContractYearEnd = CurrentContractYearEnd
+                        CurrentContractYearStart = currentContractYearStart,
+                        CurrentContractYearEnd = currentContractYearEnd,
+                        TotalDays = totalDays,
+                        TransferDays = transferDays,
+                        DeductDays = deductDays,
+                        Contracts = contract
+
                     })
                     .FirstOrDefault();
 
@@ -644,6 +667,35 @@ namespace MTCHRMS.DC
             try
             {
                 _ctx.EmployeeTicketCategories.Add(newTicketCategory);
+                _ctx.SaveChanges();
+
+                var contract = _ctx.EmployeeContracts
+                                    .SingleAsync(c => c.EmployeeDefId == newTicketCategory.EmployeeDefId && c.StatusId == 1)
+                                    .Result;
+
+                var totalTickets = _ctx.Tickets
+                                    .Where(c => c.TicketId == newTicketCategory.TicketId)
+                                    .Include(x=>x.EligibilityDetail)
+                                    .FirstAsync()
+                                    .Result;
+
+                for (int i = 0; i < contract.TotalYears; i++)
+                {
+                    var ticketYear = new EmployeeTicketYear
+                    {
+                        TicketCategoryId = newTicketCategory.TicketCategoryId,
+                        EmployeeDefId = newTicketCategory.EmployeeDefId,
+                        ContractId = newTicketCategory.ContractId,
+                        StartDate = contract.StartDate.AddMonths(12 * i),
+                        EndDate = contract.StartDate.AddMonths(12 * (i + 1)).AddDays(-1),
+                        Tickets =Convert.ToInt16(totalTickets.EligibilityDetail.Description),
+                        Reimbursement = 0,
+                        CreatedBy = newTicketCategory.CreatedBy,
+                        CreatedOn = newTicketCategory.CreatedOn
+
+                    };
+                    _ctx.EmployeeTicketYears.Add(ticketYear);
+                }
                 return true;
             }
             catch (Exception)

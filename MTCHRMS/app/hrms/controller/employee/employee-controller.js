@@ -129,7 +129,7 @@ hrmsModule.controller('EmployeeController',
             return moment(start).diff(moment(new Date()), 'day');
         };
 
-        $scope.checkLeavePeriod = function(date1, date2) {
+        $scope.checkCurrentPeriod = function(date1, date2) {
             var currentDate = new Date();
             var firstDate = new Date(date1);
             var secondDate = new Date(date2);
