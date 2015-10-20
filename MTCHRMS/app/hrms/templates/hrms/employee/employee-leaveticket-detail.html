@@ -31,15 +31,15 @@
         <div class="span12">
             <div class="widget widget-tabs">
                 <div class="widget-title">
-                    <h4><i class="icon-user"></i>Profile</h4>
+                    <h4><i class="icon-plane"></i>&nbsp;<span translate="LEAVES_TICKETS"></span></h4>
                 </div>
 
                 <div class="widget-body">
                     <div class="tabbable">
                         <!--ng-init="tab=1"  set this in controller as tab=1  -->
                         <ul class="nav nav-tabs">
-                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)"><span translate="TICKET"></span></a></li>
-                            <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)"><span translate="LEAVES"></span></a></li>
+                            <li ng-class="{active:isTabSelected(3)}"><a href="" ng-click="setTab(3)"><span translate="TICKET_DETAIL"></span></a></li>
+                            <li ng-class="{active:isTabSelected(2)}"><a href="" ng-click="setTab(2)"><span translate="LEAVE_DETAIL"></span></a></li>
                             <li ng-class="{active:isTabSelected(1)}"><a href="" ng-click="setTab(1)"><span translate="SUMMARY"></span></a></li>
                         </ul>
                         <div class="tab-pane" id="tab1" ng-show="isTabSelected(1)">
@@ -51,8 +51,8 @@
                                 </div>
                                 <ul class="nav nav-stacked" ng-if="authentication.isHRMSAdmin">
                                     <li><a ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}"><i class="icon-user"></i> <span translate="VIEW_PROFILE"></span></a></li>
-                                    <li><a href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_LEAVE"></span></a></li>
-                                    <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_TICKET"></span></a></li>
+                                    <li><a href="/{{mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_LEAVE"></span></a></li>
+                                    <li><a href="/{{mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_TICKET"></span></a></li>
                                 </ul>
 
                             </div>
@@ -69,31 +69,47 @@
                                         <tr>
                                             <td class="span3"><span translate="CONTRACT"></span> :</td>
                                             <td>
-                                                <span class="label label-success">{{employee.currentContractStart | date:'dd MMM yyyy'}}</span> ~ <span class="label label-important">{{employee.currentContractEnd | date:'dd MMM yyyy'}}</span>
+                                                <span ng-if="employee.contractId" class="label label-success">{{employee.currentContractStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="employee.contractId" class="label label-important">{{employee.currentContractEnd | date:'dd MMM yyyy'}}</span>
+                                                <span ng-if="employee.contractId==0" ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
+                                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showAddContract(employee.id)">
+                                                        <i class="icon-external-link"></i> <span translate="ASSIGN_CONTRACT"></span>
+                                                    </a>
+                                                </span>
                                             </td>
                                         </tr>
-
+                                        
                                         <tr>
                                             <td class="span3"><span translate="ACTIVE_YEAR"></span> :</td>
                                             <td>
-                                                <span class="label label-success">{{employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span class="label label-warning">{{employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
+                                                <span ng-if="employee.contractId" class="label label-success">{{employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="employee.contractId" class="label label-warning">{{employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="span3"> <span translate="LEAVE_SUMMARY"></span> :</td>
-                                            <td>
-                                                <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> - <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" data-placement="left" data-content="popovers body goes here! popovers body goes here!" data-original-title="Default popovers" class="badge badge-default popovers" ng-bind="employee.deductDays"></label>
-                                                <label title="remaining days" class="badge badge-success pull-right" ng-bind="employee.totalDays"></label>
+                                            <td ng-if="employee.leaveCategoryId">
+                                                <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> - <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label>
+                                                <label title="remaining days" class="badge badge-success pull-right">{{employee.totalDays + employee.transferDays - employee.deductDays}}</label>
+                                            </td>
+                                            <td ng-if="employee.leaveCategoryId==0">
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
+                                                    <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
+                                                </a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="span3"><span translate="TICKET_SUMMARY"></span> :</td>
-                                            <td>
-                                                {{ employee[0].dateOfBirth | date:'longDate' }}
+                                            <td ng-if="employee.ticketCategoryId">
+                                                <label title="total tickets" class="badge badge-success" ng-bind="employee.totalTickets"></label> - <label title="reimbursed tickets" class="badge badge-default" ng-bind="employee.reimbursedTickets"></label>
+                                                <label title="balance tickets" class="badge badge-success pull-right">{{employee.totalTickets - employee.reimbursedTickets}}</label>
+                                            </td>
+                                            <td ng-if="employee.ticketCategoryId==0">
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee.id)">
+                                                    <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
+                                                </a>
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>               
+                                </table>
                                 <hr />
                              
                             </div>
@@ -192,7 +208,7 @@
                             <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="TICKET_DETAIL"></span></strong>
                             <span ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
                                 <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showQualification(employee[0].id)">
-                                    <i class="icon-external-link"></i> <span translate="ADD_TICKETS_CATEGORY"></span>
+                                    <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
                                 </a>
                             </span>
                             <div class="row-fluid">

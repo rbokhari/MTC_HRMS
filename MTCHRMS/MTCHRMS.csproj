@@ -1048,9 +1048,6 @@
     <Content Include="Content\Site.css.map">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <Content Include="app\common\translate\translation_en.json" />
-    <Content Include="app\common\translate\translation_ar.json" />
-    <Content Include="app\common\translate\en-US.json" />
     <Content Include="Content\img\flag\small\.DS_Store" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap-toggle.min.js.map" />
     <Content Include="Content\bootstrap-toggle-master\js\bootstrap2-toggle.min.js.map" />

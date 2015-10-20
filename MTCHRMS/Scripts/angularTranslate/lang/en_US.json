@@ -120,9 +120,22 @@
     "COUNTRY": "Country",
     "CLOSE": "Close",
     "DETAIL": "Detail",
-  "CHILD_NAME": "Child Name",
-  "LEAVE": "Leave Master",
-  "TICKET":  "Ticket Master"
-
+    "CHILD_NAME": "Child Name",
+    "VIEW_PROFILE": "View Profile",
+    "LEAVES_TICKETS": "Leave & Tickets",
+    "ASSIGN_CONTRACT": "Assign Contract",
+    "LEAVE": "Leave Master",
+    "TICKET": "Ticket Master",
+    "ADD_LEAVE_CATEGORY": "Add Leave Category",
+    "ADD_TICKET_CATEGORY": "Add Ticket Category",
+    "LEAVE_SUMMARY": "Leave Summary",
+    "LEAVE_DETAIL": "Leave Detail",
+  "TICKET_SUMMARY": "Ticket Summary",
+  "TICKET_DETAIL": "Ticket Detail",
+    "ADD_LEAVE": "Apply Leave",
+    "ADD_TICKET": "Apply Ticket",
+  "CONTRACT_INFORMATION": "Contract Information",
+  "LAST_LEAVE": "Latest Leave",
+  "PROFILE": "Profile"
 
 }

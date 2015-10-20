@@ -306,6 +306,8 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public virtual ICollection<EmployeeLeaveCategory> LeaveCategory { get; set; }
 
+        public virtual ICollection<EmployeeLeave> EmployeeLeaves { get; set; }
+
         public virtual ICollection<EmployeeTicketCategory> TicketCategory { get; set; }
     }
 
