@@ -167,19 +167,13 @@ hrmsModule.controller('EmployeeController',
             }).then(function(modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //employee[0].employeePassports.splice(0, 0, resultEmployeePassport.data);
-                    //console.log("show passport close : " + result.newPassport.id);
                     $scope.employee[0].employeePassports.push(result.resultData);
-                    //$scope.complexResult = "Name: " + result.name + ", age: " + result.age;
-                    //$('.modal').modal('hide');
-                    //modal.element.close();
                 });
                 
             });
         };
 
         $scope.editPassport = function (passport) {
-            //console.log(passport);
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-passport.html",
                 controller: "EmployeeModalController",
@@ -291,10 +285,6 @@ hrmsModule.controller('EmployeeController',
         };
 
         $scope.editQualification = function (qualification) {
-            //console.log(qualification);
-            //var visaCopy = {};
-           
-            //angular.copy(visa, visaCopy);
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-qualification.html",
                 controller: "EmployeeModalController",
@@ -413,7 +403,6 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //console.log(result);
                     $scope.employee[0].empPicture = result.resultData.empPicture;
                 });
 
@@ -436,9 +425,7 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //$scope.employee[0].previousEmployments.push(result.resultData);
                 });
-
             });
         };
 
@@ -457,7 +444,6 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //$scope.employee[0].previousEmployments.push(result.resultData);
                 });
 
             });
@@ -478,7 +464,6 @@ hrmsModule.controller('EmployeeController',
             }).then(function (modal) {
                 modal.element.modal();
                 modal.close.then(function (result) {
-                    //$scope.employee[0].previousEmployments.push(result.resultData);
                 });
 
             });

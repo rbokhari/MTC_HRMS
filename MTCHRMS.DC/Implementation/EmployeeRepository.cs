@@ -158,6 +158,7 @@ namespace MTCHRMS.DC
                             NameAr = x.EmployeeNameAr,
                             Picture = x.EmpPicture,
                             Rank = x.Rank,
+                            Regiment = x.ParentRegiment,
                             DepartmentId = x.PostedTo,
                             DepartmentName = x.DepartmentId.DepartmentName,
                             DesignationEn = x.Designation,
@@ -1113,6 +1114,20 @@ namespace MTCHRMS.DC
                 return null;
             }
 
+        }
+
+        public bool AddEmployeeLeave(EmployeeLeave newLeave)
+        {
+            try
+            {
+                _ctx.EmployeeLeaves.Add(newLeave);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO log this error    
+                return false;
+            }
         }
     }
 }

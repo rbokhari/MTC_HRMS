@@ -136,6 +136,7 @@
     "ADD_TICKET": "Apply Ticket",
   "CONTRACT_INFORMATION": "Contract Information",
   "LAST_LEAVE": "Latest Leave",
-  "PROFILE": "Profile"
+  "PROFILE": "Profile",
+  "ACTIVE_YEAR":"Active Year"
 
 }

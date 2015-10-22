@@ -884,6 +884,35 @@ namespace MTCHRMS.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
         }
 
+        [HttpPost]
+        [ActionName("PostEmployeeLeave")]
+        [System.Web.Http.Authorize]
+        public HttpResponseMessage AddEmployeeLeave([FromBody] EmployeeLeave newLeave)
+        {
+            if (ModelState.IsValid)
+            {
+                if (newLeave.EmployeeLeaveId == 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newLeave.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newLeave.CreatedOn = DateTime.Now;
+                    if (_repo.AddEmployeeLeave(newLeave) && _repo.Save())
+                    {
+                        //var context = GlobalHost.ConnectionManager.GetHubContext<HRMSStaffHub>();
+                        //context.Clients.All.addNewEmployee(newEmployee.Id, newEmployee.CreatedBy);
+                        return Request.CreateResponse(HttpStatusCode.Created, newLeave);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
+                }
+
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+
         private IEnumerable<string> GetErrorMessages()
         {
             return ModelState.Values.SelectMany(x => x.Errors.Select(e => e.ErrorMessage));

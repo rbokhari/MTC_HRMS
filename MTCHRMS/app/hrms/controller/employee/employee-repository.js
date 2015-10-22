@@ -116,7 +116,6 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/' + employeeChild.employeeDefId + '/DeleteEmployeeChild').save(employeeChild);
     };
 
-
     var _addEmployeeKin = function(employeeKins) {
         return $resource('/api/employee/' + employeeKins.employeeDefId + '/PostEmployeeKin').save(employeeKins);
     };
@@ -135,7 +134,6 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
     var _addEmployeeTicketCategory = function (employeeTicket) {
         return $resource('/api/employee/' + employeeTicket.employeeDefId + '/PostEmployeeTicketCategory').save(employeeTicket);
     };
-
 
     var _addEmployeeImage = function (employee) {
         return $resource('/api/employee/upload').save(employee);

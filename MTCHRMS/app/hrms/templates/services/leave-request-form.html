@@ -1,9 +1,9 @@
-﻿<div class="container-fluid">
+﻿<div class="container-fluid" data-ng-init="loadEmployeeLeaveTicketDetail()">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
             <h3 class="page-title">
-                Annual Leave <small> Request </small>
+                Leave Application <small> Request Form </small>
             </h3>
             <ul class="breadcrumb">
                 <li>
@@ -26,52 +26,53 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>  Personal Information</h4>
                     <span class="tools">
+                        <a href="/{{mainPortal}}/employee/detail/{{employee.id}}" target="_blank" class="icon-user"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
                 </div>
                 <div class="widget-body">
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
                                     <span id="MainContent_lblCode" class="control-label">Employee No:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$txtCode" type="text" id="MainContent_txtCode" class="textbox" />
-                                        <input type="hidden" name="ctl00$MainContent$hdID" id="MainContent_hdID" />
+                                        <input type="text" ng-model="employee.code" />
+                                        <input type="hidden" />
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_lblAssetTag" class="control-label">Occupation:</span>
+                                    <span class="control-label">Designation:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$txtAssetTag" type="text" id="MainContent_txtAssetTag" />
+                                        <input type="text" ng-model="employee.designationEn" />
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_Label1" class="control-label">Grade:</span>
+                                    <span class="control-label">Grade:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox1" type="text" id="MainContent_TextBox1" />
+                                        <input type="text" ng-model="employee.rank" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span id="MainContent_lblName" class="control-label">Employee Name:</span>
+                                    <span class="control-label">Employee Name:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$txtName" type="text" id="MainContent_txtName" />
+                                        <input type="text" ng-model="employee.nameEn" />
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_lblSerialNo" class="control-label">Department/Section:</span>
+                                    <span class="control-label">Department/Section:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$txtSerialNo" type="text" id="MainContent_txtSerialNo" />
+                                        <input type="text" ng-model="employee.departmentName" />
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_Label2" class="control-label">Unit:</span>
+                                    <span class="control-label">Unit:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox2" type="text" id="MainContent_TextBox2" />
+                                        <input type="text" ng-model="employee.regiment"  />
                                     </div>
                                 </div>
                             </div>
@@ -81,19 +82,20 @@
             </div>
             <div class="widget">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i>  Leave Information</h4>
+                    <h4><i class="icon-reorder"></i> Leave Information </h4>
                     <span class="tools">
+                        <a href="/{{mainPortal}}/employee/leaveticket/{{employee.id}}" target="_blank" class="icon-plane"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
                 </div>
                 <div class="widget-body">
                     <div class="row-fluid">
-                        <div class="span6">
+                        <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span id="MainContent_Label3" class="control-label">Leave Type:</span>
+                                    <span class="control-label">Leave Type:</span>
                                     <div class="controls">
-                                        <select name="ctl00$MainContent$TextBox3" id="MainContent_TextBox3">
+                                        <select>
                                             <option value="Annual Leave">Annual Leave</option>
                                             <option value="Sick Leave">Sick Leave</option>
                                             <option value="Emergency Leave">Emergency Leave</option>
@@ -104,81 +106,92 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_Label5" class="control-label">With Pay/Without Pay:</span>
+                                    <span class="control-label">From Date:</span>
                                     <div class="controls">
-                                        <input id="MainContent_TextBox5" type="checkbox" name="ctl00$MainContent$TextBox5" />
+                                        <input type="text"/>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <span class="control-label">Replace Person:</span>
+                                    <div class="controls">
+                                        <input type="text"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span id="MainContent_Label6" class="control-label">From Date:</span>
+                                    <span class="control-label">With Pay/Without Pay:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox6" type="text" id="MainContent_TextBox6" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label9" class="control-label">Address/Phone No:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox9" type="text" id="MainContent_TextBox9" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label10" class="control-label">Replace Person:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox10" type="text" id="MainContent_TextBox10" class="span24" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label8" class="control-label">Ticket Cost:</span>
-                                    <div class="controls">
-                                        <label class="checkbox">
-                                            <input type="checkbox" value="" /> Self
-                                            <input type="checkbox" value="" /> MOD
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label11" class="control-label">Signature:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox11" type="text" id="MainContent_TextBox11" />
+                                        <toggle-switch html="true" model="leave.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
-                        <div class="span6">
+                        <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span id="MainContent_Label4" class="control-label">Total Days:</span>
+                                    <span class="control-label">Total Days:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox4" type="text" id="MainContent_TextBox4" />
+                                        <input type="text"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    &nbsp;
-                                    <div class="controls">&nbsp;</div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label7" class="control-label">To Date:</span>
+                                    <span class="control-label">To Date:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox7" type="text" id="MainContent_TextBox7" />
+                                        <input type="text"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    &nbsp;
-                                    <div class="controls">&nbsp;</div>
-                                </div>
-                                <div class="control-group">
-                                    &nbsp;
-                                    <div class="controls">&nbsp;</div>
-                                </div>
-                                <div class="control-group">
-                                    <span id="MainContent_Label12" class="control-label">Date:</span>
+                                    <span class="control-label">Address/Phone No:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$TextBox8" type="text" id="MainContent_TextBox8" />
+                                        <input type="text"/>
                                     </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">Ticket :</span>
+                                    <div class="controls">
+                                        <toggle-switch html="true" model="leave.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="span2 alert alert-info">
+                            <div class="control-group">
+                                <span class="control-label"><span translate="ACTIVE_YEAR"></span> :</span>
+                                <div class="controls">
+                                    <span ng-if="employee.contractId" class="label label-success">{{employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="employee.contractId" class="label label-warning">{{employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group" ng-if="employee.leaveCategoryId">
+                                <span class="control-label"><span translate="LEAVE_SUMMARY"></span> :</span>
+                                <div class="controls">
+                                    <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> - <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label>
+                                    <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
+                                    <label title="remaining days" class="badge badge-success pull-right bottom-right">{{employee.totalDays + employee.transferDays - employee.deductDays}}</label>
+
+                                </div>
+                            </div>
+                            <div class="control-group" ng-if="employee.ticketCategoryId">
+                                <span class="control-label"><span translate="TICKET_SUMMARY"></span> :</span>
+                                <div class="controls">
+                                    <label title="total tickets" class="badge badge-success" ng-bind="employee.totalTickets"></label> - <label title="reimbursed tickets" class="badge badge-default" ng-bind="employee.reimbursedTickets"></label>
+                                    <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
+                                    <label title="balance tickets" class="badge badge-success pull-right">{{employee.totalTickets - employee.reimbursedTickets}}</label>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="cmdSave" class="btn btn-success" ng-click="save(leave)" ng-disabled="frmLeave.$invalid">
+                            <i class="icon-share"></i>
+                            <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
+                        </button>
+                        <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/leave">
+                            <i class="icon-undo"></i>
+                            <span translate="CANCEL"></span>&nbsp;
+                        </a>
                     </div>
                 </div>
             </div>
@@ -196,7 +209,7 @@
                                 <div class="control-group">
                                     <span class="control-label">Line Manager Name:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox90" type="text" id="MainContent_textbox90" />
+                                        <select ></select>
                                     </div>
                                 </div>
                             </div>
@@ -204,9 +217,9 @@
                         <div class="span6">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span class="control-label">Signature:</span>
+                                    <span class="control-label">Date :</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox12" type="text" id="MainContent_textbox12" />
+                                        <input type="text" />
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +241,7 @@
                                 <div class="control-group">
                                     <span class="control-label">Manager Name:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox13" type="text" id="MainContent_textbox13" />
+                                        <select></select>
                                     </div>
                                 </div>
                             </div>
@@ -236,9 +249,9 @@
                         <div class="span6">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span class="control-label">Signature:</span>
+                                    <span class="control-label">Date :</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox14" type="text" id="MainContent_textbox14" />
+                                        <input type="text" />
                                     </div>
                                 </div>
                             </div>
@@ -259,39 +272,21 @@
                         <div class="span12">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span class="control-label">Total Leave Days:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$textbox15" type="text" id="MainContent_textbox15" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Contract Dates:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$textbox16" type="text" id="MainContent_textbox16" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Leave Transferred from Previous Contract:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$textbox17" type="text" id="MainContent_textbox17" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Used Days:</span>
-                                    <div class="controls">
-                                        <input name="ctl00$MainContent$textbox18" type="text" id="MainContent_textbox18" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
                                     <span class="control-label">Remaining Days:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox19" type="text" id="MainContent_textbox19" />
+                                        <input type="text"/>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <span class="control-label">HR Person :</span>
+                                    <div class="controls">
+                                        <select ></select>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Signature:</span>
                                     <div class="controls">
-                                        <input name="ctl00$MainContent$textbox20" type="text" id="MainContent_textbox20" />
+                                        <input type="text" />
                                     </div>
                                 </div>
 
