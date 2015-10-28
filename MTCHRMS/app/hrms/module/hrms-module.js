@@ -86,7 +86,7 @@
         $routeProvider
             .when('/HRMSPortal/leaverequest/:id', {
                 templateUrl: '/app/hrms/templates/services/leave-request-form.html',
-                controller: 'EmployeeController'
+                controller: 'ServicesController'
             });
 
         $routeProvider

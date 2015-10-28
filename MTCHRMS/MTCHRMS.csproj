@@ -207,6 +207,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\NinjectConfig.cs" />
     <Compile Include="App_Start\NinjectResolver.cs" />
+    <Compile Include="Controllers\HrmservicesController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\DistributionController.cs" />
@@ -239,6 +240,8 @@
     <Content Include="app\common\templates\modal\confirm-modal.html" />
     <Content Include="app\hrms\controller\leave\leave-controller.js" />
     <Content Include="app\hrms\controller\leave\leave-repository.js" />
+    <Content Include="app\hrms\controller\services\services-controller.js" />
+    <Content Include="app\hrms\controller\services\services-repository.js" />
     <Content Include="app\hrms\controller\ticket\ticket-controller.js" />
     <Content Include="app\hrms\controller\ticket\ticket-repository.js" />
     <Content Include="app\hrms\directive\employee-picture.js" />

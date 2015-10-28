@@ -56,11 +56,9 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
         return $resource('/api/employee/GetEmployeeByDepartmentId/' + id).query();
     };
 
-
     var _getEmployeesSearchList = function (employee) {
         return $resource('/api/employee/GetEmployeeSearch').query(employee);
     };
-
 
     var _addEmployee = function (employeeDef) {
         return $resource('/api/employee').save(employeeDef);
@@ -93,7 +91,6 @@ hrmsModule.factory('employeeRepository', ['$resource', '$http', function ($resou
     var _deleteEmployeePreviousEmployement = function (previousEmployement) {
         return $resource('/api/employee/' + previousEmployement.employeeDefId + '/DeletePreviousEmployement').save(previousEmployement);
     };
-
 
     var _addEmployeeMarital = function(employeeMaritals) {
         return $resource('/api/employee/' + employeeMaritals.employeeDefId + '/PostEmployeeMarital').save(employeeMaritals);

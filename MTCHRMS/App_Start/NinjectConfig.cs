@@ -36,6 +36,8 @@ namespace MTCHRMS.App_Start
             kernel.Bind<ITicketDefRepository>().To<TicketDefRepository>();
             kernel.Bind<ILeavesDefRepository>().To<LeaveDefRepository>();
 
+            kernel.Bind<IServicesRepository>().To<ServicesRepository>();
+
             return kernel;
         }
     }

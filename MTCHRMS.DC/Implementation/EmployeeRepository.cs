@@ -101,6 +101,7 @@ namespace MTCHRMS.DC
             var contract = _ctx.EmployeeContracts
                 .Where(c => c.EmployeeDefId == id && c.StatusId == 1)
                 .Include(d => d.LeaveCategory.Select(a => a.LeaveYears))
+                .Include(d => d.LeaveCategory.Select(a => a.LeaveYears.Select(f=>f.EmployeeLeaves)))
                 .Include(d => d.LeaveCategory.Select(a => a.LeaveDetail).Select(f=>f.ScheduleDetail))
                 .Include(d => d.LeaveCategory.Select(a => a.LeaveDetail).Select(f => f.TypeDetail))
                 .Include(e => e.TicketCategory.Select(a => a.TicketsYears))
@@ -113,7 +114,8 @@ namespace MTCHRMS.DC
             DateTime currentContractYearStart = new DateTime(DateTime.Now.Year,1 ,1); 
             DateTime currentContractYearEnd = new DateTime(DateTime.Now.Year, 12 , 31);
             int leaveCategoryId = 0, ticketCategoryId = 0;
-            short totalDays = 0, transferDays = 0, deductDays = 0;
+            int leaveActiveYearId = 0;
+            short totalDays = 0, transferDays = 0, deductDays = 0, availedDays = 0;
             short totalTickets = 0, reimbursedTickets = 0;
 
 
@@ -135,6 +137,8 @@ namespace MTCHRMS.DC
                         totalDays = currentLeaveYear.LeaveDays;
                         transferDays = currentLeaveYear.TransferDays;
                         deductDays = currentLeaveYear.DeductDays;
+                        leaveActiveYearId = currentLeaveYear.LeaveYearId;
+                        availedDays = Convert.ToInt16(currentLeaveYear.EmployeeLeaves.Sum(f=>f.LeaveDays));
                     }
 
                     var currentTicketYear = _ctx.EmployeeTicketYears
@@ -166,6 +170,7 @@ namespace MTCHRMS.DC
                             Nationality = x.ValidationDetailId.NameEn,
                             ContractId = contract.FirstOrDefault().ContractId,
                             LeaveCategoryId = leaveCategoryId,
+                            LeaveYearCurrentId = leaveActiveYearId,
                             TicketCategoryId = ticketCategoryId,
                             CurrentContractStart = contract.FirstOrDefault().StartDate,
                             CurrentContractEnd = contractEntDate,
@@ -174,6 +179,7 @@ namespace MTCHRMS.DC
                             TotalDays = totalDays,
                             TransferDays = transferDays,
                             DeductDays = deductDays,
+                            AvailedDays = availedDays,
                             TotalTickets = totalTickets,
                             ReimbursedTickets = reimbursedTickets,
                             Contracts = contract

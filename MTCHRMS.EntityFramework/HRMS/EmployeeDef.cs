@@ -306,8 +306,6 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public virtual ICollection<EmployeeLeaveCategory> LeaveCategory { get; set; }
 
-        public virtual ICollection<EmployeeLeave> EmployeeLeaves { get; set; }
-
         public virtual ICollection<EmployeeTicketCategory> TicketCategory { get; set; }
     }
 
@@ -356,6 +354,10 @@ namespace MTCHRMS.EntityFramework.HRMS
         public short TransferDays { get; set; }
 
         public short DeductDays { get; set; }
+
+        public short AvailedDays { get; set; }
+
+        public virtual ICollection<EmployeeLeave> EmployeeLeaves { get; set; }
     }
 
     /// <summary>
@@ -369,6 +371,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int LeaveYearId { get; set; }
 
         public int EmployeeDefId { get; set; }
+
+        public short LeaveTypeId { get; set; }
 
         public short LeaveDays { get; set; }
 

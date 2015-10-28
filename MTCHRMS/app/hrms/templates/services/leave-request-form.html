@@ -35,10 +35,9 @@
                         <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
-                                    <span id="MainContent_lblCode" class="control-label">Employee No:</span>
+                                    <span class="control-label">Employee No:</span>
                                     <div class="controls">
                                         <input type="text" ng-model="employee.code" />
-                                        <input type="hidden" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -89,33 +88,31 @@
                     </span>
                 </div>
                 <div class="widget-body">
+                    <div class="row-fluid" ng-show="errors.length > 0" >
+                        <div class="alert alert-error" ng-repeat="error in errors">{{ error }}</div>
+                    </div>
                     <div class="row-fluid">
                         <div class="span5">
                             <div class="form-horizontal">
                                 <div class="control-group">
                                     <span class="control-label">Leave Type:</span>
                                     <div class="controls">
-                                        <select>
-                                            <option value="Annual Leave">Annual Leave</option>
-                                            <option value="Sick Leave">Sick Leave</option>
-                                            <option value="Emergency Leave">Emergency Leave</option>
-                                            <option value="Married Leave">Married Leave</option>
-                                            <option value="Haj Leave">Haj Leave</option>
-
+                                        <select ng-model="leave.leaveTypeId"
+                                                ng-options="leave.id as leave.nameEn for leave in leavetypes">
                                         </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">From Date:</span>
                                     <div class="controls">
-                                        <input type="text"/>
+                                        <input type="text" ng-model="leave.leaveStart"/>
                                     </div>
                                 </div>
 
                                 <div class="control-group">
                                     <span class="control-label">Replace Person:</span>
                                     <div class="controls">
-                                        <input type="text"/>
+                                        <input type="text" ng-model="leave.alternateEmployeeId"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -132,19 +129,19 @@
                                 <div class="control-group">
                                     <span class="control-label">Total Days:</span>
                                     <div class="controls">
-                                        <input type="text"/>
+                                        <input type="text" ng-model="leave.leaveDays"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">To Date:</span>
                                     <div class="controls">
-                                        <input type="text"/>
+                                        <input type="text" ng-model="leave.leaveEnd"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Address/Phone No:</span>
                                     <div class="controls">
-                                        <input type="text"/>
+                                        <input type="text" ng-model="leave.alternateAddress"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -156,7 +153,7 @@
 
                             </div>
                         </div>
-                        <div class="span2 alert alert-info">
+                        <div class="span2 alert alert-info fade-in" ng-if="employee.contractId">
                             <div class="control-group">
                                 <span class="control-label"><span translate="ACTIVE_YEAR"></span> :</span>
                                 <div class="controls">
@@ -167,9 +164,9 @@
                             <div class="control-group" ng-if="employee.leaveCategoryId">
                                 <span class="control-label"><span translate="LEAVE_SUMMARY"></span> :</span>
                                 <div class="controls">
-                                    <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> - <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label>
+                                    <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> + <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label> - <label title="avail days" class="badge badge-default" ng-bind="employee.availedDays"></label>
                                     <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
-                                    <label title="remaining days" class="badge badge-success pull-right bottom-right">{{employee.totalDays + employee.transferDays - employee.deductDays}}</label>
+                                    <label title="remaining days" class="badge badge-success pull-right bottom-right">{{employee.totalDays + employee.transferDays - employee.deductDays - employee.availedDays}}</label>
 
                                 </div>
                             </div>
@@ -184,7 +181,7 @@
                         </div>
                     </div>
                     <div class="form-actions">
-                        <button type="submit" id="cmdSave" class="btn btn-success" ng-click="save(leave)" ng-disabled="frmLeave.$invalid">
+                        <button type="submit" id="cmdSave" class="btn btn-success" ng-click="saveApplyLeave(leave)" ng-disabled="frmLeave.$invalid">
                             <i class="icon-share"></i>
                             <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
                         </button>
@@ -193,6 +190,7 @@
                             <span translate="CANCEL"></span>&nbsp;
                         </a>
                     </div>
+
                 </div>
             </div>
             <div class="widget">
