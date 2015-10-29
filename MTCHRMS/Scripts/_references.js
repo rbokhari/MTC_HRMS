@@ -22,6 +22,7 @@
 /// <reference path="../app/hrms/controller/employee/employee-repository.js" />
 /// <reference path="../app/hrms/controller/leave/leave-controller.js" />
 /// <reference path="../app/hrms/controller/leave/leave-repository.js" />
+/// <reference path="../app/hrms/controller/services/hrms-services-modal-controller.js" />
 /// <reference path="../app/hrms/controller/services/services-controller.js" />
 /// <reference path="../app/hrms/controller/services/services-repository.js" />
 /// <reference path="../app/hrms/controller/ticket/ticket-controller.js" />

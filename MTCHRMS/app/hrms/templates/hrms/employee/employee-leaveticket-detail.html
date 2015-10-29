@@ -87,8 +87,8 @@
                                         <tr>
                                             <td class="span3"> <span translate="LEAVE_SUMMARY"></span> :</td>
                                             <td ng-if="employee.leaveCategoryId">
-                                                <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> - <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label>
-                                                <label title="remaining days" class="badge badge-success pull-right">{{employee.totalDays + employee.transferDays - employee.deductDays}}</label>
+                                                <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> + <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label> - <label title="avail days" class="badge badge-default" ng-bind="employee.availedDays"></label>
+                                                <label title="remaining days" class="badge badge-success pull-right">{{employee.totalDays + employee.transferDays - employee.deductDays - employee.availedDays}}</label>
                                             </td>
                                             <td ng-if="employee.leaveCategoryId==0">
                                                 <a class="pull-right" ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
@@ -181,18 +181,18 @@
                                                             Year : {{$index +1}}
                                                         </td>
                                                         <td style="vertical-align: middle !important;">
-                                                            {{leaveyear.startDate | date:'dd/MM/yyyy'}}
+                                                            {{leaveyear.startDate | date:'dd MMM yyyy'}}
                                                         </td>
                                                         <td style="text-align: left !important;">
-                                                            {{leaveyear.endDate | date:'dd/MM/yyyy'}}
+                                                            {{leaveyear.endDate | date:'dd MMM yyyy'}}
                                                         </td>
                                                         <td style="vertical-align: middle !important;">
                                                             {{leaveyear.leaveDays}}
                                                         </td>
                                                         <td>{{leaveyear.transferDays}}</td>
                                                         <td>{{leaveyear.deductDays}}</td>
-                                                        <td>{{leaveyear.availDays}}</td>
-                                                        <td>{{leaveyear.leaveDays + leaveyear.transferDays - leaveyear.deductDays - leaveyear.availDays}}</td>
+                                                        <td>{{leaveyear.availedDays}}</td>
+                                                        <td>{{leaveyear.leaveDays + leaveyear.transferDays - leaveyear.deductDays - leaveyear.availedDays}}</td>
                                                         <td><a href="" ng-if="checkCurrentPeriod(leaveyear.startDate,leaveyear.endDate)">Apply Leaves</a></td>
                                                     </tr>
                                                     </tbody>

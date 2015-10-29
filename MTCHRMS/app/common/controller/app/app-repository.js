@@ -67,6 +67,7 @@ accModule.factory('appRepository', [
         };
 
         var _showPageBusyNotification = function (ctrl, buttontext) {
+            ctrl = $('#cmdSave');
             
             $(ctrl)
                 .prop('disabled', true)

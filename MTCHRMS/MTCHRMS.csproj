@@ -240,6 +240,7 @@
     <Content Include="app\common\templates\modal\confirm-modal.html" />
     <Content Include="app\hrms\controller\leave\leave-controller.js" />
     <Content Include="app\hrms\controller\leave\leave-repository.js" />
+    <Content Include="app\hrms\controller\services\hrms-services-modal-controller.js" />
     <Content Include="app\hrms\controller\services\services-controller.js" />
     <Content Include="app\hrms\controller\services\services-repository.js" />
     <Content Include="app\hrms\controller\ticket\ticket-controller.js" />

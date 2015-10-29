@@ -34,136 +34,140 @@
 </head>
 <!-- BEGIN BODY -->
 <body class="fixed-top" data-ng-controller="AppController">
+    <div class="submit-progress hidden">
+        <label><i class="icon icon-2x icon-spinner icon-spin"></i> Please wait while processing ....</label>
+    </div>
     <!-- BEGIN HEADER -->
     <div id="header" class="navbar navbar-inverse navbar-fixed-top" data-ng-init="getAuthenticationData()">
-        <!-- BEGIN TOP NAVIGATION BAR -->
-        <navbar-main></navbar-main>
+    <!-- BEGIN TOP NAVIGATION BAR -->
+    <navbar-main></navbar-main>
 
-        <!-- END TOP NAVIGATION BAR -->
+    <!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+    <!-- BEGIN SIDEBAR -->
+    <menu-main></menu-main>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN PAGE -->
+    <div id="main-content">
+        <!-- BEGIN PAGE CONTAINER-->
+        <div data-ng-view class="view-slide-in"></div>
+        <!-- END PAGE CONTAINER-->
     </div>
-    <!-- END HEADER -->
-    <!-- BEGIN CONTAINER -->
-    <div id="container" class="row-fluid">
-        <!-- BEGIN SIDEBAR -->
-        <menu-main></menu-main>
-        <!-- END SIDEBAR -->
-        <!-- BEGIN PAGE -->
-        <div id="main-content">
-            <!-- BEGIN PAGE CONTAINER-->
-            <div data-ng-view class="view-slide-in"></div>
-            <!-- END PAGE CONTAINER-->
-        </div>
-        <!-- END PAGE -->
+    <!-- END PAGE -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div id="footer">
+    2014 &copy; MTC HRMS Application.
+    <div class="span1 pull-left">
+        <span class="go-top"><i class="icon-arrow-up"></i></span>
     </div>
-    <!-- END CONTAINER -->
-    <!-- BEGIN FOOTER -->
-    <div id="footer">
-        2014 &copy; MTC HRMS Application.
-        <div class="span1 pull-left">
-            <span class="go-top"><i class="icon-arrow-up"></i></span>
-        </div>
-    </div>
-    <!-- END FOOTER -->
-    <!-- BEGIN JAVASCRIPTS -->
-    <!-- Load javascripts at bottom, this will reduce page load time -->
+</div>
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS -->
+<!-- Load javascripts at bottom, this will reduce page load time -->
 
-    <script src="/Scripts/jquery-2.1.1.min.js" type="Application/javascript"></script>
-    <script src="/Scripts/bootstrap-rtl.min.js" type="text/javascript"></script>
-    <script src="/Scripts/jquery.gritter.js" type="text/javascript"></script>
-    <script src="/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
-    <script src="/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-    <script src="/Scripts/jquery.signalR-2.1.2.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery-2.1.1.min.js" type="Application/javascript"></script>
+<script src="/Scripts/bootstrap-rtl.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.gritter.js" type="text/javascript"></script>
+<script src="/Scripts/modernizr-2.8.3.js" type="text/javascript"></script>
+<script src="/Content/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="/Scripts/jquery.signalR-2.1.2.min.js" type="text/javascript"></script>
 
-    <script src="/Scripts/angular-file-upload-shim.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular-file-upload-shim.min.js" type="text/javascript"></script>
 
-    <script src="/Scripts/angular.min.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-route.min.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-resource.min.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-animate.min.js" type="text/javascript"></script>
-    <script src="/Scripts/dirPagination/dirPagination.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-sanitize.min.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-file-upload.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular-route.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular-resource.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular-animate.min.js" type="text/javascript"></script>
+<script src="/Scripts/dirPagination/dirPagination.js" type="text/javascript"></script>
+<script src="/Scripts/angular-sanitize.min.js" type="text/javascript"></script>
+<script src="/Scripts/angular-file-upload.min.js" type="text/javascript"></script>
 
-    <script src="/Scripts/angularTranslate/angular-translate.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/translate.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/service/default-interpolation.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/service/handler-log.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/service/loader-static-files.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-toggle/js/angular-toggle-switch.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/angular-translate.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/translate.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/service/default-interpolation.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/service/handler-log.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/service/loader-static-files.js" type="text/javascript"></script>
+<script src="/Scripts/angular-toggle/js/angular-toggle-switch.js" type="text/javascript"></script>
 
 
-    <script src="/Scripts/angularTranslate/service/storage-key.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/service/storage-local.js" type="text/javascript"></script>
-    <!--<script src="/Scripts/angularTranslate/service/storage-cookie.js" type="text/javascript"></script>-->
-    <script src="/Scripts/angularTranslate/service/translate.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/directive/translate.js" type="text/javascript"></script>
-    <script src="/Scripts/angularTranslate/filter/translate.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/service/storage-key.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/service/storage-local.js" type="text/javascript"></script>
+<!--<script src="/Scripts/angularTranslate/service/storage-cookie.js" type="text/javascript"></script>-->
+<script src="/Scripts/angularTranslate/service/translate.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/directive/translate.js" type="text/javascript"></script>
+<script src="/Scripts/angularTranslate/filter/translate.js" type="text/javascript"></script>
 
-    <script src="/Scripts/moment.js" type="text/javascript"></script>
-    <script src="/Scripts/angular-moment.js" type="text/javascript"></script>
-    <script src="/Content/bootstrap-datepicker/js/daterangepicker.js" type="text/javascript"></script>
+<script src="/Scripts/moment.js" type="text/javascript"></script>
+<script src="/Scripts/angular-moment.js" type="text/javascript"></script>
+<script src="/Content/bootstrap-datepicker/js/daterangepicker.js" type="text/javascript"></script>
+<script src="/Scripts/modal/angular-modal-service.js" type="text/javascript"></script>
 
-    <!--<script src="/Scripts/ui-bootstrap-tpls-0.12.0.min.js" type="text/javascript"></script>-->
-    <!--<script src="Content/template2/js/scripts.js"></script>-->
-    <!-- Angular Module Controller START -->
-    <script src="/app/common/module/acc-module.js" type="text/javascript"></script>
-    <script src="/app/hrms/module/hrms-module-ar.js" type="text/javascript"></script>
-    <!--<script src="/app/controller/translate/translate-service.js" type="text/javascript"></script>-->
-    <script src="/app/common/controller/app/app-repository.js" type="text/javascript"></script>
-    <script src="/app/common/controller/app/app-controller.js" type="text/javascript"></script>
-    <script src="/app/common/controller/account/account-repository.js" type="text/javascript"></script>
-    <script src="/app/common/controller/account/auth-repository.js" type="text/javascript"></script>
-    <script src="/app/common/controller/account/authInterceptorService.js" type="text/javascript"></script>
+<!--<script src="/Scripts/ui-bootstrap-tpls-0.12.0.min.js" type="text/javascript"></script>-->
+<!--<script src="Content/template2/js/scripts.js"></script>-->
+<!-- Angular Module Controller START -->
+<script src="/app/common/module/acc-module.js" type="text/javascript"></script>
+<script src="/app/hrms/module/hrms-module-ar.js" type="text/javascript"></script>
+<!--<script src="/app/controller/translate/translate-service.js" type="text/javascript"></script>-->
+<script src="/app/common/controller/app/app-repository.js" type="text/javascript"></script>
+<script src="/app/common/controller/app/app-controller.js" type="text/javascript"></script>
+<script src="/app/common/controller/account/account-repository.js" type="text/javascript"></script>
+<script src="/app/common/controller/account/auth-repository.js" type="text/javascript"></script>
+<script src="/app/common/controller/account/authInterceptorService.js" type="text/javascript"></script>
 
-    <script src="/app/common/controller/validation/validation-repository.js" type="text/javascript"></script>
-    <script src="/app/common/controller/validation/validation-controller.js" type="text/javascript"></script>
+<script src="/app/common/controller/validation/validation-repository.js" type="text/javascript"></script>
+<script src="/app/common/controller/validation/validation-controller.js" type="text/javascript"></script>
 
-    <script src="/app/common/directive/datepicker.js" type="text/javascript"></script>
-    <script src="/app/common/directive/imgShow.js" type="text/javascript"></script>
+<script src="/app/common/directive/datepicker.js" type="text/javascript"></script>
+<script src="/app/common/directive/imgShow.js" type="text/javascript"></script>
 
-    <script src="/app/common/provider/common.js" type="text/javascript"></script>
-    <script src="/app/common/provider/localStorageService.js" type="text/javascript"></script>
+<script src="/app/common/provider/common.js" type="text/javascript"></script>
+<script src="/app/common/provider/localStorageService.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/controller/dashboard/dashboard-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/dashboard/dashboard-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/dashboard/dashboard-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/dashboard/dashboard-controller.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/controller/department/department-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/department/department-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/department/department-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/department/department-controller.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/hubs/employee-hub.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/employee/employee-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/employee/employee-controller.js" type="text/javascript"></script>
-    <script src="/app/hrms/directive/employee-picture.js" type="text/javascript"></script>
+<script src="/app/hrms/hubs/employee-hub.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/employee/employee-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/employee/employee-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/directive/employee-picture.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/directive/navbar-main.js" type="text/javascript"></script>
-    <script src="/app/hrms/directive/dashboard.js" type="text/javascript"></script>
+<script src="/app/hrms/directive/navbar-main.js" type="text/javascript"></script>
+<script src="/app/hrms/directive/dashboard.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/controller/leave/leave-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/leave/leave-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/leave/leave-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/leave/leave-controller.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/controller/ticket/ticket-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/ticket/ticket-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/ticket/ticket-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/ticket/ticket-controller.js" type="text/javascript"></script>
 
-    <script src="/app/hrms/controller/services/services-repository.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/services/services-controller.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/services/services-repository.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/services/services-controller.js" type="text/javascript"></script>
 
-    <script src="/Scripts/modal/angular-modal-service.js" type="text/javascript"></script>
-    <script src="/app/hrms/controller/employee/employee-modal-controller.js" type="text/javascript"></script>
+<script src="/Scripts/modal/angular-modal-service.js" type="text/javascript"></script>
+<script src="/app/hrms/controller/employee/employee-modal-controller.js" type="text/javascript"></script>
 
-    <!-- Angular Module Controller END -->
+<!-- Angular Module Controller END -->
 
-    <script type="text/javascript">
-        $(function () {
-            $('.has-sub').removeClass('active');
-            $('#liDashboard').addClass('active');
-            //console.log("Main script load");
-            // initiate layout and plugins
-            //alert("yahoo:");
-            //App.init();
+<script type="text/javascript">
+    $(function() {
+        $('.has-sub').removeClass('active');
+        $('#liDashboard').addClass('active');
+        //console.log("Main script load");
+        // initiate layout and plugins
+        //alert("yahoo:");
+        //App.init();
 
-        });
-    </script>
-    <!-- END JAVASCRIPTS -->
+    });
+</script>
+<!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
 </html>
