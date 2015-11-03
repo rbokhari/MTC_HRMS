@@ -9,7 +9,7 @@ namespace MTC.Models.Inventory
     public class ItemModel
     {
         public int Id { get; set; }
-
+        
         public String Code { get; set; }
 
         public String Name { get; set; }

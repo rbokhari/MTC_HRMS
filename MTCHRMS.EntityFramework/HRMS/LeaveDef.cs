@@ -13,7 +13,7 @@ namespace MTCHRMS.EntityFramework.HRMS
     public class LeaveDef : TableStrutcture
     {
         [Key]
-        public int LeaveId { get; set; }
+        public int LeaveId123 { get; set; }
 
         [MaxLength(25)]
         public String Code { get; set; }

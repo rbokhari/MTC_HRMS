@@ -130,7 +130,6 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public virtual ICollection<EmployeeContract> Contract { get; set; }
 
-
     }
 
     public class EmployeePassport : TableStrutcture

@@ -30,7 +30,6 @@ namespace MTCHRMS.DC
 
         public async Task<IQueryable<Department>> GetDepartments()
         {
-            //System.Threading.Thread.Sleep(100);
             return await Task.Run(() => _ctx.Departments);
         }
 
@@ -59,6 +58,7 @@ namespace MTCHRMS.DC
                 //newDepartment.CreatedBy = 1;
                 //newDepartment.CreatedOn = DateTime.UtcNow;
                 _ctx.Departments.Add(newDepartment);
+
                 return true;
             }
             catch (Exception ex)

@@ -26,7 +26,6 @@ namespace MTCHRMS.EntityFramework
 
         public DateTime? ModifiedOn { get; set; }
 
-
         //public virtual EmployeeDef CreatedDetail { get; set; }
 
         //public virtual EmployeeDef ModifiedDetail { get; set; }
