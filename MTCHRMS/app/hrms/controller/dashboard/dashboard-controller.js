@@ -70,17 +70,20 @@ hrmsModule.controller('DashboardController',
             return new Date(a) >= new Date(b);
         };
 
-        $scope.departments = departmentRepository.getAllDepartment();
+        // = departmentRepository.getAllDepartment();
+        
+        departmentRepository.getAllDepartment()
+            .then(function (response) {
+            //alert("success");
+            $scope.departments = response;
+        }, function () {
+            //alert("error");
+        })
+            .then(function () { $scope.isBusy = false; });
+        
+        //$scope.departments = departmentRepository.getAllDepartment();
         $scope.nationalities = validationRepository.getAllDetailsByValidationId(2);
         $scope.employees = employeeRepository.getAllEmployees();
-
-        $scope.departments.$promise.then(function() {
-                //alert("success");
-            }, function() {
-                //alert("error");
-            })
-            .then(function() { $scope.isBusy = false; });
-
 
         $scope.loadProbation = function() {
             $scope.probations = employeeRepository.getEmployeesProbationExpiry();

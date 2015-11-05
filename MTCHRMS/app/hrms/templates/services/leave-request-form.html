@@ -120,11 +120,12 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span class="control-label">With Pay/Without Pay:</span>
+                                    <span class="control-label">Ticket :</span>
                                     <div class="controls">
-                                        <toggle-switch html="true" model="leave.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                        <toggle-switch html="true" model="leave.isTicket" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
                                     </div>
                                 </div>
+                                
 
                             </div>
                         </div>
@@ -145,13 +146,13 @@
                                 <div class="control-group">
                                     <span class="control-label">Address/Phone No:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="leave.alternateAddress" />
+                                        <input type="text" ng-model="leave.alternateAddress"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <span class="control-label">Ticket :</span>
+                                    <span class="control-label">With Pay/Without Pay:</span>
                                     <div class="controls">
-                                        <toggle-switch html="true" model="leave.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                        <toggle-switch html="true" model="leave.isPay" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
                                     </div>
                                 </div>
 
@@ -184,51 +185,88 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row-fluid">
-
+                    <div class="row-fluid" data-ng-show="leave.isTicket">
+                        <div class="span12">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Departure Date</td>
+                                    <td>From</td>
+                                    <td>To</td>
+                                    <td>Return Date</td>
+                                    <td>Relation</td>
+                                    <td>Ticket</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>{{leave.isTicket}}</td>
+                                    <td>Me</td>
+                                    <td>Me</td>
+                                    <td>Me</td>
+                                    <td>Me</td>
+                                    <td>Me</td>
+                                    <td>Me</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" id="cmdSave" name="cmdSave" class="btn btn-success" ng-click="saveApplyLeave('cmdSave',leave)" ng-disabled="frm.$invalid">
-                            <i class="icon-share"></i>
-                            <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
-                        </button>
-                        <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/leave">
-                            <i class="icon-undo"></i>
-                            <span translate="CANCEL"></span>&nbsp;
-                        </a>
-                    </div>
-
                 </div>
             </div>
             <div class="widget">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i> Line Manager</h4>
+                    <h4><i class="icon-reorder"></i> Supervisor</h4>
                     <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
                 </div>
                 <div class="widget-body">
                     <div class="row-fluid">
-                        <div class="span6">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Line Manager Name:</span>
-                                    <div class="controls">
-                                        <select></select>
+                        <div class="span12">
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <span class="control-label">Department:</span>
+                                        <div class="controls">
+                                            <select id="cDepartment" class="input-xxlarge" name="cDepartment"
+                                                    ng-model="leave.departmentId"
+                                                    ng-change="loadEmployee(leave.departmentId)"
+                                                    ng-options="dept.id as dept.departmentName for dept in departments" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <span class="control-label">Supervisor Name :</span>
+                                        <div class="controls">
+                                            <select id="cPerson" class="input-xxlarge" name="cPerson"
+                                                    ng-model="leave.employeeId"
+                                                    ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in employees" required></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <span class="control-label">Date :</span>
+                                        <div class="controls">
+                                            <input type="text"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="span6">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Date :</span>
-                                    <div class="controls">
-                                        <input type="text" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" id="cmdSave" name="cmdSave" class="btn btn-success" ng-click="saveApplyLeave('cmdSave',leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-share"></i>
+                            <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
+                        </button>
+                        <a class="btn btn-inverse" href="/{{mainPortal}}/leave">
+                            <i class="icon-undo"></i>
+                            <span translate="CANCEL"></span>&nbsp;
+                        </a>
                     </div>
                 </div>
             </div>

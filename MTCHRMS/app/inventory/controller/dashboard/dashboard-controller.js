@@ -67,7 +67,11 @@ invModule.controller('DashboardController',
             $scope.manufacturers = manufacturerRepository.getAllManufacturers();
             $scope.itemTypes = validationRepository.getItemTypes;
             $scope.itemCategories = validationRepository.getItemCategories;
-            $scope.departments = departmentRepository.getAllDepartment();
+            
+            departmentRepository.getAllDepartment()
+                .then(function (response) {
+                    $scope.departments = response;
+            }, function (err) { });
 
             //$scope.itemTechnicians = validationRepository.getItemTechnicians;
 

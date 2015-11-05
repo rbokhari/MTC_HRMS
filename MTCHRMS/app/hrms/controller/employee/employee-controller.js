@@ -493,14 +493,14 @@ hrmsModule.controller('EmployeeController',
             });
         });
 
-        $scope.departments = departmentRepository.getAllDepartment();
-        $scope.departments.$promise.then(function () {
-            console.log("Department reach");
-            //console.log("department id ", $scope.employee.postedTo);
+        //$scope.departments = departmentRepository.getAllDepartment();
+        departmentRepository.getAllDepartment()
+            .then(function (response) {
+                $scope.departments = response;
+                console.log("Department reach");
+            }, function(err) {
             
-        }, function() {
-            
-        });
+            });
 
         $scope.nationalities = validationRepository.getNationalities; //validationRepository.getAllDetailsByValidationId(2);
         $scope.countries = validationRepository.getCountries; //validationRepository.getAllDetailsByValidationId(3);

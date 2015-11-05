@@ -19,7 +19,12 @@ moduleModal.controller('ItemModalController',
         $scope.itemManufacturer = itemManufacturer;
 
         
-        $scope.departments = departmentRepository.getAllDepartment();
+        
+        departmentRepository.getAllDepartment()
+            .then(function (response) {
+                $scope.departments = response;
+            }, function (err) { });
+
         $scope.itemYears = validationRepository.getItemYears;
         $scope.itemSuppliers = supplierRepository.getAllSuppliers();
         $scope.iManufacturers = manufacturerRepository.getAllManufacturers();

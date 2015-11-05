@@ -24,6 +24,7 @@ namespace MTCHRMS
             {
 
                 AllowInsecureHttp = true,
+                
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(3),
                 Provider = new DomainAuthorizationServerProvider()  // see post

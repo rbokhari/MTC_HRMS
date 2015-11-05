@@ -33,7 +33,10 @@ invModule.controller('ItemController',
             $scope.itemCategories = validationRepository.getItemCategories;
             $scope.itemTechnicians = validationRepository.getItemTechnicians;
             $scope.storeLocations = locationRepository.getAllLocations();
-            $scope.departments = departmentRepository.getAllDepartment();
+            departmentRepository.getAllDepartment()
+                .then(function (response) {
+                    $scope.departments = response;
+                }, function (err) { });
             //console.log($scope.storeLocations);
 
         };

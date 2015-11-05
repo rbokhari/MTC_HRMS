@@ -4,10 +4,37 @@
 
 'use strict';
 
-hrmsModule.factory('departmentRepository', ['$resource', '$http', function ($resource, $http) {
+hrmsModule.factory('departmentRepository', ['$resource', '$http', '$q', 'localStorageService', function ($resource, $http, $q, localStorageService) {
 
-    var _getAllDepartment = function() {
-        return $resource('/api/department').query(); // can use get() instead of query(), but using query() because it except to return back array of objects
+    var _getAllDepartment = function (forceRefresh) {
+        if (typeof forceRefresh === 'undefined') { forceRefresh = false; }
+        var req = {
+            method: 'GET',
+            url: '/api/department'
+        };
+        var deferred = $q.defer();
+        var departmentData = null;
+
+        if (!forceRefresh) { departmentData = localStorageService.get('departments') }
+
+        if (departmentData) {
+            console.log("found departments from storage");
+
+            deferred.resolve(departmentData);
+        } else {
+            console.log("fetch departments from server");
+            $http(req)
+                .success(function (res) {
+                    localStorageService.set('departments', res);
+                    deferred.resolve(res);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
+        }
+        return deferred.promise;
+
+        //return $resource('/api/department').query(); 
     };
 
     var _getDepartmentById = function(id) {

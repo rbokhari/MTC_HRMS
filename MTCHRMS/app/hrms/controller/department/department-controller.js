@@ -14,10 +14,13 @@ hrmsModule.controller('DepartmentController',
 
         $scope.loadDepartment = function() {
             $scope.isBusy = true;
-            $scope.departments = departmentRepository.getAllDepartment();
+            //$scope.departments = departmentRepository.getAllDepartment();
+            $scope.employees = employeeRepository.getAllEmployees();
 
-            $scope.departments.$promise.then(function() {
-                    //alert("success");
+            departmentRepository.getAllDepartment()
+                .then(function (response) {
+                //alert("success");
+                $scope.departments = response;
                 }, function() {
                     //alert("error");
                 })
@@ -31,10 +34,12 @@ hrmsModule.controller('DepartmentController',
         $scope.save = function(department) {
             
             $scope.errors = [];
-            departmentRepository.addDepartment(department).$promise.then(
+            departmentRepository.addDepartment(department)
+                .$promise
+                .then(
                 function () {
                     appRepository.showAddSuccessGritterNotification();
-                    console.log("save - Successfully !");
+                    //console.log("save - Successfully !");
                     $location.url('/' + $scope.mainPortal + '/department');
                 }, function(response) {
                     // failure case

@@ -69,6 +69,7 @@ namespace MTCHRMS.DC
                         DepartmentName = x.DepartmentId.DepartmentName,
                         DesignationEn = x.Designation,
                         DesignationAr = x.DesignationAr,
+                        NationalityId = x.NationalityId,
                         Nationality = x.ValidationDetailId.NameEn
                     })
                     .OrderBy(c => c.NameEn);

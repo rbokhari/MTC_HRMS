@@ -8,8 +8,17 @@ hrmsModule.controller('ServicesController',
     function ($scope, appRepository, servicesRepository, employeeRepository, $location, $routeParams,
         departmentRepository, validationRepository, ModalService) {
 
+        $scope.loadEmployee = function (id) {
+            $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
+        }
+
         $scope.loadEmployeeLeaveTicketDetail = function () {
             $scope.isBusy = false;
+
+            departmentRepository.getAllDepartment()
+                .then(function(response) {
+                    $scope.departments = response;
+                }, function (err) { });
 
             $scope.leavetypes = validationRepository.getLeaveTypes;
 

@@ -15,7 +15,7 @@ namespace MTCHRMS.Controllers
 {
     public class DepartmentController : ApiController
     {
-        public IDepartmentsRepository _repo;
+        public IDepartmentsRepository _repo ;
 
         public DepartmentController(IDepartmentsRepository pRepository)
         {
@@ -48,6 +48,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
+        [Route("/api/department")]
         public HttpResponseMessage Post([FromBody] Department newDepartment)
         {
             if (ModelState.IsValid)

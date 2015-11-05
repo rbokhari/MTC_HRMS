@@ -9,9 +9,10 @@
         <i class="icon-group"></i>
         <div>{{ department.departmentName | limitTo:20}}</div>
 
-        <div ng-repeat="emp in filtered = (employees  | filter:{postedTo:department.id}:true)">
+        <div ng-repeat="emp in filtered = (employees  | filter:{departmentId:department.id}:true)">
             <!--<span class="badge badge-important">{{ employees.length | filter:employees.postedTo:1 }}</span>-->
             <span class="badge badge-important">{{ filtered.length }}</span>
         </div>
     </a>
+    
 </div>

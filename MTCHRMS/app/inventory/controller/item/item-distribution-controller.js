@@ -15,7 +15,12 @@ invModule.controller('ItemDistributionController',
 
         $scope.loadDistributionAdd = function () {
             $scope.auth = authRepository.authentication;
-            $scope.departments = departmentRepository.getAllDepartment();
+            
+            departmentRepository.getAllDepartment()
+                .then(function(response) {
+                    $scope.departments = response;
+                }, function () { });
+
             $scope.storeLocations = locationRepository.getAllLocations();
 
             $scope.distribution = {
