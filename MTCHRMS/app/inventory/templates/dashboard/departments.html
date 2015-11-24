@@ -1,0 +1,16 @@
+﻿
+<h4><i class="icon-group"></i>&nbsp;Departments</h4>
+
+<div data-ng-hide="departments.$resolved">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
+</div>
+<div class="icon-btn span3 red fade-in" ng-repeat="department in departments" data-ng-show="filtered.length>0">
+    <a ng-href="INVPortal/item/list?param04={{department.id}}" title="{{department.departmentName}}">
+        <i class="icon-group"></i>
+        <div>{{ department.departmentName | limitTo:20}} {{department.departmentName.length > 20 ? '...' : ''}}</div>
+
+        <div ng-repeat="item in filtered = (itemDepartments | filter:{departmentId:department.id}:true)">
+            <span class="badge badge-info">{{ filtered.length }}</span>
+        </div>
+    </a>
+</div>

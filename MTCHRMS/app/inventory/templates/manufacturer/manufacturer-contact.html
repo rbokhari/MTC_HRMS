@@ -1,0 +1,63 @@
+﻿
+<div id="dvContact" class="modal fade"  role="dialog" aria-hidden="true" aria-labelledby="Add Contact">
+    <form id="frm" novalidate>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="myModalLabel1">{{title}}</h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="control-group">
+                    <label for="tName" class="control-label">Person Name :</label>
+                    <div class="controls">
+                        <input type="text" id="tName" name="tName" ng-model="manufacturerContact.contactPerson" required />
+                        <div class="help-inline" ng-show="frm.tName.$error.required && frm.tName.$dirty">Please enter name !</div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Position :</label>
+                    <div class="controls">
+                        <input type="text" id="tPosition" name="tPosition" ng-model="manufacturerContact.position" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Email :</label>
+                    <div class="controls">
+                        <input type="text" id="tEmail" name="tEmail" ng-model="manufacturerContact.email" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Mobile :</label>
+                    <div class="controls">
+                        <input type="text" ng-model="manufacturerContact.mobileNo" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Phone :</label>
+                    <div class="controls">
+                        <input type="text" ng-model="manufacturerContact.phoneNo" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Fax :</label>
+                    <div class="controls">
+                        <input type="text" ng-model="manufacturerContact.faxNo" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Status :</label>
+                    <div class="controls">
+                        <input type="checkbox" id="tStatusId" name="tStatusId" ng-true-value="1" ng-false-value="0" ng-model="manufacturerContact.statusId" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+            <button type="submit" class="btn btn-primary" ng-click="saveManufacturerContact(parentId, manufacturerContact);" ng-disabled="frm.$invalid">
+                <i class="icon-save"></i>&nbsp;Save
+            </button>
+        </div>
+    </form>
+</div>

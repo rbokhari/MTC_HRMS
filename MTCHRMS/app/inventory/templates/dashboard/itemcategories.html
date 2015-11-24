@@ -1,0 +1,16 @@
+﻿
+<h4><i class="icon-bookmark"></i>&nbsp; <a href="/INVPortal/definition/validation/8"> Item Categories</a></h4>
+
+<div data-ng-hide="itemCategories.$resolved">
+    <img alt="" data-ng-src="/Content/img/loading.gif" />
+</div>
+<div class="icon-btn span3 red fade-in" ng-repeat="category in itemCategories" ng-show="filtered.length>0">
+    <a ng-href="INVPortal/item/list?param02={{category.id}}" title="{{category.nameEn}}">
+        <i class="icon-bookmark"></i>
+        <div>{{ category.nameEn | limitTo:20}} {{category.nameEn.length > 20 ? '...' : ''}}</div>
+
+        <div ng-repeat="item in filtered = (items | filter:{categoryId:category.id}:true)">
+            <span class="badge badge-important">{{ filtered.length }}</span>
+        </div>
+    </a>
+</div>
