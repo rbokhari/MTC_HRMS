@@ -369,6 +369,7 @@ namespace MTCHRMS.EntityFramework.HRMS
 
         public int LeaveYearId { get; set; }
 
+        [ForeignKey("EmployeeDetail")]
         public int EmployeeDefId { get; set; }
 
         public short LeaveTypeId { get; set; }
@@ -402,6 +403,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         public DateTime? HREmployeeDate { get; set; }
 
         public int StatusId { get; set; }
+
+        public virtual EmployeeDef EmployeeDetail { get; set; }
     }
 
     public class EmployeeTicketCategory : TableStrutcture

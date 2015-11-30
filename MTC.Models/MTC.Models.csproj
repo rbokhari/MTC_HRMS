@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\NotificationModel.cs" />
     <Compile Include="HRMS\EmployeeModel.cs" />
     <Compile Include="Inventory\ItemDistributionSerialModel.cs" />
     <Compile Include="Inventory\ItemModel.cs" />

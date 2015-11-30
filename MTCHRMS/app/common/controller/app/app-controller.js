@@ -3,15 +3,35 @@
 'use strict';
 accModule.controller('AppController',
 [
-    '$scope', '$location', 'authRepository', '$window','appRepository', '$translate', 
-    function ($scope, $location, authRepository, $window, appRepository, $translate) {
+    '$location', 'authRepository', '$window', 'appRepository', '$translate', '$interval', 'appRoles', 'servicesRepository',
+    function ($location, authRepository, $window, appRepository, $translate, $interval, appRoles, servicesRepository) {
 
         console.log("app controller");
 
-        $scope.message = "";
+        var vm = this;
 
-        $scope.currentDateNow = new Date();
-        $translate.use('en_US');
+        vm.message = "";
+        vm.appRoles = appRoles;
+
+        if ($location.path().indexOf('/HRMSPortalAr') == 0) {
+            vm.lang = "ar_OM";
+            vm.mainPortal = "HRMSPortalAr";
+            vm.activeModule = 1;
+            $translate.use('ar_OM');
+        } else if ($location.path().indexOf('/HRMSPortal') == 0) {
+            vm.lang = "en_US";
+            vm.mainPortal = "HRMSPortal";
+            vm.activeModule = 1;
+            $translate.use('en_US');
+        } else if ($location.path().indexOf('/INVPortal') == 0) {
+            vm.lang = "en_US";
+            vm.mainPortal = "INVPortal";
+            vm.activeModule = 2;
+            $translate.use('en_US');
+        }
+
+        vm.currentDateNow = new Date();
+        //$translate.use('en_US');
        
         //$scope.translate = function () {
         //    translationService.getTranslation($scope, $scope.selectedLanguage);
@@ -20,44 +40,56 @@ accModule.controller('AppController',
         //Init
         //$scope.selectedLanguage = 'en';
         //$scope.translate();
+        vm.authentication = authRepository.authentication;
 
-        $scope.tab = 1;       // set active tab bydefault
+        vm.tab = 1;       // set active tab bydefault
         // set which tab to activate
-        $scope.setTab = function (setTab) {
+        vm.setTab = function (setTab) {
             this.tab = setTab;
         };
         // verify if tab is selected or not, use for ng-class 
-        $scope.isTabSelected = function (checkTab) {
+        vm.isTabSelected = function (checkTab) {
             return this.tab === checkTab;
         };
 
-        $scope.lock = function () {
+        vm.lock = function () {
             $window.location.href = '/lock';
         };
 
-        $scope.logOut = function () {
+
+        function loadNotification() {
+            console.log("calling...");
+            servicesRepository.getNotifications()
+                .then(function (response) {
+                    vm.messages = response.notifications;
+            }, function (err) { });
+        };
+        
+
+        vm.logOut = function () {
             
             authRepository.logOut();
-            $scope.authentication = authRepository.authentication;
+            vm.authentication = authRepository.authentication;
             //$location.path('/home');
             $window.location.href = '/login';
             appRepository.showSuccessGritterNotification();
         };
 
-        $scope.lockLogin = function () {
-            $scope.loginData.userName = $scope.authentication.userName;
-            authRepository.lockLogin($scope.loginData)
+        vm.lockLogin = function () {
+            vm.loginData.userName = vm.authentication.userName;
+            authRepository.lockLogin(vm.loginData)
                 .then(function (response) {
                     $window.location.href = '/HRMSPortal';
                 }, function (err) {
                     console.log(err);
-                    $scope.message = "Invalid Password !";
+                    vm.message = "Invalid Password !";
                 });
         };
 
-        $scope.getAuthenticationData = function () {
-            $scope.authentication = authRepository.authentication;
+        vm.getAuthenticationData = function () {
+            vm.authentication = authRepository.authentication;
         };
 
+        $interval(loadNotification, 10000);
     }
 ]);

@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MTC.Models.Common;
 using MTCHRMS.DC.Interface.HRMS;
 using MTCHRMS.EntityFramework;
 using MTCHRMS.EntityFramework.HRMS;
@@ -58,6 +59,22 @@ namespace MTCHRMS.DC.Implementation.HRMS
                 // TODO log this error
                 return false;
             }
+        }
+
+
+        public async Task<IList<NotificationModel>> GetEmployeeNotification(int id)
+        {
+            return await
+                    _ctx.EmployeeLeaves
+                        .Where(x=>x.LeaveTypeId > 400)
+                        .Select(x => new NotificationModel
+                        {
+                            Id = x.EmployeeLeaveId,
+                            Title = x.EmployeeDefId.ToString(),
+                            Message = "Applied Leave By " + x.EmployeeDetail.EmployeeName,
+                            Avatar = x.EmployeeDetail.EmpPicture
+                        }).ToListAsync();
+                    
         }
     }
 }

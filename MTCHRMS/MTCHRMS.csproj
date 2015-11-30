@@ -237,6 +237,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\common\directive\navbar-main.js" />
     <Content Include="app\common\templates\modal\confirm-modal.html" />
     <Content Include="app\hrms\controller\leave\leave-controller.js" />
     <Content Include="app\hrms\controller\leave\leave-repository.js" />
@@ -278,7 +279,7 @@
     <Content Include="app\inventory\directive\barcode-print.js" />
     <Content Include="app\inventory\directive\dashboard.js" />
     <Content Include="app\inventory\directive\item-picture.js" />
-    <Content Include="app\inventory\directive\navbar-main.js" />
+    <Content Include="app\inventory\directive\inv-main.js" />
     <Content Include="app\common\controller\account\account-repository.js" />
     <Content Include="app\common\controller\account\auth-repository.js" />
     <Content Include="app\common\controller\account\authInterceptorService.js" />
@@ -289,7 +290,7 @@
     <Content Include="app\common\translate\translate-service.js" />
     <Content Include="app\hrms\directive\dashboard.js" />
     <Content Include="app\common\directive\imgShow.js" />
-    <Content Include="app\hrms\directive\navbar-main.js" />
+    <Content Include="app\hrms\directive\hrms-main.js" />
     <Content Include="app\hrms\hubs\employee-hub.js" />
     <Content Include="app\common\provider\common.js" />
     <Content Include="app\common\provider\localStorageService.js" />
@@ -1370,9 +1371,9 @@
     <Content Include="app\hrms\templates\hrms\listing\list.html" />
     <Content Include="app\hrms\templates\hrms\oc\organization-chart.html" />
     <Content Include="app\hrms\templates\main\menu-main.html" />
-    <Content Include="app\hrms\templates\main\navbar-user.html" />
-    <Content Include="app\hrms\templates\main\navbar.html" />
-    <Content Include="app\hrms\templates\main\navbar-notify.html" />
+    <Content Include="app\common\templates\main\navbar-user.html" />
+    <Content Include="app\common\templates\main\navbar.html" />
+    <Content Include="app\common\templates\main\navbar-notify.html" />
     <Content Include="app\hrms\templates\services\leave-request-form.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

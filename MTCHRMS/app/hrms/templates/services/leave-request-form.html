@@ -240,7 +240,7 @@
                                         <span class="control-label">Supervisor Name :</span>
                                         <div class="controls">
                                             <select id="cPerson" class="input-xxlarge" name="cPerson"
-                                                    ng-model="leave.employeeId"
+                                                    ng-model="leave.lineMangerId"
                                                     ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in employees" required></select>
                                         </div>
                                     </div>
@@ -251,7 +251,7 @@
                                     <div class="control-group">
                                         <span class="control-label">Date :</span>
                                         <div class="controls">
-                                            <input type="text"/>
+                                            <input type="text" ng-model="leave.applyDate"/>
                                         </div>
                                     </div>
                                 </div>

@@ -7,20 +7,10 @@ hrmsModule.controller('DashboardController',
     function ($scope, appRepository, departmentRepository, employeeRepository, validationRepository, $location, $routeParams, $translate, appRoles) {
 
         console.log("dashboard controller");
-        $scope.appRoles = appRoles;
-
-        if ($location.path().indexOf('/HRMSPortalAr') == 0) {
-            $scope.lang = "ar_OM";
-            $scope.mainPortal = "HRMSPortalAr";
-            $translate.use('ar_OM');
-        } else {
-            $scope.lang = "en_US";
-            $scope.mainPortal = "HRMSPortal";
-            $translate.use('en_US');
-        }
+        
 
         //$scope.isHRMSModule1 = appRepository.isHRMSModule;
-
+        $scope.appRoles = appRoles;
         $scope.isBusy = true;
         $scope.isProbationBusy = true;
         $scope.isContractBusy = true;

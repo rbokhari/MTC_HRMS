@@ -55,7 +55,7 @@ namespace MTCHRMS.Controllers
             {
                 var user = account.GetUserDetail(Convert.ToInt32(Request.Headers.GetValues("userId").First()));
 
-                return user == null ? 0 : user.RoleId;
+                return user?.RoleId ?? 0;
             }
             
         }

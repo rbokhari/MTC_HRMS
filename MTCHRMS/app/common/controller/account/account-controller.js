@@ -3,17 +3,19 @@
 
 accModule.controller('AccountController',
 [
-    '$scope', 'authRepository', '$location','$window','appModules',
-    function ($scope, authRepository, $location, $window, appModules) {
+    'authRepository', '$location','$window','appModules',
+    function (authRepository, $location, $window, appModules) {
 
         console.log("account controller");
-        $scope.loginData = {
+        var vm = this;
+
+        vm.loginData = {
             userName: "",
             password: ""
         };
-        $scope.message = "";
-        $scope.login = function () {
-            authRepository.login($scope.loginData)
+        vm.message = "";
+        vm.login = function () {
+            authRepository.login(vm.loginData)
                 .then(function (response) {
                     //moduleDetail();
                 //roleDetail();
@@ -36,27 +38,27 @@ accModule.controller('AccountController',
                     //$scope.message = err.error_description;
                     //$scope.message = err.error;
                     if (err.status == undefined) {
-                        $scope.message = "Invalid Username or Password !";
+                        vm.message = "Invalid Username or Password !";
                     }
                     else if (err.status == 500) {
-                        $scope.message = "User not allowed to login system !";
+                        vm.message = "User not allowed to login system !";
                     }
                 });
         };
 
-        $scope.authData = function() {
+        vm.authData = function () {
             authRepository.fillAuthData();
-            $scope.authentication = authRepository.authentication;
+            vm.authentication = authRepository.authentication;
         };
 
-        $scope.redirect = function () {
+        vm.redirect = function () {
             authRepository.fillAuthData()
-                .then(function(res) {
-                    $scope.authentication = authRepository.authentication;
-                    if ($scope.authentication.moduleId == appModules.HRMS_Module) {
+                .then(function (res) {
+                    vm.authentication = authRepository.authentication;
+                    if (vm.authentication.moduleId == appModules.HRMS_Module) {
                         // check language also here
                         $window.location.href = '/HRMSPortal';
-                    } else if ($scope.authentication.moduleId == appModules.INV_Module) {
+                    } else if (vm.authentication.moduleId == appModules.INV_Module) {
                         $window.location.href = '/INVPortal';
                     }
                 },
@@ -65,40 +67,5 @@ accModule.controller('AccountController',
                     $window.location.href = '/Login';
                 });
         };
-
-
-        
-
-        //var userDetail = function(id) {
-        //    accountRepository.getUserById(id)
-        //        .then(function(response) {
-        //            $scope.userInfo = response.data;
-
-        //        }, function(err) {
-
-        //        });
-        //};
-
-        //var roleDetail = function (id) {
-        //    accountRepository.getRoleById(id)
-        //        .then(function (response) {
-        //            $scope.roleInfo = response.data;
-
-        //        }, function (err) {
-
-        //        });
-        //};
-
-        //var moduleDetail = function (id) {
-        //    accountRepository.getModuleById(id)
-        //        .then(function (response) {
-        //            $scope.moduleInfo = response.data;
-
-        //        }, function (err) {
-
-        //        });
-        //};
-
-
     }
 ]);

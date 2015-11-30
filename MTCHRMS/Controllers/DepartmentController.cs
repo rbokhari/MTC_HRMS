@@ -23,6 +23,8 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
+        [HttpGet]
+        [Route("api/department")]
         public Task<IQueryable<Department>> Get()
         {
             // IQueryable filter data inside sql query and on database side get specified filter results only, 
@@ -35,6 +37,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
+        [Route("api/department/{id}")]
         public Department Get(int id)
         {
             //IDepartmentsRepository _repo = new DepartmentRepository();
@@ -48,7 +51,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        [Route("/api/department")]
+        [Route("api/department")]
         public HttpResponseMessage Post([FromBody] Department newDepartment)
         {
             if (ModelState.IsValid)

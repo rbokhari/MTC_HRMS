@@ -26,9 +26,9 @@ invModule.controller('DashboardController',
             return active;
         };
 
-        if ($scope.authentication.moduleId == 1 && $scope.authentication.roleId > 1) {
-            $window.location.href = '/HRMSPortal';
-        }
+        //if (vm.authentication.moduleId == 1 && vm.authentication.roleId > 1) {
+        //    $window.location.href = '/HRMSPortal';
+        //}
 
         $scope.serialItem = "";
         $scope.getItemBySerial = function (event) {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using MTCHRMS.DC.Interface.HRMS;
 using MTCHRMS.EntityFramework.HRMS;
@@ -65,6 +66,20 @@ namespace MTCHRMS.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+        }
+
+        [HttpGet]
+        [Route("api/hrmservices/getServiceNotification")]
+        public async Task<dynamic> GetEmployeeNotification()
+        {
+            var currentUser = 5; // Convert.ToInt32(Request.Headers.GetValues("userId").First());
+
+            //var notifications = await Repo.GetEmployeeNotification(currentUser);
+
+            return new
+            {
+                Notifications = await Repo.GetEmployeeNotification(currentUser)
+            };
         }
 
         private IEnumerable<string> GetErrorMessages()

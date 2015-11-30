@@ -29,13 +29,13 @@
         Welcome to the <strong>MTC Inventory System</strong>!
     </div>
 
-    <div class="alert alert-danger" ng-show="authentication.isHRMSAdmin || authentication.isHRMSUser">
+    <div class="alert alert-danger" ng-show="vm.authentication.isHRMSAdmin || vm.authentication.isHRMSUser">
         <i class="icon-exclamation-sign"></i>&nbsp;  You are not authorized for this Module.
     </div>
 
     <div class="row-fluid">
         <div class="span12">
-            <div class="row-fluid circle-state-overview" ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser">
+            <div class="row-fluid circle-state-overview" ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser">
                 <div data-desktop="span2" data-tablet="span4" class="span2 responsive clearfix">
                     <div class="circle-wrap">
                         <div class="stats-circle turquoise-color">
@@ -86,30 +86,30 @@
 
             <div class="row-fluid">
                 <div class="span6">
-                    <itemcategory ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemcategory>
+                    <itemcategory ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></itemcategory>
                 </div>
                 <div class="span6">
-                    <itemtype ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></itemtype>
-                </div>
-            </div>
-            <hr />
-
-            <div class="row-fluid">
-                <div class="span6">
-                    <departments ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></departments>
-                </div>
-                <div class="span6">
-                    <locations ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></locations>
+                    <itemtype ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></itemtype>
                 </div>
             </div>
             <hr />
 
             <div class="row-fluid">
                 <div class="span6">
-                    <manufacturers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></manufacturers>
+                    <departments ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></departments>
                 </div>
                 <div class="span6">
-                    <suppliers ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser"></suppliers>
+                    <locations ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></locations>
+                </div>
+            </div>
+            <hr />
+
+            <div class="row-fluid">
+                <div class="span6">
+                    <manufacturers ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></manufacturers>
+                </div>
+                <div class="span6">
+                    <suppliers ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser"></suppliers>
                 </div>
             </div>
             <hr/>

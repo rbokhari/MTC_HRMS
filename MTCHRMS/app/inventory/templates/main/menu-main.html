@@ -13,19 +13,19 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
+                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
                         <a class="" href="/INVPortal/definition/store/list">Store Location</a>
                     </li>
-                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
+                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
                         <a class="" href="/INVPortal/definition/validation/7">Item Class</a>
                     </li>
-                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
+                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || authentication.isINVUser" id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
                         <a class="" href="/INVPortal/definition/validation/8">Item Category</a>
                     </li>
-                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
+                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
                         <a class="" href="/INVPortal/definition/manufacturer/">Manufacturer</a>
                     </li>
-                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin || authentication.isINVUser" id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
+                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
                         <a class="" href="/INVPortal/definition/supplier/list">Supplier</a>
                     </li>
                 </ul>

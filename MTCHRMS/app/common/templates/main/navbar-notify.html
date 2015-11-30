@@ -1,4 +1,4 @@
-﻿<div id="top_menu" class="nav notify-row">
+﻿<div id="top_menu" class="nav notify-row" ng-controller="AppController as vm">
     <!-- BEGIN NOTIFICATION -->
     <ul class="nav top-menu">
         <!-- BEGIN SETTINGS -->
@@ -6,11 +6,12 @@
             <a class="dropdown-toggle" data-toggle="dropdown" href="#" data-original-title="Settings">
                 <i class="icon-th"></i>
             </a>
-            <ul class="dropdown-menu">
+            
+            <ul class="dropdown-menu" ng-hide="vm.activeModule==2">
                 <li style="padding: 15px;">
                     <a href="/INVPortal" target="_self" style="background-color: #3f3861;">
                         <div style="height: 96px; width: 96px;">
-                            <img src="/Content/img/Inventory-128.png" alt="" />
+                            <img src="/Content/img/Inventory-128.png" alt=""/>
                         </div>
                         <span class="message" style="color: #ffffff;">
                             Inventory System
@@ -19,15 +20,27 @@
                 </li>
 
             </ul>
-        </li>
+            <ul class="dropdown-menu" ng-hide="vm.activeModule==1">
+                <li style="padding: 15px;">
+                    <a href="/HRMSPortal" target="_self" style="background-color: #22878E;">
+                        <div style="height: 96px; width: 96px;">
+                            <img src="/Content/img/hrms-128.png" alt="" />
+                        </div>
+                        <span class="message" style="color: #ffffff;">
+                            HRMS System
+                        </span>
+                    </a>
+                </li>
 
+            </ul>
+        </li>
 
         <!-- END SETTINGS -->
         <!-- BEGIN INBOX DROPDOWN -->
-        <!--<li class="dropdown" id="header_inbox_bar">
+        <li class="dropdown" id="header_inbox_bar">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-envelope-alt"></i>
-                <span class="badge badge-important">5</span>
+                <span class="badge badge-important" ng-if="vm.messages.length>0">{{vm.messages.length}}</span>
             </a>
             <ul class="dropdown-menu extended inbox">
                 <li>
@@ -49,7 +62,7 @@
                     <a href="#">See all messages</a>
                 </li>
             </ul>
-        </li>-->
+        </li>
         <!-- END INBOX DROPDOWN -->
         <!-- BEGIN NOTIFICATION DROPDOWN -->
         <!--<li class="dropdown" id="header_notification_bar">
