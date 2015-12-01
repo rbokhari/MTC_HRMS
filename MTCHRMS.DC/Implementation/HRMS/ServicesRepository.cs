@@ -61,7 +61,25 @@ namespace MTCHRMS.DC.Implementation.HRMS
             }
         }
 
+        public async Task<EmployeeLeave> GetEmployeeLeave(int id)
+        {
+            return await Task.Run(() =>
+                _ctx.EmployeeLeaves
+                    .Include(x=>x.EmployeeDetail)
+                    .Include(x=>x.LeaveTypeDetail)
+                    .Include(x=>x.AlternateEmployeeDetail)
+                    .Include(x=>x.SupervisorEmployeeDetail)
+                    .SingleOrDefaultAsync(x=>x.EmployeeLeaveId == id)
+                    
+            );
+        }
 
+
+        /// <summary>
+        /// For Notification Services
+        /// </summary>
+        /// <param name="id">Current Login user Id</param>
+        /// <returns></returns>
         public async Task<IList<NotificationModel>> GetEmployeeNotification(int id)
         {
             return await
@@ -70,9 +88,10 @@ namespace MTCHRMS.DC.Implementation.HRMS
                         .Select(x => new NotificationModel
                         {
                             Id = x.EmployeeLeaveId,
-                            Title = x.EmployeeDefId.ToString(),
-                            Message = "Applied Leave By " + x.EmployeeDetail.EmployeeName,
-                            Avatar = x.EmployeeDetail.EmpPicture
+                            Title = x.LeaveTypeDetail.NameEn,
+                            Message =  x.EmployeeDetail.EmployeeName,
+                            Avatar = x.EmployeeDetail.EmpPicture,
+                            CreatedOn = x.CreatedOn
                         }).ToListAsync();
                     
         }

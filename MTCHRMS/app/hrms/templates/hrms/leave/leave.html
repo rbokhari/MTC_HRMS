@@ -8,7 +8,7 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     <a href="#">HRMS</a> <span class="divider">&nbsp;</span>
@@ -27,9 +27,9 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i><span translate="LISTING"></span></h4>
                     <span class="tools">
-                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{mainPortal}}/leave/add"></a>
+                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{vm.mainPortal}}/leave/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
-                        <a href="/{{mainPortal}}/" class="icon-remove"></a>
+                        <a href="/{{vm.mainPortal}}/" class="icon-remove"></a>
                     </span>
                 </div>
                 <div class="widget-body" ng-init="loadLeave()">
@@ -73,7 +73,7 @@
                         <tr dir-paginate="leave in leaves | filter:search | itemsPerPage: recordPage">
                             <td>{{$index+1}}</td>
                             <td ng-if="authentication.isHRMSAdmin">
-                                <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.leaveName }} </a>
+                                <a ng-href="/{{vm.mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.leaveName }} </a>
                             </td>
                             <td>
                                 {{ leave.typeDetail.nameEn }}
@@ -88,7 +88,7 @@
                                 </label>
                             </td>
                             <td ng-if="authentication.isHRMSAdmin">
-                                <a href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> <i class="icon-edit"></i></a>
+                                <a href="/{{vm.mainPortal}}/leave/edit/{{ leave.leaveId}}"> <i class="icon-edit"></i></a>
                                 <a href="" ng-click=""> <i class="icon-trash"></i></a>
                             </td>
                         </tr>

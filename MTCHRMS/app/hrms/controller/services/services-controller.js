@@ -3,41 +3,71 @@
 
 hrmsModule.controller('ServicesController',
 [
-    '$scope', 'appRepository', 'servicesRepository', 'employeeRepository', '$location', '$routeParams',
+    'authRepository', 'appRepository', 'servicesRepository', 'employeeRepository', '$location', '$routeParams',
     'departmentRepository', 'validationRepository', 'ModalService',
-    function ($scope, appRepository, servicesRepository, employeeRepository, $location, $routeParams,
+    function (authRepository, appRepository, servicesRepository, employeeRepository, $location, $routeParams,
         departmentRepository, validationRepository, ModalService) {
 
-        $scope.loadEmployee = function (id) {
-            $scope.employees = employeeRepository.getEmployeesByDepartmentId(id);
+        var vm = this;
+
+        vm.authentication = authRepository.authentication;
+
+        vm.loadEmployee = function (id) {
+            vm.employees = employeeRepository.getEmployeesByDepartmentId(id);
         }
 
-        $scope.loadEmployeeLeaveTicketDetail = function () {
-            $scope.isBusy = false;
+        vm.loadEmployeeLeaveTicketDetail = function () {
+            vm.isBusy = false;
 
             departmentRepository.getAllDepartment()
                 .then(function(response) {
-                    $scope.departments = response;
+                    vm.departments = response;
                 }, function (err) { });
 
-            $scope.leavetypes = validationRepository.getLeaveTypes;
+            vm.leavetypes = validationRepository.getLeaveTypes;
 
-            employeeRepository.getEmployeeLeaveTicketDetailById($routeParams.id)
-                .$promise
-                .then(function (response) {
-                    $scope.employee = response;
-                }, function () { })
-                .then(function () {
-                    $scope.isBusy = true;
+            // for applying new leave, then load current user data, otherwise load employee leave data
+            if (typeof $routeParams.id === 'undefined') {
+                employeeRepository.getEmployeeLeaveTicketDetailById(authRepository.authentication.employeeId)
+                    .$promise
+                    .then(function (response) {
+                        vm.employee = response;
+                    }, function () { })
+                    .then(function () {
+                        vm.isBusy = true;
+                    });
+            } else {
+                console.log("else part");
+                servicesRepository.getLeave($routeParams.id)
+                    .$promise
+                    .then(function (response) {
+                        console.log(response.leave);
+                        vm.leave = response.leave;
+
+                        employeeRepository.getEmployeeLeaveTicketDetailById(vm.leave.employeeDefId)
+                                            .$promise
+                                            .then(function (response) {
+                                                vm.employee = response;
+                                            }, function () { })
+                                            .then(function () {
+                                                vm.isBusy = true;
+                                            });
+
+                }, function (err) {
+                    
                 });
+
+
+                
+            }
         }
 
-        $scope.saveApplyLeave = function (ctrl, leave) {
-            leave.leaveYearId = $scope.employee.leaveYearCurrentId;
+        vm.saveApplyLeave = function (ctrl, leave) {
+            leave.leaveYearId = vm.employee.leaveYearCurrentId;
             leave.statusId = 1;
-            leave.employeeDefId = $scope.employee.id;
+            leave.employeeDefId = vm.employee.id;
             console.log("leave", leave);
-            $scope.errors = [];
+            vm.errors = [];
 
             //appRepository.showPageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Saving...');
 
@@ -62,12 +92,12 @@ hrmsModule.controller('ServicesController',
                                 appRepository.hidePageBusyNotification(ctrl, '<i class="icon-ok"></i>&nbsp;Save');
                                 appRepository.showAddSuccessGritterNotification();
                                 console.log("save - Successfully !");
-                                $location.url('/' + $scope.mainPortal);
+                                $location.url('/' + vm.mainPortal);
                             }, function (response) {
                                 // failure case
                                 console.log("save - Error !");
                                 appRepository.showErrorGritterNotification();
-                                $scope.errors = response.data;
+                                vm.errors = response.data;
                             });
                         
                     } else {
@@ -76,8 +106,5 @@ hrmsModule.controller('ServicesController',
                     console.log(result.resultData);
                 });
             });
-
-
-            
         }
 }]);

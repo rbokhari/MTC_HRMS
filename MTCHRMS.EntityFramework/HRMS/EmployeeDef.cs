@@ -372,7 +372,8 @@ namespace MTCHRMS.EntityFramework.HRMS
         [ForeignKey("EmployeeDetail")]
         public int EmployeeDefId { get; set; }
 
-        public short LeaveTypeId { get; set; }
+        [ForeignKey("LeaveTypeDetail")]
+        public int LeaveTypeId { get; set; }
 
         public short LeaveDays { get; set; }
 
@@ -386,14 +387,19 @@ namespace MTCHRMS.EntityFramework.HRMS
         [MaxLength(50)]
         public String AlternatePhone { get; set; }
 
+        [ForeignKey("AlternateEmployeeDetail")]
         public int AlternateEmployeeId { get; set; }
+
+        public DateTime? AlternateEmployeeDate { get; set; }
 
         public byte IsTicket { get; set; }
 
+        [ForeignKey("SupervisorEmployeeDetail")]
         public int? LineMangerId { get; set; }
 
         public DateTime? LineMangerDate { get; set; }
 
+        [ForeignKey("ManagerEmployeeDetail")]
         public int? DepartmentMangerId { get; set; }
 
         public DateTime? DepartmentManagerDate { get; set; }
@@ -405,6 +411,14 @@ namespace MTCHRMS.EntityFramework.HRMS
         public int StatusId { get; set; }
 
         public virtual EmployeeDef EmployeeDetail { get; set; }
+
+        public virtual EmployeeDef AlternateEmployeeDetail { get; set; }
+
+        public virtual EmployeeDef SupervisorEmployeeDetail { get; set; }
+
+        public virtual EmployeeDef ManagerEmployeeDetail { get; set; }
+
+        public virtual ValidationDetail LeaveTypeDetail { get; set; }
     }
 
     public class EmployeeTicketCategory : TableStrutcture

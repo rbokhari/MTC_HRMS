@@ -69,7 +69,7 @@ namespace MTCHRMS.Controllers
         }
 
         [HttpGet]
-        [Route("api/hrmservices/getServiceNotification")]
+        [Route("api/hrmsservices/getServiceNotification")]
         public async Task<dynamic> GetEmployeeNotification()
         {
             var currentUser = 5; // Convert.ToInt32(Request.Headers.GetValues("userId").First());
@@ -81,6 +81,17 @@ namespace MTCHRMS.Controllers
                 Notifications = await Repo.GetEmployeeNotification(currentUser)
             };
         }
+
+        [HttpGet]
+        [Route("api/hrmsservices/getLeave/{id}")]
+        public async Task<dynamic> GetEmployeeLeaveById(int id)
+        {
+            return new
+            {
+                Leave = await Repo.GetEmployeeLeave(id)
+            };
+        }
+
 
         private IEnumerable<string> GetErrorMessages()
         {

@@ -122,7 +122,7 @@
         $routeProvider
             .when('/HRMSPortalAr/employee/appraisal', {
                 templateUrl: '/app/hrms/templates/hrms/listing/employee-appraisal-list.html',
-                controller: 'EmployeeController'
+                controller: 'DashboardController'
             });
 
         $routeProvider

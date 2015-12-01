@@ -1327,6 +1327,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sb-admin-2.js" />
     <Content Include="Content\template2\js\scripts.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="app\inventory\templates\Dashboard.html" />
     <Content Include="app\inventory\templates\item\item-add.html" />
@@ -1396,6 +1398,7 @@
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\modal\angular-modal-service.min.js.map" />
+    <Content Include="Scripts\underscore.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

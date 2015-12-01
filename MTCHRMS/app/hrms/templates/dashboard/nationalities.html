@@ -5,7 +5,7 @@
         <div style="width: 100%;" class="bar"></div>
     </div>
     <div class="icon-btn span3 red fade-in" ng-repeat="nationality in nationalities" ng-show="filtered1.length>0">
-        <a ng-href="{{mainPortal}}/employee/search?param02={{nationality.id}}">
+        <a ng-href="{{vm.mainPortal}}/employee/search?param02={{nationality.id}}">
             <img alt="" ng-src="/Content/img/flag/{{nationality.id}}.png" />
             <div>{{ nationality.nameEn}}</div>
 

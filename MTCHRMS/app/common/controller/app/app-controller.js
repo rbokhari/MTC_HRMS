@@ -3,8 +3,8 @@
 'use strict';
 accModule.controller('AppController',
 [
-    '$location', 'authRepository', '$window', 'appRepository', '$translate', '$interval', 'appRoles', 'servicesRepository',
-    function ($location, authRepository, $window, appRepository, $translate, $interval, appRoles, servicesRepository) {
+    '$location', 'authRepository', '$window', 'appRepository', '$translate', '$timeout', '$interval', 'appRoles', 'servicesRepository',
+    function ($location, authRepository, $window, appRepository, $translate, $timeout, $interval, appRoles, servicesRepository) {
 
         console.log("app controller");
 
@@ -56,13 +56,18 @@ accModule.controller('AppController',
             $window.location.href = '/lock';
         };
 
-
+        var count = 0;
         function loadNotification() {
-            console.log("calling...");
+            count += 1;
+            console.log("calling... :" + count);
             servicesRepository.getNotifications()
                 .then(function (response) {
                     vm.messages = response.notifications;
             }, function (err) { });
+        };
+
+        vm.daysCount = function (start) {
+            return moment(start).startOf('hour').fromNow();
         };
         
 
@@ -90,6 +95,8 @@ accModule.controller('AppController',
             vm.authentication = authRepository.authentication;
         };
 
-        $interval(loadNotification, 10000);
+        $timeout(loadNotification, 1000);
+
+        $interval(loadNotification, 50000);
     }
 ]);

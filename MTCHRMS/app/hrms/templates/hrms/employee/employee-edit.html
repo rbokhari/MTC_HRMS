@@ -8,14 +8,14 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{mainPortal}}/employee"><span translate="EMPLOYEES"></span></a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{vm.mainPortal}}/employee"><span translate="EMPLOYEES"></span></a><span class="divider">&nbsp;</span></li>
                 <li>
-                    <a ng-href="/{{mainPortal}}/employee/detail/{{employee[0].id}}"><span translate="UPDATE"></span></a><span class="divider-last">&nbsp;</span>
+                    <a ng-href="/{{vm.mainPortal}}/employee/detail/{{employee[0].id}}"><span translate="UPDATE"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
             </ul>
         </div>
@@ -238,7 +238,7 @@
                                 <i class="icon-save"></i>
                                 <span translate="UPDATE"></span>
                             </button>
-                            <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/employee/detail/{{employee[0].id}}">
+                            <a id="cmdCancel" class="btn btn-inverse" href="/{{vm.mainPortal}}/employee/detail/{{employee[0].id}}">
                                 <i class="icon-undo"></i>
                                 <span translate="CANCEL"></span>
                             </a>

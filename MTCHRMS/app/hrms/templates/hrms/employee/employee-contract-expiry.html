@@ -8,9 +8,9 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{vm.mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
                 <li><a href="#"><span translate="CONTRACT_EXPIRE"></span></a><span class="divider-last">&nbsp;</span></li>
                 <li class="pull-right search-wrap">
                     <div class="search-input-area">
@@ -76,11 +76,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin" class=" odd" dir-paginate="contract in contracts | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
-                                            <td style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{visa.id}}">{{ contract.employeeCode}}</a></td>
+                                        <tr ng-if="vm.authentication.isHRMSAdmin || vm.authentication.isSystemAdmin" class=" odd" dir-paginate="contract in contracts | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
+                                            <td style="vertical-align: middle;"><a ng-href="/{{vm.mainPortal}}/employee/detail/{{visa.id}}">{{ contract.employeeCode}}</a></td>
                                             <td>
                                                 <img class="circular" alt="" data-img-loading-value="{{contract.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
-                                                <a ng-href="/{{mainPortal}}/employee/detail/{{contract.id}}">{{ contract.employeeName }}</a>
+                                                <a ng-href="/{{vm.mainPortal}}/employee/detail/{{contract.id}}">{{ contract.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{contract.departmentId.departmentName}}</td>
                                             <td class="hidden-phone center" style="vertical-align: middle;"><img alt="" ng-src="/Content/img/flag/{{contract.nationalityId}}.png" /> &nbsp;<!--{{contract.validationDetailId.nameEn}}--></td>

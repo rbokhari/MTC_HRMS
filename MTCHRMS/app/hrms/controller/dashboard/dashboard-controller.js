@@ -116,6 +116,7 @@ hrmsModule.controller('DashboardController',
         };
 
         $scope.loadAppraisal = function () {
+            console.log("appraisals");
             $scope.appraisals = employeeRepository.getEmployeesAppraisalList();
             $scope.appraisals.$promise
                 .then(function (response) {

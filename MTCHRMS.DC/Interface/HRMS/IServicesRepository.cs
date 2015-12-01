@@ -14,6 +14,8 @@ namespace MTCHRMS.DC.Interface.HRMS
 
         bool AddEmployeeApplyLeave(EmployeeLeave newLeave);
 
+        Task<EmployeeLeave> GetEmployeeLeave(int id);
+
         Task<IList<NotificationModel>> GetEmployeeNotification(int id);
     }
 }

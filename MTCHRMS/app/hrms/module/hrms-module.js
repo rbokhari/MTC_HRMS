@@ -84,9 +84,15 @@
             });
 
         $routeProvider
+            .when('/HRMSPortal/leaverequest/', {
+                templateUrl: '/app/hrms/templates/services/leave-request-form.html',
+                controller: 'ServicesController as vm'
+            });
+ 
+        $routeProvider
             .when('/HRMSPortal/leaverequest/:id', {
                 templateUrl: '/app/hrms/templates/services/leave-request-form.html',
-                controller: 'ServicesController'
+                controller: 'ServicesController as vm'
             });
 
         $routeProvider
@@ -128,7 +134,7 @@
         $routeProvider
             .when('/HRMSPortal/employee/appraisal', {
                 templateUrl: '/app/hrms/templates/hrms/listing/employee-appraisal-list.html',
-                controller: 'EmployeeController'
+                controller: 'DashboardController'
             });
 
         $routeProvider

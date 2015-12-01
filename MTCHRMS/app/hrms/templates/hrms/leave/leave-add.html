@@ -8,12 +8,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{mainPortal}}/leave"><span translate="LEAVE"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{vm.mainPortal}}/leave"><span translate="LEAVE"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -31,7 +31,7 @@
                     <h4><i class="icon-reorder"></i><span translate="LEAVE"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
                     <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
-                        <a href="/{{mainPortal}}/leave" class="icon-remove"></a>
+                        <a href="/{{vm.mainPortal}}/leave" class="icon-remove"></a>
                     </span>
                 </div>
                 <div class="widget-body">
@@ -86,7 +86,7 @@
                                     <i class="icon-save"></i>
                                     <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
                                 </button>
-                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/leave">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{vm.mainPortal}}/leave">
                                     <i class="icon-undo"></i>
                                     <span translate="CANCEL"></span>&nbsp;
                                 </a>

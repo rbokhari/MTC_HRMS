@@ -1,4 +1,4 @@
-﻿<div class="container-fluid" data-ng-init="loadEmployeeLeaveTicketDetail()">
+﻿<div class="container-fluid" data-ng-init="vm.loadEmployeeLeaveTicketDetail()">
     <!-- BEGIN PAGE HEADER-->
     <div class="row-fluid">
         <div class="span12">
@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i> Personal Information</h4>
                     <span class="tools">
-                        <a href="/{{mainPortal}}/employee/detail/{{employee.id}}" target="_blank" class="icon-user"></a>
+                        <a href="/{{vm.mainPortal}}/employee/detail/{{vm.employee.id}}" target="_blank" class="icon-user"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
                 </div>
@@ -38,19 +38,19 @@
                                 <div class="control-group">
                                     <span class="control-label">Employee No:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.code" />
+                                        <input type="text" ng-model="vm.employee.code" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Designation:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.designationEn" />
+                                        <input type="text" ng-model="vm.employee.designationEn" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Grade:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.rank" />
+                                        <input type="text" ng-model="vm.employee.rank" readonly="readonly" />
                                     </div>
                                 </div>
                             </div>
@@ -60,19 +60,19 @@
                                 <div class="control-group">
                                     <span class="control-label">Employee Name:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.nameEn" />
+                                        <input type="text" ng-model="vm.employee.nameEn" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Department/Section:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.departmentName" />
+                                        <input type="text" ng-model="vm.employee.departmentName" readonly="readonly" />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <span class="control-label">Unit:</span>
                                     <div class="controls">
-                                        <input type="text" ng-model="employee.regiment" />
+                                        <input type="text" ng-model="vm.employee.regiment" readonly="readonly" />
                                     </div>
                                 </div>
                             </div>
@@ -80,144 +80,155 @@
                     </div>
                 </div>
             </div>
-            <div class="widget">
-                <div class="widget-title">
-                    <h4><i class="icon-reorder"></i> Leave Information </h4>
-                    <span class="tools">
-                        <a href="/{{mainPortal}}/employee/leaveticket/{{employee.id}}" target="_blank" class="icon-plane"></a>
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> Leave Information </h4>
+                <span class="tools">
+                        <a href="/{{vm.mainPortal}}/employee/leaveticket/{{employee.id}}" target="_blank" class="icon-plane"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
+            </div>
+            <div class="widget-body">
+                <div class="row-fluid" ng-show="errors.length > 0">
+                    <div class="alert alert-error" ng-repeat="error in errors">{{ error }}</div>
                 </div>
-                <div class="widget-body">
-                    <div class="row-fluid" ng-show="errors.length > 0">
-                        <div class="alert alert-error" ng-repeat="error in errors">{{ error }}</div>
-                    </div>
-                    <div class="row-fluid">
-                        <div class="span5">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Leave Type:</span>
-                                    <div class="controls">
-                                        <select id="ctype" name="ctype" ng-model="leave.leaveTypeId"
-                                                ng-options="leave.id as leave.nameEn for leave in leavetypes"></select>
-                                        <div class="help-inline" ng-show="frm.ctype.$error.required && frm.ctype.$dirty">*</div>
-                                    </div>
-                                    
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">From Date:</span>
-                                    <div class="controls">
-                                        <input type="text" id="tstart" name="tstart" ng-model="leave.leaveStart"/>
-                                        <div class="help-inline" ng-show="frm.tstart.$error.required && frm.tstart.$dirty">*</div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <span class="control-label">Replace Person:</span>
-                                    <div class="controls">
-                                        <input type="text" id="treplace" name="treplace" ng-model="leave.alternateEmployeeId"/>
-                                        <div class="help-inline" ng-show="frm.treplace.$error.required && frm.treplace.$dirty">*</div>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Ticket :</span>
-                                    <div class="controls">
-                                        <toggle-switch html="true" model="leave.isTicket" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
-                                    </div>
-                                </div>
-                                
-
-                            </div>
-                        </div>
-                        <div class="span5">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Total Days:</span>
-                                    <div class="controls">
-                                        <input type="text" ng-model="leave.leaveDays" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">To Date:</span>
-                                    <div class="controls">
-                                        <input type="text" ng-model="leave.leaveEnd" />
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Address/Phone No:</span>
-                                    <div class="controls">
-                                        <input type="text" ng-model="leave.alternateAddress"/>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">With Pay/Without Pay:</span>
-                                    <div class="controls">
-                                        <toggle-switch html="true" model="leave.isPay" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="span2 alert alert-info fade-in" ng-if="employee.contractId">
+                <div class="row-fluid">
+                    <div class="span5">
+                        <div class="form-horizontal" >
                             <div class="control-group">
-                                <span class="control-label"><span translate="ACTIVE_YEAR"></span> :</span>
+                                <span class="control-label">Leave Type:</span>
                                 <div class="controls">
-                                    <span ng-if="employee.contractId" class="label label-success">{{employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="employee.contractId" class="label label-warning">{{employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
+                                    <select ng-disabled="vm.leave.statusId >= 5200" id="ctype" name="ctype" ng-model="vm.leave.leaveTypeId"
+                                            ng-options="leave.id as leave.nameEn for leave in vm.leavetypes"></select>
+                                    <div class="help-inline" ng-show="frm.ctype.$error.required && frm.ctype.$dirty">*</div>
+                                </div>
 
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label">From Date:</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" id="tstart" name="tstart" ng-model="vm.leave.leaveStart"/>
+                                    <div class="help-inline" ng-show="frm.tstart.$error.required && frm.tstart.$dirty">*</div>
                                 </div>
                             </div>
-                            <div class="control-group" ng-if="employee.leaveCategoryId">
-                                <span class="control-label"><span translate="LEAVE_SUMMARY"></span> :</span>
-                                <div class="controls">
-                                    <label title="total days" class="badge badge-success" ng-bind="employee.totalDays"></label> + <label title="transfer days" class="badge badge-warning" ng-bind="employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="employee.deductDays"></label> - <label title="avail days" class="badge badge-default" ng-bind="employee.availedDays"></label>
-                                    <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
-                                    <label title="remaining days" class="badge badge-success pull-right bottom-right">{{employee.totalDays + employee.transferDays - employee.deductDays - employee.availedDays}}</label>
 
+                            <div class="control-group">
+                                <span class="control-label">Address :</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" id="treplace" name="treplace" ng-model="vm.leave.address"/>
+                                    <div class="help-inline" ng-show="frm.treplace.$error.required && frm.treplace.$dirty">*</div>
                                 </div>
                             </div>
-                            <div class="control-group" ng-if="employee.ticketCategoryId">
-                                <span class="control-label"><span translate="TICKET_SUMMARY"></span> :</span>
+                            <div class="control-group">
+                                <span class="control-label">Ticket :</span>
                                 <div class="controls">
-                                    <label title="total tickets" class="badge badge-success" ng-bind="employee.totalTickets"></label> - <label title="reimbursed tickets" class="badge badge-default" ng-bind="employee.reimbursedTickets"></label>
-                                    <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
-                                    <label title="balance tickets" class="badge badge-success pull-right">{{employee.totalTickets - employee.reimbursedTickets}}</label>
+                                    <toggle-switch ng-disabled="vm.leave.statusId >= 5200" html="true" model="vm.leave.isTicket" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="span5">
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <span class="control-label">Total Days:</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" ng-model="vm.leave.leaveDays"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label">To Date:</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" ng-model="vm.leave.leaveEnd"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label">Phone No:</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" ng-model="vm.leave.phone"/>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <span class="control-label">With Pay/Without Pay:</span>
+                                <div class="controls">
+                                    <toggle-switch ng-disabled="vm.leave.statusId >= 5200" html="true" model="vm.leave.isPay" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="span2 alert alert-info fade-in" ng-if="vm.employee.contractId">
+                        <div class="control-group">
+                            <span class="control-label"><span translate="ACTIVE_YEAR"></span> :</span>
+                            <div class="controls">
+                                <span ng-if="vm.employee.contractId" class="label label-success">{{vm.employee.currentContractYearStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="vm.employee.contractId" class="label label-warning">{{vm.employee.currentContractYearEnd | date:'dd MMM yyyy'}}</span>
+
+                            </div>
+                        </div>
+                        <div class="control-group" ng-if="vm.employee.leaveCategoryId">
+                            <span class="control-label"><span translate="LEAVE_SUMMARY"></span> :</span>
+                            <div class="controls">
+                                <label title="total days" class="badge badge-success" ng-bind="vm.employee.totalDays"></label> + <label title="transfer days" class="badge badge-warning" ng-bind="vm.employee.transferDays"></label> - <label title="deduct days" class="badge badge-default" ng-bind="vm.employee.deductDays"></label> - <label title="avail days" class="badge badge-default" ng-bind="vm.employee.availedDays"></label>
+                                <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
+                                <label title="remaining days" class="badge badge-success pull-right bottom-right">{{vm.employee.totalDays + vm.employee.transferDays - vm.employee.deductDays - vm.employee.availedDays}}</label>
+
+                            </div>
+                        </div>
+                        <div class="control-group" ng-if="vm.employee.ticketCategoryId">
+                            <span class="control-label"><span translate="TICKET_SUMMARY"></span> :</span>
+                            <div class="controls">
+                                <label title="total tickets" class="badge badge-success" ng-bind="vm.employee.totalTickets"></label> - <label title="reimbursed tickets" class="badge badge-default" ng-bind="vm.employee.reimbursedTickets"></label>
+                                <a href="" title="view history" class="pull-right bottom-right"><i class="icon-time"></i></a>&nbsp;
+                                <label title="balance tickets" class="badge badge-success pull-right">{{vm.employee.totalTickets - vm.employee.reimbursedTickets}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span12">
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <span class="control-label">Remarks :</span>
+                                <div class="controls">
+                                    <input type="text" ng-disabled="vm.leave.statusId >= 5200" class="input-xxlarge" ng-model="vm.leave.remarks" />
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row-fluid" data-ng-show="leave.isTicket">
-                        <div class="span12">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Departure Date</td>
-                                    <td>From</td>
-                                    <td>To</td>
-                                    <td>Return Date</td>
-                                    <td>Relation</td>
-                                    <td>Ticket</td>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>{{leave.isTicket}}</td>
-                                    <td>Me</td>
-                                    <td>Me</td>
-                                    <td>Me</td>
-                                    <td>Me</td>
-                                    <td>Me</td>
-                                    <td>Me</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
+                </div>
+                <div class="row-fluid" data-ng-show="leave.isTicket">
+                    <div class="span12">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <td>Name</td>
+                                <td>Departure Date</td>
+                                <td>From</td>
+                                <td>To</td>
+                                <td>Return Date</td>
+                                <td>Relation</td>
+                                <td>Ticket</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>{{leave.isTicket}}</td>
+                                <td>Me</td>
+                                <td>Me</td>
+                                <td>Me</td>
+                                <td>Me</td>
+                                <td>Me</td>
+                                <td>Me</td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
+        </div>
             <div class="widget">
                 <div class="widget-title">
-                    <h4><i class="icon-reorder"></i> Supervisor</h4>
+                    <h4><i class="icon-user"></i> Replacement Person</h4>
                     <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
@@ -227,21 +238,33 @@
                         <div class="span12">
                             <div class="span6">
                                 <div class="form-horizontal">
-                                    <div class="control-group">
+                                    <div class="control-group" ng-if="!vm.leave.statusId">
                                         <span class="control-label">Department:</span>
                                         <div class="controls">
                                             <select id="cDepartment" class="input-xxlarge" name="cDepartment"
-                                                    ng-model="leave.departmentId"
-                                                    ng-change="loadEmployee(leave.departmentId)"
-                                                    ng-options="dept.id as dept.departmentName for dept in departments" required></select>
+                                                    ng-model="vm.leave.departmentId1"
+                                                    ng-change="vm.loadEmployee(leave.departmentId1)"
+                                                    ng-options="dept.id as dept.departmentName for dept in vm.departments" required></select>
                                         </div>
                                     </div>
-                                    <div class="control-group">
-                                        <span class="control-label">Supervisor Name :</span>
+                                    <div class="control-group" ng-if="!vm.leave.statusId">
+                                        <span class="control-label">Name :</span>
                                         <div class="controls">
                                             <select id="cPerson" class="input-xxlarge" name="cPerson"
-                                                    ng-model="leave.lineMangerId"
-                                                    ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in employees" required></select>
+                                                    ng-model="vm.leave.alternateEmployeeId"
+                                                    ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in vm.employees" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-if="vm.leave.statusId">
+                                        <span class="control-label">Name :</span>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge" ng-model="vm.leave.alternateEmployeeDetail.employeeName" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-if="vm.leave.statusId">
+                                        <span class="control-label">Comments :</span>
+                                        <div class="controls">
+                                            <textarea rows="3" cols="10" class="input-xlarge" ng-model="vm.leave.alternateEmployeeComments"></textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -251,40 +274,66 @@
                                     <div class="control-group">
                                         <span class="control-label">Date :</span>
                                         <div class="controls">
-                                            <input type="text" ng-model="leave.applyDate"/>
+                                            <input type="text" ng-model="vm.leave.applyDate"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                    <div class="form-actions">
-                        <button type="submit" id="cmdSave" name="cmdSave" class="btn btn-success" ng-click="saveApplyLeave('cmdSave',leave)" ng-disabled="frm.$invalid">
-                            <i class="icon-share"></i>
-                            <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
+                    <div class="form-actions" style="background:transparent;" ng-if="vm.leave.statusId==5200">
+                        <button type="submit" name="cmdAccept1" class="btn btn-success" ng-click="acceptReplacement('cmdAccept1',vm.leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-thumbs-up"></i>
+                            Accept
                         </button>
-                        <a class="btn btn-inverse" href="/{{mainPortal}}/leave">
-                            <i class="icon-undo"></i>
-                            <span translate="CANCEL"></span>&nbsp;
-                        </a>
+                        <button type="submit" name="cmdReject1" class="btn btn-danger" ng-click="rejectReplacement('cmdReject1',vm.leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-thumbs-down"></i>
+                            Rejects
+                        </button>
                     </div>
                 </div>
+
             </div>
-            <div class="widget">
-                <div class="widget-title">
-                    <h4><i class="icon-reorder"></i> Department Manager</h4>
-                    <span class="tools">
+        <div class="widget" ng-if="vm.leave.statusId>=5201">
+            <div class="widget-title">
+                <h4><i class="icon-user"></i> Supervisor</h4>
+                <span class="tools">
                         <a href="javascript:;" class="icon-chevron-down"></a>
                     </span>
-                </div>
-                <div class="widget-body">
-                    <div class="row-fluid">
+            </div>
+            <div class="widget-body">
+                <div class="row-fluid">
+                    <div class="span12">
                         <div class="span6">
                             <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Manager Name:</span>
+                                <div class="control-group" ng-if="!vm.leave.statusId">
+                                    <span class="control-label">Department:</span>
                                     <div class="controls">
-                                        <select></select>
+                                        <select id="cDepartment" class="input-xxlarge" name="cDepartment"
+                                                ng-model="vm.leave.departmentId"
+                                                ng-change="vm.loadEmployee(leave.departmentId)"
+                                                ng-options="dept.id as dept.departmentName for dept in vm.departments" required></select>
+                                    </div>
+                                </div>
+                                <div class="control-group" ng-if="!vm.leave.statusId">
+                                    <span class="control-label">Supervisor Name :</span>
+                                    <div class="controls">
+                                        <select id="cPerson" class="input-xxlarge" name="cPerson"
+                                                ng-model="vm.leave.lineMangerId"
+                                                ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in vm.employees" required></select>
+                                    </div>
+                                </div>
+                                <div class="control-group" ng-if="vm.leave.statusId>=5201">
+                                    <span class="control-label">Name :</span>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" ng-model="vm.leave.supervisorEmployeeDetail.employeeName" readonly="readonly" />
+                                    </div>
+                                </div>
+                                <div class="control-group" ng-if="vm.leave.statusId>=5201">
+                                    <span class="control-label">Comments :</span>
+                                    <div class="controls">
+                                        <textarea rows="3" cols="10" class="input-xlarge" ng-model="vm.leave.supervisorEmployeeComments"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -294,16 +343,106 @@
                                 <div class="control-group">
                                     <span class="control-label">Date :</span>
                                     <div class="controls">
-                                        <input type="text" />
+                                        <input type="text" ng-model="vm.leave.applyDate"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="form-actions" style="background:transparent;" ng-if="vm.leave.statusId==5201">
+                    <button type="submit" name="cmdAccept2" class="btn btn-success" ng-click="acceptSupervisor('cmdAccept2',vm.leave)" ng-disabled="frm.$invalid">
+                        <i class="icon-thumbs-up"></i>
+                        Accept
+                    </button>
+                    <button type="submit" name="cmdReject2" class="btn btn-danger" ng-click="rejectSupervisor('cmdReject2',vm.leave)" ng-disabled="frm.$invalid">
+                        <i class="icon-thumbs-down"></i>
+                        Rejects
+                    </button>
+                </div>
+            </div>
+        </div>
+            <div class="form-actions" style="background:transparent;" ng-if="!vm.leave.statusId">
+                <button type="submit" id="cmdSave" name="cmdSave" class="btn btn-success" ng-click="saveApplyLeave('cmdSave',vm.leave)" ng-disabled="frm.$invalid">
+                    <i class="icon-share"></i>
+                    <span translate="SEND_FOR_APPROVAL"></span>&nbsp;
+                </button>
+                <a class="btn btn-inverse" href="/{{vm.mainPortal}}/leave">
+                    <i class="icon-undo"></i>
+                    <span translate="CANCEL"></span>&nbsp;
+                </a>
+            </div>
+            <div class="widget" ng-if="vm.leave.statusId>=5201">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i> Department Manager</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group" ng-if="vm.leave.statusId==5201">
+                                        <span class="control-label">Department:</span>
+                                        <div class="controls">
+                                            <select id="cDepartment" class="input-xxlarge" name="cDepartment"
+                                                    ng-model="vm.leave.departmentId"
+                                                    ng-change="vm.loadEmployee(leave.departmentId)"
+                                                    ng-options="dept.id as dept.departmentName for dept in vm.departments" required></select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-if="vm.leave.statusId==5201">
+                                        <span class="control-label">Supervisor Name :</span>
+                                        <div class="controls">
+                                            <select id="cPerson" class="input-xxlarge" name="cPerson"
+                                                    ng-model="vm.leave.lineMangerId"
+                                                    ng-options="employee.id as (employee.employeeName + ', ' + employee.employeeCode) for employee in vm.employees" required></select>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group" ng-if="vm.leave.statusId>=5202">
+                                        <span class="control-label">Name :</span>
+                                        <div class="controls">
+                                            <input type="text" class="input-xlarge" ng-model="vm.leave.managerEmployeeDetail.employeeName" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group" ng-if="vm.leave.statusId>=5202">
+                                        <span class="control-label">Comments :</span>
+                                        <div class="controls">
+                                            <textarea rows="3" cols="10" class="input-xlarge" ng-model="vm.leave.managerEmployeeComments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <span class="control-label">Date :</span>
+                                        <div class="controls">
+                                            <input type="text"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-actions" style="background:transparent;" ng-if="vm.leave.statusId==5202">
+                        <button type="submit" name="cmdAccept3" class="btn btn-success" ng-click="acceptManager('cmdAccept3',vm.leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-thumbs-up"></i>
+                            Accept
+                        </button>
+                        <button type="submit" name="cmdReject3" class="btn btn-danger" ng-click="rejectManager('cmdReject3',vm.leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-thumbs-down"></i>
+                            Rejects
+                        </button>
+                    </div>
+                </div>
             </div>
 
-            <div class="widget">
+            <div class="widget" ng-if="vm.leave.statusId>=5203">
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i> HR Department</h4>
                     <span class="tools">
@@ -313,30 +452,69 @@
                 <div class="widget-body">
                     <div class="row-fluid">
                         <div class="span12">
-                            <div class="form-horizontal">
-                                <div class="control-group">
-                                    <span class="control-label">Remaining Days:</span>
-                                    <div class="controls">
-                                        <input type="text" />
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <span class="control-label">HR Person :</span>
+                                        <div class="controls">
+                                            <input type="text" ng-model="vm.authentication.fullName" readonly="readonly"/>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <span class="control-label">Comments :</span>
+                                        <div class="controls">
+                                            <textarea rows="3" cols="10" class="input-xlarge" ng-model="vm.leave.managerEmployeeComments"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <span class="control-label">HR Person :</span>
-                                    <div class="controls">
-                                        <select></select>
+                            </div>
+                            <div class="span6">
+                                <div class="form-horizontal">
+                                    <div class="control-group">
+                                        <span class="control-label">Leave Days:</span>
+                                        <div class="controls">
+                                            {{vm.leave.leaveDays}}
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="control-group">
-                                    <span class="control-label">Signature:</span>
-                                    <div class="controls">
-                                        <input type="text" />
+                                    <div class="control-group">
+                                        <span class="control-label">Contract Period:</span>
+                                        <div class="controls">
+                                            {{vm.employee.currentContractYearStart | date:'dd MMM yyyy'}} ~ {{vm.employee.currentContractYearEnd | date:'dd MMM yyyy'}}
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="control-group">
+                                        <span class="control-label">Transfer Days :</span>
+                                        <div class="controls">
+                                            {{vm.employee.transferDays}}
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <span class="control-label">Availed Days:</span>
+                                        <div class="controls">
+                                            {{vm.employee.availedDays}}
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <span class="control-label">Remaining Days:</span>
+                                        <div class="controls">
+                                            {{vm.employee.totalDays + vm.employee.transferDays - vm.employee.deductDays - vm.employee.availedDays - vm.leave.leaveDays}}
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-actions" style="background:transparent;" ng-if="vm.leave.statusId==5203">
+                        <button type="submit" name="cmdAccept3" class="btn btn-success" ng-click="acceptManager('cmdAccept3',vm.leave)" ng-disabled="frm.$invalid">
+                            <i class="icon-thumbs-up"></i>
+                            Completed
+                        </button>
+                        <button type="submit" name="cmdPrint" class="btn btn-inverse" ng-disabled="frm.$invalid">
+                            <i class="icon-print"></i>
+                            Print
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

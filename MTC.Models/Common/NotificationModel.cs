@@ -15,5 +15,7 @@ namespace MTC.Models.Common
         public String Message;
 
         public byte[] Avatar;
+
+        public DateTime CreatedOn;
     }
 }

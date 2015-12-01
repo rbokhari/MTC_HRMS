@@ -6,10 +6,14 @@ hrmsModule.factory('servicesRepository', ['$resource', '$http', '$q', function (
         return $resource('/api/hrmservices/postemployeeleave').save(leave);
     };
 
+    var _getLeave = function (id) {
+        return $resource('/api/hrmsservices/getLeave/' + id).get();
+    };
+
     var _getNotifications = function (id) {
         var req = {
             method: 'GET',
-            url: '/api/hrmservices/getServiceNotification'
+            url: '/api/hrmsservices/getServiceNotification'
         };
         var deferred = $q.defer();
 
@@ -26,8 +30,8 @@ hrmsModule.factory('servicesRepository', ['$resource', '$http', '$q', function (
 
     return {
         applyLeave: _applyLeave,
+        getLeave: _getLeave,
         getNotifications: _getNotifications
     };
-
 
 }]);
