@@ -8,12 +8,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{vm.mainPortal}}/department"><span translate="DEPARTMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/department"><span translate="DEPARTMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#"><span translate="EDIT"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -24,13 +24,13 @@
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
 
-    <div class="row-fluid">
+    <div class="row-fluid" data-ng-init="getDepartment()">
         <div class="span12">
             <div class="widget">
                 <div class="widget-title">
                     <h4><i class="icon-edit"></i><span translate="EDIT"></span>&nbsp;</h4>
                     <span class="tools">
-                        <a class="icon-plus-sign" href="/{{vm.mainPortal}}/department/add"></a>
+                        <a class="icon-plus-sign" href="/{{mainPortal}}/department/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -72,7 +72,7 @@
                                     <i class="icon-edit"></i>
                                     <span translate="UPDATE"></span>
                                 </button>
-                                <a id="cmdCancel" class="btn btn-inverse" href="/{{vm.mainPortal}}/department">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/department">
                                     <i class="icon-undo"></i>
                                     <span translate="CANCEL"></span>
                                 </a>

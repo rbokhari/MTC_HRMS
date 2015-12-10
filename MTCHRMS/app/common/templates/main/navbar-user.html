@@ -1,11 +1,11 @@
 ﻿<div class="top-nav ">
-    <ul class="nav top-menu" ng-class="{'pull-left' : vm.lang == 'ar_OM', 'pull-right' : vm.lang == 'en_US'}">
+    <ul class="nav top-menu" ng-class="{'pull-left' : lang == 'ar_OM', 'pull-right' : lang == 'en_US'}">
         <!-- BEGIN SUPPORT -->
         <li class="dropdown mtop5">
-            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="vm.lang=='en_US'" href="/HRMSPortalAr" target="_self" data-original-title="Chat">
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="lang=='en_US'" href="/HRMSPortalAr" target="_self" data-original-title="Chat">
                 <i class="icon-comments-alt"></i>
             </a>
-            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="vm.lang=='ar_OM'" href="/HRMSPortal" target="_self" data-original-title="Chat">
+            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" ng-show="lang=='ar_OM'" href="/HRMSPortal" target="_self" data-original-title="Chat">
                 <i class="icon-comments-alt"></i>
             </a>
         </li>
@@ -18,12 +18,12 @@
         <!-- BEGIN USER LOGIN DROPDOWN -->
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img data-img-loading-value="{{vm.authentication.empPicture}}" data-img-loading-size="mini" style="height: 35px; width: 35px;" alt="">
-                <span class="username">{{vm.authentication.fullName}}&nbsp;</span>
+                <img data-img-loading-value="{{authentication.empPicture}}" data-img-loading-size="mini" style="height: 35px; width: 35px;" alt="">
+                <span class="username">{{authentication.fullName}}&nbsp;</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-                <li><a ng-href="/{{vm.mainPortal}}/employee/detail/{{vm.authentication.employeeId}}"><i class="icon-user"></i> My Profile</a></li>
+                <li><a ng-href="/{{mainPortal}}/employee/detail/{{authentication.employeeId}}"><i class="icon-user"></i> My Profile</a></li>
                 <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
                 <li><a href="#"><i class="icon-calendar"></i> Calendar</a></li>
                 <li class="divider"></li>

@@ -8,9 +8,9 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{vm.mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
                 <li><a href="#"><span translate="APPRAISAL"></span></a><span class="divider-last">&nbsp;</span></li>
                 <li class="pull-right search-wrap">
                     <div class="search-input-area">
@@ -73,11 +73,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="vm.authentication.isHRMSAdmin || vm.authentication.isSystemAdmin || vm.authentication.isHRMSUser" class="odd" dir-paginate="appraisal in appraisals | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
-                                            <td class="hidden-phone" style="vertical-align: middle;"><a ng-href="/{{vm.mainPortal}}/employee/detail/{{appraisal.id}}">{{ appraisal.employeeCode}}</a></td>
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="appraisal in appraisals | filter:search | itemsPerPage: recordPage" ng-repeat="visa in visas">
+                                            <td class="hidden-phone" style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{appraisal.id}}">{{ appraisal.employeeCode}}</a></td>
                                             <td>
                                                 <img class="circular" alt="" data-img-loading-value="{{appraisal.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
-                                                <a ng-href="/{{vm.mainPortal}}/employee/detail/{{appraisal.id}}">{{ appraisal.employeeName }}</a>
+                                                <a ng-href="/{{mainPortal}}/employee/detail/{{appraisal.id}}">{{ appraisal.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{appraisal.departmentId.departmentName}}</td>
                                             <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{appraisal.nationalityId}}.png" /> &nbsp;<!--{{appraisal.validationDetailId.nameEn}}--></td>

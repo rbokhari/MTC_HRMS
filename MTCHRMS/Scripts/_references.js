@@ -162,6 +162,7 @@
 /// <reference path="dirpagination/dirpagination - copy.js" />
 /// <reference path="dirpagination/dirpagination.js" />
 /// <reference path="fileapi.min.js" />
+/// <reference path="filesaver/filesaver.js" />
 /// <reference path="jquery.gritter.js" />
 /// <reference path="jquery.jorgchart.js" />
 /// <reference path="jquery.signalr-2.1.2.js" />

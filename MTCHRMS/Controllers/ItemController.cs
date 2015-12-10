@@ -13,6 +13,10 @@ using System.IO;
 using System.Net.Http.Headers;
 using System.Text;
 using MTC.Models.Inventory;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using PdfRpt.Core.Contracts;
+using PdfRpt.FluentInterface;
 
 namespace MTCHRMS.Controllers
 {
@@ -53,6 +57,222 @@ namespace MTCHRMS.Controllers
             var items = _repo.GetItemsModel();
 
             return items;
+        }
+
+        [Route("api/item/getExcelFile")]
+        [HttpGet]
+        //[Authorize]
+        public async Task<HttpResponseMessage> GetExcelFile([FromUri]Item item)
+        {
+            var items = await _repo.GetItemSearch(item);
+
+            var xlPackage = new ExcelPackage();
+            var oSheet = xlPackage.Workbook.Worksheets.Add("Item Report");
+            oSheet.Cells["A2"].Value = "Hello world";
+            oSheet.Cells["D5"].LoadFromCollection(items);
+            var stream = xlPackage.GetAsByteArray();
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(stream)
+            };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "abc1.xlsx"
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            return result;
+
+        }
+
+        [Route("api/item/getPdfFile")]
+        [HttpGet]
+        //[Authorize]
+        public async Task<HttpResponseMessage> GetPdfFile([FromUri]Item item)
+        {
+            var fullName = string.Empty;
+            if (Request.Headers.Contains("name"))
+            {
+                fullName = Request.Headers.GetValues("name").First();
+            }
+            var items = await _repo.GetItemSearch(item);
+
+            var report = new PdfReport().DocumentPreferences(doc =>
+            {
+                doc.RunDirection(PdfRunDirection.LeftToRight);
+                doc.Orientation(PageOrientation.Landscape);
+                doc.PageSize(PdfPageSize.A4);
+                doc.DocumentMetadata(new DocumentMetadata
+                {
+                    Author = "Sits",
+                    Application = "MTC-Inventory",
+                    Keywords = ", .",
+                    Subject = "Item List",
+                    Title = "Item List"
+                });
+            })
+            .DefaultFonts(fonts =>
+            {
+                //fonts.Path(Environment.GetEnvironmentVariable("SystemRoot") + "\\fonts\\arial.ttf",
+                //                  Environment.GetEnvironmentVariable("SystemRoot") + "\\fonts\\verdana.ttf");
+            })
+            .PagesFooter(footer =>
+            {
+                footer.DefaultFooter("Print By :: " + fullName + " , @ " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
+            })
+            .PagesHeader(header =>
+            {
+                header.PdfFont.Size = 30;
+                header.DefaultHeader(defaultHeader =>
+                {
+                    defaultHeader.RunDirection(PdfRunDirection.LeftToRight);
+                    
+                    defaultHeader.ImagePath(HttpRuntime.AppDomainAppPath + "\\Content\\img\\photo.jpg");
+                    defaultHeader.Message("Report : Item Listing ");
+                    defaultHeader.MessageFontStyle(DocumentFontStyle.Bold);
+                    
+                });
+            })
+            .MainTableTemplate(template =>
+            {
+                template.BasicTemplate(BasicTemplate.ProfessionalTemplate);
+            })
+            .MainTablePreferences(table =>
+            {
+                table.ColumnsWidthsType(TableColumnWidthType.Relative);
+                //table.NumberOfDataRowsPerPage(5);
+            })
+            .MainTableDataSource(dataSource =>
+            {
+                dataSource.StronglyTypedList(items);
+            })
+            .MainTableSummarySettings(summarySettings =>
+            {
+                //summarySettings.OverallSummarySettings("Summary (Total Stock)");
+                //summarySettings.OverallSummarySettings("Summary (Total Items)");
+                //summarySettings.PreviousPageSummarySettings("Previous Page Summary");
+                //summarySettings.PageSummarySettings("Page Summary");
+            })
+            .MainTableColumns(columns =>
+            {
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName("rowNo");
+                    column.IsRowNumber(true);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                    column.IsVisible(true);
+                    column.Order(0);
+                    column.Width(1);
+                    column.HeaderCell("SN.");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Code);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Justified);
+                    column.IsVisible(true);
+                    column.Order(1);
+                    column.Width(2);
+                    column.HeaderCell("Code");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Name);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Justified);
+                    column.IsVisible(true);
+                    column.Order(2);
+                    column.Width(6);
+                    column.HeaderCell("Name");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.PartNo);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                    column.IsVisible(true);
+                    column.Order(3);
+                    column.Width(3);
+                    column.HeaderCell("Part No");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Type);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                    column.IsVisible(true);
+                    column.Order(4);
+                    column.Width(3);
+                    column.HeaderCell("Class");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Category);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                    column.IsVisible(true);
+                    column.Order(5);
+                    column.Width(3);
+                    column.HeaderCell("Category");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Store);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Center);
+                    column.IsVisible(true);
+                    column.Order(6);
+                    column.Width(3);
+                    column.HeaderCell("Store");
+                });
+
+                columns.AddColumn(column =>
+                {
+                    column.PropertyName<ItemModel>(x => x.Stock);
+                    column.CellsHorizontalAlignment(HorizontalAlignment.Right);
+                    column.IsVisible(true);
+                    column.Order(7);
+                    column.Width(1);
+                    column.HeaderCell("Stock");
+                    column.ColumnItemsTemplate(template =>
+                    {
+                        template.TextBlock();
+                        template.DisplayFormatFormula(obj => obj == null ? string.Empty : string.Format("{0:n0}", obj));
+                    });
+                    //column.AggregateFunction(aggregateFunction =>
+                    //{
+                    //    aggregateFunction.NumericAggregateFunction(AggregateFunction.Sum);
+                    //    aggregateFunction.DisplayFormatFormula(obj => obj == null ? string.Empty : string.Format("{0:n0}", obj));
+                    //});
+                });
+
+            })
+            .MainTableEvents(events =>
+            {
+                events.DataSourceIsEmpty(message: "There is no data available to display.");
+            });
+            //.Export(export =>
+            //{
+            //    export.ToExcel();
+            //    export.ToCsv();
+            //    export.ToXml();
+            //});
+            string fileName = Guid.NewGuid() + ".pdf";
+            string filePath = String.Format("{0}\\temp\\{1}", HttpRuntime.AppDomainAppPath, fileName);  // HttpRuntime.AppDomainAppPath + "\\temp\\" + fileName;
+            report.Generate(data => data.AsPdfFile(filePath));
+            //var stream = report.gen
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(File.ReadAllBytes(filePath))
+            };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = fileName
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            File.Delete(filePath);
+            return result;
+
         }
 
         [Route("api/item/GetSingleItem")]
@@ -153,8 +373,6 @@ namespace MTCHRMS.Controllers
             {
                 if (newItem.ItemId == 0)
                 {
-
-
                     if (Request.Headers.Contains("userId"))
                     {
                         newItem.CreatedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());

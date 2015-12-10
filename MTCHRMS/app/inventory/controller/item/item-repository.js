@@ -2,7 +2,7 @@
 'use strict';
 
 invModule.factory('itemRepository', [
-    '$resource', '$http', function($resource, $http) {
+    '$resource', '$http', '$q', function($resource, $http, $q) {
 
         console.log("item repository ");
 
@@ -148,6 +148,52 @@ invModule.factory('itemRepository', [
             return $resource('/api/distributionSerial/' + id);
         };
 
+        var _getPdfFile = function (item) {
+            var req = {
+                method: 'GET',
+                url: '/api/item/getPdfFile',
+                params: item,
+                headers: {
+                    'Content-type': 'application/pdf'
+                },
+                responseType: 'arraybuffer'
+            };
+            var deferred = $q.defer();
+
+            $http(req)
+                .success(function (res) {
+                    deferred.resolve(res);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
+            return deferred.promise;
+            //return $resource('/api/item/getPdfFile').query(item);
+        };
+
+        var _getExcelFile = function (item) {
+            var req = {
+                method: 'GET',
+                url: '/api/item/getExcelFile',
+                params: item,
+                headers: {
+                    'Content-type': 'application/xlsx'
+                },
+                responseType: 'arraybuffer'
+            };
+            var deferred = $q.defer();
+
+            $http(req)
+                .success(function (res) {
+                    deferred.resolve(res);
+                })
+                .error(function (err) {
+                    deferred.reject(err);
+                });
+            return deferred.promise;
+            //return $resource('/api/item/getPdfFile').query(item);
+        };
+
         return {
             getAllItems: _getAllItems,
             getItemPicture: _getItemPicture,
@@ -183,7 +229,10 @@ invModule.factory('itemRepository', [
             getItemDistribution: _getItemDistribution,
             getItemDistributionHierarchy: _getItemDistributionHierarchy,
             getItemUsers: _getItemUsers,
-            getItemBySerialNo: _getItemBySerialNo
+            getItemBySerialNo: _getItemBySerialNo,
+            getExcelFile: _getExcelFile,
+            getPdfFile: _getPdfFile
+
         };
 
     }

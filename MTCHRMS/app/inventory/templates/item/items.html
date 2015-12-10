@@ -115,7 +115,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="control-group" data-ng-init="loadUsers()">
+                                    <div ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" class="control-group" data-ng-init="loadUsers()">
                                         <label for="cUsers" class="control-label">Users :</label>
                                         <div class="controls">
                                             <select id="cUsers" name="cUsers" ng-model="item.createdBy">
@@ -134,6 +134,13 @@
                                                 <i class="icon-refresh"></i>
                                                 <span translate="CLEAR"></span>
                                             </button>
+                                            <div class="btn-group">
+                                                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown"><i class="icon-print"></i> Print <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#" ng-click="getFile('pdf',item)">Export Pdf</a></li>
+                                                    <li><a href="#" ng-click="getFile('xlsx',item)">Export Excel</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

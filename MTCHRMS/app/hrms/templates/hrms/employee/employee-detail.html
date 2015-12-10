@@ -14,12 +14,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{vm.mainPortal}}/employee"><span translate="EMPLOYEES"></span> </a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/employee"><span translate="EMPLOYEES"></span> </a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#"><span translate="PROFILE"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -66,18 +66,18 @@
                                         220px;" width="220px" height="220px" alt="">-->
                                     </div>
                                     <ul class="nav nav-stacked" ng-if="authentication.isHRMSAdmin">
-                                        <li><a ng-href="/{{vm.mainPortal}}/employee/edit/{{employee[0].id}}"><i class="icon-save"></i> <span translate="UPDATE"></span></a></li>
+                                        <li><a ng-href="/{{mainPortal}}/employee/edit/{{employee[0].id}}"><i class="icon-save"></i> <span translate="UPDATE"></span></a></li>
                                         <li><a href="" ng-click="showPassport(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PASSPORT"></span></a></li>
                                         <li><a href="" ng-click="showVisa(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_VISA"></span></a></li>
                                         <li><a href="" ng-click="showPreviousEmployement(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_PREVIOUS_EMPLOYMENT"></span></a></li>
                                         <li><a href="" ng-click="showChild(employee[0].id)"><i class="icon-external-link"></i> <span translate="ADD_CHILDREN"></span></a></li>
                                         <li><a href="" ng-click="showImageForm(employee[0].id)"><i class="icon-camera-retro"></i> <span translate="UPDATE_PICTURE"></span></a></li>
-                                        <li><a ng-href="/{{vm.mainPortal}}/employee/leaveticket/{{employee[0].id}}"><i class="icon-plane"></i> <span translate="LEAVES_TICKETS"></span></a></li>
+                                        <li><a ng-href="/{{mainPortal}}/employee/leaveticket/{{employee[0].id}}"><i class="icon-plane"></i> <span translate="LEAVES_TICKETS"></span></a></li>
                                     </ul>
 
                                 </div>
                                 <div class="span7">
-                                    <h4>{{ vm.mainPortal=='HRMSPortal' ? (employee[0].employeeName.length > 1 ? employee[0].employeeName : employee[0].employeeNameAr) : (employee[0].employeeNameAr.length > 1 ? employee[0].employeeNameAr : employee[0].employeeName) }} - {{ employee[0].rank }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
+                                    <h4>{{ mainPortal=='HRMSPortal' ? (employee[0].employeeName.length > 1 ? employee[0].employeeName : employee[0].employeeNameAr) : (employee[0].employeeNameAr.length > 1 ? employee[0].employeeNameAr : employee[0].employeeName) }} - {{ employee[0].rank }} <br /><small>{{ employee[0].departmentId.departmentName}} </small></h4>
                                     <table class="table">
                                         <tbody>
                                             <tr>
@@ -167,7 +167,7 @@
                                         </address>
                                     </div>
                                     <hr />
-                                    <a ng-if="authentication.isHRMSAdmin" ng-href="/{{vm.mainPortal}}/employee/edit/{{employee[0].id}}" class="btn btn-info">
+                                    <a ng-if="authentication.isHRMSAdmin" ng-href="/{{mainPortal}}/employee/edit/{{employee[0].id}}" class="btn btn-info">
                                         <i class="icon-save"></i>
                                         <span translate="UPDATE"></span>
                                     </a>

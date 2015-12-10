@@ -3,34 +3,34 @@
 'use strict';
 accModule.controller('AppController',
 [
-    '$location', 'authRepository', '$window', 'appRepository', '$translate', '$timeout', '$interval', 'appRoles', 'servicesRepository',
-    function ($location, authRepository, $window, appRepository, $translate, $timeout, $interval, appRoles, servicesRepository) {
+    '$scope', '$location', 'authRepository', '$window', 'appRepository', '$translate', '$timeout', '$interval', 'appRoles', 'servicesRepository',
+    function ($scope, $location, authRepository, $window, appRepository, $translate, $timeout, $interval, appRoles, servicesRepository) {
 
         console.log("app controller");
 
-        var vm = this;
+        //var appvm = this;
 
-        vm.message = "";
-        vm.appRoles = appRoles;
+        $scope.message = "";
+        $scope.appRoles = appRoles;
 
         if ($location.path().indexOf('/HRMSPortalAr') == 0) {
-            vm.lang = "ar_OM";
-            vm.mainPortal = "HRMSPortalAr";
-            vm.activeModule = 1;
+            $scope.lang = "ar_OM";
+            $scope.mainPortal = "HRMSPortalAr";
+            $scope.activeModule = 1;
             $translate.use('ar_OM');
         } else if ($location.path().indexOf('/HRMSPortal') == 0) {
-            vm.lang = "en_US";
-            vm.mainPortal = "HRMSPortal";
-            vm.activeModule = 1;
+            $scope.lang = "en_US";
+            $scope.mainPortal = "HRMSPortal";
+            $scope.activeModule = 1;
             $translate.use('en_US');
         } else if ($location.path().indexOf('/INVPortal') == 0) {
-            vm.lang = "en_US";
-            vm.mainPortal = "INVPortal";
-            vm.activeModule = 2;
+            $scope.lang = "en_US";
+            $scope.mainPortal = "INVPortal";
+            $scope.activeModule = 2;
             $translate.use('en_US');
         }
 
-        vm.currentDateNow = new Date();
+        $scope.currentDateNow = new Date();
         //$translate.use('en_US');
        
         //$scope.translate = function () {
@@ -40,19 +40,19 @@ accModule.controller('AppController',
         //Init
         //$scope.selectedLanguage = 'en';
         //$scope.translate();
-        vm.authentication = authRepository.authentication;
+        $scope.authentication = authRepository.authentication;
 
-        vm.tab = 1;       // set active tab bydefault
+        $scope.tab = 1;       // set active tab bydefault
         // set which tab to activate
-        vm.setTab = function (setTab) {
+        $scope.setTab = function (setTab) {
             this.tab = setTab;
         };
         // verify if tab is selected or not, use for ng-class 
-        vm.isTabSelected = function (checkTab) {
+        $scope.isTabSelected = function (checkTab) {
             return this.tab === checkTab;
         };
 
-        vm.lock = function () {
+        $scope.lock = function () {
             $window.location.href = '/lock';
         };
 
@@ -62,38 +62,40 @@ accModule.controller('AppController',
             console.log("calling... :" + count);
             servicesRepository.getNotifications()
                 .then(function (response) {
-                    vm.messages = response.notifications;
+                    $scope.messages = response.notifications;
             }, function (err) { });
         };
 
-        vm.daysCount = function (start) {
+        $scope.daysCount = function (start) {
             return moment(start).startOf('hour').fromNow();
         };
         
 
-        vm.logOut = function () {
+        $scope.logOut = function () {
             
             authRepository.logOut();
-            vm.authentication = authRepository.authentication;
+            //vmappvm.authentication = authRepository.authentication;
             //$location.path('/home');
             $window.location.href = '/login';
             appRepository.showSuccessGritterNotification();
         };
 
-        vm.lockLogin = function () {
-            vm.loginData.userName = vm.authentication.userName;
+        $scope.lockLogin = function () {
+            $scope.loginData.userName = $scope.authentication.userName;
             authRepository.lockLogin(vm.loginData)
                 .then(function (response) {
                     $window.location.href = '/HRMSPortal';
                 }, function (err) {
                     console.log(err);
-                    vm.message = "Invalid Password !";
+                    $scope.message = "Invalid Password !";
                 });
         };
 
-        vm.getAuthenticationData = function () {
-            vm.authentication = authRepository.authentication;
-        };
+        //vm.getAuthenticationData = function () {
+        //    alert("yahoo");
+        //    console.log("auth data");
+        //    vm.authentication = authRepository.authentication;
+        //};
 
         $timeout(loadNotification, 1000);
 

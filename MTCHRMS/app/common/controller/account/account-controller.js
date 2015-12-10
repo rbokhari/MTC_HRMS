@@ -3,19 +3,19 @@
 
 accModule.controller('AccountController',
 [
-    'authRepository', '$location','$window','appModules',
-    function (authRepository, $location, $window, appModules) {
+    '$scope', 'authRepository', '$location','$window','appModules',
+    function ($scope, authRepository, $location, $window, appModules) {
 
         console.log("account controller");
-        var vm = this;
+        //var vm = this;
 
-        vm.loginData = {
+        $scope.loginData = {
             userName: "",
             password: ""
         };
-        vm.message = "";
-        vm.login = function () {
-            authRepository.login(vm.loginData)
+        $scope.message = "";
+        $scope.login = function () {
+            authRepository.login($scope.loginData)
                 .then(function (response) {
                     //moduleDetail();
                 //roleDetail();
@@ -46,19 +46,20 @@ accModule.controller('AccountController',
                 });
         };
 
-        vm.authData = function () {
+        $scope.authData = function () {
             authRepository.fillAuthData();
-            vm.authentication = authRepository.authentication;
+            console.log("auth data calling - setting vm here");
+            $scope.authentication = authRepository.authentication;
         };
 
-        vm.redirect = function () {
+        $scope.redirect = function () {
             authRepository.fillAuthData()
                 .then(function (res) {
-                    vm.authentication = authRepository.authentication;
-                    if (vm.authentication.moduleId == appModules.HRMS_Module) {
+                    $scope.authentication = authRepository.authentication;
+                    if ($scope.authentication.moduleId == appModules.HRMS_Module) {
                         // check language also here
                         $window.location.href = '/HRMSPortal';
-                    } else if (vm.authentication.moduleId == appModules.INV_Module) {
+                    } else if ($scope.authentication.moduleId == appModules.INV_Module) {
                         $window.location.href = '/INVPortal';
                     }
                 },

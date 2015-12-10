@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using MTC.GlobalVariables;
 using MTCHRMS.DC.Interface.HRMS;
 using MTCHRMS.EntityFramework.HRMS;
 
@@ -12,11 +13,11 @@ namespace MTCHRMS.Controllers
 {
     public class HrmservicesController : ApiController
     {
-        public IServicesRepository Repo;
+        public IServicesRepository repo;
 
         public HrmservicesController(IServicesRepository repo)
         {
-            Repo = repo;
+            this.repo = repo;
         }
 
         //[ActionName("PostNewEmployee")]
@@ -35,8 +36,9 @@ namespace MTCHRMS.Controllers
                     }
 
                     newLeave.CreatedOn = DateTime.Now;
+                    newLeave.StatusId = (Int32)ApplicationPreferences.Validation_Details.LEAVE_APPLICATION_APPLIED;
 
-                    if (Repo.AddEmployeeApplyLeave(newLeave) && Repo.Save())
+                    if (repo.AddEmployeeApplyLeave(newLeave) && repo.Save())
                     {
                         //context.Clients.All.addNewEmployee(newEmployee.Id, newEmployee.CreatedBy);
                         return Request.CreateResponse(HttpStatusCode.Created, newLeave);
@@ -47,21 +49,21 @@ namespace MTCHRMS.Controllers
                         return Request.CreateResponse(HttpStatusCode.Found, GetErrorMessages());
                     }
                 }
-                //else if (newLeave.EmployeeLeaveId != 0)
-                //{
-                //    if (Request.Headers.Contains("userId"))
-                //    {
-                //        newLeave.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
-                //    }
-                //    newLeave.ModifiedOn = DateTime.Now;
+                else if (newLeave.EmployeeLeaveId != 0)
+                {
+                    if (Request.Headers.Contains("userId"))
+                    {
+                        newLeave.ModifiedBy = Convert.ToInt32(Request.Headers.GetValues("userId").First());
+                    }
+                    newLeave.ModifiedOn = DateTime.Now;
 
-                //    if (Repo.UpdateEmployee(newLeave, GetRoleIdByUserId()) && _repo.Save())
-                //    {
-                //        return Request.CreateResponse(HttpStatusCode.Created, newEmployee);
-                //        //return new HttpResponseMessage(HttpStatusCode.OK);
-                //    }
+                    if (repo.AddEmployeeApplyLeave(newLeave) && repo.Save())
+                    {
+                        return Request.CreateResponse(HttpStatusCode.Created, newLeave);
+                        //return new HttpResponseMessage(HttpStatusCode.OK);
+                    }
 
-                //}
+                }
 
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, GetErrorMessages());
             }
@@ -72,13 +74,13 @@ namespace MTCHRMS.Controllers
         [Route("api/hrmsservices/getServiceNotification")]
         public async Task<dynamic> GetEmployeeNotification()
         {
-            var currentUser = 5; // Convert.ToInt32(Request.Headers.GetValues("userId").First());
+            var currentUser = Convert.ToInt32(Request.Headers.GetValues("userId").First());
 
             //var notifications = await Repo.GetEmployeeNotification(currentUser);
 
             return new
             {
-                Notifications = await Repo.GetEmployeeNotification(currentUser)
+                Notifications = await repo.GetEmployeeNotification(currentUser)
             };
         }
 
@@ -88,7 +90,7 @@ namespace MTCHRMS.Controllers
         {
             return new
             {
-                Leave = await Repo.GetEmployeeLeave(id)
+                Leave = await repo.GetEmployeeLeave(id)
             };
         }
 

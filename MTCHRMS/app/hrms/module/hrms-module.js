@@ -1,6 +1,7 @@
 ﻿var hrmsModule = angular.module("hrmsModule", 
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
         'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule'])
+
     .config(function ($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
 
         console.log('hrms module router call !');
@@ -162,17 +163,17 @@
         $routeProvider
             .when('/HRMSPortal/leave', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
         $routeProvider
             .when('/HRMSPortal/leave/add', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-add.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
         $routeProvider
             .when('/HRMSPortal/leave/edit/:id', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-edit.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
 
         $routeProvider

@@ -1,4 +1,4 @@
-﻿<div id="top_menu" class="nav notify-row" ng-controller="AppController as vm">
+﻿<div id="top_menu" class="nav notify-row" ng-controller="AppController">
     <!-- BEGIN NOTIFICATION -->
     <ul class="nav top-menu">
         <!-- BEGIN SETTINGS -->
@@ -7,7 +7,7 @@
                 <i class="icon-th"></i>
             </a>
             
-            <ul class="dropdown-menu" ng-hide="vm.activeModule==2">
+            <ul class="dropdown-menu" ng-hide="activeModule==2">
                 <li style="padding: 15px;">
                     <a href="/INVPortal" target="_self" style="background-color: #3f3861;">
                         <div style="height: 96px; width: 96px;">
@@ -20,7 +20,7 @@
                 </li>
 
             </ul>
-            <ul class="dropdown-menu" ng-hide="vm.activeModule==1">
+            <ul class="dropdown-menu" ng-hide="activeModule==1">
                 <li style="padding: 15px;">
                     <a href="/HRMSPortal" target="_self" style="background-color: #22878E;">
                         <div style="height: 96px; width: 96px;">
@@ -40,20 +40,20 @@
         <li class="dropdown" id="header_inbox_bar">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="icon-envelope-alt"></i>
-                <span class="badge badge-important" ng-if="vm.messages.length>0">{{vm.messages.length}}</span>
+                <span class="badge badge-important" ng-if="messages.length>0">{{messages.length}}</span>
             </a>
             <ul class="dropdown-menu extended inbox">
                 <li>
-                    <p>You have {{vm.messages.length}} new messages</p>
+                    <p>You have {{messages.length}} new messages</p>
                 </li>
-                <li ng-repeat="message in vm.messages">
-                    <a href="/{{vm.mainPortal}}/leaverequest/{{message.id}}">
+                <li ng-repeat="message in messages">
+                    <a href="/{{mainPortal}}/leaverequest/{{message.id}}">
                         <span class="photo">
                             <img alt="" data-img-loading-value="{{message.avatar}}" data-img-loading-size="mini" />
                         </span>
                         <span class="subject">
                             <span class="from">{{message.title}}</span>
-                            <span class="time">{{vm.daysCount(message.createdOn)}}</span>
+                            <span class="time">{{daysCount(message.createdOn)}}</span>
                         </span>
                         <span class="message">
                             {{message.message}}

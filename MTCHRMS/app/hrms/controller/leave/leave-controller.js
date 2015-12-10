@@ -9,31 +9,31 @@ hrmsModule.controller('LeaveController',
     function ($scope, appRepository, leaveRepository, validationRepository, employeeRepository, $location, $routeParams) {
 
         console.log("leave controller");
+        var vm = this;
         //$scope.myname = "yahoo";
-        $scope.isBusy = false;
+        vm.isBusy = false;
 
-        $scope.loadLeave = function() {
-            $scope.isBusy = true;
-            $scope.leaves = leaveRepository.getAllLeaves();
+        vm.loadLeave = function () {
+            vm.isBusy = true;
+            vm.leaves = leaveRepository.getAllLeaves();
 
-            $scope.leaves.$promise.then(function (res) {
+            vm.leaves.$promise.then(function (res) {
                     //alert("success");
                 }, function(err) {
                     //alert("error");
                 })
-                .then(function() { $scope.isBusy = false; });
+                .then(function () { vm.isBusy = false; });
         };
 
-        $scope.loadLeaveAdd = function () {
-
-            $scope.schedules = validationRepository.getLeaveSchedules;
-            $scope.types = validationRepository.getLeaveTypes;
+        vm.loadLeaveAdd = function () {
+            vm.schedules = validationRepository.getLeaveSchedules;
+            vm.types = validationRepository.getLeaveTypes;
 
         };
 
-        $scope.save = function(leave) {
+        vm.save = function (leave) {
             
-            $scope.errors = [];
+            vm.errors = [];
             leaveRepository.addLeave(leave).$promise.then(
                 function () {
                     appRepository.showAddSuccessGritterNotification();
@@ -43,13 +43,13 @@ hrmsModule.controller('LeaveController',
                     // failure case
                     console.log("save - Error !");
                     appRepository.showErrorGritterNotification();
-                    $scope.errors = response.data;
+                    vm.errors = response.data;
                 }
             );
         };
 
-        $scope.saveAddNew = function (leave) {
-            $scope.errors = [];
+        vm.saveAddNew = function (leave) {
+            vm.errors = [];
 
             var clearDept = {
                 departmentCode: "",
@@ -60,23 +60,23 @@ hrmsModule.controller('LeaveController',
             leaveRepository.addLeave(leave).$promise.then(
                 function() {
                     // success case
-                    $scope.departmentForm.$setPristine();
-                    $scope.department = clearDept;
+                    vm.departmentForm.$setPristine();
+                    vm.department = clearDept;
                     console.log("saveAddNew - Successfully !");
 
                     appRepository.showAddSuccessGritterNotification();
 
                 }, function(response) {
                     // failure case
-                    $scope.errors = response.data;
+                    vm.errors = response.data;
                     appRepository.showErrorGritterNotification();
                     console.log("saveAddNew - Error !");
                 }
             );
         };
 
-        $scope.edit = function (leave) {
-            $scope.errors = [];
+        vm.edit = function (leave) {
+            vm.errors = [];
             leaveRepository.editLeave(leave).then(
                 function() {
                     // success case
@@ -88,14 +88,14 @@ hrmsModule.controller('LeaveController',
                     // failure case
                     console.log("edit - Error !");
                     appRepository.showErrorGritterNotification();
-                    $scope.errors = response.data;
+                    vm.errors = response.data;
                 }
             );
         };
 
         //alert($routeParams.id);
         if ($routeParams.id != undefined) {
-            $scope.leave = leaveRepository.getLeaveById($routeParams.id);
+            vm.leave = leaveRepository.getLeaveById($routeParams.id);
         }
 
     }

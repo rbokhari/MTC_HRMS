@@ -29,7 +29,7 @@
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body id="login-body" ng-controller="AccountController as vm" style="background: transparent !important;">
+<body id="login-body" ng-controller="AccountController" style="background: transparent !important;">
     <!-- BEGIN LOGIN -->
     <div id="login">
         <!-- BEGIN LOGIN FORM -->
@@ -41,7 +41,7 @@
         </div>
         <hr />
         <br /><br />
-        <div style="text-align: center" class="center" ng-init="vm.redirect()">
+        <div style="text-align: center" class="center" ng-init="redirect()">
             <img src="/Content/img/loader.gif" alt="logo" style="width: 16px; height: 16px;" class="center" />
         </div>
 

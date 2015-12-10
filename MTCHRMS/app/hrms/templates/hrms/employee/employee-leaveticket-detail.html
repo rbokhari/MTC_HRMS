@@ -7,12 +7,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     HRMS <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{vm.mainPortal}}/employee"><span translate="EMPLOYEES"></span> </a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/employee"><span translate="EMPLOYEES"></span> </a><span class="divider">&nbsp;</span></li>
                 <li>
                     <a href="#"><span translate="LEAVES_TICKETS"></span></a><span class="divider-last">&nbsp;</span>
                 </li>
@@ -49,15 +49,15 @@
                                     <p ng-show="mainPortal=='HRMSPortalAr'">{{ employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn | limitTo:25 }}</p>
                                     <img data-img-loading-value="{{employee.picture}}" data-img-loading-size="profile" alt="" />
                                 </div>
-                                <ul class="nav nav-stacked" ng-if="vm.authentication.isHRMSAdmin">
-                                    <li><a ng-href="/{{vm.mainPortal}}/employee/detail/{{employee.id}}"><i class="icon-user"></i> <span translate="VIEW_PROFILE"></span></a></li>
-                                    <li><a href="/{{vm.mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_LEAVE"></span></a></li>
-                                    <li><a href="/{{vm.mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_TICKET"></span></a></li>
+                                <ul class="nav nav-stacked" ng-if="authentication.isHRMSAdmin">
+                                    <li><a ng-href="/{{mainPortal}}/employee/detail/{{employee.id}}"><i class="icon-user"></i> <span translate="VIEW_PROFILE"></span></a></li>
+                                    <li><a href="/{{mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_LEAVE"></span></a></li>
+                                    <li><a href="/{{mainPortal}}/leaverequest/{{employee.id}}"><i class="icon-external-link"></i> <span translate="ADD_TICKET"></span></a></li>
                                 </ul>
 
                             </div>
                             <div class="span7">
-                                <h4>{{ vm.mainPortal=='HRMSPortal' ? (employee.nameEn.length > 1 ? employee.nameEn : employee.nameAr) : (employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn) }} - {{ employee.rank }} <br /><small>{{ employee.departmentName}} </small></h4>
+                                <h4>{{ mainPortal=='HRMSPortal' ? (employee.nameEn.length > 1 ? employee.nameEn : employee.nameAr) : (employee.nameAr.length > 1 ? employee.nameAr : employee.nameEn) }} - {{ employee.rank }} <br /><small>{{ employee.departmentName}} </small></h4>
                                 <table class="table">
                                     <tbody>
                                         <tr>
@@ -71,7 +71,7 @@
                                             <td>
                                                 <span ng-if="employee.contractId" class="label label-success">{{employee.currentContractStart | date:'dd MMM yyyy'}}</span> ~ <span ng-if="employee.contractId" class="label label-important">{{employee.currentContractEnd | date:'dd MMM yyyy'}}</span>
                                                 <span ng-if="employee.contractId==0" ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
-                                                    <a ng-if="vm.authentication.isHRMSAdmin" href="" ng-click="showAddContract(employee.id)">
+                                                    <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showAddContract(employee.id)">
                                                         <i class="icon-external-link"></i> <span translate="ASSIGN_CONTRACT"></span>
                                                     </a>
                                                 </span>
@@ -91,7 +91,7 @@
                                                 <label title="remaining days" class="badge badge-success pull-right">{{employee.totalDays + employee.transferDays - employee.deductDays - employee.availedDays}}</label>
                                             </td>
                                             <td ng-if="employee.leaveCategoryId==0">
-                                                <a class="pull-right" ng-if="vm.authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
                                                     <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
                                                 </a>
                                             </td>
@@ -103,7 +103,7 @@
                                                 <label title="balance tickets" class="badge badge-success pull-right">{{employee.totalTickets - employee.reimbursedTickets}}</label>
                                             </td>
                                             <td ng-if="employee.ticketCategoryId==0">
-                                                <a class="pull-right" ng-if="vm.authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee.id)">
+                                                <a class="pull-right" ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee.id)">
                                                     <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
                                                 </a>
                                             </td>
@@ -130,7 +130,7 @@
                     <div class="tab-pane" id="tab2" ng-show="isTabSelected(2)">
                         <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i> <strong><span translate="LEAVE_DETAIL"></span></strong>
                         <span ng-if="employee.leaveCategoryId==0" ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
-                            <a ng-if="vm.authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
+                            <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showLeaveCategory(employee.id)">
                                 <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
                             </a>
                         </span>
@@ -141,7 +141,7 @@
                                             <h4><i class="icon-time"></i>&nbsp; <span class="label label-success">{{cont.startDate | date:'dd MMM yyyy'}}</span> ~ <span class="label label-important">{{cont.endDate | date:'dd MMM yyyy'}}</span></h4>
                                         </div>
                                         <div class="widget-body" style="border-color: darkgray;">
-                                            <a class="pull-right" ng-if="vm.authentication.isHRMSAdmin && cont.leaveCategory.length==0" href="" ng-click="showLeaveCategory(employee[0].id)">
+                                            <a class="pull-right" ng-if="authentication.isHRMSAdmin && cont.leaveCategory.length==0" href="" ng-click="showLeaveCategory(employee[0].id)">
                                                 <i class="icon-external-link"></i> <span translate="ADD_LEAVE_CATEGORY"></span>
                                             </a>
                                             <div ng-repeat="leavecat in cont.leaveCategory">
@@ -208,7 +208,7 @@
                         <div class="tab-pane" id="tab3" ng-show="isTabSelected(3)">
                             <i ng-class="{'icon-hand-right' : lang=='en_US', 'icon-hand-left' : lang=='ar_OM'}"></i>  <strong><span translate="TICKET_DETAIL"></span></strong>
                             <span ng-if="employee.ticketCategoryId==0" ng-class="{ 'pull-right' : lang=='en_US', 'pull-left' : lang=='ar_OM' }">
-                                <a ng-if="vm.authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee.id)">
+                                <a ng-if="authentication.isHRMSAdmin" href="" ng-click="showTicketCategory(employee.id)">
                                     <i class="icon-external-link"></i> <span translate="ADD_TICKET_CATEGORY"></span>
                                 </a>
                             </span>

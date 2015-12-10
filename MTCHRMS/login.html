@@ -40,7 +40,7 @@
             <h3>Military Technological College</h3>
         </div>
         <hr />
-        <form id="loginform" class="no-padding no-margin" novalidate ng-controller="AccountController as vm">
+        <form id="loginform" class="no-padding no-margin" novalidate ng-controller="AccountController">
             <div class="lock">
                 <i class="icon-lock"></i>
             </div>
@@ -52,7 +52,7 @@
                             <span class="add-on">
                                 <i class="icon-user"></i>
                             </span>
-                            <input id="tUsername" type="text" placeholder="Username" data-ng-model="vm.loginData.userName" required autofocus />
+                            <input id="tUsername" type="text" placeholder="Username" data-ng-model="loginData.userName" required autofocus />
 
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <span class="add-on">
                                 <i class="icon-key"></i>
                             </span>
-                            <input id="tPassword" type="password" placeholder="Password" data-ng-model="vm.loginData.password" required />
+                            <input id="tPassword" type="password" placeholder="Password" data-ng-model="loginData.password" required />
                         </div>
                         <div class="mtop10">
                             <div class="pull-left small">
@@ -80,9 +80,9 @@
                 </div>
             </div>
 
-            <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" ng-click="vm.login()" />
+            <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" ng-click="login()" />
 
-            <div class="alert alert-danger" data-ng-hide="vm.message == ''" data-ng-cloak data-ng-bind="vm.message">
+            <div class="alert alert-danger" data-ng-hide="message == ''" data-ng-cloak data-ng-bind="message">
                 <!--{{message}}-->
             </div>
         </form>

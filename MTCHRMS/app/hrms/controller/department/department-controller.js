@@ -96,8 +96,10 @@ hrmsModule.controller('DepartmentController',
         };
 
         //alert($routeParams.id);
-        if ($routeParams.id != undefined) {
-            $scope.department = departmentRepository.getDepartmentById($routeParams.id);
+        $scope.getDepartment = function() {
+            if ($routeParams.id != undefined) {
+                $scope.department = departmentRepository.getDepartmentById($routeParams.id);
+            }
         }
 
     }

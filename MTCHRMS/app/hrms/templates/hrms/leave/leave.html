@@ -8,7 +8,7 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     <a href="#">HRMS</a> <span class="divider">&nbsp;</span>
@@ -20,19 +20,18 @@
     <hr />
     <!-- END PAGE HEADER-->
     <!-- BEGIN PAGE CONTENT-->
-
     <div class="row-fluid">
         <div class="span12">
             <div class="widget">
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i><span translate="LISTING"></span></h4>
                     <span class="tools">
-                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{vm.mainPortal}}/leave/add"></a>
+                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{mainPortal}}/leave/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
-                        <a href="/{{vm.mainPortal}}/" class="icon-remove"></a>
+                        <a href="/{{mainPortal}}/" class="icon-remove"></a>
                     </span>
                 </div>
-                <div class="widget-body" ng-init="loadLeave()">
+                <div class="widget-body" ng-init="vm.loadLeave()">
                     <div class="form-horizontal">
                         <div class="control-group pull-left">
                             <label class="control-label">
@@ -63,17 +62,17 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-show="isBusy">
-                                <td colspan="6">
-                                    <div class="progress progress-striped active">
-                                        <div style="width: 100%;" class="bar"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                        <tr dir-paginate="leave in leaves | filter:search | itemsPerPage: recordPage">
+                        <tr ng-show="vm.isBusy">
+                            <td colspan="6">
+                                <div class="progress progress-striped active">
+                                    <div style="width: 100%;" class="bar"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr dir-paginate="leave in vm.leaves | filter:search | itemsPerPage: recordPage">
                             <td>{{$index+1}}</td>
                             <td ng-if="authentication.isHRMSAdmin">
-                                <a ng-href="/{{vm.mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.leaveName }} </a>
+                                <a ng-href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> {{ leave.leaveName }}</a>
                             </td>
                             <td>
                                 {{ leave.typeDetail.nameEn }}
@@ -88,14 +87,14 @@
                                 </label>
                             </td>
                             <td ng-if="authentication.isHRMSAdmin">
-                                <a href="/{{vm.mainPortal}}/leave/edit/{{ leave.leaveId}}"> <i class="icon-edit"></i></a>
+                                <a href="/{{mainPortal}}/leave/edit/{{ leave.leaveId}}"> <i class="icon-edit"></i></a>
                                 <a href="" ng-click=""> <i class="icon-trash"></i></a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <div style="height:40px;">
-                        <span class="bottom pull-left" ng-show="leaves.length>0">
+                    <div style="height: 40px;">
+                        <span class="bottom pull-left" ng-show="vm.leaves.length>0">
                             <span translate="DISPLAYING"></span>&nbsp;{{ range.lower }} - {{ range.upper }} <span translate="OF"></span> {{ range.total }}
                         </span>
                         <span class="pull-right">

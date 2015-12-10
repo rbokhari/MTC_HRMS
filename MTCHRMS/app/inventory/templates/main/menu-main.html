@@ -5,7 +5,7 @@
             <li id="liDashboard">
                 <a href="/INVPortal"><span class="icon-box"><i class="icon-dashboard"></i></span> Dashboard</a>
             </li>
-            <li class="has-sub active" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition')}">
+            <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" class="has-sub active" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/INVPortal/definition')}">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-edit"></i>
@@ -13,19 +13,19 @@
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub">
-                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liStore" ng-class="{ active: isActiveNavigation('/INVPortal/definition/store/list')}">
                         <a class="" href="/INVPortal/definition/store/list">Store Location</a>
                     </li>
-                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liItemType" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/7')}">
                         <a class="" href="/INVPortal/definition/validation/7">Item Class</a>
                     </li>
-                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || authentication.isINVUser" id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liItemCategory" ng-class="{ active: isActiveNavigation('/INVPortal/definition/validation/8')}">
                         <a class="" href="/INVPortal/definition/validation/8">Item Category</a>
                     </li>
-                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liManufacturer" ng-class="{ active: isActiveNavigation('/INVPortal/definition/manufacturer')}">
                         <a class="" href="/INVPortal/definition/manufacturer/">Manufacturer</a>
                     </li>
-                    <li ng-if="vm.authentication.isINVAdmin || vm.authentication.isSystemAdmin || vm.authentication.isINVUser" id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liSupplier" ng-class="{ active: isActiveNavigation('/INVPortal/definition/supplier/list')}">
                         <a class="" href="/INVPortal/definition/supplier/list">Supplier</a>
                     </li>
                 </ul>
@@ -41,7 +41,7 @@
                     <li id="liItems" ng-class="{ active: isActiveNavigation('/INVPortal/item/list')}">
                         <a href="/INVPortal/item/list">Items</a>
                     </li>
-                    <li id="liItemDistribution" ng-class="{ active: isActiveNavigation('/INVPortal/distribution/add')}">
+                    <li ng-if="authentication.isINVAdmin || authentication.isSystemAdmin" id="liItemDistribution" ng-class="{ active: isActiveNavigation('/INVPortal/distribution/add')}">
                         <a href="/INVPortal/distribution/add">Staff Distribution</a>
                     </li>
                 </ul>

@@ -204,7 +204,6 @@ hrmsModule.controller('EmployeeController',
             }
         };
 
-
         $scope.showVisa = function (id) {
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-visa.html",
@@ -351,7 +350,6 @@ hrmsModule.controller('EmployeeController',
             }
         };
 
-
         $scope.showChild = function (id) {
             ModalService.showModal({
                 templateUrl: "/app/hrms/templates/hrms/employee/employee-child.html",
@@ -497,7 +495,7 @@ hrmsModule.controller('EmployeeController',
         departmentRepository.getAllDepartment()
             .then(function (response) {
                 $scope.departments = response;
-                console.log("Department reach");
+                console.log("Department reach 11");
             }, function(err) {
             
             });
@@ -772,7 +770,7 @@ hrmsModule.controller('EmployeeController',
 
         };
 
-
+        console.log("end emp controller");
     }
 ]);
 

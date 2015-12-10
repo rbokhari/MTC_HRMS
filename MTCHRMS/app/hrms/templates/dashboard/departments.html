@@ -5,7 +5,7 @@
     <div style="width: 100%;" class="bar"></div>
 </div>
 <div class="icon-btn span3 red fade-in" ng-repeat="department in departments" ng-show="filtered.length>0">
-    <a ng-href="{{vm.mainPortal}}/employee/search?param01={{department.id}}" title="{{department.departmentName}}">
+    <a ng-href="{{mainPortal}}/employee/search?param01={{department.id}}" title="{{department.departmentName}}">
         <i class="icon-group"></i>
         <div>{{ department.departmentName | limitTo:20}}</div>
 

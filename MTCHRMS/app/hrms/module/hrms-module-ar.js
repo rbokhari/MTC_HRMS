@@ -150,17 +150,17 @@
         $routeProvider
             .when('/HRMSPortal/leave', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
         $routeProvider
             .when('/HRMSPortal/leave/add', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-add.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
         $routeProvider
             .when('/HRMSPortal/leave/edit/:id', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-edit.html',
-                controller: 'LeaveController'
+                controller: 'LeaveController as vm'
             });
 
         $routeProvider

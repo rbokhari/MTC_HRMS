@@ -22,7 +22,7 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
-    <TypeScriptToolsVersion>1.5</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>1.7</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,6 +42,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus">
+      <HintPath>F:\EPPlus 4.0.4\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>F:\PdfRpt-2.8\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>F:\PdfRpt-2.8\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker">
+      <HintPath>F:\PdfRpt-2.8\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
@@ -71,6 +83,9 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC5.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfRpt">
+      <HintPath>F:\PdfRpt-2.8\PdfRpt.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -1043,6 +1058,8 @@
     <Content Include="Scripts\dirPagination\dirPagination.tpl - Copy.html" />
     <Content Include="Scripts\FileAPI.flash.swf" />
     <Content Include="Scripts\FileAPI.min.js" />
+    <Content Include="Scripts\FileSaver\FileSaver.js" />
+    <Content Include="Scripts\FileSaver\FileSaver.min.js" />
     <Content Include="Scripts\jquery.jOrgChart.js" />
     <Content Include="Scripts\modal\angular-modal-service.js" />
     <Content Include="Scripts\moment.js" />
@@ -1405,12 +1422,17 @@
     <Folder Include="attachments\inventory\items\" />
     <Folder Include="Content\template2\img\" />
     <Folder Include="include\" />
+    <Folder Include="temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MTC.GlobalVariables\MTC.GlobalVariables.csproj">
+      <Project>{981df8e6-76cf-4f8e-8c94-84adfc3c9306}</Project>
+      <Name>MTC.GlobalVariables</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MTC.Models\MTC.Models.csproj">
       <Project>{cbc7148c-d91e-4289-8f27-717218f40644}</Project>
       <Name>MTC.Models</Name>

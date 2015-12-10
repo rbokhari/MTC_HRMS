@@ -8,7 +8,7 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     <a href="#">HRMS</a> <span class="divider">&nbsp;</span>
@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i><span translate="LISTING"></span></h4>
                     <span class="tools">
-                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{vm.mainPortal}}/department/add"></a>
+                        <a ng-if="authentication.isHRMSAdmin" class="icon-plus-sign" href="/{{mainPortal}}/department/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -70,19 +70,19 @@
                             </tr>
                             <tr dir-paginate="department in departments | filter:search | itemsPerPage: recordPage">
                                 <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{vm.mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentCode }} </a>
+                                    <a ng-href="/{{mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentCode }} </a>
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
                                     {{ department.departmentCode }}
                                 </td>
                                 <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{vm.mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentName }} </a>
+                                    <a ng-href="/{{mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentName }} </a>
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
                                     {{ department.departmentName }}
                                 </td>
                                 <td ng-if="authentication.isHRMSAdmin">
-                                    <a ng-href="/{{vm.mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentNameAr }} </a>
+                                    <a ng-href="/{{mainPortal}}/department/edit/{{ department.id}}"> {{ department.departmentNameAr }} </a>
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isHRMSUser">
                                     {{ department.departmentNameAr }}

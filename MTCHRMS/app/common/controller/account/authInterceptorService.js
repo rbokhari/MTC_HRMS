@@ -18,6 +18,7 @@ accModule.factory('authInterceptorService', ['$q', '$location', 'localStorageSer
                 config.headers.userId = customData.userId;
                 config.headers.roleId = customData.roleId;
                 config.headers.roles = customData.role;
+                config.headers.name = customData.fullName;
             }
         }
 

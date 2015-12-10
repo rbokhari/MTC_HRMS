@@ -64,12 +64,10 @@ accModule.factory('authRepository', [
 
             $http.post('token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                 .success(function(response) {
-                console.log("token done");
                 accountRepository.getUserByUserName(loginData.userName)
                     .$promise
                     .then(function(res) {
 
-                        console.log("getuser by username done");
                         _authentication.moduleId = res.moduleId;
                         localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, role: _authentication.roles });
 
@@ -148,7 +146,7 @@ accModule.factory('authRepository', [
                                         _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
                                         _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
 
-                                        localStorageService.set('userData', { userName: authData.userName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
+                                        localStorageService.set('userData', { userName: authData.userName, fullName: response.employeeName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
                                         deferred.resolve(response);
                                     });
                             }, function(error) {

@@ -388,25 +388,45 @@ namespace MTCHRMS.EntityFramework.HRMS
         public String AlternatePhone { get; set; }
 
         [ForeignKey("AlternateEmployeeDetail")]
-        public int AlternateEmployeeId { get; set; }
+        public int AlternateEmployeeId { get; set; }        // replace it with replacementId
 
         public DateTime? AlternateEmployeeDate { get; set; }
+
+        [MaxLength(500)]
+        public String AlternateEmployeeComments { get; set; }
+
+        public byte AlternateEmployeeDecision { get; set; }
 
         public byte IsTicket { get; set; }
 
         [ForeignKey("SupervisorEmployeeDetail")]
-        public int? LineMangerId { get; set; }
+        public int? LineManagerId { get; set; }
 
-        public DateTime? LineMangerDate { get; set; }
+        public DateTime? LineManagerDate { get; set; }
+
+        public byte LineManagerDecision { get; set; }
+
+        [MaxLength(500)]
+        public String LineManagerComments { get; set; }
 
         [ForeignKey("ManagerEmployeeDetail")]
-        public int? DepartmentMangerId { get; set; }
+        public int? DepartmentManagerId { get; set; }
 
         public DateTime? DepartmentManagerDate { get; set; }
+
+        public byte DepartmentManagerDecision { get; set; }
+
+        [MaxLength(500)]
+        public String DepartmentManagerComments { get; set; }
 
         public int? HREmployeeId { get; set; }
 
         public DateTime? HREmployeeDate { get; set; }
+
+        public byte HREmployeeDecision { get; set; }
+
+        [MaxLength(500)]
+        public String HREmployeeComments { get; set; }
 
         public int StatusId { get; set; }
 

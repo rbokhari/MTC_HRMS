@@ -8,9 +8,9 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/{{vm.mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/{{vm.mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}"><span translate="DASHBOARD"></span></a><span class="divider">&nbsp;</span></li>
                 <li><a href="#"><span translate="SEARCH"></span></a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
@@ -185,11 +185,11 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr ng-if="vm.authentication.isHRMSAdmin || vm.authentication.isSystemAdmin || vm.authentication.isHRMSUser" class="odd" dir-paginate="emp in empSearchResults | filter:search | itemsPerPage: recordPage">
-                                            <td style="vertical-align: middle;"><a ng-href="/{{vm.mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeCode}}</a></td>
+                                        <tr ng-if="authentication.isHRMSAdmin || authentication.isSystemAdmin || authentication.isHRMSUser" class="odd" dir-paginate="emp in empSearchResults | filter:search | itemsPerPage: recordPage">
+                                            <td style="vertical-align: middle;"><a ng-href="/{{mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeCode}}</a></td>
                                             <td style="vertical-align: middle;">
                                                 <img class="circular" alt="" data-img-loading-value="{{emp.empPicture}}" data-img-loading-size="mini" style="height: 48px; width: 48px;" width="48px" height="48px" />
-                                                <a style="vertical-align: middle;" ng-href="/{{vm.mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeName }}</a>
+                                                <a style="vertical-align: middle;" ng-href="/{{mainPortal}}/employee/detail/{{emp.id}}">{{ emp.employeeName }}</a>
                                             </td>
                                             <td class="hidden-phone" style="vertical-align: middle;">{{emp.departmentId.departmentName}}</td>
                                             <td class="hidden-phone center" style="vertical-align: middle;"><img alt="123456" ng-src="/Content/img/flag/{{emp.nationalityId}}.png" /> &nbsp;<!--{{probation.validationDetailId.nameEn}}--></td>
