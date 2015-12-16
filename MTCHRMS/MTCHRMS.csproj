@@ -42,8 +42,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EPPlus">
-      <HintPath>F:\EPPlus 4.0.4\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=4.0.4.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.0.4\lib\net20\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus_ExcelDemo.vshost, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86">
+      <HintPath>..\packages\EpplusExcel.1.0.0\lib\net40\EPPlus_ExcelDemo.vshost.exe</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="itextsharp">
       <HintPath>F:\PdfRpt-2.8\itextsharp.dll</HintPath>
@@ -86,6 +91,22 @@
     </Reference>
     <Reference Include="PdfRpt">
       <HintPath>F:\PdfRpt-2.8\PdfRpt.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Common, Version=1.2.271.55040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.7.8\lib\net40\Spire.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.5.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.7.8\lib\net40\Spire.License.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=3.4.183.55040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.7.8\lib\net40\Spire.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=7.8.0.55040, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.7.8\lib\net40\Spire.XLS.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -832,6 +853,7 @@
     <Content Include="Content\font-awesome\docs\index.html" />
     <Content Include="Content\font-awesome\docs\test.html" />
     <Content Include="Content\jquery.jOrgChart.css" />
+    <Content Include="Content\reset.css" />
     <Content Include="Content\Site.css">
       <DependentUpon>Site.less</DependentUpon>
     </Content>

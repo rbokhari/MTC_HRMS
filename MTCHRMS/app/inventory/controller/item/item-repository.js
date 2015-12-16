@@ -148,13 +148,13 @@ invModule.factory('itemRepository', [
             return $resource('/api/distributionSerial/' + id);
         };
 
-        var _getPdfFile = function (item) {
+        var _getPdfFile = function (type, item) {
             var req = {
                 method: 'GET',
-                url: '/api/item/getPdfFile',
+                url: '/api/item/getFile/' + type + '/',
                 params: item,
                 headers: {
-                    'Content-type': 'application/pdf'
+                    'Content-type': type === 'pdf' ? 'application/pdf' : 'application/xlsx'
                 },
                 responseType: 'arraybuffer'
             };

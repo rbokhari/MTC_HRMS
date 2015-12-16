@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,6 +16,10 @@ using System.Text;
 using MTC.Models.Inventory;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
+//using Spire.Xls;
+//using Spire.Pdf;
+//using Spire.Xls.Converter;
+
 using PdfRpt.Core.Contracts;
 using PdfRpt.FluentInterface;
 
@@ -55,47 +60,186 @@ namespace MTCHRMS.Controllers
 
             //System.Threading.Thread.Sleep(1000);
             var items = _repo.GetItemsModel();
-
+            
             return items;
         }
 
-        [Route("api/item/getExcelFile")]
+        [Route("api/item/getFile/{format}/")]
         [HttpGet]
         //[Authorize]
-        public async Task<HttpResponseMessage> GetExcelFile([FromUri]Item item)
+        public async Task<HttpResponseMessage> GetExcelFile([FromUri]Item item, string format)
         {
+
             var items = await _repo.GetItemSearch(item);
 
-            var xlPackage = new ExcelPackage();
-            var oSheet = xlPackage.Workbook.Worksheets.Add("Item Report");
-            oSheet.Cells["A2"].Value = "Hello world";
-            oSheet.Cells["D5"].LoadFromCollection(items);
-            var stream = xlPackage.GetAsByteArray();
-            var result = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new ByteArrayContent(stream)
-            };
-            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-            {
-                FileName = "abc1.xlsx"
-            };
-            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-            return result;
+            //if (!String.IsNullOrEmpty(fileName))
+            //{
+            //    string documentName = string.Format("Item Listing -{0}", format);
+
+            switch (format)
+                {
+                    case "pdf":
+                        return GetPdfFile(items);
+                        //if (ConvertXLSXtoPDF(fileName))
+                        //{
+                        //    return StreamAsFile(fileName.Replace(".xlsx",".pdf"));
+                        //}
+                        //break;
+                    case "xlsx":
+                        
+                        var fileName = GetExcelDocument(items);
+                        return StreamAsFile(fileName);
+                }
+            //}
+            return new HttpResponseMessage(HttpStatusCode.NotFound);
+
+            //var stream = xlPackage.GetAsByteArray();
+            //var result = new HttpResponseMessage(HttpStatusCode.OK)
+            //{
+            //    Content = new ByteArrayContent(stream)
+            //};
+            //result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            //{
+            //    FileName = "abc1.xlsx"
+            //};
+            //result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //return result;
 
         }
 
-        [Route("api/item/getPdfFile")]
-        [HttpGet]
+
+        public static HttpResponseMessage StreamAsFile(string filename)
+        {
+            // Set HTTP Status Code
+            //var result = new HttpResponseMessage(HttpStatusCode.OK);
+
+            // Reset Stream Position
+            //var memoryStream = File.ReadAllBytes(string.Format("", filename));
+            //stream.Position = 0;
+            //result.Content = new StreamContent(stream);
+
+            //// Generic Content Header
+            //result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            //result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
+
+            ////Set Filename sent to client
+            //result.Content.Headers.ContentDisposition.FileName = filename;
+
+            //return result;
+
+            string filePath = String.Format("{0}\\temp\\{1}", HttpRuntime.AppDomainAppPath, filename);
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(File.ReadAllBytes(filePath))
+            };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = filename
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+            File.Delete(filePath);
+            return result;
+        }
+
+        //public static bool ConvertXLSXtoPDF(string filename)
+        //{
+        //    // Result Stream
+        //    //var pdfMemoryStream = new MemoryStream();
+
+        //    try
+        //    {
+        //        // Spire.XLS to open XLSX workbook stream created by EPPlus
+        //        var workbook = new Workbook();
+        //        string filePath = String.Format("{0}temp\\{1}", HttpRuntime.AppDomainAppPath, filename);
+        //        //workbook.LoadFromFile(filePath);
+
+        //        // Spire.PDF to convert XLSX to PDF, I read it has limited functionality (total pages, rows, etc...).
+        //        //var pdfConverter = new PdfConverter(workbook);
+        //        var pdfConverter = new PdfConverter(filePath);
+        //        var settings = new PdfConverterSettings();
+        //        var pdfDocument = pdfConverter.Convert(settings);
+        //        //pdfDocument.SaveToStream(pdfMemoryStream);
+
+        //        string savePath = String.Format("{0}\\temp\\{1}", HttpRuntime.AppDomainAppPath, filename.Replace(".xlsx", ".pdf"));
+
+        //        pdfDocument.SaveToFile(savePath);
+
+        //        return true;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        private static string GetExcelDocument(List<ItemModel> items)
+        {
+            //var output = new MemoryStream();
+
+            var selectedItems = items.Select(x => new
+            {
+                Code = x.Code,
+                Name = x.Name,
+                Part = x.PartNo,
+                Serial = x.SerialNo,
+                Type = x.Type,
+                Category = x.Category,
+                Store = x.Store,
+                Stock = x.Stock
+
+            });
+
+            var xlPackage = new ExcelPackage(new FileInfo(Guid.NewGuid() + ".xlsx"));
+
+            var oSheet = xlPackage.Workbook.Worksheets.Add("Item Listing");
+
+            // Rows Heads
+
+            oSheet.Cells["A4"].LoadFromCollection(selectedItems, true, OfficeOpenXml.Table.TableStyles.Medium4);
+
+
+            oSheet.Cells.AutoFitColumns();
+
+            // Report Heading
+            oSheet.Cells["A1"].Value = "MTC - Inventory System";
+            oSheet.Cells["A1"].Style.Font.Size = 26;
+            oSheet.Cells["A1"].Style.Font.Bold = true;
+            oSheet.Cells["A1"].Style.Font.Color.SetColor(Color.DimGray);
+
+            // Report Sub Heading
+            oSheet.Cells["A2"].Value = "Item Listing Report";
+            oSheet.Cells["A2"].Style.Font.Size = 16;
+            oSheet.Cells["A2"].Style.Font.Bold = true;
+            oSheet.Cells["A2"].Style.Font.Color.SetColor(Color.Black);
+
+
+            //oSheet.PrinterSettings.PaperSize = ePaperSize.A4;
+            //oSheet.PrinterSettings.Orientation = eOrientation.Portrait;
+            //oSheet.PrinterSettings.LeftMargin = 1 / 5;
+            //oSheet.PrinterSettings.FitToPage = true;
+            //oSheet.PrinterSettings.FitToWidth = 50;
+
+            string fileName = Guid.NewGuid() + ".xlsx";
+            string filePath = String.Format("{0}\\temp\\{1}", HttpRuntime.AppDomainAppPath, fileName);
+
+            var stream = File.Create(filePath);
+            xlPackage.SaveAs(stream);
+            stream.Close();
+            return fileName;
+        }
+
+        //[Route("api/item/getPdfFile")]
+        //[HttpGet]
         //[Authorize]
-        public async Task<HttpResponseMessage> GetPdfFile([FromUri]Item item)
+        public HttpResponseMessage GetPdfFile(List<ItemModel> items)
         {
             var fullName = string.Empty;
             if (Request.Headers.Contains("name"))
             {
                 fullName = Request.Headers.GetValues("name").First();
             }
-            var items = await _repo.GetItemSearch(item);
-
             var report = new PdfReport().DocumentPreferences(doc =>
             {
                 doc.RunDirection(PdfRunDirection.LeftToRight);
@@ -117,7 +261,7 @@ namespace MTCHRMS.Controllers
             })
             .PagesFooter(footer =>
             {
-                footer.DefaultFooter("Print By :: " + fullName + " , @ " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
+                footer.DefaultFooter("Print By :: " + fullName + " @ " + DateTime.Now.ToString("dd MMM yyyy HH:mm"));
             })
             .PagesHeader(header =>
             {
@@ -125,11 +269,11 @@ namespace MTCHRMS.Controllers
                 header.DefaultHeader(defaultHeader =>
                 {
                     defaultHeader.RunDirection(PdfRunDirection.LeftToRight);
-                    
-                    defaultHeader.ImagePath(HttpRuntime.AppDomainAppPath + "\\Content\\img\\photo.jpg");
+
+                    //defaultHeader.ImagePath(HttpRuntime.AppDomainAppPath + "\\Content\\img\\photo.jpg");
                     defaultHeader.Message("Report : Item Listing ");
                     defaultHeader.MessageFontStyle(DocumentFontStyle.Bold);
-                    
+
                 });
             })
             .MainTableTemplate(template =>

@@ -727,8 +727,7 @@ invModule.controller('ItemController',
         $scope.getFile = function (type, item) {
             appRepository.showPageBusyNotification();
             console.log(type);
-            if (type === "pdf") {
-                itemRepository.getPdfFile(item)
+            itemRepository.getPdfFile(type, item)
                     .then(function (response) {
                         var file = new Blob([response], {
                             type: 'application/csv'
@@ -741,34 +740,57 @@ invModule.controller('ItemController',
                         var a = document.createElement('a');
                         a.href = fileURL;
                         a.target = '_blank';
-                        a.download = 'ItemList.pdf';
+                        a.download = 'ItemList.' + type;
                         document.body.appendChild(a);
                         a.click();
                         appRepository.hidePageBusyNotification();
                     }, function (error) {
-
+                        console.log("error", error);
+                        appRepository.hidePageBusyNotification();
                     });
-            } else if (type === "xlsx") {
-                itemRepository.getExcelFile(item)
-                   .then(function (response) {
-                       var file = new Blob([response], {
-                           type: 'application/csv'
-                       });
 
-                       //trick to download store a file having its URL
-                       var fileURL = URL.createObjectURL(file);
-                       //console.log(fileURL);
-                       var a = document.createElement('a');
-                       a.href = fileURL;
-                       a.target = '_blank';
-                       a.download = 'ItemList.xlsx';
-                       document.body.appendChild(a);
-                       a.click();
-                       appRepository.hidePageBusyNotification();
-                   }, function (error) {
+            //if (type === "pdf") {
+            //    itemRepository.getPdfFile(item)
+            //        .then(function (response) {
+            //            var file = new Blob([response], {
+            //                type: 'application/csv'
+            //            });
+            //            //Filesaver.saveAs(file, "myfile.pdf");
 
-                   });
-            }
+            //            //trick to download store a file having its URL
+            //            var fileURL = URL.createObjectURL(file);
+            //            //console.log(fileURL);
+            //            var a = document.createElement('a');
+            //            a.href = fileURL;
+            //            a.target = '_blank';
+            //            a.download = 'ItemList.pdf';
+            //            document.body.appendChild(a);
+            //            a.click();
+            //            appRepository.hidePageBusyNotification();
+            //        }, function (error) {
+
+            //        });
+            //} else if (type === "xlsx") {
+            //    itemRepository.getExcelFile(item)
+            //       .then(function (response) {
+            //           var file = new Blob([response], {
+            //               type: 'application/csv'
+            //           });
+
+            //           //trick to download store a file having its URL
+            //           var fileURL = URL.createObjectURL(file);
+            //           //console.log(fileURL);
+            //           var a = document.createElement('a');
+            //           a.href = fileURL;
+            //           a.target = '_blank';
+            //           a.download = 'ItemList.xlsx';
+            //           document.body.appendChild(a);
+            //           a.click();
+            //           appRepository.hidePageBusyNotification();
+            //       }, function (error) {
+
+            //       });
+            //}
         }
 
     }

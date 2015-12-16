@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,12 +11,16 @@ namespace MTC.Models.Inventory
     {
         public int Id { get; set; }
         
+        [DisplayName("Item Code")]
         public String Code { get; set; }
 
+        [DisplayName("Item Name")]
         public String Name { get; set; }
 
+        [DisplayName("Part No")]
         public String PartNo { get; set; }
 
+        [DisplayName("Serial No")]
         public String SerialNo { get; set; }
 
         public int TypeId { get; set; }
