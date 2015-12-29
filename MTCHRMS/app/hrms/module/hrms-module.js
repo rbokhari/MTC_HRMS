@@ -28,7 +28,6 @@
             prefix: '/scripts/angularTranslate/lang/',
             suffix: '.json'
         });
-    //alert(mainPortal);
         $routeProvider
             .when('/HRMSPortal', {
                 templateUrl: '/app/hrms/templates/dashboard.html',
@@ -177,11 +176,34 @@
             });
 
         $routeProvider
+            .when('/HRMSPortal/training/courses', {
+                templateUrl: '/app/hrms/templates/tr/course/courses.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortal/training/course/add', {
+                templateUrl: '/app/hrms/templates/tr/course/course-add.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortal/training/course/edit/:id', {
+                templateUrl: '/app/hrms/templates/tr/course/course-edit.html',
+                controller: 'CourseController as vm'
+            });
+
+        $routeProvider
+            .when('/HRMSPortal/training/assignment/add/:id', {
+                templateUrl: '/app/hrms/templates/tr/assignment/assignment-add.html',
+                controller: 'AssignmentController as vm'
+            });
+
+
+
+        $routeProvider
             .when('/HRMSPortalAr', {
                 templateUrl: '/app/hrms/templates/dashboard.html',
                 controller: 'DashboardController'
             });
-
 
         $routeProvider
             .when('/INVPortal', {

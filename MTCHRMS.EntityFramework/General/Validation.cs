@@ -33,6 +33,12 @@ namespace MTCHRMS.EntityFramework.General
 
         public int ValidationId { get; set; }
 
+        [MaxLength(50)]
+        public string CodeEn { get; set; }
+
+        [MaxLength(50)]
+        public string CodeAr { get; set; }
+
         public string NameEn { get; set; }
 
         public string NameAr { get; set; }

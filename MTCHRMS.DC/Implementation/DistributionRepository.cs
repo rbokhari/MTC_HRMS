@@ -122,7 +122,7 @@ namespace MTCHRMS.DC.Implementation
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -158,7 +158,7 @@ namespace MTCHRMS.DC.Implementation
                 }
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

@@ -259,7 +259,7 @@ namespace MTCHRMS.DC
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -276,7 +276,7 @@ namespace MTCHRMS.DC
                 _ctx.EmployeeDefs.Add(newEmployee);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -334,7 +334,7 @@ namespace MTCHRMS.DC
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -400,7 +400,7 @@ namespace MTCHRMS.DC
                 _ctx.EmployeePassports.Add(newPassport);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -511,7 +511,7 @@ namespace MTCHRMS.DC
                 _ctx.Entry(updatePreviousEmployement).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -1130,7 +1130,7 @@ namespace MTCHRMS.DC
                 _ctx.EmployeeLeaves.Add(newLeave);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

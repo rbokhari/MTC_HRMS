@@ -72,6 +72,7 @@
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\User.cs" />
     <Compile Include="TableStrutcture.cs" />
+    <Compile Include="Training\CourseDef.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -83,6 +84,7 @@
       <Name>MTC.GlobalVariables</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

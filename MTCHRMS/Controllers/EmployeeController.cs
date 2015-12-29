@@ -292,49 +292,82 @@ namespace MTCHRMS.Controllers
             try
             {
 
-            if (!Request.Content.IsMimeMultipartContent())
-            {
-                this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
-            }
-            HttpPostedFile _file = HttpContext.Current.Request.Files[0];
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
+                }
+                HttpPostedFile _file = HttpContext.Current.Request.Files[0];
 
-            var provider = GetMultipartProvider();
-            var result = await Request.Content.ReadAsMultipartAsync(provider);
+                var provider = GetMultipartProvider();
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
 
-            // Remove this line as well as GetFormData method if you're not 
-            // sending any form data with your upload request
-            int paramData = GetFormData<int>(result);
+                // Remove this line as well as GetFormData method if you're not 
+                // sending any form data with your upload request
+                int paramData = GetFormData<int>(result);
 
-            var memstream = new MemoryStream();
+                var memstream = new MemoryStream();
 
-            _file.InputStream.CopyTo(memstream);
-            var employee = _repo.GetEmployee(paramData, GetRoleIdByUserId());
-            employee.EmpPicture = memstream.ToArray();
-
-            if (_repo.UpdateEmployeeImage(ref employee) && _repo.Save())
-            {
-                return Request.CreateResponse(HttpStatusCode.Created, employee);
-                //return new HttpResponseMessage(HttpStatusCode.OK);
-            }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
-            // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
-            // so this is how you can get the original file name
-            //var originalFileName = GetDeserializedFileName(result.FileData.First());
-
-            // uploadedFileInfo object will give you some additional stuff like file length,
-            // creation time, directory name, a few filesystem methods etc..
-            //var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
+                _file.InputStream.CopyTo(memstream);
+                var employee = _repo.GetEmployee(paramData, GetRoleIdByUserId());
 
 
-            // Through the request response you can return an object to the Angular controller
-            // You will be able to access this in the .success callback through its data attribute
-            // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
-            //var returnData = "ReturnTest";
-            //return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
+                //using (System.IO.Compression.GZipStream compressionStream = 
+                //    new System.IO.Compression.GZipStream(_file.InputStream, System.IO.Compression.CompressionMode.Compress))
+                //{
+                //    //originalFileStream.CopyTo(compressionStream);
+
+                //    employee.EmpPicture = compressionStream.toar;
+                //}
+
+                employee.EmpPicture = memstream.ToArray();
+
+                if (_repo.UpdateEmployeeImage(ref employee) && _repo.Save())
+                {
+                    return Request.CreateResponse(HttpStatusCode.Created, employee);
+                    //return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+                // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
+                // so this is how you can get the original file name
+                //var originalFileName = GetDeserializedFileName(result.FileData.First());
+
+                // uploadedFileInfo object will give you some additional stuff like file length,
+                // creation time, directory name, a few filesystem methods etc..
+                //var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
+
+
+                // Through the request response you can return an object to the Angular controller
+                // You will be able to access this in the .success callback through its data attribute
+                // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
+                //var returnData = "ReturnTest";
+                //return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
             }
             catch (Exception)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
+            }
+        }
+
+        public static byte[] compress(byte[] data)
+        {
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                using (System.IO.Compression.GZipStream gzipStream = 
+                    new System.IO.Compression.GZipStream(outStream, System.IO.Compression.CompressionMode.Compress))
+                using (MemoryStream srcStream = new MemoryStream(data))
+                    srcStream.CopyTo(gzipStream);
+                return outStream.ToArray();
+            }
+        }
+
+        public static byte[] decompress(byte[] compressed)
+        {
+            using (MemoryStream inStream = new MemoryStream(compressed))
+            using (System.IO.Compression.GZipStream gzipStream = new System.IO.Compression.GZipStream(inStream, System.IO.Compression.CompressionMode.Decompress))
+            using (MemoryStream outStream = new MemoryStream())
+            {
+                gzipStream.CopyTo(outStream);
+                return outStream.ToArray();
             }
         }
 

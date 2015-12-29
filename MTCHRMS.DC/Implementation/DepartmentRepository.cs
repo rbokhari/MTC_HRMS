@@ -44,7 +44,7 @@ namespace MTCHRMS.DC
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -61,7 +61,7 @@ namespace MTCHRMS.DC
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -77,7 +77,7 @@ namespace MTCHRMS.DC
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

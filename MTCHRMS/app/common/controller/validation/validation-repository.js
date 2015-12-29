@@ -49,7 +49,8 @@ accModule.factory('validationRepository', ['$resource', '$http', 'validations', 
         getMaintenanceType: _getAllDetailsByValidationId(validations.MAINTENANCE_TYPE),
         getLeaveTypes: _getAllDetailsByValidationId(validations.LEAVE_TYPE),
         getLeaveSchedules: _getAllDetailsByValidationId(validations.LEAVE_SCHEDULE),
-        getTicketEligibilities: _getAllDetailsByValidationId(validations.TICKET_ELIGIBILITY)
+        getTicketEligibilities: _getAllDetailsByValidationId(validations.TICKET_ELIGIBILITY),
+        getTrainingCategories: _getAllDetailsByValidationId(validations.TRAINING_CATEGORY)
         
 
     //    get: function() {

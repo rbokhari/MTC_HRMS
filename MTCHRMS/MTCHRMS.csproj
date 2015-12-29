@@ -251,6 +251,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
     <Compile Include="Controllers\StoreLocationController.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Hubs\HRMSStaffHub.cs" />
     <Compile Include="Provider\DomainAuthorizationServerProvider.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -275,6 +276,8 @@
   <ItemGroup>
     <Content Include="app\common\directive\navbar-main.js" />
     <Content Include="app\common\templates\modal\confirm-modal.html" />
+    <Content Include="app\hrms\controller\assignment\assignment-controller.js" />
+    <Content Include="app\hrms\controller\assignment\assignment-repository.js" />
     <Content Include="app\hrms\controller\leave\leave-controller.js" />
     <Content Include="app\hrms\controller\leave\leave-repository.js" />
     <Content Include="app\hrms\controller\services\hrms-services-modal-controller.js" />
@@ -282,6 +285,8 @@
     <Content Include="app\hrms\controller\services\services-repository.js" />
     <Content Include="app\hrms\controller\ticket\ticket-controller.js" />
     <Content Include="app\hrms\controller\ticket\ticket-repository.js" />
+    <Content Include="app\hrms\controller\course\course-controller.js" />
+    <Content Include="app\hrms\controller\course\course-repository.js" />
     <Content Include="app\hrms\directive\employee-picture.js" />
     <Content Include="app\hrms\templates\hrms\employee\employee-contract-add.html" />
     <Content Include="app\hrms\templates\hrms\employee\employee-leaveticket-detail.html" />
@@ -294,6 +299,11 @@
     <Content Include="app\hrms\templates\hrms\ticket\ticket-add.html" />
     <Content Include="app\hrms\templates\hrms\ticket\ticket-edit.html" />
     <Content Include="app\hrms\templates\hrms\ticket\ticket.html" />
+    <Content Include="app\hrms\templates\services\leave-add.html" />
+    <Content Include="app\hrms\templates\tr\assignment\assignment-add.html" />
+    <Content Include="app\hrms\templates\tr\course\course-add.html" />
+    <Content Include="app\hrms\templates\tr\course\course-edit.html" />
+    <Content Include="app\hrms\templates\tr\course\courses.html" />
     <Content Include="app\inventory\controller\dashboard\dashboard-controller.js" />
     <Content Include="app\inventory\controller\dashboard\dashboard-repository.js" />
     <Content Include="app\inventory\controller\item\item-controller.js" />
@@ -363,6 +373,8 @@
     <Content Include="bg3.jpg" />
     <Content Include="bg4.jpg" />
     <Content Include="bg5.jpg" />
+    <Content Include="Content\angular-toastr.css" />
+    <Content Include="Content\angular-toastr.min.css" />
     <Content Include="Content\animate.css">
       <DependentUpon>animate.less</DependentUpon>
     </Content>
@@ -902,6 +914,7 @@
     <Content Include="Content\timeline\css\style.css" />
     <Content Include="Content\timeline\js\main.js" />
     <Content Include="Content\timeline\js\modernizr.js" />
+    <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Content\uniform\css\uniform.default.css" />
     <Content Include="Content\uniform\demo\demo.html" />
     <Content Include="Content\uniform\images\bg-input-focus.png" />
@@ -1051,10 +1064,18 @@
     <Content Include="Scripts\angular-moment.js" />
     <Content Include="Scripts\angular-signalr-hub.js" />
     <Content Include="Scripts\angular-signalr-hub.min.js" />
+    <Content Include="Scripts\angular-toastr.js" />
+    <Content Include="Scripts\angular-toastr.min.js" />
+    <Content Include="Scripts\angular-toastr.tpls.js" />
+    <Content Include="Scripts\angular-toastr.tpls.min.js" />
     <Content Include="Scripts\angular-toggle\css\bootstrap3\angular-toggle-switch-bootstrap-3.css" />
     <Content Include="Scripts\angular-toggle\css\default\angular-toggle-switch.css" />
     <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.js" />
     <Content Include="Scripts\angular-toggle\js\angular-toggle-switch.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.js" />
     <Content Include="Scripts\angularFileUpload\angular-file-upload.min.js" />
     <Content Include="Scripts\angularTranslate\angular-translate.js" />

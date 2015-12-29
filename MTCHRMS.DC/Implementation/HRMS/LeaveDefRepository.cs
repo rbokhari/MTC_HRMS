@@ -40,7 +40,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -54,7 +54,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
                 _ctx.Leaves.Add(newLeave);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -70,7 +70,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

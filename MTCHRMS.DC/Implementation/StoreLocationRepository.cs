@@ -46,7 +46,7 @@ namespace MTCHRMS.DC
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -62,7 +62,7 @@ namespace MTCHRMS.DC
                 _ctx.StoreLocations.Add(newLocation);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -77,7 +77,7 @@ namespace MTCHRMS.DC
                 _ctx.Entry(updateLocation).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

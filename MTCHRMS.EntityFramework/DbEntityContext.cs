@@ -11,6 +11,7 @@ using MTCHRMS.EntityFramework.General;
 using MTCHRMS.EntityFramework.HRMS;
 using MTCHRMS.EntityFramework.Inventory;
 using MTCHRMS.EntityFramework.Security;
+using MTCHRMS.EntityFramework.Training;
 
 namespace MTCHRMS.EntityFramework
 {
@@ -110,6 +111,8 @@ namespace MTCHRMS.EntityFramework
         public DbSet<EmployeeTicketYear> EmployeeTicketYears { get; set; }
 
         public DbSet<EmployeeLeave> EmployeeLeaves { get; set; }
+
+        public DbSet<CourseDef> Courses { get; set; }
 
     }
 }

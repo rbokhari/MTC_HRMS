@@ -8,12 +8,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
                     <a href="#">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="/INVPortal/definition/validation/{{validation.id}}">{{validation.nameEn}} List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="/{{mainPortal}}/definition/validation/{{validation.id}}">{{validation.nameEn}} List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -55,7 +55,8 @@
                             <div class="control-group">
                                 <label class="control-label" for="txtDescription">Status</label>
                                 <div class="controls">
-                                    <input type="checkbox" id="cActive" name="cActive" ng-model="validationDetail.isActive" ng-true-value="1" ng-false-value="0" />
+                                    <!--<input type="checkbox" id="cActive" name="cActive" ng-model="validationDetail.isActive" ng-true-value="1" ng-false-value="0" />-->
+                                    <toggle-switch html="true" id="cActive" model="validationDetail.isActive" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
                                 </div>
                             </div>
 
@@ -67,7 +68,7 @@
                             <i class="icon-ok"></i>&nbsp; Save and Add New
 
                         </button>-->
-                                <a id="cmdCancel" class="btn btn-inverse" href="/INVPortal/definition/validation/{{validationDetail.validationId}}">
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/definition/validation/{{validationDetail.validationId}}">
                                     <i class=" icon-remove"></i>&nbsp; Cancel
                                 </a>
                             </div>

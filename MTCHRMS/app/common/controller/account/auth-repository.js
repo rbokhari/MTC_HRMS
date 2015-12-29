@@ -26,7 +26,8 @@ accModule.factory('authRepository', [
             isHRMSAdmin: false,
             isHRMSUser: false,
             isINVAdmin: false,
-            isINVUser:false
+            isINVUser: false,
+            isTRAdmin: false
     };
 
         //var _saveRegistration = function (registration) {
@@ -100,6 +101,9 @@ accModule.factory('authRepository', [
             console.log("logOut from System");
 
             localStorageService.remove('authorizationData');
+            localStorageService.remove('departments');
+            localStorageService.remove('courses');
+            localStorageService.remove('userData');
 
             _authentication.isAuth = false;
             _authentication.userName = "";
@@ -145,6 +149,8 @@ accModule.factory('authRepository', [
 
                                         _authentication.isINVAdmin = _authentication.roleId == appRoles.INV_ADMIN;
                                         _authentication.isINVUser = _authentication.roleId == appRoles.INV_USER;
+
+                                        _authentication.isTRAdmin = _authentication.roleId == appRoles.TR_ADMIN_LOCAL;
 
                                         localStorageService.set('userData', { userName: authData.userName, fullName: response.employeeName, userId: response.id, role: _authentication.roles, roleId: _authentication.roleId });
                                         deferred.resolve(response);

@@ -46,7 +46,7 @@ namespace MTCHRMS.DC
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -62,7 +62,7 @@ namespace MTCHRMS.DC
                 _ctx.Suppliers.Add(newSupplier);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -78,7 +78,7 @@ namespace MTCHRMS.DC
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -93,7 +93,7 @@ namespace MTCHRMS.DC
                 _ctx.SupplierContactPersons.Add(newContactPerson);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -108,7 +108,7 @@ namespace MTCHRMS.DC
                 _ctx.SupplierContracts.Add(newContract);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

@@ -1,8 +1,8 @@
-﻿var hrmsModule = angular.module("hrmsModule", 
+﻿'use strict'
+var hrmsModule = angular.module("hrmsModule",
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
         'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule'])
     .config(function ($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
-
         console.log('hrms module router call !');
 
         $httpProvider.interceptors.push('authInterceptorService');
@@ -22,7 +22,6 @@
         //    HEADLINE: 'Hey, das ist meine großartige App!',
         //    INTRO_TEXT: 'Und sie untersützt mehrere Sprachen!'
         //});
-        
         $translateProvider.useStaticFilesLoader({
             prefix: '/scripts/angularTranslate/lang/',
             suffix: '.json'
@@ -132,35 +131,51 @@
             });
 
         $routeProvider
-            .when('/HRMSPortal/ticket', {
+            .when('/HRMSPortalAr/ticket', {
                 templateUrl: '/app/hrms/templates/hrms/ticket/ticket.html',
                 controller: 'TicketController'
             });
         $routeProvider
-            .when('/HRMSPortal/ticket/add', {
+            .when('/HRMSPortalAr/ticket/add', {
                 templateUrl: '/app/hrms/templates/hrms/ticket/ticket-add.html',
                 controller: 'TicketController'
             });
         $routeProvider
-            .when('/HRMSPortal/ticket/edit/:id', {
+            .when('/HRMSPortalAr/ticket/edit/:id', {
                 templateUrl: '/app/hrms/templates/hrms/ticket/ticket-edit.html',
                 controller: 'TicketController'
             });
 
         $routeProvider
-            .when('/HRMSPortal/leave', {
+            .when('/HRMSPortalAr/leave', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave.html',
                 controller: 'LeaveController as vm'
             });
         $routeProvider
-            .when('/HRMSPortal/leave/add', {
+            .when('/HRMSPortalAr/leave/add', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-add.html',
                 controller: 'LeaveController as vm'
             });
         $routeProvider
-            .when('/HRMSPortal/leave/edit/:id', {
+            .when('/HRMSPortalAr/leave/edit/:id', {
                 templateUrl: '/app/hrms/templates/hrms/leave/leave-edit.html',
                 controller: 'LeaveController as vm'
+            });
+
+        $routeProvider
+            .when('/HRMSPortalAr/training/courses', {
+                templateUrl: '/app/hrms/templates/tr/course/courses.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortalAr/training/course/add', {
+                templateUrl: '/app/hrms/templates/tr/course/course-add.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortalAr/training/course/edit/:id', {
+                templateUrl: '/app/hrms/templates/tr/course/course-edit.html',
+                controller: 'CourseController as vm'
             });
 
         $routeProvider

@@ -8,12 +8,12 @@
             </h3>
             <ul class="breadcrumb">
                 <li>
-                    <a href="/INVPortal"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                 </li>
                 <li>
-                    <a href="#">Definition</a> <span class="divider">&nbsp;</span>
+                    <a href="">Definition</a> <span class="divider">&nbsp;</span>
                 </li>
-                <li><a href="#">{{validation.nameEn}} List</a><span class="divider-last">&nbsp;</span></li>
+                <li><a href="">{{validation.nameEn}} List</a><span class="divider-last">&nbsp;</span></li>
             </ul>
         </div>
     </div>
@@ -27,7 +27,7 @@
                 <div class="widget-title">
                     <h4><i class="icon-reorder"></i>&nbsp;{{validation.nameEn}}</h4>
                     <span class="tools">
-                        <a ng-if="authentication.isINVAdmin" class=" icon-plus-sign" href="/INVPortal/definition/validation/{{validation.id}}/add"></a>
+                        <a ng-if="authentication.isHRMSAdmin || authentication.isTRAdmin || authentication.isINVAdmin" class="icon-plus-sign" href="/{{mainPortal}}/definition/validation/{{validation.id}}/add"></a>
                         <a href="javascript:;" class="icon-chevron-down"></a>
                         <a href="javascript:;" class="icon-remove"></a>
                     </span>
@@ -67,12 +67,12 @@
                                 </td>
                             </tr>
                             <tr dir-paginate="validation in validationDetails | filter:search | itemsPerPage: recordPage">
-                                <td ng-if="authentication.isINVAdmin">
-                                    <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.nameEn }} </a>
+                                <td ng-if="authentication.isHRMSAdmin || authentication.isTRAdmin || authentication.isINVAdmin">
+                                    <a ng-href="/{{mainPortal}}/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.nameEn }} </a>
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ validation.nameEn }}</td>
-                                <td ng-if="authentication.isINVAdmin">
-                                    <a ng-href="/INVPortal/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.description }} </a>
+                                <td ng-if="authentication.isHRMSAdmin || authentication.isTRAdmin || authentication.isINVAdmin">
+                                    <a ng-href="/{{mainPortal}}/definition/validation/{{validation.validationId}}/edit/{{ validation.id}}"> {{ validation.description }} </a>
                                 </td>
                                 <td ng-if="authentication.isSystemAdmin || authentication.isINVUser">{{ validation.description }}</td>
                                 <td>

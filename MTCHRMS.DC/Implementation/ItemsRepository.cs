@@ -196,7 +196,7 @@ namespace MTCHRMS.DC
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -229,7 +229,7 @@ namespace MTCHRMS.DC
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -245,7 +245,7 @@ namespace MTCHRMS.DC
                 _ctx.ItemDepartments.Add(newItemDepartment);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -294,7 +294,7 @@ namespace MTCHRMS.DC
                 _ctx.ItemYears.Add(newItemYear);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -311,7 +311,7 @@ namespace MTCHRMS.DC
                 _ctx.Entry(updateItemYear).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -365,7 +365,7 @@ namespace MTCHRMS.DC
                 _ctx.ItemAttachments.Add(newItemAttachment);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -467,7 +467,7 @@ namespace MTCHRMS.DC
                 _ctx.Entry(updateItemSupplier).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -522,7 +522,7 @@ namespace MTCHRMS.DC
                 _ctx.Entry(updateItemManufacturer).State = EntityState.Modified;
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -743,7 +743,7 @@ namespace MTCHRMS.DC
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

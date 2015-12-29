@@ -51,8 +51,9 @@ namespace MTC.GlobalVariables
             ITEM_STOCK_STATUS = 13,
             LEAVE_TYPE = 14,
             LEAVE_SCHEDULE = 15,
-            TICKET_ELIGIBILITY = 16
-
+            TICKET_ELIGIBILITY = 16,
+            TRAINING_CATEGORY = 17,
+            TRAINING_ORGANIZERS = 18
         }
 
         public enum Validation_Details

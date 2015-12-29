@@ -1,0 +1,105 @@
+﻿
+<div class="container-fluid">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                <span translate="COURSE"></span>&nbsp;<small> <span translate="ADD"></span> </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    TRAINING <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/{{mainPortal}}/training/courses"><span translate="COURSE"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider">&nbsp;</span></li>
+                <li>
+                    <a href="#">Add New</a><span class="divider-last">&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="span12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-reorder"></i><span translate="COURSE"></span>&nbsp; - <span translate="ADD"></span>&nbsp;</h4>
+                    <span class="tools">
+                        <a href="javascript:;" class="icon-chevron-down"></a>
+                        <a href="/{{mainPortal}}/training/courses" class="icon-remove"></a>
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="frmCourse" novalidate>
+
+                        <div class="form-horizontal">
+                            <div class="control-group">
+                                <label class="control-label" for="txtCode"><span translate="CODE"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="text" id="txtCode" name="txtCode" ng-model="course.code" required="required" />
+                                    <div class="help-inline" ng-show="frmCourse.txtCode.$error.required && frmDepartmentfrmCourse.txtCode.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="txtName"><span translate="NAME"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <input type="text" name="txtName" class="span6" id="txtName" ng-model="course.courseName" required="required" />
+                                    <div class="help-inline red-color" ng-show="frmCourse.txtName.$error.required && frmCourse.txtName.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="tObjectives"><span translate="OBJECTIVES"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <textarea name="txtName" class="span6" id="tObjectives" ng-model="course.objectives" required="required" ></textarea>
+                                    <div class="help-inline red-color" ng-show="frmCourse.tObjectives.$error.required && frmCourse.tObjectives.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+                            <div class="control-group" ng-init="loadCategories()">
+                                <label class="control-label" for="txtName"><span translate="CATEGORY"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <select name="cCategory" id="cCategory" ng-model="course.categoryId" ng-options="category.id as category.nameEn for category in categories" required="required"></select>
+                                    <div class="help-inline red-color" ng-show="frmCourse.cCategory.$error.required && frmCourse.cCategory.$dirty"><span translate="MANDATORY_FIELD_MISSING"></span></div>
+                                </div>
+                            </div>
+
+                            <div class="control-group">
+                                <label class="control-label" for="tDescription"><span translate="DESCRIPTION"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <textarea name="tDescription" class="span6" id="tDescription" ng-model="course.description"></textarea>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label" for="statusId"><span translate="STATUS"></span>&nbsp;</label>
+                                <div class="controls">
+                                    <toggle-switch html="true" model="course.statusId" ng-true-value="1" ng-false-value="0" on-label="<i class='icon-check'></i>" off-label="<i class='icon-check-empty'></i>"></toggle-switch>
+                                </div>
+                            </div>
+                            <div class="form-actions" ng-if="authentication.isTRAdmin">
+                                <button type="submit" id="cmdSave" class="btn btn-primary" ng-click="save(course)" ng-disabled="frmCourse.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE"></span>&nbsp;
+                                </button>
+                                <button type="submit" id="cmdSaveAddNew" class="btn btn-primary" ng-click="saveAddNew(course)" ng-disabled="frmCourse.$invalid">
+                                    <i class="icon-save"></i>
+                                    <span translate="SAVE_AND_ADD_NEW"></span>&nbsp;
+                                </button>
+                                <a id="cmdCancel" class="btn btn-inverse" href="/{{mainPortal}}/training/courses">
+                                    <i class="icon-undo"></i>
+                                    <span translate="CANCEL"></span>&nbsp;
+                                </a>
+                            </div>
+                        </div>
+                        <div class="error" ng-show="errors.length > 0" ng-repeat="error in errors">{{ error }}</div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

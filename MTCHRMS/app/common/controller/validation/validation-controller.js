@@ -47,18 +47,25 @@ accModule.controller('ValidationController',
     $scope.save = function(id, validationDetail) {
         $scope.errors = [];
         validationDetail.validationId = id;
-        validationRepository.addValidationDetail(validationDetail).$promise.then(
+        if (angular.isUndefined(validationDetail.isActive) || validationDetail.isActive == 'false' || validationDetail.isActive == 0) {
+            validationDetail.isActive = 0;
+        } else {
+            validationDetail.isActive = 1;
+        }
+        validationRepository.addValidationDetail(validationDetail)
+            .$promise
+            .then(
             function() {
                 // success case
-                $.gritter.add({
-                    title: $scope.validation.nameEn,
-                    text: 'Added Successfully !',
-                    time: 2000,
-                    position: 'center'
-                });
+                //$.gritter.add({
+                //    title: $scope.validation.nameEn,
+                //    text: 'Added Successfully !',
+                //    time: 2000,
+                //    position: 'center'
+                //});
                 appRepository.showAddSuccessGritterNotification();
                 console.log("save - Successfully !");
-                $location.url('/INVPortal/definition/validation/' + id);
+                $location.url('/' + $scope.mainPortal + '/definition/validation/' + id);
             }, function(error) {
                 // failure case
                 appRepository.showErrorGritterNotification();
@@ -76,7 +83,11 @@ accModule.controller('ValidationController',
             departmentName: "",
             statusId:""
         };
-
+        if (angular.isUndefined(validationDetail.isActive) || validationDetail.isActive == 'false' || validationDetail.isActive == 0) {
+            validationDetail.isActive = 0;
+        } else {
+            validationDetail.isActive = 1;
+        }
         validationRepository.save(validationDetail).$promise.then(
             function() {
                 // success case
@@ -96,13 +107,17 @@ accModule.controller('ValidationController',
 
     $scope.edit = function (validationDetail) {
         $scope.errors = [];
-
-        validationRepository.editValidationDetail(validationDetail).then(
-            function (response) {
+        if (angular.isUndefined(validationDetail.isActive) || validationDetail.isActive == 'false' || validationDetail.isActive == 0) {
+            validationDetail.isActive = 0;
+        } else {
+            validationDetail.isActive = 1;
+        }
+        validationRepository.editValidationDetail(validationDetail)
+            .then(function (response) {
                 // success case
                 console.log("edit - Successfully !");
                 appRepository.showUpdateSuccessGritterNotification();
-                $location.url('/INVPortal/definition/validation/' + validationDetail.validationId);
+                $location.url('/' + $scope.mainPortal + '/definition/validation/' + validationDetail.validationId);
             }, function (error) {
                 // failure case
                 appRepository.showErrorGritterNotification();

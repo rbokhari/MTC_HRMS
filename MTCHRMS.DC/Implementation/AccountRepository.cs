@@ -41,7 +41,7 @@ namespace MTCHRMS.DC
                 _ctx.Users.Add(newUser);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;

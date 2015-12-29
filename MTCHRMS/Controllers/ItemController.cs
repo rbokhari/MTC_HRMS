@@ -790,7 +790,7 @@ namespace MTCHRMS.Controllers
 
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 return Request.CreateResponse(HttpStatusCode.BadRequest, GetErrorMessages());
             }
@@ -1178,7 +1178,7 @@ namespace MTCHRMS.Controllers
                 result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -1225,7 +1225,7 @@ namespace MTCHRMS.Controllers
                 result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
@@ -1270,7 +1270,7 @@ namespace MTCHRMS.Controllers
                 result.Content.Headers.ContentDisposition.FileName = Guid.NewGuid().ToString() + ".ps";
                 return result;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }

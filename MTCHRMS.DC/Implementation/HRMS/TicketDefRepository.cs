@@ -37,7 +37,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
             {
                 return _ctx.SaveChanges() > 0;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error
                 return false;
@@ -51,7 +51,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
                 _ctx.Tickets.Add(newTicket);
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
@@ -66,7 +66,7 @@ namespace MTCHRMS.DC.Implementation.HRMS
                 return true;
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // TODO log this error    
                 return false;
