@@ -72,6 +72,7 @@
     <Compile Include="Security\Role.cs" />
     <Compile Include="Security\User.cs" />
     <Compile Include="TableStrutcture.cs" />
+    <Compile Include="Training\CourseAssignment.cs" />
     <Compile Include="Training\CourseDef.cs" />
   </ItemGroup>
   <ItemGroup>

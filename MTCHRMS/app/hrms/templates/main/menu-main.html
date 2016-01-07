@@ -5,7 +5,7 @@
             <li id="liDashboard" ng-class="{ active: isActiveParentNavigation('/{{mainPortal}}')}">
                 <a class="" href="/{{mainPortal}}"><span class="icon-box"><i class="icon-dashboard"></i></span> <span translate="DASHBOARD"></span></a>
             </li>
-            <li class="has-sub" id="liHRMS" ng-class="{ active: isActiveParentNavigation('/{{mainPortal}}/')}">
+            <li class="has-sub" id="liHRMS">
                 <a href="javascript:;" class="">
                     <span class="icon-box">
                         <i class="icon-user"></i>
@@ -69,11 +69,15 @@
                     <li id="liTrainingOrganizer">
                         <a class="" href="/{{mainPortal}}/definition/validation/18"><span translate="TRAINING_ORGANIZERS"></span></a>
                     </li>
+                    <li id="liTrainingYears">
+                        <a class="" href="/{{mainPortal}}/definition/validation/19"><span translate="TRAINING_YEARS"></span></a>
+                    </li>
+
                     <li id="liTrainingCourses" ng-class="{ active: isActiveNavigation('/{{mainPortal}}/training/courses')}">
                         <a class="" href="/{{mainPortal}}/training/courses"><span translate="TRAINING_COURSES"></span></a>
                     </li>
                     <li id="liTrainAssigment">
-                        <a class="" href="/{{mainPortal}}/training/assignment/add/4186"><span translate="TRAINING_ASSIGNMENT"></span></a>
+                        <a class="" href="/{{mainPortal}}/training/assignment/list"><span translate="TRAINING_ASSIGNMENT"></span></a>
                     </li>
                 </ul>
             </li>

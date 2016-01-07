@@ -1,7 +1,7 @@
 ﻿'use strict'
 var hrmsModule = angular.module("hrmsModule",
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
-        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule'])
+        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'ui.bootstrap', 'ui.select', 'accModule'])
     .config(function ($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
         console.log('hrms module router call !');
 
@@ -179,11 +179,33 @@ var hrmsModule = angular.module("hrmsModule",
             });
 
         $routeProvider
+            .when('/HRMSPortalAr/training/courses', {
+                templateUrl: '/app/hrms/templates/tr/course/courses.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortalAr/training/course/add', {
+                templateUrl: '/app/hrms/templates/tr/course/course-add.html',
+                controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortalAr/training/course/edit/:id', {
+                templateUrl: '/app/hrms/templates/tr/course/course-edit.html',
+                controller: 'CourseController as vm'
+            });
+
+        $routeProvider
+            .when('/HRMSPortalAr/training/assignment/add/:id', {
+                templateUrl: '/app/hrms/templates/tr/assignment/assignment-add.html',
+                controller: 'AssignmentController as vm'
+            });
+
+
+        $routeProvider
             .when('/HRMSPortalAr', {
                 templateUrl: '/app/hrms/templates/dashboard.html',
                 controller: 'DashboardController'
             });
-
 
         $routeProvider
             .when('/INVPortal', {

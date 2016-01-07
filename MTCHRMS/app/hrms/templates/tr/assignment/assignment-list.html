@@ -1,0 +1,118 @@
+﻿
+<div class="container-fluid" data-ng-init="loadAssignment()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="row-fluid">
+        <div class="span12">
+            <h3 class="page-title">
+                <span translate="EMPLOYEE_ASSIGNMENT"></span>&nbsp;<small> <span translate="LIST"></span> </small>
+            </h3>
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/{{mainPortal}}"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                </li>
+                <li>
+                    TRAINING <span class="divider">&nbsp;</span>
+                </li>
+                <li><a href="/{{mainPortal}}/training/courses"><span translate="EMPLOYEE_ASSIGNMENT"></span>&nbsp;<span translate="LIST"></span>&nbsp;</a><span class="divider-last">&nbsp;</span></li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+    <!-- END PAGE HEADER-->
+    <!-- BEGIN PAGE CONTENT-->
+
+    <div class="row-fluid">
+        <div class="col-lg-12 col-md-12">
+            <div class="widget">
+                <div class="widget-title">
+                    <h4><i class="icon-search"></i>  <span translate="SEARCH_CRITERIA"></span></h4>
+                    <span class="tools">
+                        <a class="icon-remove" href="/{{mainPortal}}/"></a> 
+                    </span>
+                </div>
+                <div class="widget-body">
+                    <form name="frmStaff" novalidate>
+                        <div class="row-fluid">
+                            <div class="span12">
+                                <div class="span6">
+                                    <div class="form-horizontal">
+                                        <label class="control-label"><span translate="DEPARTMENT"></span> :</label>
+                                        <div class="controls">
+                                            <select id="cDepartment" name="cDepartment" ng-model="search.departmentId" class="input-xxlarge" required>
+                                                <!--<option value="0"></option>-->
+                                                <option ng-selected="dept.id==search.departmentId" ng-repeat="dept in departments1" ng-value="dept.id">{{dept.departmentName}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="span6">
+                                    <div class="form-horizontal">
+                                        <label class="control-label"><span translate="YEARS"></span> :</label>
+                                        <div class="controls">
+                                            <select id="cYear" name="cYear" ng-model="search.yearId" class="input-xlarge" required>
+                                                <option ng-selected="year.id==search.yearId" ng-repeat="year in years" ng-value="year.id">{{year.nameEn}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" id="cmdSearch" class="btn btn-success offset1" ng-click="assignmentSearch(search)" ng-disabled="frmStaff.$invalid">
+                                <i class="icon-search"></i>
+                                <span translate="SEARCH"></span>
+                            </button>
+                            <button type="reset" id="cmdClear" class="btn btn-default" ng-click="clearSearch()">
+                                <i class="icon-refresh"></i>
+                                <span translate="CLEAR"></span>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <table class="table table-striped table-bordered table-advance table-hover">
+                                <thead>
+                                    <tr>
+                                        <th translate="SN"></th>
+                                        <th translate="Employee"></th>
+                                        <th translate="DEPARTMENT"></th>
+                                        <th translate="DESIGNATION"></th>
+                                        <th  style="text-align:center" translate="COURSES"></th>
+                                        <th translate="STATUS"></th>
+                                        <th translate="ACTION"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-show="isBusy">
+                                        <td colspan="7">
+                                            <div class="progress progress-striped active">
+                                                <div style="width: 100%;" class="bar"></div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr ng-show="!isBusy" ng-repeat="assignment in assignments track by assignment.id">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{assignment.code}} / {{assignment.nameEn}}</td>
+                                        <td ng-if="mainPortal=='HRMSPortalAr'">{{assignment.departmentNameAr}}</td>
+                                        <td ng-if="mainPortal=='HRMSPortal'">{{assignment.departmentName}}</td>
+                                        <td ng-if="mainPortal=='HRMSPortalAr'">{{assignment.designationAr}}</td>
+                                        <td ng-if="mainPortal=='HRMSPortal'">{{assignment.designationEn}}</td>
+                                        <td style="text-align:center"><span ng-if="assignment.courseCount" class="badge badge-info" uib-tooltip="{{assignment.courseCount}} courses assigned">{{assignment.courseCount}}</span></td>
+                                        <td>{{assignment.statusId}}</td>
+                                        <td>
+                                            <a ng-if="assignment.courseAssignmentId" href="/{{mainPortal}}/training/assignment/edit/{{assignment.courseAssignmentId}}" class="btn btn-sm btn-danger" uib-tooltip="update this record"><i class="icon-edit"></i>&nbsp;Edit</a>
+                                            <a ng-if="assignment.courseAssignmentId" href="/{{mainPortal}}/training/assignment/detail/{{assignment.courseAssignmentId}}" class="btn btn-sm btn-info" uib-tooltip="view detail"><i class="icon-external-link">&nbsp;View</i></a>
+                                            <a ng-if="!assignment.courseAssignmentId" href="/{{mainPortal}}/training/assignment/add/{{assignment.id}}" class="btn btn-sm btn-success" uib-tooltip="Add assignment"><i class="icon-plus"></i>&nbsp;Assign</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

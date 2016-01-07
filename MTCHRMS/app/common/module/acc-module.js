@@ -34,7 +34,8 @@
         "LEAVE_SCHEDULE": "15",
         "TICKET_ELIGIBILITY": "16",
         "TRAINING_CATEGORY": "17",
-        "TRAINING_ORGANIZERS": "18"
+        "TRAINING_ORGANIZERS": "18",
+        "TRAINING_YEARS": "19"
     })
 
     .config(function ($httpProvider, $routeProvider, toastrConfig) {

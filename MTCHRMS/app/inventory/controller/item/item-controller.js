@@ -576,6 +576,8 @@ invModule.controller('ItemController',
             $('#tr' + serialid).addClass('info');
             $('#tEditSerial' + serialid).removeAttr("disabled");
             $('#tEditSerial' + serialid).focus();
+            $('#tEditOrgNo' + serialid).removeAttr("disabled");
+            $('#tEditOrgNo' + serialid).focus();
             $('#cEdit' + serialid).hide();
             $('#cPrintBarcode' + serialid).hide();
             $('#cSave' + serialid).show();
@@ -586,6 +588,7 @@ invModule.controller('ItemController',
             console.log(serialid);
             $('#tr' + serialid).removeClass('info', 1000, 'fade');
             $('#tEditSerial' + serialid).attr('disabled', 'disabled');
+            $('#tEditOrgNo' + serialid).attr('disabled', 'disabled');
             $('#cEdit' + serialid).show();
             $('#cPrintBarcode' + serialid).show();
             $('#cSave' + serialid).hide();
@@ -599,6 +602,7 @@ invModule.controller('ItemController',
                     appRepository.showUpdateSuccessGritterNotification();
                     $('#tr' + serial.itemStockSerialId).removeClass('info', 1000, 'fade');
                     $('#tEditSerial' + serial.itemStockSerialId).attr('disabled', 'disabled');
+                    $('#tEditOrgNo' + serial.itemStockSerialId).attr('disabled', 'disabled');
                     $('#cEdit' + serial.itemStockSerialId).show();
                     $('#cPrintBarcode' + serial.itemStockSerialId).show();
                     $('#cSave' + serial.itemStockSerialId).hide();

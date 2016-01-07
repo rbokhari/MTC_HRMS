@@ -56,6 +56,7 @@
     <Compile Include="Implementation\HRMS\LeaveDefRepository.cs" />
     <Compile Include="Implementation\HRMS\ServicesRepository.cs" />
     <Compile Include="Implementation\HRMS\TicketDefRepository.cs" />
+    <Compile Include="Implementation\HRTR\AssignmentRepository.cs" />
     <Compile Include="Implementation\HRTR\CourseRepository.cs" />
     <Compile Include="Implementation\ManufacturerRepository.cs" />
     <Compile Include="Implementation\ItemsRepository.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Interface\HRMS\ILeaveDefRepository.cs" />
     <Compile Include="Interface\HRMS\IServicesRepository.cs" />
     <Compile Include="Interface\HRMS\ITicketDefRepository.cs" />
+    <Compile Include="Interface\HRTR\IAssignmentRepository.cs" />
     <Compile Include="Interface\HRTR\ICourseRepository.cs" />
     <Compile Include="Interface\IDistributionRepository.cs" />
     <Compile Include="Interface\IManufacturerRepository.cs" />

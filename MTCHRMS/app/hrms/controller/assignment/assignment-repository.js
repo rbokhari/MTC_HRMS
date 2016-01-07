@@ -4,54 +4,64 @@
 
 'use strict';
 
-hrmsModule.factory('assignmentRepository', ['$resource', '$http', '$q', 'localStorageService', function ($resource, $http, $q, localStorageService) {
+hrmsModule.factory('assignmentRepository',
+    ['$resource', '$http', '$q', 'localStorageService',
+        function ($resource, $http, $q, localStorageService) {
 
-    var _getAllCourses = function (forceRefresh) {
-        if (typeof forceRefresh === 'undefined') { forceRefresh = false; }
+    var _getAssignments = function (search) {
         var req = {
             method: 'GET',
-            url: '/api/course'
+            url: '/api/courseassignment',
+            params: {                   // use data for post request
+                departmentId: search.departmentId,
+                yearId: search.yearId
+            }
         };
         var deferred = $q.defer();
-        var coursetData = null;
 
-        if (!forceRefresh) { coursetData = localStorageService.get('courses') }
+        $http(req)
+            .success(function (res) {
+                deferred.resolve(res);
+            })
+            .error(function (err) {
+                deferred.reject(err);
+            });
 
-        if (coursetData) {
-            console.log("found courses from storage");
-
-            deferred.resolve(coursetData);
-        } else {
-            console.log("fetch courses from server");
-            $http(req)
-                .success(function (res) {
-                    localStorageService.set('courses', res);
-                    deferred.resolve(res);
-                })
-                .error(function (err) {
-                    deferred.reject(err);
-                });
-        }
         return deferred.promise;
     };
 
-    var _getCourseById = function(id) {
-        return $resource('/api/course/' + id).get();
+    var _getAssignment = function (id) {
+
+        var req = {
+            method: 'GET',
+            url: '/api/courseassignment/'+id,
+        };
+        var deferred = $q.defer();
+
+        $http(req)
+            .success(function (res) {
+                deferred.resolve(res);
+            })
+            .error(function (err) {
+                deferred.reject(err);
+            });
+
+        return deferred.promise;
     };
 
-    var _addCourse = function(course) {
-        return $resource('/api/course').save(course);
+    var _addAssignment = function(assign) {
+        return $resource('/api/courseassignment').save(assign);
     };
 
-    var _editCourse = function (course) {
-        return $http.put('/api/course/' + course.courseId, course);
+    var _updateAssignment = function (assign) {
+        return $http.put('/api/courseassignment', assign);
     };
 
     return {
-        getAllCourses: _getAllCourses,
-        getCourseById: _getCourseById,
-        addCourse: _addCourse,
-        editCourse: _editCourse
+        getAssignments: _getAssignments,
+        getAssignment:_getAssignment,
+        addAssignment: _addAssignment,
+        updateAssignment: _updateAssignment
     };
 
 }]);

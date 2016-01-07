@@ -114,5 +114,9 @@ namespace MTCHRMS.EntityFramework
 
         public DbSet<CourseDef> Courses { get; set; }
 
+        public DbSet<CourseAssignment> CourseAssignments { get; set; }
+
+        public DbSet<CourseAssignmentDetail> CourseAssignmentDetails { get; set; }
+
     }
 }

@@ -26,6 +26,8 @@ namespace MTC.Models.HRMS
 
         public String DepartmentName { get; set; }
 
+        public String DepartmentNameAr { get; set; }
+
         public String DesignationEn { get; set; }
 
         public String DesignationAr { get; set; }
@@ -37,6 +39,10 @@ namespace MTC.Models.HRMS
         public byte[] Picture { get; set; }
 
         public int ContractId { get; set; }
+
+        public int? CourseAssignmentId { get; set; }     // course assignment id
+
+        public int? CourseCount { get; set; }
 
     }
 

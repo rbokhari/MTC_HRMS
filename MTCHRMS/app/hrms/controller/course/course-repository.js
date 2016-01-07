@@ -44,7 +44,7 @@ hrmsModule.factory('courseRepository', ['$resource', '$http', '$q', 'localStorag
     };
 
     var _editCourse = function (course) {
-        return $http.put('/api/course/' + course.courseId, course);
+        return $http.put('/api/course', course);
     };
 
     return {

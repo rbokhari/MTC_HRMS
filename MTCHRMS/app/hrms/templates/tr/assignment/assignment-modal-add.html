@@ -1,0 +1,57 @@
+﻿<div class="modal-header">
+    <h3 class="modal-title">Assign New Course</h3>
+</div>
+<div class="modal-body">
+    
+    <form name="frmCourse" novalidate>
+        <div class="form-horizontal">
+            <div class="control-group">
+                <label for="tCode" class="control-label"><span translate="CATEGORY"></span> :</label>
+                <div class="controls">
+                    <select id="cPerson" class="input-xlarge" name="cPerson"
+                            ng-model="assign.categoryId"
+                            ng-change="assign.categoryNameAr=(vm.categories|filter:{id:assign.categoryId})[0].nameAr"
+                            ng-options="category.id as category.nameEn for category in vm.categories" required></select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><span translate="COURSE_NAME"></span> :</label>
+                <div class="controls">
+                    <select id="cPerson" class="input-xlarge" name="cPerson"
+                            ng-model="assign.courseId"
+                            ng-change="assign.courseName=(vm.courses|filter:{id:assign.courseId})[0].name; assign.courseObjectives=(vm.courses|filter:{id:assign.courseId})[0].objectives"
+                            ng-options="course.id as course.name for course in vm.courses" required></select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><span translate="DURATION"></span> :</label>
+                <div class="controls">
+                    <input type="text" id="rRank" name="tRank" ng-model="assign.duration" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><span translate="PERIOD"></span> :</label>
+                <div class="controls">
+                    <input type="text" id="rRank" name="tRank" ng-model="assign.timePeriod" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><span translate="LOCATION"></span> :</label>
+                <div class="controls">
+                    <input type="text" id="rRank" name="tRank" ng-model="assign.location" required />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label"><span translate="ORGANIZER"></span> :</label>
+                <div class="controls">
+                    <input type="text" id="rRank" name="tRank" ng-model="assign.organizer" required />
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-success" type="button" ng-click="vm.ok(assign)"><i class="icon-plus"></i>&nbsp;Add</button>
+    <button class="btn btn-inverse" type="button" ng-click="vm.cancel()">Cancel</button>
+</div>

@@ -534,6 +534,34 @@ hrmsModule.controller('EmployeeController',
         //if ($routeParams.id != undefined) {
         //    //console.log($scope.employee);
         //}
+
+        $scope.opened = false;
+        $scope.open = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            $scope.opened = true;
+        };
+        $scope.uibdatePicker = (function () {
+            var method = {};
+            method.instances = [];
+
+            method.open = function ($event, instance) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                method.instances[instance] = true;
+            };
+
+            method.options = {
+                'show-weeks': false,
+                startingDay: 0
+            };
+
+            var formats = ['dd/MM/yyyy', 'dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            method.format = formats[0];
+
+            return method;
+        })();
         
         $scope.save = function(employeeDef) {
             $scope.errors = [];

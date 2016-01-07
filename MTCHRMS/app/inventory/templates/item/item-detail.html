@@ -340,9 +340,10 @@
                                 <thead>
                                 <tr>
                                     <th class="span1">SN</th>
-                                    <th class="span4">Serial No</th>
-                                    <th class="span4">Status</th>
-                                    <th class="span3" ng-if="authentication.isINVAdmin">Action</th>
+                                    <th class="span3">Serial No</th>
+                                    <th class="span3">MTC No</th>
+                                    <th class="span3">Status</th>
+                                    <th class="span2" ng-if="authentication.isINVAdmin">Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -352,8 +353,13 @@
                                     </td>
                                     <td style="vertical-align: middle !important;">
                                         <span id="sSerial{{serial.itemStockSerialId}}">
-                                                                    <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
-                                                                </span>
+                                            <input type="text" ng-model="serial.serialNo" id="tEditSerial{{serial.itemStockSerialId}}" disabled="disabled" />
+                                        </span>
+                                    </td>
+                                    <td style="vertical-align: middle !important;">
+                                        <span id="sSerial{{serial.itemStockSerialId}}">
+                                            <input type="text" ng-model="serial.organizationNo" id="tEditOrgNo{{serial.itemStockSerialId}}" disabled="disabled" />
+                                        </span>
                                     </td>
                                     <td style="vertical-align: middle !important;">
                                         <label ng-class="serial.itemStockStatusDetail.description">{{serial.itemStockStatusDetail.nameEn}}</label>

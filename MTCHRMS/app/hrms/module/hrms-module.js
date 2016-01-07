@@ -1,6 +1,6 @@
 ﻿var hrmsModule = angular.module("hrmsModule", 
     ['ngRoute', 'ngResource', 'angularModalService', 'ngAnimate', 'ngSanitize', 'angularUtils.directives.dirPagination',
-        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'accModule'])
+        'angularFileUpload', 'LocalStorageModule', 'pascalprecht.translate', 'toggle-switch', 'ui.bootstrap', 'ui.select', 'accModule'])
 
     .config(function ($routeProvider, $locationProvider, $httpProvider, $translateProvider) {
 
@@ -189,6 +189,21 @@
             .when('/HRMSPortal/training/course/edit/:id', {
                 templateUrl: '/app/hrms/templates/tr/course/course-edit.html',
                 controller: 'CourseController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortal/training/assignment/list', {
+                templateUrl: '/app/hrms/templates/tr/assignment/assignment-list.html',
+                controller: 'AssignmentController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortal/training/assignment/detail/:id', {
+                templateUrl: '/app/hrms/templates/tr/assignment/assignment-detail.html',
+                controller: 'AssignmentController as vm'
+            });
+        $routeProvider
+            .when('/HRMSPortal/training/assignment/edit/:id', {
+                templateUrl: '/app/hrms/templates/tr/assignment/assignment-edit.html',
+                controller: 'AssignmentController as vm'
             });
 
         $routeProvider

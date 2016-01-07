@@ -41,6 +41,7 @@ namespace MTCHRMS.App_Start
             kernel.Bind<IServicesRepository>().To<ServicesRepository>();
 
             kernel.Bind<ICourseRepository>().To<CourseRepository>();
+            kernel.Bind<IAssignmentRepository>().To<AssignmentRepository>();
 
             return kernel;
         }

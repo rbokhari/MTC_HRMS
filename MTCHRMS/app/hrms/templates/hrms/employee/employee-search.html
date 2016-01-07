@@ -45,7 +45,7 @@
                                         <div class="controls">
                                             <select id="cPostedTo" name="cPostedTo" ng-model="employee.postedTo" >
                                                 <option value="0"></option>
-                                                <option ng-selected="department.id==employee.postedTo" ng-repeat="department in departments" ng-value="department.id">{{department.departmentName}}</option>
+                                                <option ng-selected="department.id==employee.postedTo" ng-repeat="department in departments track by department.id" ng-value="department.id">{{department.departmentName}}</option>
                                             </select>
                                         </div>
                                     </div>

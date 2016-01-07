@@ -131,7 +131,7 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="JOINING_DATE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" data-date-format="dd/mm/yyyy" ng-model="employeeDef.appointment" datepicker required />
+                                            <input type="text" id="tAppintmentDate" name="tAppintmentDate" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="uibdatePicker.options" is-open="uibdatePicker.instances['0']" ng-click="uibdatePicker.open($event, '0')" ng-model="employeeDef.appointment"  />
                                             <div class="help-inline" ng-show="staffForm.tAppintmentDate.$error.required && staffForm.tAppintmentDate.$dirty">*</div>
                                         </div>
                                     </div>
@@ -187,21 +187,21 @@
                                     <div class="control-group">
                                         <label class="control-label"><span translate="BIRTH_DATE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tDOB" name="tDOB" ng-model="employeeDef.dateOfBirth" data-date-format="dd/mm/yyyy" datepicker required /> <!--data-date-format="dd/mm/yyyy"--> 
+                                            <input type="text" id="tDOB" name="tDOB" ng-model="employeeDef.dateOfBirth" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="uibdatePicker.options" is-open="uibdatePicker.instances['1']" ng-click="uibdatePicker.open($event, '1')" close-text="Close"  required /> <!--data-date-format="dd/mm/yyyy"--> 
                                             <div class="help-inline" ng-show="staffForm.tDOB.$error.required && staffForm.tDOB.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="PROBATION_EXPIRE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tProbationExpire" name="tProbationExpire" ng-model="employeeDef.probationEndDate" data-date-format="dd/mm/yyyy" datepicker required />
+                                            <input type="text" id="tProbationExpire" name="tProbationExpire" ng-model="employeeDef.probationEndDate" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="uibdatePicker.options" is-open="uibdatePicker.instances['2']" ng-click="uibdatePicker.open($event, '2')" required />
                                             <div class="help-inline" ng-show="staffForm.tProbationExpire.$error.required && staffForm.tProbationExpire.$dirty">*</div>
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label"><span translate="CONTRACT_EXPIRE"></span> :</label>
                                         <div class="controls">
-                                            <input type="text" id="tContactExpire" name="tContactExpire" ng-model="employeeDef.serviceEndDate" data-date-format="dd/mm/yyyy" datepicker required />
+                                            <input type="text" id="tContactExpire" name="tContactExpire" ng-model="employeeDef.serviceEndDate" uib-datepicker-popup="dd/MM/yyyy" datepicker-options="uibdatePicker.options" is-open="uibdatePicker.instances['3']" ng-click="uibdatePicker.open($event, '3')" required />
                                             <div class="help-inline" ng-show="staffForm.tContactExpire.$error.required && staffForm.tContactExpire.$dirty">*</div>
                                         </div>
                                     </div>
@@ -249,12 +249,12 @@
 
     <script type="text/javascript">
         $(function () {
-            $('.sidebar-menu > .active').removeClass('active open');
-            $('#liHRMS, #liStaffRegistration').addClass('active open');
-            $('#tDOB, #tDOE').datepicker({
-                format: 'dd/mm/yyyy',
-                autoclose:'true'
-            });
+            //$('.sidebar-menu > .active').removeClass('active open');
+            //$('#liHRMS, #liStaffRegistration').addClass('active open');
+            //$('#tDOB, #tDOE').datepicker({
+            //    format: 'dd/mm/yyyy',
+            //    autoclose:'true'
+            //});
 
         });
     </script>

@@ -65,7 +65,7 @@ namespace MTCHRMS.Controllers
         }
 
         [Authorize]
-        public HttpResponseMessage Put(int id, [FromBody] CourseDef updateCourse)
+        public HttpResponseMessage Put([FromBody] CourseDef updateCourse)
         {
             if (ModelState.IsValid)
             {

@@ -22,6 +22,9 @@ namespace MTCHRMS.EntityFramework.Inventory
         [StringLength(250)]
         public string SerialNo { get; set; }
 
+        [StringLength(100)]
+        public string OrganizationNo { get; set; }
+
         public int BarcodePrintCount { get; set; }
 
         [ForeignKey("ItemStockStatusDetail")]
